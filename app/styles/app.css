@@ -1,0 +1,170 @@
+body {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+h1 {
+  font-size: 72px;
+}
+.gradient-blue {
+  text-shadow: 0px 0px 7px rgba(37, 0, 0, 0.24);
+  background: -webkit-linear-gradient(#e2ddf1, #4300af);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.gradient-white {
+  text-shadow: 0px 0px 7px rgba(37, 0, 0, 0.24);
+  background: -webkit-linear-gradient(#ffffff, #f3f3f3);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.gradient-dark {
+  text-shadow: 0px 0px 7px rgba(37, 0, 0, 0.24);
+  background: -webkit-linear-gradient(#b6b6b6, #000000);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+h2 {
+  font-size: 30px;
+  text-shadow: 0px 0px 7px rgba(37, 0, 0, 0.24);
+}
+h3 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 14px;
+}
+
+.next-page-button {
+  animation: bump 2s infinite;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.page-in {
+  animation: pageSlideIn 1s ease-in-out;
+}
+.page-in-left {
+  animation: pageInLeft 1s ease-in-out;
+}
+
+@keyframes pageInLeft {
+  from {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pageSlideIn {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.main-screen-background {
+  background-image: url("public/images/background.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
+.secondary-screen-background {
+  background-image: url("public/images/background-2.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
+.third-screen-background {
+  background-image: url("public/images/background-3.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
+.fourth-screen-background {
+  background-image: url("public/images/background-4.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
+.fifth-screen-background {
+  background-image: url("public/images/background-5.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
+.frontend-bg {
+  background-image: url("public/images/front-end-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(2px);
+}
+.backend-bg {
+  background-image: url("public/images/backend-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(2px);
+}
+
+.page-slide-in-enter {
+  transform: translateX(-20%);
+  opacity: 0;
+}
+.page-slide-in-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: 1s ease-in-out;
+}
+.page-slide-in-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.page-slide-in-exit-active {
+  transform: translateX(-20%);
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+
+a.active {
+  color: #8a92db;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.zoom-in {
+  transform-origin: center;
+  animation: zoomIn 500ms ease-in-out;
+}
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
