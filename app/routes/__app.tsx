@@ -188,7 +188,7 @@ const AppLayout = () => {
         </AnimatePresence>
         <AnimatePresence mode="wait">
           <motion.div
-            className="h-full  flex-1 z-20"
+            className="h-auto flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"
@@ -198,14 +198,6 @@ const AppLayout = () => {
             {outlet}
           </motion.div>
         </AnimatePresence>
-        <div
-          className="py-4  fixed  right-[60px] flex justify-center h-1/2 top-1/4 cursor-pointer items-center"
-          onClick={nextPageHandler}
-        >
-          <span className=" next-page-button">
-            {changeNextPageLabelHandler()}
-          </span>
-        </div>
       </div>
     </main>
   );

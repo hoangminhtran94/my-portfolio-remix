@@ -130,6 +130,32 @@ p {
   filter: blur(2px);
 }
 
+.social-media-bg {
+  background-image: url("public/images/social-media.avif");
+  background-position: center;
+  background-size: cover;
+  filter: blur(3px);
+}
+.linkedin-bg {
+  background-image: url("public/images/linkedin.avif");
+  background-position: center;
+  background-size: cover;
+  filter: blur(3px);
+}
+.email-bg {
+  background-image: url("public/images/email-bg.avif");
+  background-position: center;
+  background-size: cover;
+  filter: blur(3px);
+}
+
+.phone-bg {
+  background-image: url("public/images/phone-bg.avif");
+  background-position: center;
+  background-size: cover;
+  filter: blur(3px);
+}
+
 .page-slide-in-enter {
   transform: translateX(-20%);
   opacity: 0;

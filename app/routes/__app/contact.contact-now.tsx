@@ -1,5 +1,6 @@
 import { Form } from "@remix-run/react";
 import Input from "~/components/UI/Input/Input";
+import { ActionFunction } from "@remix-run/node";
 
 const ContactNow = () => {
   return (
@@ -16,3 +17,5 @@ const ContactNow = () => {
 };
 
 export default ContactNow;
+
+export const actions: ActionFunction = ({ request }) => {};
