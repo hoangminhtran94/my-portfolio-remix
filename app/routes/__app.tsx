@@ -173,7 +173,7 @@ const AppLayout = () => {
           className={`absolute top-0 right-0 ${setBackGroundImageHanlder()} w-full h-full`}
         />
       </AnimatePresence>
-      <div className="flex max-w-[1920px] min-h-[1080px] mx-auto  items-center flex-wrap ">
+      <div className="flex max-w-[1920px] min-h-[1080px] mx-auto  items-center ">
         <AnimatePresence mode="wait">
           <motion.div
             className=" w-[600px] h-full px-[60px] z-20"
@@ -188,7 +188,7 @@ const AppLayout = () => {
         </AnimatePresence>
         <AnimatePresence mode="wait">
           <motion.div
-            className="h-auto flex-1 z-20"
+            className="h-auto max-w-[70%] flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"
