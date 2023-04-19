@@ -1,4 +1,4 @@
-import { Link, Outlet, useOutlet } from "@remix-run/react";
+import { useOutlet } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "@remix-run/react";

@@ -1,7 +1,5 @@
-import { useNavigate } from "@remix-run/react";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "@remix-run/react";
+import { useLocation, useMatches } from "@remix-run/react";
 import { useOutlet } from "@remix-run/react";
 import MainPageHeader from "~/components/MainPage/MainPageHeader";
 import ProjectHeader from "~/components/ProjectPage/ProjectHeader";
@@ -11,23 +9,10 @@ import AboutHeader from "./../components/About/AboutHeader";
 
 const AppLayout = () => {
   const outlet = useOutlet();
-  const pages = ["/home", "/my-project", "/skills", "/about", "/contact"];
-
+  const matches = useMatches();
+  const firstContainerPathPattern = matches[2];
   const location = useLocation();
-  const navigate = useNavigate();
-  const nextPageHandler = () => {
-    if (location.pathname === "/") {
-      return navigate("/home");
-    }
-    const currentPageIndex = pages.findIndex(
-      (path) => path === location.pathname
-    );
-    if (currentPageIndex < pages.length - 1) {
-      return navigate(pages[currentPageIndex + 1]);
-    }
 
-    return navigate(pages[0]);
-  };
   const background = {
     hidden: { opacity: 0 },
     show: {
@@ -66,72 +51,75 @@ const AppLayout = () => {
       transition: { duration: 0.5 },
     },
   };
-  const changeNextPageLabelHandler = () => {
-    switch (location.pathname) {
-      case "/":
-        return "Get Started";
-      case "/contact":
-        return "Back to home";
-      default:
-        return "Next Page";
-    }
-  };
-  const changeFirstContainerHandler = () => {
-    switch (location.pathname) {
-      case "/home":
-        return <MainPageHeader />;
-      case "/my-project":
-        return <ProjectHeader />;
-      case "/skills":
-        return <SkillsHeader />;
-      case "/skills/front-end":
-        return <SkillsHeader />;
-      case "/skills/back-end":
-        return <SkillsHeader />;
-      case "/about":
-        return <AboutHeader />;
-      default:
-        return <ContactMeHeader />;
-    }
-  };
 
   const setBackGroundImageHanlder = () => {
-    switch (location.pathname) {
-      case "/home":
-        return "main-screen-background";
-      case "/about":
-        return "third-screen-background";
-      case "/contact":
-        return "fourth-screen-background";
-      case "/contact/contact-now":
-        return "fourth-screen-background";
-      case "/skills":
-        return "fifth-screen-background";
-      case "/skills/front-end":
-        return "fifth-screen-background";
-      case "/skills/back-end":
-        return "fifth-screen-background";
-      default:
-        return "secondary-screen-background";
+    if (firstContainerPathPattern.id.includes("home")) {
+      return "main-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return "secondary-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return "fifth-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("about")) {
+      return "third-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("contact")) {
+      return "fourth-screen-background";
     }
   };
 
   const setBackGroundKey = () => {
-    switch (location.pathname) {
-      case "/contact":
-        return "contact-background-container";
-      case "/contact/contact-now":
-        return "contact-background-container";
-      case "/skills":
-        return "skill-background-container";
-      case "/skills/front-end":
-        return "skill-background-container";
-      case "/skills/back-end":
-        return "skill-background-container";
-      default:
-        return location.pathname + "background-container";
+    if (firstContainerPathPattern.id.includes("home")) {
+      return "main-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return "secondary-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return "fifth-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("about")) {
+      return "third-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("contact")) {
+      return "fourth-screen-background";
     }
   };
+
+  const changeFirstContainerHandler = () => {
+    if (firstContainerPathPattern.id.includes("home")) {
+      return <MainPageHeader />;
+    }
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return <ProjectHeader />;
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return <SkillsHeader />;
+    }
+    if (firstContainerPathPattern.id.includes("about")) {
+      return <AboutHeader />;
+    }
+    if (firstContainerPathPattern.id.includes("contact")) {
+      return <ContactMeHeader />;
+    }
+  };
+
+  const firstContainerKey = () => {
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return "project-first-container";
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return "skills-first-container";
+    }
+    if (firstContainerPathPattern.id.includes("contact")) {
+      return "contact-first-container";
+    } else {
+      return location.pathname + "first-container";
+    }
+  };
+
   const secondContainerKey = () => {
     switch (location.pathname) {
       case "/skills":
@@ -144,25 +132,10 @@ const AppLayout = () => {
         return location.pathname;
     }
   };
-  const firstContainerKey = () => {
-    switch (location.pathname) {
-      case "/contact":
-        return "contact-first-container";
-      case "/contact/contact-now":
-        return "contact-first-container";
-      case "/skills":
-        return "skill-first-container";
-      case "/skills/front-end":
-        return "skill-first-container";
-      case "/skills/back-end":
-        return "skill-first-container";
-      default:
-        return location.pathname + "first-container";
-    }
-  };
 
   return (
     <main className="relative">
+      {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
           key={setBackGroundKey()}
@@ -173,10 +146,11 @@ const AppLayout = () => {
           className={`absolute top-0 right-0 ${setBackGroundImageHanlder()} w-full h-full`}
         />
       </AnimatePresence>
-      <div className="flex max-w-[1920px] min-h-[1080px] mx-auto  items-center flex-wrap ">
+      <div className="flex max-w-[1920px] h-[1080px] mx-auto  items-center ">
+        {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
-            className=" w-[600px] h-full px-[60px] z-20"
+            className=" w-[600px]  px-[60px] z-20"
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -186,9 +160,10 @@ const AppLayout = () => {
             {changeFirstContainerHandler()}
           </motion.div>
         </AnimatePresence>
+        {/* Second Container */}
         <AnimatePresence mode="wait">
           <motion.div
-            className="h-auto flex-1 z-20"
+            className=" flex items-center  h-full max-w-[70%] flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

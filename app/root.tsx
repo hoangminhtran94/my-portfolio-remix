@@ -39,6 +39,10 @@ export default function App() {
 
 export const links: LinksFunction = () => {
   return [
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css?family=Montserrat",
+    },
     { rel: "stylesheet", href: stylesheet },
     { rel: "stylesheet", href: appStyles },
   ];
