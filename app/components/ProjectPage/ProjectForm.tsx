@@ -3,7 +3,7 @@ import TextArea from "../UI/TextArea/TextArea";
 import ImageInput from "../UI/ImageInput/ImageInput";
 const ProjectForm = () => {
   return (
-    <form>
+    <form className="flex flex-col gap-3">
       <Input label="Project name" />
       <TextArea label="Project description" />
       <Input label="Project Github link" />
