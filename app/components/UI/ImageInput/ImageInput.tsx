@@ -1,9 +1,10 @@
 import type { FC } from "react";
 import { useRef, useState } from "react";
-interface ImageInputProps {
+import type { ComponentPropsWithoutRef } from "react";
+interface ImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
 }
-const ImageInput: FC<ImageInputProps> = ({ label }) => {
+const ImageInput: FC<ImageInputProps> = ({ label, ...otherProps }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = useState([]);
@@ -13,6 +14,7 @@ const ImageInput: FC<ImageInputProps> = ({ label }) => {
       <label htmlFor="image-input">{label}</label>
       <input
         ref={inputRef}
+        {...otherProps}
         id="image-input"
         type="file"
         className="hidden"
