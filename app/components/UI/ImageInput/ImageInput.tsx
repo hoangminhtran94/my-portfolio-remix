@@ -3,12 +3,17 @@ import { useRef, useState } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 interface ImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
+  projectImages?: string[];
 }
-const ImageInput: FC<ImageInputProps> = ({ label, ...otherProps }) => {
+const ImageInput: FC<ImageInputProps> = ({
+  label,
+  projectImages = [],
+  ...otherProps
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = useState([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>(projectImages);
   return (
     <div className="flex flex-col">
       <label htmlFor="image-input">{label}</label>

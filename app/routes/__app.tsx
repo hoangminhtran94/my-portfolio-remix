@@ -150,7 +150,7 @@ const AppLayout = () => {
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
-            className=" w-[600px]  px-[60px] z-20"
+            className=" w-[600px] h-full flex items-center  px-[60px] z-20"
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
