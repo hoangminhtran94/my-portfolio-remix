@@ -3,7 +3,7 @@ import { useLocation, useMatches } from "@remix-run/react";
 const ProjectHeader = () => {
   const { pathname } = useLocation();
   const matches = useMatches();
-
+  const rootData = matches[0].data;
   return (
     <div className="relative  flex items-center">
       <h1>
@@ -13,7 +13,7 @@ const ProjectHeader = () => {
           ? "Edit Project"
           : "My Project"}
       </h1>
-      {pathname === "/my-project" && (
+      {pathname === "/my-project" && rootData && (
         <Link
           className=" absolute top-full flex gap-2 items-center border border-slate-400 p-2 rounded-md hover:bg-slate-50"
           to="my-project/new-project"

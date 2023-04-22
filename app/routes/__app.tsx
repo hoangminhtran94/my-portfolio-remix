@@ -39,7 +39,7 @@ const AppLayout = () => {
   };
 
   const container2 = {
-    hidden: { opacity: 0, y: location.pathname.includes("skills") ? 0 : -50 },
+    hidden: { opacity: 0, y: -50 },
     show: {
       opacity: 1,
       y: 0,
@@ -68,6 +68,9 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("contact")) {
       return "fourth-screen-background";
     }
+    if (firstContainerPathPattern.id.includes("auth")) {
+      return "login-screen-background";
+    }
   };
 
   const setBackGroundKey = () => {
@@ -85,6 +88,9 @@ const AppLayout = () => {
     }
     if (firstContainerPathPattern.id.includes("contact")) {
       return "fourth-screen-background";
+    }
+    if (firstContainerPathPattern.id.includes("auth")) {
+      return "login-screen-background";
     }
   };
 
@@ -121,16 +127,11 @@ const AppLayout = () => {
   };
 
   const secondContainerKey = () => {
-    switch (location.pathname) {
-      case "/skills":
-        return "skill-second-container";
-      case "/skills/front-end":
-        return "skill-second-container";
-      case "/skills/back-end":
-        return "skill-second-container";
-      default:
-        return location.pathname;
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return "skills-second-container";
     }
+
+    return location.pathname;
   };
 
   return (
@@ -150,7 +151,9 @@ const AppLayout = () => {
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
-            className=" w-[600px] h-full flex items-center  px-[60px] z-20"
+            className={`${
+              firstContainerPathPattern.id.includes("auth") && "hidden"
+            } w-[600px] h-full flex items-center  px-[60px] z-20`}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -163,7 +166,7 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait">
           <motion.div
-            className=" flex items-center  h-full max-w-[70%] flex-1 z-20"
+            className=" flex items-center  h-full  flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

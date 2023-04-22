@@ -8,6 +8,17 @@ export interface Project {
   name: string;
   description: string;
   projectImages: string[];
-  link: string;
+  githubLink: string;
+  demoLink: string;
   technologies: Technology[];
+  technologyIds: string[];
+}
+
+export interface User {
+  id: string;
+  name: string;
+  username: string;
+  password?: string;
+  projects?: Project[];
+  technologies?: Technology[];
 }

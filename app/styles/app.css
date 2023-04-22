@@ -117,6 +117,13 @@ p {
   background-size: cover;
   filter: blur(8px);
 }
+
+.login-screen-background {
+  background-image: url("public/images/bg-login.avif");
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+}
 .frontend-bg {
   background-image: url("public/images/front-end-bg.jpg");
   background-position: center;

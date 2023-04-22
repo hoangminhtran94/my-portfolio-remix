@@ -1,16 +1,18 @@
 import type { ComponentPropsWithoutRef, FC } from "react";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import type { Technology } from "~/utils/models/models";
 import { includes } from "lodash";
 
 interface InputDropdownProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   dropdownList: Technology[];
+  getSelectedList?: (list: Technology[]) => void;
 }
 
 const InputDropdown: FC<InputDropdownProps> = ({
   label,
   dropdownList,
+  getSelectedList,
   ...otherProps
 }) => {
   const [input, setInput] = useState("");
@@ -23,6 +25,11 @@ const InputDropdown: FC<InputDropdownProps> = ({
       !includes(selectedItems, item)
     );
   });
+  useEffect(() => {
+    if (getSelectedList) {
+      getSelectedList(selectedItems);
+    }
+  }, [selectedItems]);
   return (
     <div className="relative flex flex-col gap-2">
       <label htmlFor={label}>{label}</label>

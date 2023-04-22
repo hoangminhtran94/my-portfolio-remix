@@ -11,7 +11,7 @@ const Contact = () => {
   return (
     <AnimatePresence>
       <div
-        className="h-[900px] shadow-lg rounded-md grid grid-cols-4   bg-[rgb(255,255,255,0.5)]"
+        className="h-[900px] w-full shadow-lg rounded-md grid grid-cols-4   bg-[rgb(255,255,255,0.5)]"
         key={pathname}
       >
         <motion.div
@@ -30,10 +30,10 @@ const Contact = () => {
           />
           {showPhone ? (
             <motion.div
-              className="flex flex-col items-center text-3xl gap-2"
+              className="flex flex-col items-center text-xl gap-2"
               animate={{ rotateY: 180 }}
             >
-              <span>Contact me now</span>
+              <h3>Contact me now</h3>
               <span>+1 (613)-805-9623</span>
             </motion.div>
           ) : (
@@ -57,10 +57,10 @@ const Contact = () => {
           />
           {showEmail ? (
             <motion.div
-              className="flex flex-col items-center text-2xl gap-2"
+              className="flex flex-col items-center text-xl gap-2"
               animate={{ rotateY: 180 }}
             >
-              <span>Email me now</span>
+              <h3>Email me now</h3>
               <span>hoang.minhtran94@gmail.com</span>
               <span>tran0450@algonquinlive.com</span>
             </motion.div>

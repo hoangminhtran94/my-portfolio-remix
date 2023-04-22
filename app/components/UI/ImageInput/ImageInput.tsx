@@ -1,23 +1,34 @@
 import type { FC } from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 interface ImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   projectImages?: string[];
+  getImages?: (image: { image: string; file: File | null }[]) => void;
 }
 const ImageInput: FC<ImageInputProps> = ({
   label,
   projectImages = [],
+  getImages,
   ...otherProps
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [files, setFiles] = useState([]);
-  const [images, setImages] = useState<string[]>(projectImages);
+  const [images, setImages] = useState<{ image: string; file: File | null }[]>(
+    projectImages.map((image) => ({ image, file: null }))
+  );
+
+  useEffect(() => {
+    if (getImages) {
+      getImages(images);
+    }
+  }, [images]);
+
   return (
     <div className="flex flex-col">
       <label htmlFor="image-input">{label}</label>
       <input
+        multiple={true}
         ref={inputRef}
         {...otherProps}
         id="image-input"
@@ -25,10 +36,17 @@ const ImageInput: FC<ImageInputProps> = ({
         className="hidden"
         accept=".jpg,.jpeg,.png,.avif,.webp"
         onChange={(event) => {
-          setImages((prev) => [
-            URL.createObjectURL(event.target.files![0]),
-            ...prev,
-          ]);
+          const files = event.target.files!;
+          let objectUrls: { image: string; file: File | null }[] = [];
+
+          for (let i = 0; i < files.length; i++) {
+            objectUrls.push({
+              image: URL.createObjectURL(files[i]),
+              file: files[i],
+            });
+          }
+
+          setImages((prev) => [...objectUrls, ...prev]);
         }}
       />
       <div className="flex gap-3">
@@ -36,7 +54,7 @@ const ImageInput: FC<ImageInputProps> = ({
           images.map((image, index) => (
             <div
               className="w-56 h-56 relative rounded-lg overflow-hidden"
-              key={image}
+              key={image.image}
             >
               <div
                 onClick={() => {
@@ -59,8 +77,10 @@ const ImageInput: FC<ImageInputProps> = ({
               </div>
               <img
                 className="  w-full h-full  object-cover"
-                src={image}
-                alt={image}
+                src={
+                  image.image.includes("blob") ? image.image : "/" + image.image
+                }
+                alt={image.image}
               />
             </div>
           ))}

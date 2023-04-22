@@ -3,10 +3,14 @@ import TextArea from "../UI/TextArea/TextArea";
 import ImageInput from "../UI/ImageInput/ImageInput";
 import Button from "../UI/Button/Button";
 import { Form } from "@remix-run/react";
+import type { FormEvent } from "react";
+import { useSubmit, useFetcher } from "@remix-run/react";
 import type { FormProps } from "@remix-run/react";
 import InputDropdown from "../UI/InputDropdown/InputDropdown";
 import type { ComponentPropsWithoutRef, FC } from "react";
+import { useState } from "react";
 import type { Project, Technology } from "~/utils/models/models";
+
 const ProjectForm: FC<
   FormProps & ComponentPropsWithoutRef<"form"> & { project?: Project }
 > = (props) => {
@@ -14,8 +18,46 @@ const ProjectForm: FC<
     { id: "angular", name: "Angular" },
     { id: "react", name: "React" },
   ];
+  const [selectedTechonologies, setSelectedTechnologies] = useState<
+    Technology[]
+  >([]);
+  const [projectImages, setProjectImages] = useState<
+    { image: string; file: File | null }[]
+  >(
+    props.project
+      ? props.project.projectImages.map((image) => ({ image, file: null }))
+      : []
+  );
+
+  const fetcher = useFetcher();
+  const submitHandler = (event: FormEvent) => {
+    const formData = new FormData(event.target as HTMLFormElement);
+    if (selectedTechonologies.length > 0) {
+      selectedTechonologies.forEach((tech) =>
+        formData.append("technologyIds", tech.id)
+      );
+    }
+    projectImages.forEach((image) => {
+      if (image.file) {
+        formData.append("projectImages", image.file);
+      } else {
+        formData.append("projectImages", image.image);
+      }
+    });
+
+    fetcher.submit(formData, {
+      method: "post",
+      encType: "multipart/form-data",
+    });
+  };
+
   return (
-    <Form {...props} className={`${props.className} flex flex-col gap-3`}>
+    <Form
+      onSubmit={submitHandler}
+      id="new-project-form"
+      {...props}
+      className={`${props.className} flex flex-col gap-3`}
+    >
       <Input
         defaultValue={props.project?.name}
         name="name"
@@ -27,21 +69,36 @@ const ProjectForm: FC<
         label="Project description"
       />
       <Input
-        defaultValue={props.project?.link}
-        name="link"
+        defaultValue={props.project?.githubLink}
+        name="githubLink"
         label="Project Github link"
+      />
+      <Input
+        defaultValue={props.project?.demoLink}
+        name="demoLink"
+        label="Project demo link"
       />
       <ImageInput
         projectImages={props.project?.projectImages}
-        name="images"
+        getImages={(images) => {
+          setProjectImages(images);
+        }}
         label="Project images"
       />
-      <InputDropdown label="Technologies" dropdownList={technologies} />
+      <InputDropdown
+        getSelectedList={(list) => {
+          setSelectedTechnologies(list);
+        }}
+        label="Technologies"
+        dropdownList={technologies}
+      />
       <div className="flex gap-5">
         <Button to={"/my-project"} className="flex-1">
           Cancel
         </Button>
-        <Button className="flex-1">{props.project ? "Save" : "Submit"}</Button>
+        <Button type="submit" className="flex-1">
+          {props.project ? "Save" : "Submit"}
+        </Button>
       </div>
     </Form>
   );

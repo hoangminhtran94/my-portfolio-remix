@@ -6,6 +6,7 @@ import ImageCarousel from "../UI/ImageCarousel/ImageCarousel";
 import NavigtionDot from "../UI/NavigationDot/NavigationDot";
 import type { Project } from "~/utils/models/models";
 import Button from "../UI/Button/Button";
+import { useMatches } from "@remix-run/react";
 
 interface ProjectCarouselProps {
   projects: Project[];
@@ -15,7 +16,8 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
   const [disableButtons, setDisabledButtons] = useState(false);
   const [nextProject, setNextProject] = useState(true);
   const [usingNavigationDot, setUsingNavigationDot] = useState(false);
-
+  const matches = useMatches();
+  const rootData = matches[0].data;
   if (!projects || projects.length === 0) {
     return <div></div>;
   }
@@ -71,19 +73,6 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                     <p className="text-lg">{currentProject.description}</p>
                   </div>
                 )}
-                {currentProject.link && (
-                  <div>
-                    <h3>Link</h3>
-                    <a
-                      className="text-lg"
-                      href={currentProject.link}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Visit the demo website
-                    </a>
-                  </div>
-                )}
                 {currentProject.technologies.length > 0 && (
                   <div>
                     <h3>Technologies</h3>
@@ -94,10 +83,38 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                     </div>
                   </div>
                 )}
+                {currentProject.demoLink && (
+                  <div>
+                    <h3>Link</h3>
+                    <a
+                      className="text-lg"
+                      href={currentProject.demoLink}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Visit the demo website
+                    </a>
+                  </div>
+                )}
+                {currentProject.githubLink && (
+                  <div>
+                    <h3>Project respository</h3>
+                    <a
+                      className="text-lg"
+                      href={currentProject.githubLink}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Visit the project source code
+                    </a>
+                  </div>
+                )}
               </div>
-              <Button className="w-full" to={currentProject.id}>
-                Edit
-              </Button>
+              {rootData && (
+                <Button className="w-full" to={currentProject.id}>
+                  Edit
+                </Button>
+              )}
             </div>
             <div className="flex-1">
               <ImageCarousel images={currentProject.projectImages} />
