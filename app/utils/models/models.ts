@@ -1,6 +1,10 @@
 export interface Technology {
   id: string;
   name: string;
+  backgroundColor: string;
+  textColor: string;
+  icon: string;
+  creatorId?: string;
 }
 
 export interface Project {

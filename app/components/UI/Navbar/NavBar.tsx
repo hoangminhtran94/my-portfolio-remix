@@ -1,7 +1,7 @@
 import { NavLink, Link } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 const NavBar = () => {
-  const userData = useLoaderData();
+  const { userData } = useLoaderData();
 
   return (
     <header className="relative flex justify-between  py-[30px] px-[80px] z-50">

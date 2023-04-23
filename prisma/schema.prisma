@@ -11,12 +11,15 @@ datasource db {
 }
 
 model Technology {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  projects   Project[] @relation(fields: [projectIds], references: [id])
-  projectIds String[]  @db.ObjectId
-  creator    User?     @relation(fields: [creatorId], references: [id])
-  creatorId  String?   @db.ObjectId
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  backgroundColor String
+  textColor       String
+  icon            String
+  projects        Project[] @relation(fields: [projectIds], references: [id])
+  projectIds      String[]  @db.ObjectId
+  creator         User?     @relation(fields: [creatorId], references: [id])
+  creatorId       String?   @db.ObjectId
 }
 
 model Project {

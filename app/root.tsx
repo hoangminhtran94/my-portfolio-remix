@@ -16,6 +16,8 @@ import NavBar from "./components/UI/Navbar/NavBar";
 import appStyles from "~/styles/app.css";
 import Footer from "./components/UI/Footer/Footer";
 import { getUserFromSession } from "./utils/database/auth.server";
+import { getTechnologies } from "./utils/database/technology.server";
+import { getProjects } from "./utils/database/project.server";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "New Remix App",
@@ -50,14 +52,6 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: stylesheet },
     { rel: "stylesheet", href: appStyles },
   ];
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  try {
-    return await getUserFromSession(request);
-  } catch (error) {
-    return error;
-  }
 };
 
 export function CatchBoundary() {
@@ -117,3 +111,26 @@ export function ErrorBoundary() {
     </html>
   );
 }
+export const loader: LoaderFunction = async ({ request }) => {
+  let user;
+  try {
+    user = await getUserFromSession(request);
+  } catch (error) {
+    user = null;
+  }
+  let technologies: any = [];
+  try {
+    technologies = await getTechnologies();
+  } catch (error) {
+    technologies = [];
+  }
+
+  let projects: any = [];
+  try {
+    projects = await getProjects();
+  } catch (error) {
+    projects = [];
+  }
+
+  return { userData: user, technologies, projects };
+};

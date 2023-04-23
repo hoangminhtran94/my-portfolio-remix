@@ -4,7 +4,7 @@ import ImageInput from "../UI/ImageInput/ImageInput";
 import Button from "../UI/Button/Button";
 import { Form } from "@remix-run/react";
 import type { FormEvent } from "react";
-import { useSubmit, useFetcher } from "@remix-run/react";
+import { useMatches, useFetcher } from "@remix-run/react";
 import type { FormProps } from "@remix-run/react";
 import InputDropdown from "../UI/InputDropdown/InputDropdown";
 import type { ComponentPropsWithoutRef, FC } from "react";
@@ -14,10 +14,9 @@ import type { Project, Technology } from "~/utils/models/models";
 const ProjectForm: FC<
   FormProps & ComponentPropsWithoutRef<"form"> & { project?: Project }
 > = (props) => {
-  const technologies: Technology[] = [
-    { id: "angular", name: "Angular" },
-    { id: "react", name: "React" },
-  ];
+  const matches = useMatches();
+
+  const technologies: Technology[] = matches[0].data.technologies;
   const [selectedTechonologies, setSelectedTechnologies] = useState<
     Technology[]
   >([]);
@@ -56,7 +55,7 @@ const ProjectForm: FC<
       onSubmit={submitHandler}
       id="new-project-form"
       {...props}
-      className={`${props.className} flex flex-col gap-3`}
+      className={`${props.className}  flex flex-col gap-3`}
     >
       <Input
         defaultValue={props.project?.name}

@@ -110,7 +110,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                   </div>
                 )}
               </div>
-              {rootData && (
+              {rootData.userData && (
                 <Button className="w-full" to={currentProject.id}>
                   Edit
                 </Button>

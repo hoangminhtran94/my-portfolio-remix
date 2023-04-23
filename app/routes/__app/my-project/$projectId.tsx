@@ -1,27 +1,39 @@
-import {
+import type {
   ActionFunction,
   LoaderFunction,
   NodeOnDiskFile,
+} from "@remix-run/node";
+import {
   redirect,
   unstable_createFileUploadHandler,
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
 import fs from "fs";
 import path from "path";
-import { useLoaderData } from "@remix-run/react";
+
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { editProject, getAProject } from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
 import type { Project } from "~/utils/models/models";
+import { useParams, useMatches } from "@remix-run/react";
 
 const EditProject = () => {
-  const data = useLoaderData<{ project: Project }>();
+  const matches = useMatches();
+  const { projectId } = useParams();
+  const projects = matches[0].data.projects;
+  if (!projects || projects.length === 0) {
+    throw new Error("There's no project to edit");
+  }
+  const project = projects.find((project: Project) => project.id === projectId);
+  if (!project) {
+    throw new Error("This project do not exist");
+  }
 
   return (
-    <div className="flex flex-col h-full w-full bg-white p-8">
+    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8">
       <h2>Edit Project</h2>
-      <ProjectForm project={data?.project} className="flex-1" />
+      <ProjectForm project={project} className="flex-1" />
     </div>
   );
 };
@@ -37,18 +49,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   } catch (error) {
     throw error;
   }
-  const { projectId } = params;
-  let project;
-  try {
-    project = await getAProject(projectId!);
-  } catch (error) {
-    throw serverError(500, "Something wrong happened");
-  }
-
-  if (!project) {
-    throw serverError(401, "Not found");
-  }
-  return { project };
+  return null;
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -91,7 +92,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const deletedImages = project.projectImages.filter(
     (image) => !imageFormData.includes(image)
   );
-  console.log(__dirname);
+
   deletedImages.forEach((deletedImage) =>
     fs.unlink(path.join("public", deletedImage), (e) => {
       console.log(e);

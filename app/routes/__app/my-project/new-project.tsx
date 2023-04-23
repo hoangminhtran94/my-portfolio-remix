@@ -1,6 +1,6 @@
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { createProject } from "~/utils/database/project.server";
-import { NodeOnDiskFile, redirect } from "@remix-run/node";
+import { LoaderFunction, NodeOnDiskFile, redirect } from "@remix-run/node";
 
 import {
   unstable_createFileUploadHandler,
@@ -11,7 +11,7 @@ import type { ActionFunction } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 const NewProject = () => {
   return (
-    <div className="flex flex-col h-full w-full bg-white p-8">
+    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8">
       <h2>New Project</h2>
       <ProjectForm className="flex-1" />
     </div>
@@ -19,6 +19,19 @@ const NewProject = () => {
 };
 
 export default NewProject;
+
+export const loader: LoaderFunction = async ({ request }) => {
+  let user;
+  try {
+    user = await getUserFromSession(request);
+  } catch (error) {
+    throw error;
+  }
+  if (!user) {
+    throw redirect("/auth");
+  }
+  return null;
+};
 
 export const action: ActionFunction = async ({ request }) => {
   let user;

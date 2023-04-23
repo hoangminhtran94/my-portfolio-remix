@@ -20,7 +20,7 @@ const Auth = () => {
         <Form method="post" className="flex flex-col gap-4">
           {mode === "register" && <Input name="name" label="Name" />}
           <Input name="username" label="Username" />
-          <Input name="password" label="Password" />
+          <Input type="password" name="password" label="Password" />
           <Button className="mt-8">
             {mode === "login" ? "Login" : "Submit"}
           </Button>
@@ -47,13 +47,14 @@ export const action: ActionFunction = async ({ request }) => {
       return await register(data);
     } catch (error) {
       console.log(error);
-      return error;
+      throw error;
     }
   } else {
     try {
       return await login(data);
     } catch (error) {
-      return error;
+      console.log(error);
+      throw error;
     }
   }
 };

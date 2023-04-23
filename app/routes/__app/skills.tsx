@@ -38,7 +38,7 @@ const MySkillsLayout = () => {
   return (
     <div className="flex w-[1000px] mx-auto gap-[50px]">
       <div
-        className="relative flex-1 h-[600px]  flex justify-center items-center cursor-pointer gap-[16px] hover:scale-[1.1] hover:z-10"
+        className="relative flex-1 h-[600px]   flex justify-center items-center cursor-pointer gap-[16px] hover:scale-[1.1] hover:z-10"
         onClick={() => {
           navigate("front-end");
         }}

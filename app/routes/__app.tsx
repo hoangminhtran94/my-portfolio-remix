@@ -6,11 +6,13 @@ import ProjectHeader from "~/components/ProjectPage/ProjectHeader";
 import SkillsHeader from "~/components/SkillsPage/SkillsHeader";
 import ContactMeHeader from "~/components/ContactMe/ContactMeHeader";
 import AboutHeader from "./../components/About/AboutHeader";
+import * as bgSVGs from "~/components/svgs/bg-svgs";
 
 const AppLayout = () => {
   const outlet = useOutlet();
   const matches = useMatches();
   const firstContainerPathPattern = matches[2];
+
   const location = useLocation();
 
   const background = {
@@ -53,23 +55,20 @@ const AppLayout = () => {
   };
 
   const setBackGroundImageHanlder = () => {
-    if (firstContainerPathPattern.id.includes("home")) {
-      return "main-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("my-project")) {
-      return "secondary-screen-background";
-    }
     if (firstContainerPathPattern.id.includes("skills")) {
-      return "fifth-screen-background";
+      return bgSVGs.skill;
     }
     if (firstContainerPathPattern.id.includes("about")) {
-      return "third-screen-background";
+      return bgSVGs.about;
+    }
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return bgSVGs.project;
     }
     if (firstContainerPathPattern.id.includes("contact")) {
-      return "fourth-screen-background";
+      return bgSVGs.contact;
     }
     if (firstContainerPathPattern.id.includes("auth")) {
-      return "login-screen-background";
+      return bgSVGs.auth;
     }
   };
 
@@ -130,10 +129,13 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("skills")) {
       return "skills-second-container";
     }
+    if (firstContainerPathPattern.id.includes("technology")) {
+      return "technology-second-container";
+    }
 
     return location.pathname;
   };
-
+  // ${setBackGroundImageHanlder()}
   return (
     <main className="relative">
       {/* BackGround */}
@@ -144,8 +146,12 @@ const AppLayout = () => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className={`absolute top-0 right-0 ${setBackGroundImageHanlder()} w-full h-full`}
-        />
+          className={`absolute flex top-0 right-0  w-full h-full`}
+        >
+          <div className="flex-1 flex items-center justify-end ">
+            {setBackGroundImageHanlder()}
+          </div>
+        </motion.div>
       </AnimatePresence>
       <div className="flex max-w-[1920px] h-[1080px] mx-auto  items-center ">
         {/* First Container */}
