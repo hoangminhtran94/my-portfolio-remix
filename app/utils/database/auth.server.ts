@@ -41,7 +41,10 @@ export const getUserFromSession = async (request: Request) => {
     return null;
   }
   try {
-    const user = await prisma.user.findFirst({ where: { id: userId } });
+    const user = await prisma.user.findFirst({
+      where: { id: userId },
+      include: { socialMedias: true },
+    });
     return user;
   } catch (error) {
     throw error;
@@ -58,6 +61,19 @@ export const logout = async (request: Request) => {
     throw error;
   }
 };
+export const getRootUser = async () => {
+  let user;
+  try {
+    user = await prisma.user.findFirst({
+      where: { id: "64432d0ba5e18c1697a2e04c" },
+      include: { socialMedias: true },
+    });
+  } catch (error) {
+    throw error;
+  }
+  const { password, ...userData } = user!;
+  return userData;
+};
 
 export const register = async (userData: any) => {
   let user;
@@ -66,6 +82,9 @@ export const register = async (userData: any) => {
     user = await prisma.user.create({
       data: {
         name: userData.name,
+        secondaryEmail: userData.secondaryEmail,
+        profileImage: "",
+        contactNumber: "",
         username: userData.username,
         password: hashedPassword,
       },
@@ -81,6 +100,14 @@ export const register = async (userData: any) => {
     return await createUserSession(user.id!, "/my-project");
   } catch (error) {
     throw error;
+  }
+};
+
+export const updateUser = async (userId: string, userData: any) => {
+  try {
+    await prisma.user.update({ where: { id: userId }, data: { ...userData } });
+  } catch (error) {
+    throw serverError(500, "Something went wrong");
   }
 };
 

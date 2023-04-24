@@ -96,6 +96,7 @@ p {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  width: 100%;
   opacity: 0.1;
 }
 .my-skill-bg {

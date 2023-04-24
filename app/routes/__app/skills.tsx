@@ -137,8 +137,8 @@ const MySkillsLayout = () => {
         <motion.div
           className={` fixed w-screen h-screen top-0 left-0 ${
             pathname === "/skills/front-end" || pathname === "/skills/back-end"
-              ? "z-[889]"
-              : " -z-10 "
+              ? "z-[889] block"
+              : " hidden "
           }`}
           key={pathname + "modal"}
           variants={pathname === "/skills/front-end" ? frontEnd : backend}

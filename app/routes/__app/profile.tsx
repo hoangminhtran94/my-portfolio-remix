@@ -1,6 +1,9 @@
 import { Link, useOutlet } from "@remix-run/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { getUserFromSession } from "~/utils/database/auth.server";
+import { redirect } from "@remix-run/node";
 const Profile = () => {
   const location = useLocation();
   const container1 = {
@@ -16,19 +19,23 @@ const Profile = () => {
       transition: { duration: 0.5 },
     },
   };
+
+  const setKey = () => {
+    if (location.pathname.includes("edit-profile")) {
+      return "profile-edit-profile-container";
+    }
+    return location.pathname;
+  };
   const outlet = useOutlet();
   return (
-    <div className="flex flex-col gap-20 text-slate-600 w-full h-full">
+    <div className=" flex flex-col gap-10 text-slate-600 w-full h-full">
       <div>
         <h2 className="text-center">My Profile</h2>
-        <div className="flex gap-4 justify-center">
-          <Link to={"edit-profile"}>Edit profile</Link>
-        </div>
       </div>
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={location.pathname}
+          key={setKey()}
           variants={container1}
           initial="hidden"
           animate="show"
@@ -43,3 +50,16 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const loader: LoaderFunction = async ({ request }) => {
+  let user;
+  try {
+    user = await getUserFromSession(request);
+  } catch (error) {
+    return redirect("/auth");
+  }
+  if (!user) {
+    return redirect("/auth");
+  }
+  return null;
+};

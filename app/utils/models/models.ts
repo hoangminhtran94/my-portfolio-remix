@@ -22,7 +22,19 @@ export interface User {
   id: string;
   name: string;
   username: string;
+  secondaryEmail: string;
+  profileImage: string;
+  socialMedias: SocialMedia[];
   password?: string;
   projects?: Project[];
   technologies?: Technology[];
+}
+
+export interface SocialMedia {
+  id: string;
+  name: string;
+  link: string;
+  icon: string;
+  ownerId?: string;
+  owner?: User;
 }

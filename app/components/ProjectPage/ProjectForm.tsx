@@ -78,7 +78,7 @@ const ProjectForm: FC<
         label="Project demo link"
       />
       <ImageInput
-        projectImages={props.project?.projectImages}
+        defaultImages={props.project?.projectImages}
         getImages={(images) => {
           setProjectImages(images);
         }}

@@ -40,10 +40,10 @@ const AppLayout = () => {
   };
 
   const container2 = {
-    hidden: { opacity: 0, y: -50 },
+    hidden: { opacity: 0, x: 300 },
     show: {
       opacity: 1,
-      y: 0,
+      x: 0,
       transition: { duration: 1 },
     },
     exit: {
@@ -148,6 +148,9 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("technology")) {
       return "technology-second-container";
     }
+    if (firstContainerPathPattern.id.includes("profile")) {
+      return "profile-second-container";
+    }
 
     return location.pathname;
   };
@@ -179,7 +182,7 @@ const AppLayout = () => {
                 firstContainerPathPattern.id === "routes/__app/profile" ||
                 firstContainerPathPattern.id.includes("auth")) &&
               "hidden"
-            } relative w-[600px] h-full flex items-center  px-[60px] z-20 text-slate-500 `}
+            } relative w-[600px] h-[1080px] flex items-center  px-[60px] z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -193,7 +196,7 @@ const AppLayout = () => {
           </motion.div>
         </AnimatePresence>
         {/* Second Container */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             className=" flex items-center  h-full  flex-1 z-20"
             key={secondContainerKey()}

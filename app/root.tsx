@@ -15,7 +15,7 @@ import type { LinksFunction } from "@remix-run/react/dist/routeModules";
 import NavBar from "./components/UI/Navbar/NavBar";
 import appStyles from "~/styles/app.css";
 import Footer from "./components/UI/Footer/Footer";
-import { getUserFromSession } from "./utils/database/auth.server";
+import { getRootUser, getUserFromSession } from "./utils/database/auth.server";
 import { getTechnologies } from "./utils/database/technology.server";
 import { getProjects } from "./utils/database/project.server";
 export const meta: MetaFunction = () => ({
@@ -112,6 +112,13 @@ export function ErrorBoundary() {
   );
 }
 export const loader: LoaderFunction = async ({ request }) => {
+  let rootUser;
+  try {
+    rootUser = await getRootUser();
+  } catch (error) {
+    rootUser = null;
+  }
+
   let user;
   try {
     user = await getUserFromSession(request);
@@ -132,5 +139,5 @@ export const loader: LoaderFunction = async ({ request }) => {
     projects = [];
   }
 
-  return { userData: user, technologies, projects };
+  return { rootUser, userData: user, technologies, projects };
 };

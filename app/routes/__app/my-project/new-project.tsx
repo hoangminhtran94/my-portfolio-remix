@@ -57,7 +57,7 @@ export const action: ActionFunction = async ({ request }) => {
   );
   const images = (
     imageData.getAll("projectImages") as unknown as NodeOnDiskFile[]
-  ).map((file) => "uploadImages/" + file.name);
+  ).map((file) => "/uploadImages/" + file.name);
   const technologyIds = formData.getAll("technologyIds");
   const databaseData = { ...data, projectImages: images, technologyIds };
 

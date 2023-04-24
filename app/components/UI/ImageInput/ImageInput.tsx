@@ -3,12 +3,12 @@ import { useRef, useState, useEffect } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 interface ImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
-  projectImages?: string[];
+  defaultImages?: string[];
   getImages?: (image: { image: string; file: File | null }[]) => void;
 }
 const ImageInput: FC<ImageInputProps> = ({
   label,
-  projectImages = [],
+  defaultImages = [],
   multiple = true,
   getImages,
   ...otherProps
@@ -16,7 +16,7 @@ const ImageInput: FC<ImageInputProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [images, setImages] = useState<{ image: string; file: File | null }[]>(
-    projectImages.map((image) => ({ image, file: null }))
+    defaultImages.map((image) => ({ image, file: null }))
   );
 
   useEffect(() => {
@@ -78,9 +78,7 @@ const ImageInput: FC<ImageInputProps> = ({
               </div>
               <img
                 className="  w-full h-full  object-cover"
-                src={
-                  image.image.includes("blob") ? image.image : "/" + image.image
-                }
+                src={image.image}
                 alt={image.image}
               />
             </div>
