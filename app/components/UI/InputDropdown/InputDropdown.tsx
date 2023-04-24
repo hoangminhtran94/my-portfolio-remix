@@ -6,25 +6,33 @@ import { includes } from "lodash";
 interface InputDropdownProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   dropdownList: Technology[];
+  defaultList?: Technology[];
   getSelectedList?: (list: Technology[]) => void;
 }
 
 const InputDropdown: FC<InputDropdownProps> = ({
   label,
   dropdownList,
+  defaultList = [],
   getSelectedList,
   ...otherProps
 }) => {
   const [input, setInput] = useState("");
-  const [selectedItems, setSelectedItems] = useState<Technology[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Technology[]>(
+    defaultList ?? []
+  );
+  const checkInclude = (list: any[], item: any) => {
+    return !!list.find((listItem) => listItem.id === item.id);
+  };
 
   const displayList = dropdownList.filter((item) => {
     return (
       item.name.toLowerCase().includes(input.toLowerCase().trim()) &&
       input.length > 0 &&
-      !includes(selectedItems, item)
+      !checkInclude(selectedItems, item)
     );
   });
+
   useEffect(() => {
     if (getSelectedList) {
       getSelectedList(selectedItems);
@@ -45,18 +53,22 @@ const InputDropdown: FC<InputDropdownProps> = ({
       />
       {selectedItems.length > 0 && (
         <ul className="flex gap-1">
-          {selectedItems.map((item, index) => (
+          {selectedItems.map((item) => (
             <li
               className="flex items-center gap-1 py-1 px-2 border rounded-md border-slate-200"
               key={item.id}
             >
-              {item.name}{" "}
+              {item.name}
               <span
                 className=" cursor-pointer"
                 onClick={() => {
                   setSelectedItems((prev) => {
                     const selected = [...prev];
-                    prev.splice(index, 1);
+                    const index = selected.findIndex(
+                      (listItem) => listItem.id === item.id
+                    );
+
+                    selected.splice(index, 1);
                     return selected;
                   });
                 }}

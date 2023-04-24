@@ -8,6 +8,8 @@ import type { Project } from "~/utils/models/models";
 import Button from "../UI/Button/Button";
 import { useMatches } from "@remix-run/react";
 
+import ProjectTechnology from "../UI/ProjectTechnology/ProjectTechnology";
+
 interface ProjectCarouselProps {
   projects: Project[];
 }
@@ -41,7 +43,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
 
   return (
     <div className="w-full h-full">
-      <div className="w-full rounded-lg h-full relative overflow-hidden">
+      <div className="w-full rounded-lg border border-slate-50 h-full relative overflow-hidden">
         <AnimatePresence
           custom={{ next: nextProject, usingDot: usingNavigationDot }}
           initial={false}
@@ -66,26 +68,32 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
           >
             <div className="p-[48px] w-1/2 flex flex-col items-center justify-center">
               <div className="flex gap-8 w-full flex-col flex-1">
-                <h2 className="h-fit">{currentProject.name}</h2>
+                <h2 className="h-fit text-center font-bold">
+                  {currentProject.name}
+                </h2>
                 {currentProject.description && (
                   <div>
-                    <h3>Description</h3>
+                    <h3 className="font-bold">Description</h3>
                     <p className="text-lg">{currentProject.description}</p>
                   </div>
                 )}
                 {currentProject.technologies.length > 0 && (
                   <div>
-                    <h3>Technologies</h3>
-                    <div className="flex gap-2 text-lg">
+                    <h3 className="font-bold">Technologies</h3>
+                    <div className="flex gap-4 max-w-full flex-wrap text-lg">
                       {currentProject.technologies.map((tech) => (
-                        <span key={tech.id}>{tech.name}</span>
+                        <ProjectTechnology
+                          key={tech.id}
+                          icon={tech.icon}
+                          label={tech.name}
+                        />
                       ))}
                     </div>
                   </div>
                 )}
                 {currentProject.demoLink && (
                   <div>
-                    <h3>Link</h3>
+                    <h3 className="font-bold">Link</h3>
                     <a
                       className="text-lg"
                       href={currentProject.demoLink}
@@ -98,7 +106,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                 )}
                 {currentProject.githubLink && (
                   <div>
-                    <h3>Project respository</h3>
+                    <h3 className="font-bold">Project respository</h3>
                     <a
                       className="text-lg"
                       href={currentProject.githubLink}
@@ -116,18 +124,18 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                 </Button>
               )}
             </div>
-            <div className="flex-1">
+            <div className="flex-1 border-l  border-slate-50">
               <ImageCarousel images={currentProject.projectImages} />
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="flex justify-between w-1/2 mx-auto items-center mt-6">
+      <div className="flex justify-between w-3/4 mx-auto items-center mt-6">
         <span
           className={`${
             disableButtons && "pointer-events-none"
-          } cursor-pointer flex items-center gap-2 opacity-70 hover:opacity-100 hover:scale-110 `}
+          } cursor-pointer flex items-center font-bold gap-2 opacity-70 hover:opacity-100 hover:scale-110 `}
           onClick={previousHandler}
         >
           <svg
@@ -156,7 +164,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
         <span
           className={`${
             disableButtons && "pointer-events-none"
-          } cursor-pointer flex items-center gap-2 opacity-70 hover:opacity-100 hover:scale-110 `}
+          } cursor-pointer font-bold  flex items-center gap-2 opacity-70 hover:opacity-100 hover:scale-110 `}
           onClick={nextHandler}
         >
           Next

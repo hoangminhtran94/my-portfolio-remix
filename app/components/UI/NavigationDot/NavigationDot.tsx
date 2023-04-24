@@ -6,7 +6,7 @@ const NavigtionDot: FC<{
   return (
     <span
       onClick={onClick}
-      className={`cursor-pointer rounded-full w-3 h-3 shadow-md border  ${
+      className={`cursor-pointer rounded-full w-4 h-4  border  ${
         selected ? "bg-slate-400 border-slate-400" : "bg-white border-slate-200"
       }`}
     />

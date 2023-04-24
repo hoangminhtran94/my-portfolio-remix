@@ -85,6 +85,7 @@ const ProjectForm: FC<
         label="Project images"
       />
       <InputDropdown
+        defaultList={props.project?.technologies}
         getSelectedList={(list) => {
           setSelectedTechnologies(list);
         }}

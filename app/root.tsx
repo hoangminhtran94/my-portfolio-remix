@@ -1,7 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import stylesheet from "~/tailwind.css";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import { LoaderFunction, ErrorBoundaryComponent } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,

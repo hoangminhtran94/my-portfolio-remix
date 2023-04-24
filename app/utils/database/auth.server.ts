@@ -1,4 +1,4 @@
-import prisma from "./db.server";
+import { prisma } from "./db.server";
 import type { User } from "@prisma/client";
 import { createCookieSessionStorage } from "@remix-run/node";
 import { hashSync, compareSync } from "bcrypt";

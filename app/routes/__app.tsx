@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useMatches } from "@remix-run/react";
 import { useOutlet } from "@remix-run/react";
-import MainPageHeader from "~/components/MainPage/MainPageHeader";
 import ProjectHeader from "~/components/ProjectPage/ProjectHeader";
 import SkillsHeader from "~/components/SkillsPage/SkillsHeader";
 import ContactMeHeader from "~/components/ContactMe/ContactMeHeader";
@@ -70,6 +69,12 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("auth")) {
       return bgSVGs.auth;
     }
+    if (firstContainerPathPattern.id.includes("home")) {
+      return bgSVGs.home;
+    }
+    if (firstContainerPathPattern.id.includes("profile")) {
+      return bgSVGs.profile;
+    }
   };
 
   const setBackGroundKey = () => {
@@ -94,9 +99,6 @@ const AppLayout = () => {
   };
 
   const changeFirstContainerHandler = () => {
-    if (firstContainerPathPattern.id.includes("home")) {
-      return <MainPageHeader />;
-    }
     if (firstContainerPathPattern.id.includes("my-project")) {
       return <ProjectHeader />;
     }
@@ -108,6 +110,20 @@ const AppLayout = () => {
     }
     if (firstContainerPathPattern.id.includes("contact")) {
       return <ContactMeHeader />;
+    }
+  };
+  const changeFirstContainerBgHandler = () => {
+    if (firstContainerPathPattern.id.includes("my-project")) {
+      return "my-project-bg";
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
+      return "my-skill-bg";
+    }
+    if (firstContainerPathPattern.id.includes("about")) {
+      return "about-bg";
+    }
+    if (firstContainerPathPattern.id.includes("contact")) {
+      return "contact-bg";
     }
   };
 
@@ -158,14 +174,21 @@ const AppLayout = () => {
         <AnimatePresence mode="wait">
           <motion.div
             className={`${
-              firstContainerPathPattern.id.includes("auth") && "hidden"
-            } w-[600px] h-full flex items-center  px-[60px] z-20`}
+              (firstContainerPathPattern.id === "routes/__app/index" ||
+                firstContainerPathPattern.id === "routes/__app/home" ||
+                firstContainerPathPattern.id === "routes/__app/profile" ||
+                firstContainerPathPattern.id.includes("auth")) &&
+              "hidden"
+            } relative w-[600px] h-full flex items-center  px-[60px] z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
             animate="show"
             exit="exit"
           >
+            <div
+              className={`w-full h-1/2 absolute top-1/4 left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+            />
             {changeFirstContainerHandler()}
           </motion.div>
         </AnimatePresence>

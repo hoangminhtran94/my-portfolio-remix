@@ -1,4 +1,4 @@
-import prisma from "./db.server";
+import { prisma } from "./db.server";
 export const createATechnology = async (userId: string, technology: any) => {
   try {
     return await prisma.technology.create({

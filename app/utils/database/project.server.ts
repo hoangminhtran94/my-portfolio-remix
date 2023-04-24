@@ -1,6 +1,6 @@
 import type { Project } from "../models/models";
 import serverError from "../models/ServerError";
-import prisma from "./db.server";
+import { prisma } from "./db.server";
 
 export const getProjects = async () => {
   try {

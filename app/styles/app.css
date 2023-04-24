@@ -30,6 +30,9 @@ h2 {
 h3 {
   font-size: 24px;
 }
+h4 {
+  font-size: 20px;
+}
 
 p {
   font-size: 14px;
@@ -87,54 +90,46 @@ p {
     opacity: 1;
   }
 }
-.main-screen-background {
-  background-image: url("public/images/background.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
-.secondary-screen-background {
-  background-image: url("public/images/background-2.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
-.third-screen-background {
-  background-image: url("public/images/background-3.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
-.fourth-screen-background {
-  background-image: url("public/images/background-4.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
-.fifth-screen-background {
-  background-image: url("public/images/background-5.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
 
-.login-screen-background {
-  background-image: url("public/images/bg-login.avif");
+.my-project-bg {
+  background-image: url("public/images/my-project.svg");
   background-position: center;
-  background-size: cover;
-  filter: blur(8px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.my-skill-bg {
+  background-image: url("public/images/my-skills.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+}
+.about-bg {
+  background-image: url("public/images/about.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+}
+.contact-bg {
+  background-image: url("public/images/contact.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
 }
 .frontend-bg {
-  background-image: url("public/images/front-end-bg.jpg");
+  background-image: url("public/images/frontend-bg.svg");
   background-position: center;
   background-size: cover;
-  filter: blur(2px);
+  opacity: 0.9;
 }
 .backend-bg {
-  background-image: url("public/images/backend-bg.jpg");
+  background-image: url("public/images/backend-bg.svg");
   background-position: center;
   background-size: cover;
-  filter: blur(2px);
+  opacity: 0.9;
 }
 
 .social-media-bg {
@@ -184,6 +179,8 @@ p {
 
 a.active {
   color: #8a92db;
+  font-size: large;
+  font-weight: 800;
 }
 *::-webkit-scrollbar {
   display: none;
