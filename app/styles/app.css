@@ -28,6 +28,9 @@ h2 {
   font-size: 30px;
 }
 h3 {
+  font-size: 24px;
+}
+h4 {
   font-size: 20px;
 }
 
@@ -87,47 +90,47 @@ p {
     opacity: 1;
   }
 }
-.main-screen-background {
-  background-image: url("public/images/background.jpg");
+
+.my-project-bg {
+  background-image: url("public/images/my-project.svg");
   background-position: center;
-  background-size: cover;
-  filter: blur(8px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  opacity: 0.1;
 }
-.secondary-screen-background {
-  background-image: url("public/images/background-2.jpg");
+.my-skill-bg {
+  background-image: url("public/images/my-skills.svg");
   background-position: center;
-  background-size: cover;
-  filter: blur(8px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
 }
-.third-screen-background {
-  background-image: url("public/images/background-3.jpg");
+.about-bg {
+  background-image: url("public/images/about.svg");
   background-position: center;
-  background-size: cover;
-  filter: blur(8px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
 }
-.fourth-screen-background {
-  background-image: url("public/images/background-4.jpg");
+.contact-bg {
+  background-image: url("public/images/contact.svg");
   background-position: center;
-  background-size: cover;
-  filter: blur(8px);
-}
-.fifth-screen-background {
-  background-image: url("public/images/background-5.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: blur(8px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
 }
 .frontend-bg {
-  background-image: url("public/images/front-end-bg.jpg");
+  background-image: url("public/images/frontend-bg.svg");
   background-position: center;
   background-size: cover;
-  filter: blur(2px);
+  opacity: 0.9;
 }
 .backend-bg {
-  background-image: url("public/images/backend-bg.jpg");
+  background-image: url("public/images/backend-bg.svg");
   background-position: center;
   background-size: cover;
-  filter: blur(2px);
+  opacity: 0.9;
 }
 
 .social-media-bg {
@@ -136,12 +139,7 @@ p {
   background-size: cover;
   filter: blur(3px);
 }
-.linkedin-bg {
-  background-image: url("public/images/linkedin.avif");
-  background-position: center;
-  background-size: cover;
-  filter: blur(3px);
-}
+
 .email-bg {
   background-image: url("public/images/email-bg.avif");
   background-position: center;
@@ -149,6 +147,33 @@ p {
   filter: blur(3px);
 }
 
+.about-link-1 {
+  background: rgb(208, 205, 205);
+  background: linear-gradient(
+    90deg,
+    rgba(208, 205, 205, 1) 0%,
+    rgba(97, 93, 93, 1) 0%,
+    rgba(208, 205, 205, 1) 56%
+  );
+}
+.about-link-2 {
+  background: rgb(185, 134, 230);
+  background: linear-gradient(
+    90deg,
+    rgba(185, 134, 230, 1) 0%,
+    rgba(66, 137, 199, 1) 42%,
+    rgba(122, 23, 195, 1) 99%
+  );
+}
+.about-link-3 {
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
 .phone-bg {
   background-image: url("public/images/phone-bg.avif");
   background-position: center;
@@ -177,6 +202,8 @@ p {
 
 a.active {
   color: #8a92db;
+  font-size: large;
+  font-weight: 800;
 }
 *::-webkit-scrollbar {
   display: none;
