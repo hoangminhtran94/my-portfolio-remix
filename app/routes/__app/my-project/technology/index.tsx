@@ -8,7 +8,7 @@ const TechnologyTable = () => {
   return (
     <div>
       <h2 className="text-center font-bold">All technologies</h2>
-      <div className="p-5">
+      <div className="p-5 overflow-scroll max-h-[700px]">
         <ul className="flex flex-col gap-10">
           <li
             className=" grid h-7 grid-cols-6 items-center font-bold text-lg  "

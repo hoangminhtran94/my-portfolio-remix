@@ -69,7 +69,7 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("auth")) {
       return bgSVGs.auth;
     }
-    if (firstContainerPathPattern.id.includes("home")) {
+    if (firstContainerPathPattern.id === "routes/__app/index") {
       return bgSVGs.home;
     }
     if (firstContainerPathPattern.id.includes("profile")) {
@@ -178,7 +178,6 @@ const AppLayout = () => {
           <motion.div
             className={`${
               (firstContainerPathPattern.id === "routes/__app/index" ||
-                firstContainerPathPattern.id === "routes/__app/home" ||
                 firstContainerPathPattern.id === "routes/__app/profile" ||
                 firstContainerPathPattern.id.includes("auth")) &&
               "hidden"

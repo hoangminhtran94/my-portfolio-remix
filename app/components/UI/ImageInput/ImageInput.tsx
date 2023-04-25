@@ -47,7 +47,7 @@ const ImageInput: FC<ImageInputProps> = ({
             });
           }
 
-          setImages((prev) => [...objectUrls, ...prev]);
+          setImages((prev) => [...prev, ...objectUrls]);
         }}
       />
       <div className="flex gap-3">

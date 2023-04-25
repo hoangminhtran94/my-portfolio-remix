@@ -1,4 +1,10 @@
-import { Form, useMatches, useLocation, useNavigate } from "@remix-run/react";
+import {
+  Form,
+  useMatches,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import ImageInput from "~/components/UI/ImageInput/ImageInput";
 import Input from "~/components/UI/Input/Input";
@@ -32,6 +38,7 @@ const EditProfile = () => {
   const { pathname } = useLocation();
   const outlet = useOutlet();
   const userData = matches[0].data.userData;
+  const [searchParams] = useSearchParams();
 
   return (
     <div className="w-1/2 shadow-md border  border-slate-100 p-10 ">
@@ -113,9 +120,10 @@ const EditProfile = () => {
           </Button>
           <Button className="flex-1">Submit</Button>
         </div>
-        <AnimatePresence initial={false}>
+        <AnimatePresence mode="wait" initial={false}>
           {pathname.includes("social-media") && (
             <motion.div
+              key={searchParams.get("id") ?? "default"}
               variants={container1}
               initial="hidden"
               animate="show"

@@ -82,7 +82,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     requestClone,
     uploadHandler
   );
-  console.log(imageData.getAll("projectImages"));
+
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   const imageFormData = formData.getAll("projectImages");

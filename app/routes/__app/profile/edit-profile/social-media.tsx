@@ -17,7 +17,8 @@ import {
 } from "~/utils/database/socialMedia.server";
 import { useMatches } from "@remix-run/react";
 import type { SocialMedia as TypeSocialMedia } from "~/utils/models/models";
-
+import fs from "fs";
+import path from "path";
 const SocialMedia = () => {
   const matches = useMatches();
   const [searchParams] = useSearchParams();
@@ -47,6 +48,7 @@ const SocialMedia = () => {
           label="Connect link"
         />
         <ImageInput
+          className=" !object-contain "
           defaultImages={
             currentSocialMedia ? [currentSocialMedia.icon] : undefined
           }
@@ -92,20 +94,24 @@ export const action: ActionFunction = async ({ request }) => {
     uploadHandler
   );
 
-  let currentSocialMedia;
+  let currentSocialMedia = null;
 
   const mediaId = new URL(request.url).searchParams.get("id");
   if (mediaId) {
     try {
       currentSocialMedia = await getASocialMedia(mediaId);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 
   const data = Object.fromEntries(formData);
   const icon = parsedData.get("icon");
   const iconPath = icon
     ? "/icons/" + (icon as File).name
-    : currentSocialMedia?.icon;
+    : currentSocialMedia
+    ? currentSocialMedia.icon
+    : "";
   const databaseData = { ...data, icon: iconPath };
 
   if (!mediaId) {
@@ -115,6 +121,12 @@ export const action: ActionFunction = async ({ request }) => {
       throw error;
     }
   } else {
+    if (icon) {
+      fs.unlink(path.join("public", currentSocialMedia!.icon), (e) => {
+        console.log(e);
+      });
+    }
+
     try {
       updateASocialMedia(mediaId, databaseData);
     } catch (error) {

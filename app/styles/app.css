@@ -139,12 +139,7 @@ p {
   background-size: cover;
   filter: blur(3px);
 }
-.linkedin-bg {
-  background-image: url("public/images/linkedin.avif");
-  background-position: center;
-  background-size: cover;
-  filter: blur(3px);
-}
+
 .email-bg {
   background-image: url("public/images/email-bg.avif");
   background-position: center;
@@ -152,6 +147,33 @@ p {
   filter: blur(3px);
 }
 
+.about-link-1 {
+  background: rgb(208, 205, 205);
+  background: linear-gradient(
+    90deg,
+    rgba(208, 205, 205, 1) 0%,
+    rgba(97, 93, 93, 1) 0%,
+    rgba(208, 205, 205, 1) 56%
+  );
+}
+.about-link-2 {
+  background: rgb(185, 134, 230);
+  background: linear-gradient(
+    90deg,
+    rgba(185, 134, 230, 1) 0%,
+    rgba(66, 137, 199, 1) 42%,
+    rgba(122, 23, 195, 1) 99%
+  );
+}
+.about-link-3 {
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
 .phone-bg {
   background-image: url("public/images/phone-bg.avif");
   background-position: center;

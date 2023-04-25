@@ -4,7 +4,7 @@ const WelcomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      navigate("/home");
+      navigate("/about");
     }, 2000);
   }, [navigate]);
   return (
