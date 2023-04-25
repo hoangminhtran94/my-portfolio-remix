@@ -8,6 +8,7 @@ module.exports = {
   serverBuildPath: ".netlify/functions-internal/server.js",
   future: {
     unstable_tailwind: true,
+    v2_errorBoundary: true,
   },
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",

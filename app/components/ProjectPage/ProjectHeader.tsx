@@ -1,9 +1,23 @@
-import { Link } from "@remix-run/react";
+import { useMatches } from "@remix-run/react";
 const ProjectHeader = () => {
+  const matches = useMatches();
+
+  const setHeader = () => {
+    if (matches[2].id.includes("new-project")) {
+      return "New Project";
+    }
+    if (matches[2].id.includes("$projectId")) {
+      return "Edit Project";
+    }
+    if (matches[2].id.includes("technology")) {
+      return "Technology";
+    }
+    return "My Project";
+  };
+
   return (
-    <div>
-      <h1>My Projects</h1>
-      <Link to="my-project/new-project">New Project</Link>
+    <div className="relative  flex items-center ">
+      <h1>{setHeader()}</h1>
     </div>
   );
 };
