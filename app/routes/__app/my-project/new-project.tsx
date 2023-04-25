@@ -1,6 +1,12 @@
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { createProject } from "~/utils/database/project.server";
-import { LoaderFunction, NodeOnDiskFile, redirect } from "@remix-run/node";
+import {
+  LoaderFunction,
+  NodeOnDiskFile,
+  redirect,
+  unstable_composeUploadHandlers,
+  unstable_createMemoryUploadHandler,
+} from "@remix-run/node";
 
 import {
   unstable_createFileUploadHandler,
@@ -9,6 +15,7 @@ import {
 
 import type { ActionFunction } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
+import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
 const NewProject = () => {
   return (
     <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8">
@@ -44,10 +51,21 @@ export const action: ActionFunction = async ({ request }) => {
     throw redirect("/login");
   }
   const requestClone = request.clone();
-  const uploadHandler = unstable_createFileUploadHandler({
-    directory: "public/uploadImages",
-    maxPartSize: 5000000,
-  });
+  const uploadHandler = unstable_composeUploadHandlers(
+    // our custom upload handler
+    async ({ name, contentType, data, filename }) => {
+      if (name !== "projectImages") {
+        return undefined;
+      }
+      const uploadedImage = await uploadImageToCloudinary(
+        data,
+        "projectImages"
+      );
+      return uploadedImage.secure_url;
+    },
+    // fallback to memory for everything else
+    unstable_createMemoryUploadHandler()
+  );
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
@@ -55,9 +73,7 @@ export const action: ActionFunction = async ({ request }) => {
     requestClone,
     uploadHandler
   );
-  const images = (
-    imageData.getAll("projectImages") as unknown as NodeOnDiskFile[]
-  ).map((file) => "/uploadImages/" + file.name);
+  const images = imageData.getAll("projectImages");
   const technologyIds = formData.getAll("technologyIds");
   const databaseData = { ...data, projectImages: images, technologyIds };
 

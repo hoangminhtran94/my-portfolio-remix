@@ -40,7 +40,7 @@ const ProjectForm: FC<
       if (image.file) {
         formData.append("projectImages", image.file);
       } else {
-        formData.append("projectImages", image.image);
+        formData.append("projectImageArray", image.image);
       }
     });
 

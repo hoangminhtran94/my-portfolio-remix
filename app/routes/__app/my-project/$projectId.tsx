@@ -1,7 +1,9 @@
-import type {
+import {
   ActionFunction,
   LoaderFunction,
   NodeOnDiskFile,
+  unstable_composeUploadHandlers,
+  unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
 import {
   redirect,
@@ -17,6 +19,10 @@ import { editProject, getAProject } from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
 import type { Project } from "~/utils/models/models";
 import { useParams, useMatches } from "@remix-run/react";
+import {
+  deleteImageFromCloudinary,
+  uploadImageToCloudinary,
+} from "~/utils/fileUpload/fileUpload";
 
 const EditProject = () => {
   const matches = useMatches();
@@ -74,10 +80,21 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
 
   const requestClone = request.clone();
-  const uploadHandler = unstable_createFileUploadHandler({
-    directory: "public/uploadImages",
-    maxPartSize: 5000000,
-  });
+  const uploadHandler = unstable_composeUploadHandlers(
+    // our custom upload handler
+    async ({ name, contentType, data, filename }) => {
+      if (name !== "projectImages") {
+        return undefined;
+      }
+      const uploadedImage = await uploadImageToCloudinary(
+        data,
+        "projectImages"
+      );
+      return uploadedImage.secure_url;
+    },
+    // fallback to memory for everything else
+    unstable_createMemoryUploadHandler()
+  );
   const imageData = await unstable_parseMultipartFormData(
     requestClone,
     uploadHandler
@@ -85,26 +102,25 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const imageFormData = formData.getAll("projectImages");
+  const { projectImageArray, ...mainFormData } = data;
+
+  const remainedImageData = formData.getAll("projectImageArray");
+
   const oldImages = project.projectImages.filter((image) =>
-    imageFormData.includes(image)
+    remainedImageData.includes(image)
   );
   const deletedImages = project.projectImages.filter(
-    (image) => !imageFormData.includes(image)
+    (image) => !remainedImageData.includes(image)
   );
 
   deletedImages.forEach((deletedImage) =>
-    fs.unlink(path.join("public", deletedImage), (e) => {
-      console.log(e);
-    })
+    deleteImageFromCloudinary(deletedImage)
   );
-  const images = (
-    imageData.getAll("projectImages") as unknown as NodeOnDiskFile[]
-  ).map((file) => "/uploadImages/" + file.name);
+  const images = imageData.getAll("projectImages");
   const technologyIds = formData.getAll("technologyIds");
 
   const databaseData = {
-    ...data,
+    ...mainFormData,
     projectImages: [...oldImages, ...images],
     technologyIds,
   };

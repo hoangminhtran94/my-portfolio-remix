@@ -1,7 +1,12 @@
 import { Form } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import TechnologyForm from "~/components/ProjectPage/Technology/TechnologyForm";
-import { ActionFunction, redirect } from "@remix-run/node";
+import {
+  ActionFunction,
+  redirect,
+  unstable_composeUploadHandlers,
+  unstable_createMemoryUploadHandler,
+} from "@remix-run/node";
 import {
   unstable_createFileUploadHandler,
   unstable_parseMultipartFormData,
@@ -9,6 +14,7 @@ import {
 import { createATechnology } from "~/utils/database/technology.server";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import serverError from "~/utils/models/ServerError";
+import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
 
 const NewTechnology = () => {
   return (
@@ -34,20 +40,25 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const requestClone = request.clone();
-  const uploadHandler = unstable_createFileUploadHandler({
-    directory: "public/icons",
-  });
+  const uploadHandler = unstable_composeUploadHandlers(
+    // our custom upload handler
+    async ({ name, contentType, data, filename }) => {
+      if (name !== "icon") {
+        return undefined;
+      }
+      const uploadedImage = await uploadImageToCloudinary(data, "icons");
+      return uploadedImage.secure_url;
+    },
+    // fallback to memory for everything else
+    unstable_createMemoryUploadHandler()
+  );
   const formdata = await request.formData();
   const data = Object.fromEntries(formdata);
   const iconData = await unstable_parseMultipartFormData(
     requestClone,
     uploadHandler
   );
-  const icon = iconData.get("icon");
-  let iconPath = "";
-  if (icon) {
-    iconPath = "/icons/" + (icon as File).name;
-  }
+  const iconPath = iconData.get("icon") ?? "";
 
   const databaseData = { ...data, icon: iconPath };
 
