@@ -1,9 +1,11 @@
-import type { FC, PointerEventHandler } from "react";
+import { FC, PointerEventHandler, useState } from "react";
+import Modal from "../Modal/Modal";
 const NavigationImage: FC<{
   image: string;
   selected: boolean;
   onClick?: PointerEventHandler<HTMLImageElement>;
 }> = ({ image, selected, onClick }) => {
+  const [toggleViewImage, setToggleViewImage] = useState(false);
   return (
     <div className="w-[80px] h-[100px] cursor-pointer">
       <img
@@ -16,6 +18,11 @@ const NavigationImage: FC<{
         }`}
         alt="navigationImage"
       />
+      {toggleViewImage && (
+        <Modal>
+          <div>Hello</div>
+        </Modal>
+      )}
     </div>
   );
 };

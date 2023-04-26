@@ -2,12 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import NavigationImage from "../NavigationImage/NavigationImage";
-
+import ViewImageModal from "../ViewImageModal/ViewImageModal";
 const ImageCarousel = ({ images = [] }: { images: string[] }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [disableButtons, setDisabledButtons] = useState(false);
   const [usingNavigation, setUsingNavigation] = useState(false);
   const [nextImage, setNextImage] = useState(true);
+  const [toogleViewImage, setToggleViewImage] = useState(false);
   const nextHandler = () => {
     if (currentImage === images.length - 1) {
       setCurrentImage(0);
@@ -26,13 +27,22 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
   };
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div className="w-full h-full relative overflow-hidden bg-slate-50">
+      {toogleViewImage && (
+        <ViewImageModal
+          onCancel={() => {
+            setToggleViewImage(false);
+          }}
+          image={images[currentImage]}
+        />
+      )}
       <AnimatePresence
         initial={false}
         mode="sync"
         custom={{ usingNavigation, next: nextImage }}
       >
         <motion.img
+          onClick={() => setToggleViewImage(true)}
           variants={animation.imageNext}
           onAnimationStart={() => {
             setDisabledButtons(true);
@@ -47,13 +57,13 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
               setUsingNavigation(false);
             }
           }}
-          className="w-full h-full object-cover absolute left-0 top-0"
+          className="w-full h-full object-cover object-left   absolute left-0 top-0"
           key={images[currentImage]}
           src={images[currentImage]}
           alt="carouselImage"
         />
       </AnimatePresence>
-      <div className=" absolute bottom-[5%] w-full justify-center flex gap-5">
+      <div className=" drop-shadow-md absolute bottom-[5%] w-full justify-center flex gap-5">
         {images.map((image, index) => (
           <NavigationImage
             onClick={() => {
@@ -69,12 +79,12 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
       <span
         className={`${
           disableButtons && " pointer-events-none"
-        } absolute opacity-60  top-1/2 right-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
+        } drop-shadow-xl  absolute opacity-60  top-1/2 right-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
         onClick={nextHandler}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="white"
+          fill="#c2c2c2"
           className="w-[40px]"
           viewBox="0 0 512 512"
         >
@@ -84,12 +94,12 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
       <span
         className={`${
           disableButtons && " pointer-events-none"
-        } absolute opacity-60  top-1/2 left-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
+        } drop-shadow-xl absolute opacity-60  top-1/2 left-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
         onClick={previousHandler}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="white"
+          fill="#c2c2c2"
           className="w-[40px]"
           viewBox="0 0 512 512"
         >

@@ -32,6 +32,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <div id="modal-hook"></div>
         <NavBar />
         <Outlet />
         <Footer />
