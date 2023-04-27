@@ -13,7 +13,7 @@ const Auth = () => {
   const mode = searchParams.get("mode") ?? "login";
   return (
     <div className="w-full flex justify-center ">
-      <div className="w-[40%] bg-white p-10 rounded-lg drop-shadow-lg">
+      <div className="w-[80%] lg:w-[40%] bg-white p-10 rounded-lg drop-shadow-lg">
         <p className="text-center text-3xl">
           {mode === "login" ? "Login" : "Register"}
         </p>

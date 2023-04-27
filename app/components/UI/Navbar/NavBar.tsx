@@ -14,7 +14,7 @@ const NavBar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="relative flex justify-between text-slate-500  items-center py-[36px] px-[80px] z-50">
+    <header className="relative flex justify-between text-slate-500  items-center  py-[36px] px-8 md:px-4 z-30  ">
       <Link to="/">Home</Link>
       <Button
         className="lg:hidden hover:scale-110 transition-all"
@@ -47,7 +47,7 @@ const NavBar = () => {
           key={"navbar" + String(showNavBar)}
           className={`${
             !showNavBar ? "hidden" : "flex"
-          }  drop-shadow-lg lg:drop-shadow-none items-center justify-center px-[200px] lg:px-0 bg-white fixed right-0 top-0 w-max lg:w-auto h-screen lg:h-auto lg:static  lg:block`}
+          }  drop-shadow-lg lg:drop-shadow-none items-center justify-center w-full md:w-1/2   lg:px-0 bg-white fixed right-0 top-0  lg:w-auto h-full lg:h-auto lg:static  lg:block`}
         >
           <ul className="flex flex-col lg:flex-row gap-[80px] items-center">
             <li className="hover:scale-110 transition-all">

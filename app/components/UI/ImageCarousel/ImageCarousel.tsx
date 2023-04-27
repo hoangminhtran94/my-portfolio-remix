@@ -67,18 +67,26 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
           alt="carouselImage"
         />
       </AnimatePresence>
-      <div className=" drop-shadow-md absolute bottom-[5%] w-full justify-center flex gap-5">
-        {images.map((image, index) => (
-          <NavigationImage
-            onClick={() => {
-              setUsingNavigation(true);
-              setCurrentImage(index);
-            }}
-            key={index}
-            image={image}
-            selected={currentImage === index}
-          />
-        ))}
+      <div className=" drop-shadow-md absolute bottom-0 py-6 w-full bg-[rgba(0,0,0,0.05)] justify-center flex gap-5">
+        {images.map((image, index) => {
+          if (
+            index === currentImage - 1 ||
+            index === currentImage + 1 ||
+            index === currentImage
+          ) {
+            return (
+              <NavigationImage
+                onClick={() => {
+                  setUsingNavigation(true);
+                  setCurrentImage(index);
+                }}
+                key={index}
+                image={image}
+                selected={currentImage === index}
+              />
+            );
+          }
+        })}
       </div>
       <span
         className={`${

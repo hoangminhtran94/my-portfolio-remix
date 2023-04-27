@@ -15,14 +15,14 @@ const Contact = () => {
   return (
     <AnimatePresence>
       <div
-        className="h-[600px] 2xl:h-[900px] w-full shadow-lg rounded-md grid grid-cols-3   bg-[rgb(255,255,255,0.5)]"
+        className="h-[600px] 2xl:h-[900px] w-full shadow-lg rounded-md flex md:flex-row flex-col  bg-[rgb(255,255,255,0.5)]"
         key={pathname}
       >
         <motion.div
           animate={{
             rotateY: showPhone ? 180 : 0,
           }}
-          className={`relative flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
+          className={`relative flex-1 flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
         >
           <div
             className={` cursor-pointer absolute w-full h-full    ${
@@ -49,7 +49,7 @@ const Contact = () => {
           animate={{
             rotateY: showEmail ? 180 : 0,
           }}
-          className={`relative flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
+          className={`relative flex flex-1 flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
         >
           <div
             onClick={() => {
@@ -77,7 +77,7 @@ const Contact = () => {
           animate={{
             rotateY: showSocial ? 180 : 0,
           }}
-          className={`relative flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
+          className={`relative flex-1 flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
         >
           <div
             onClick={() => {

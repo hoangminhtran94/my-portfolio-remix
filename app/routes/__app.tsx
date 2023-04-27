@@ -34,7 +34,7 @@ const AppLayout = () => {
     },
     exit: {
       opacity: 0,
-      y: 300,
+      x: -300,
       transition: { duration: 0.5 },
     },
   };
@@ -156,7 +156,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className="relative flex-1 mb-[60px]">
+    <main className="relative flex-1 mb-[60px] px-8 md:px-4  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div

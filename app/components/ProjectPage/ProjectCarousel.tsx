@@ -5,10 +5,9 @@ import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import ImageCarousel from "../UI/ImageCarousel/ImageCarousel";
 import NavigtionDot from "../UI/NavigationDot/NavigationDot";
 import type { Project } from "~/utils/models/models";
-import Button from "../UI/Button/Button";
-import { useMatches } from "@remix-run/react";
 
-import ProjectTechnology from "../UI/ProjectTechnology/ProjectTechnology";
+import { useMatches } from "@remix-run/react";
+import ProjectDetail from "./ProjectDetail";
 
 interface ProjectCarouselProps {
   projects: Project[];
@@ -42,8 +41,8 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="w-full rounded-lg border border-slate-50 h-full relative overflow-hidden">
+    <div className="w-full h-full flex flex-col">
+      <div className="w-full rounded-lg border border-slate-50 h-full relative overflow-hidden shadow-md">
         <AnimatePresence
           custom={{ next: nextProject, usingDot: usingNavigationDot }}
           initial={false}
@@ -64,66 +63,12 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
             }}
             exit="exit"
             key={currentProject.id}
-            className=" absolute left-0 top-0 flex h-full min-w-full"
+            className=" absolute left-0 top-0 flex flex-col-reverse flex-1 lg:flex-row h-full min-w-full"
           >
-            <div className="p-[48px] w-1/2 flex flex-col items-center justify-center">
-              <div className="flex gap-8 w-full flex-col flex-1">
-                <h2 className="h-fit text-center font-bold">
-                  {currentProject.name}
-                </h2>
-                {currentProject.description && (
-                  <div>
-                    <h3 className="font-bold">Description</h3>
-                    <p className="text-lg">{currentProject.description}</p>
-                  </div>
-                )}
-                {currentProject.technologies.length > 0 && (
-                  <div>
-                    <h3 className="font-bold">Technologies</h3>
-                    <div className="flex gap-4 max-w-full flex-wrap text-lg">
-                      {currentProject.technologies.map((tech) => (
-                        <ProjectTechnology
-                          key={tech.id}
-                          icon={tech.icon}
-                          label={tech.name}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {currentProject.demoLink && (
-                  <div>
-                    <h3 className="font-bold">Link</h3>
-                    <a
-                      className="text-lg"
-                      href={currentProject.demoLink}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Visit the demo website
-                    </a>
-                  </div>
-                )}
-                {currentProject.githubLink && (
-                  <div>
-                    <h3 className="font-bold">Project respository</h3>
-                    <a
-                      className="text-lg"
-                      href={currentProject.githubLink}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Visit the project source code
-                    </a>
-                  </div>
-                )}
-              </div>
-              {rootData.userData && (
-                <Button className="w-full" to={currentProject.id}>
-                  Edit
-                </Button>
-              )}
-            </div>
+            <ProjectDetail
+              project={currentProject}
+              enableEdit={!!rootData.userData}
+            />
             <div className="flex-1 border-l  border-slate-50">
               <ImageCarousel images={currentProject.projectImages} />
             </div>
@@ -131,7 +76,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
         </AnimatePresence>
       </div>
 
-      <div className="flex justify-between w-3/4 mx-auto items-center mt-6">
+      <div className="flex justify-between w-[95%] md:w-3/4 mx-auto items-center mt-6">
         <span
           className={`${
             disableButtons && "pointer-events-none"
@@ -146,7 +91,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
           >
             <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z" />
           </svg>
-          Previous
+          <span className="hidden md:inline"> Previous</span>
         </span>
         <div className="flex gap-4">
           {projects.map((_, index) => (
@@ -167,7 +112,8 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
           } cursor-pointer font-bold  flex items-center gap-2 opacity-70 hover:opacity-100 hover:scale-110 `}
           onClick={nextHandler}
         >
-          Next
+          <span className="hidden md:inline"> Next</span>
+
           <svg
             className="w-5"
             fill="#494949"

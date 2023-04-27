@@ -1,10 +1,11 @@
+import * as backEndIcons from "~/utils/icons/Backend";
 const Footer = () => {
   return (
-    <footer className=" mt-auto px-[40px] py-[30px] flex flex-col items-center gap-2 ">
-      <p>Developed by Minh Hoang Tran.</p>
+    <footer className=" bg-slate-50 mt-auto py-[30px] flex flex-col items-center gap-5 ">
+      <p className=" text-[16px]">Developed by Minh Hoang Tran.</p>
+      <p className="text-center font-bold text-[16px]">Technologies</p>
       <div>
-        <p>Technology</p>
-        <div className="flex gap-10 items-center flex-wrap ">
+        <div className="flex gap-5 md:gap-10 justify-center items-center flex-wrap ">
           <span>
             <svg
               x-comp="Wordmark"
@@ -288,6 +289,7 @@ const Footer = () => {
               </g>
             </svg>
           </span>
+          <span>{backEndIcons.Cloudinary}</span>
         </div>
       </div>
     </footer>

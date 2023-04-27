@@ -25,7 +25,7 @@ const MyProject = () => {
           </Link>
         </div>
       )}
-      <div className="  h-[900px] text-slate-600 w-full shadow-md rounded-md">
+      <div className=" h-[900px]  md:h-[900px] text-slate-600 w-full rounded-md">
         <ProjectCarousel projects={projects} />
       </div>
     </div>

@@ -9,8 +9,8 @@ const About = () => {
       className=" text-stone-600 drop-shadow-sm  text-justify  font-extrabold flex flex-col gap-4  "
       key={pathname}
     >
-      <div className="flex flex-col 3xl:flex-row gap-14 items-center py-9">
-        <div className="w-[400px] h-[400px] ">
+      <div className="flex flex-col 3xl:flex-row gap-14 items-center md:py-9">
+        <div className="w-[275px] h-[275px] md:w-[400px] md:h-[400px] ">
           <motion.img
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-[60px]"
+            className="text-[36px] md:text-[60px]"
           >
             Hi,
           </motion.h2>
@@ -34,7 +34,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="text-[30px]"
+            className="text-[20px] leading-loose md:text-[30px]"
           >
             I'm
             <strong> Minh Hoang Tran</strong> , a Full Stack web developer with
@@ -45,7 +45,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.5 }}
-            className="text-[30px]"
+            className="text-[20px] leading-loose md:text-[30px]"
           >
             I am working for Algonquin College - Data Analytics center. I am
             experienced with React, Angular, VueJs, Svelte, NextJs... and other
@@ -58,7 +58,7 @@ const About = () => {
         initial={{ opacity: 0, x: 300 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
-        className="flex  mt-10 text-xl  "
+        className="flex flex-col xl:flex-row gap-6  mt-10 text-md md:text-xl"
       >
         <Link
           to="/my-project"
