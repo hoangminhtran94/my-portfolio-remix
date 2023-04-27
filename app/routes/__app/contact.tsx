@@ -15,7 +15,7 @@ const Contact = () => {
   return (
     <AnimatePresence>
       <div
-        className="h-[900px] w-full shadow-lg rounded-md grid grid-cols-3   bg-[rgb(255,255,255,0.5)]"
+        className="h-[600px] 2xl:h-[900px] w-full shadow-lg rounded-md grid grid-cols-3   bg-[rgb(255,255,255,0.5)]"
         key={pathname}
       >
         <motion.div

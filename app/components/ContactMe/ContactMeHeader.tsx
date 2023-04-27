@@ -1,7 +1,7 @@
 const ContactMeHeader = () => {
   return (
-    <div>
-      <h1>Contact Me</h1>
+    <div className="w-full">
+      <h1 className="text-center">Contact Me</h1>
     </div>
   );
 };

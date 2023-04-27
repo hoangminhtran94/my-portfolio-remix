@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className=" px-[40px] py-[30px] flex flex-col items-center gap-2 ">
+    <footer className=" mt-auto px-[40px] py-[30px] flex flex-col items-center gap-2 ">
       <p>Developed by Minh Hoang Tran.</p>
       <div>
         <p>Technology</p>

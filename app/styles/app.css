@@ -1,6 +1,13 @@
 body {
   font-family: "Montserrat";
+  font-weight: 600;
+  min-height: 1080px;
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  color: rgb(71 85 105);
 }
+
 h1 {
   font-size: 72px;
   font-weight: 900;
@@ -206,7 +213,14 @@ a.active {
   font-weight: 800;
 }
 *::-webkit-scrollbar {
-  display: none;
+  width: 5px;
+  height: 8px;
+  background-color: #ffffff; /* or add it to the track */
+}
+*::-webkit-scrollbar-thumb {
+  background: #000;
+  background-color: #d3d2d2;
+  border-radius: 4px;
 }
 
 .zoom-in {
@@ -219,5 +233,11 @@ a.active {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@media (min-height: 1080px) {
+  body {
+    height: 100vh;
   }
 }

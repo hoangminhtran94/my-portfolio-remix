@@ -2,7 +2,10 @@ import { Form } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import ImageInput from "~/components/UI/ImageInput/ImageInput";
 import Input from "~/components/UI/Input/Input";
-import type { ActionFunction } from "@remix-run/node";
+import {
+  ActionFunction,
+  unstable_composeUploadHandlers,
+} from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { useSearchParams } from "@remix-run/react";
 import {
@@ -17,8 +20,11 @@ import {
 } from "~/utils/database/socialMedia.server";
 import { useMatches } from "@remix-run/react";
 import type { SocialMedia as TypeSocialMedia } from "~/utils/models/models";
-import fs from "fs";
-import path from "path";
+
+import {
+  deleteImageFromCloudinary,
+  uploadImageToCloudinary,
+} from "~/utils/fileUpload/fileUpload";
 const SocialMedia = () => {
   const matches = useMatches();
   const [searchParams] = useSearchParams();
@@ -58,7 +64,6 @@ const SocialMedia = () => {
           label="Icon"
         />
         <div className="flex gap-3 mt-3">
-          {" "}
           <Button className="flex-1" to={".."}>
             Cancel
           </Button>{" "}
@@ -85,9 +90,17 @@ export const action: ActionFunction = async ({ request }) => {
     throw redirect("/auth");
   }
 
-  const uploadHandler = unstable_createFileUploadHandler({
-    directory: "public/icons",
-  });
+  const uploadHandler = unstable_composeUploadHandlers(
+    async ({ name, contentType, data, filename }) => {
+      if (name !== "icon") {
+        return undefined;
+      }
+
+      const response = await uploadImageToCloudinary(data, "icons");
+      return response?.secure_url;
+    }
+  );
+
   const formData = await request.formData();
   const parsedData = await unstable_parseMultipartFormData(
     requestClone,
@@ -107,14 +120,15 @@ export const action: ActionFunction = async ({ request }) => {
 
   const data = Object.fromEntries(formData);
   const icon = parsedData.get("icon");
+  console.log(data);
   const iconPath = icon
-    ? "/icons/" + (icon as File).name
+    ? icon
     : currentSocialMedia
     ? currentSocialMedia.icon
     : "";
   const databaseData = { ...data, icon: iconPath };
 
-  if (!mediaId) {
+  if (!mediaId || !currentSocialMedia) {
     try {
       await addASocialMedia(user.id, databaseData);
     } catch (error) {
@@ -122,14 +136,17 @@ export const action: ActionFunction = async ({ request }) => {
     }
   } else {
     if (icon) {
-      fs.unlink(path.join("public", currentSocialMedia!.icon), (e) => {
-        console.log(e);
-      });
+      try {
+        await deleteImageFromCloudinary(currentSocialMedia.icon);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     try {
       updateASocialMedia(mediaId, databaseData);
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }

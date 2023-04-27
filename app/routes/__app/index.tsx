@@ -3,13 +3,16 @@ import { useEffect } from "react";
 const WelcomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       navigate("/about");
     }, 2000);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [navigate]);
   return (
-    <div>
-      <h1>Welcome to my website</h1>
+    <div className="w-full">
+      <h1 className="text-center"> Welcome to my website</h1>
     </div>
   );
 };

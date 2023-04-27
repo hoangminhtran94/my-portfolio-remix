@@ -47,7 +47,7 @@ export const action: ActionFunction = async ({ request }) => {
         return undefined;
       }
       const uploadedImage = await uploadImageToCloudinary(data, "icons");
-      return uploadedImage.secure_url;
+      return uploadedImage?.secure_url;
     },
     // fallback to memory for everything else
     unstable_createMemoryUploadHandler()

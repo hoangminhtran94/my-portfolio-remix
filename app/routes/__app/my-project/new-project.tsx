@@ -61,7 +61,7 @@ export const action: ActionFunction = async ({ request }) => {
         data,
         "projectImages"
       );
-      return uploadedImage.secure_url;
+      return uploadedImage?.secure_url;
     },
     // fallback to memory for everything else
     unstable_createMemoryUploadHandler()

@@ -14,7 +14,7 @@ const BackEndShowCase: React.FC = () => {
           navigate("..");
         }}
       />
-      <div className=" bg-modal w-[40%] h-[50%]   rounded-xl p-[48px]  z-[888] shadow-lg  flex flex-col items-center gap-[16px]">
+      <div className=" bg-modal w-[80%]  h-max 3xl:w-[40%]   rounded-xl p-[48px]  z-[888] shadow-lg  flex flex-col items-center gap-[16px]">
         <h2>Backend skills</h2>
         <AnimatePresence>
           <motion.div

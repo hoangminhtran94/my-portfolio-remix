@@ -16,8 +16,8 @@ const ProjectHeader = () => {
   };
 
   return (
-    <div className="relative  flex items-center ">
-      <h1>{setHeader()}</h1>
+    <div className="relative w-full flex items-center ">
+      <h1 className="text-center w-full">{setHeader()}</h1>
     </div>
   );
 };

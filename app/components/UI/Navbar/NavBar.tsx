@@ -4,7 +4,7 @@ const NavBar = () => {
   const data = useLoaderData();
 
   return (
-    <header className="relative flex justify-between text-slate-500  py-[30px] px-[80px] z-50">
+    <header className="relative flex justify-between text-slate-500  items-center py-[36px] px-[80px] z-50">
       <Link to="/">Home</Link>
       <nav>
         <ul className="flex gap-[80px] items-center">

@@ -610,7 +610,7 @@ export const about = (
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
-    className="h-full opacity-30"
+    className="h-full opacity-10"
     viewBox="0 0 786.81995 572.25773"
   >
     <circle cx="458.32136" cy="74.18162" r="26.70075" fill="#f2f2f2" />

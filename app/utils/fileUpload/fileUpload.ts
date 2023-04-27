@@ -13,8 +13,7 @@ export async function uploadImageToCloudinary(
   data: AsyncIterable<Uint8Array>,
   folder: string
 ) {
-  console.log(data);
-  const uploadPromise = new Promise<UploadApiResponse>(
+  const uploadPromise = new Promise<UploadApiResponse | undefined>(
     async (resolve, reject) => {
       const uploadStream = cloudinary.v2.uploader.upload_stream(
         {
@@ -22,7 +21,7 @@ export async function uploadImageToCloudinary(
         },
         (error, result) => {
           if (error) {
-            reject(error);
+            resolve(undefined);
             return;
           }
           resolve(result!);
@@ -42,9 +41,15 @@ export const deleteImageFromCloudinary = async (url: string) => {
     url_parts[url_parts.length - 2] +
     "/" +
     public_id_with_extension.split(".")[0];
-  let returnResult;
-  cloudinary.v2.uploader.destroy(public_id, (error, result) => {
-    returnResult = result;
+
+  const deletePromise = new Promise<any>(async (resolve, reject) => {
+    cloudinary.v2.uploader.destroy(public_id, (error, result) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(result);
+    });
   });
-  return returnResult;
+
+  return deletePromise;
 };

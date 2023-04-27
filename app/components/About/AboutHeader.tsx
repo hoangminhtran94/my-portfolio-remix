@@ -1,7 +1,7 @@
 const AboutHeader = () => {
   return (
-    <div>
-      <h1>About</h1>
+    <div className="w-full">
+      <h1 className="text-center">About</h1>
     </div>
   );
 };

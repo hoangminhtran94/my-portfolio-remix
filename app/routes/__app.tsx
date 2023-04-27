@@ -156,7 +156,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className="relative">
+    <main className="relative flex-1 mb-[60px]">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -172,7 +172,7 @@ const AppLayout = () => {
           </div>
         </motion.div>
       </AnimatePresence>
-      <div className="flex max-w-[1920px] h-[1080px] mx-auto  items-center ">
+      <div className="flex 2xl:flex-row  flex-col  container  h-full gap-14 mx-auto  items-center ">
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -181,7 +181,7 @@ const AppLayout = () => {
                 firstContainerPathPattern.id === "routes/__app/profile" ||
                 firstContainerPathPattern.id.includes("auth")) &&
               "hidden"
-            } relative w-[600px] h-[1080px] flex items-center  px-[60px] z-20 text-slate-500 `}
+            } relative w-full 2xl:w-1/3    2xl:h-full px-[36px]  flex items-center   z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -189,7 +189,7 @@ const AppLayout = () => {
             exit="exit"
           >
             <div
-              className={`w-full h-1/2 absolute top-1/4 left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+              className={`w-full h-[150%] 2xl:h-1/2 absolute 2xl:top-1/4 left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
             />
             {changeFirstContainerHandler()}
           </motion.div>
@@ -197,7 +197,7 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            className=" flex items-center  h-full  flex-1 z-20"
+            className=" flex items-center w-full  h-full  flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

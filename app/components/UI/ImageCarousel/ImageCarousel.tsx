@@ -28,14 +28,18 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-slate-50">
-      {toogleViewImage && (
-        <ViewImageModal
-          onCancel={() => {
-            setToggleViewImage(false);
-          }}
-          image={images[currentImage]}
-        />
-      )}
+      <AnimatePresence>
+        {toogleViewImage && (
+          <ViewImageModal
+            toggle={toogleViewImage}
+            onCancel={() => {
+              setToggleViewImage(false);
+            }}
+            image={images[currentImage]}
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence
         initial={false}
         mode="sync"

@@ -8,7 +8,12 @@ import {
 import Button from "~/components/UI/Button/Button";
 import ImageInput from "~/components/UI/ImageInput/ImageInput";
 import Input from "~/components/UI/Input/Input";
-import { ActionFunction, redirect } from "@remix-run/node";
+import {
+  ActionFunction,
+  redirect,
+  unstable_composeUploadHandlers,
+  unstable_createMemoryUploadHandler,
+} from "@remix-run/node";
 import { useOutlet } from "@remix-run/react";
 import {
   unstable_createFileUploadHandler,
@@ -17,6 +22,10 @@ import {
 import { getUserFromSession, updateUser } from "~/utils/database/auth.server";
 import { AnimatePresence, motion } from "framer-motion";
 import { SocialMedia } from "~/utils/models/models";
+import {
+  deleteImageFromCloudinary,
+  uploadImageToCloudinary,
+} from "~/utils/fileUpload/fileUpload";
 
 const EditProfile = () => {
   const container1 = {
@@ -41,12 +50,12 @@ const EditProfile = () => {
   const [searchParams] = useSearchParams();
 
   return (
-    <div className="w-1/2 shadow-md border  border-slate-100 p-10 ">
+    <div className="w-1/2 shadow-md border relative  border-slate-100 p-10 ">
       <h2 className="text-center">Edit Profile</h2>
       <Form
         method="post"
         encType="multipart/form-data"
-        className="flex relative flex-col gap-3"
+        className="flex  flex-col gap-3"
       >
         <ImageInput
           defaultImages={[userData.profileImage]}
@@ -120,21 +129,21 @@ const EditProfile = () => {
           </Button>
           <Button className="flex-1">Submit</Button>
         </div>
-        <AnimatePresence mode="wait" initial={false}>
-          {pathname.includes("social-media") && (
-            <motion.div
-              key={searchParams.get("id") ?? "default"}
-              variants={container1}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="absolute bottom-0 left-[110%] z-10"
-            >
-              {outlet}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </Form>
+      <AnimatePresence mode="wait" initial={false}>
+        {pathname.includes("social-media") && (
+          <motion.div
+            key={searchParams.get("id") ?? "default"}
+            variants={container1}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="absolute bottom-0 left-[110%] z-10"
+          >
+            {outlet}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -153,9 +162,18 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const requestClone = request.clone();
-  const uploadHandler = unstable_createFileUploadHandler({
-    directory: "public/uploadImages",
-  });
+  const uploadHandler = unstable_composeUploadHandlers(
+    // our custom upload handler
+    async ({ name, contentType, data, filename }) => {
+      if (name !== "profileImage") {
+        return undefined;
+      }
+      const uploadedImage = await uploadImageToCloudinary(data, "profileImage");
+      return uploadedImage?.secure_url;
+    },
+    // fallback to memory for everything else
+    unstable_createMemoryUploadHandler()
+  );
 
   const parsedData = await unstable_parseMultipartFormData(
     requestClone,
@@ -163,9 +181,14 @@ export const action: ActionFunction = async ({ request }) => {
   );
   const formData = await request.formData();
   const image = parsedData.get("profileImage");
-  const imagePath = image
-    ? "/uploadImages/" + (image as File).name
-    : user.profileImage;
+  const imagePath = image ? image : user.profileImage;
+  if (image) {
+    try {
+      await deleteImageFromCloudinary(user.profileImage);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const data = Object.fromEntries(formData);
 
   const databaseData = { ...data, profileImage: imagePath };

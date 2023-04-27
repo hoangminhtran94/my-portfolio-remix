@@ -1,7 +1,7 @@
 const EducationHeader = () => {
   return (
-    <div>
-      <h1>My skills</h1>
+    <div className="w-full">
+      <h1 className="text-center">My skills</h1>
     </div>
   );
 };

@@ -90,7 +90,7 @@ export const action: ActionFunction = async ({ request, params }) => {
         data,
         "projectImages"
       );
-      return uploadedImage.secure_url;
+      return uploadedImage?.secure_url;
     },
     // fallback to memory for everything else
     unstable_createMemoryUploadHandler()
@@ -113,9 +113,17 @@ export const action: ActionFunction = async ({ request, params }) => {
     (image) => !remainedImageData.includes(image)
   );
 
+  let deletePromises: Promise<any>[] = [];
+
   deletedImages.forEach((deletedImage) =>
-    deleteImageFromCloudinary(deletedImage)
+    deletePromises.push(deleteImageFromCloudinary(deletedImage))
   );
+  try {
+    await Promise.all(deletePromises);
+  } catch (error) {
+    console.log(error);
+  }
+
   const images = imageData.getAll("projectImages");
   const technologyIds = formData.getAll("technologyIds");
 
