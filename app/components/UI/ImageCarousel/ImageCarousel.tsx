@@ -1,14 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import NavigationImage from "../NavigationImage/NavigationImage";
 import ViewImageModal from "../ViewImageModal/ViewImageModal";
+import { debounce } from "lodash";
 const ImageCarousel = ({ images = [] }: { images: string[] }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [disableButtons, setDisabledButtons] = useState(false);
   const [usingNavigation, setUsingNavigation] = useState(false);
   const [nextImage, setNextImage] = useState(true);
   const [toogleViewImage, setToggleViewImage] = useState(false);
+  const [offset, setOffset] = useState(40);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const nextHandler = () => {
     if (currentImage === images.length - 1) {
       setCurrentImage(0);
@@ -26,6 +30,31 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
     setNextImage(false);
   };
 
+  useEffect(() => {
+    const resizeDebounce = debounce(() => {
+      if (window.innerWidth >= 786) {
+        setOffset(40);
+      } else {
+        setOffset(20);
+      }
+    }, 100);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", resizeDebounce);
+    }
+    resizeDebounce();
+
+    return () => {
+      window.removeEventListener("resize", resizeDebounce);
+    };
+  }, []);
+
+  const setContainerClassName = (index: number) => {
+    return index === currentImage
+      ? `calc(50% - ${offset}px)`
+      : `calc(50% - ${offset}px ${currentImage < index ? "+" : "-"} ${
+          Math.abs(currentImage - index) * (offset === 40 ? 110 : 60)
+        }px)`;
+  };
   return (
     <div className="w-full h-full relative overflow-hidden bg-slate-50">
       <AnimatePresence>
@@ -67,26 +96,23 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
           alt="carouselImage"
         />
       </AnimatePresence>
-      <div className=" drop-shadow-md absolute bottom-0 py-6 w-full bg-[rgba(0,0,0,0.05)] justify-center flex gap-5">
-        {images.map((image, index) => {
-          if (
-            index === currentImage - 1 ||
-            index === currentImage + 1 ||
-            index === currentImage
-          ) {
-            return (
-              <NavigationImage
-                onClick={() => {
-                  setUsingNavigation(true);
-                  setCurrentImage(index);
-                }}
-                key={index}
-                image={image}
-                selected={currentImage === index}
-              />
-            );
-          }
-        })}
+      <div
+        ref={containerRef}
+        className=" drop-shadow-md h-[120px] md:h-[180px]  absolute bottom-0 py-6 w-full bg-[rgba(0,0,0,0.05)] justify-center flex gap-5"
+      >
+        {images.map((image, index) => (
+          <NavigationImage
+            onClick={() => {
+              setUsingNavigation(true);
+              setCurrentImage(index);
+            }}
+            containerStyle={{ left: setContainerClassName(index) }}
+            containerClassName={`absolute top-[20%] `}
+            key={index}
+            image={image}
+            selected={currentImage === index}
+          />
+        ))}
       </div>
       <span
         className={`${

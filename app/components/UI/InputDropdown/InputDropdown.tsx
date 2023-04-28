@@ -52,7 +52,7 @@ const InputDropdown: FC<InputDropdownProps> = ({
         {...otherProps}
       />
       {selectedItems.length > 0 && (
-        <ul className="flex gap-1">
+        <ul className="flex flex-wrap gap-1">
           {selectedItems.map((item) => (
             <li
               className="flex items-center gap-1 py-1 px-2 border rounded-md border-slate-200"

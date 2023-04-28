@@ -197,7 +197,7 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            className=" flex items-center w-full  h-full  flex-1 z-20"
+            className=" flex items-center w-full h-full  flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

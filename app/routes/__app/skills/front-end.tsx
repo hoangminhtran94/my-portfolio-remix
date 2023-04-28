@@ -15,14 +15,18 @@ const FrontEndShowCase: React.FC = () => {
         }}
       />
       <AnimatePresence mode="wait">
-        <div className=" bg-modal w-[80%]  h-max 3xl:w-[40%]     rounded-xl p-[48px]  z-[888] shadow-lg  flex flex-col items-center gap-[16px]">
+        <div
+          className=" bg-modal w-[80%] h-[60%] overflow-scroll  md:h-max 3xl:w-[40%]     rounded-xl 
+        p-[24px] lg:p-[48px]  
+        z-[888] shadow-lg  flex flex-col items-center gap-[16px]"
+        >
           <h2>Front-end</h2>
           <motion.div
             key="frontend-programming-languages"
             initial={{ opacity: 0, translateX: -100 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="w-[80%] flex flex-col gap-6"
+            className="w-[100%] md:w-[80%] flex flex-col gap-6"
           >
             <h3>Programming language</h3>
             <ul className="flex max-w-full flex-wrap  gap-10">
@@ -38,7 +42,7 @@ const FrontEndShowCase: React.FC = () => {
             initial={{ opacity: 0, translateX: -100 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.5, delay: 1 }}
-            className="w-[80%] flex flex-col gap-6"
+            className="w-[100%] md:w-[80%] flex flex-col gap-6"
           >
             <h3>Frameworks</h3>
             <ul className="flex  flex-wrap  gap-10">

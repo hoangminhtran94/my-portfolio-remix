@@ -36,7 +36,7 @@ const SocialMedia = () => {
     : null;
 
   return (
-    <div className="flex flex-col w-[400px] h-fit p-8 gap-6 rounded-lg border border-slate-100 shadow-md bg-white">
+    <div className="flex flex-col w-full  h-fit p-8 gap-6 rounded-lg border border-slate-100 shadow-md bg-white">
       <h3>New social media info</h3>
       <Form
         method="post"

@@ -50,7 +50,7 @@ const ImageInput: FC<ImageInputProps> = ({
           setImages((prev) => [...prev, ...objectUrls]);
         }}
       />
-      <div className="flex gap-3">
+      <div className="flex flex-wrap lg:justify-start justify-center gap-3">
         {images.length > 0 &&
           images.map((image, index) => (
             <div

@@ -8,10 +8,10 @@ const ViewImageModal: FC<{
   return (
     <Modal
       onCancel={onCancel}
-      modalClassName="w-fit h-3/4 relative"
+      modalClassName="w-fit max-w-[90vw] h-fit sm:h-3/4 !bg-slate-50 relative"
       toggle={toggle}
     >
-      <div className="absolute top-[-5%] w-full flex justify-center">
+      <div className="absolute top-[-50px] w-full flex justify-center">
         <span
           onClick={onCancel}
           className="text-slate-500 drop-shadow-md  text-lg cursor-pointer hover:scale-110 transition-all"

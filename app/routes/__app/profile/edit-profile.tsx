@@ -50,7 +50,7 @@ const EditProfile = () => {
   const [searchParams] = useSearchParams();
 
   return (
-    <div className="w-1/2 shadow-md border relative  border-slate-100 p-10 ">
+    <div className="w-full lg:w-1/2 shadow-md border relative  border-slate-100 p-10 ">
       <h2 className="text-center">Edit Profile</h2>
       <Form
         method="post"
@@ -82,7 +82,7 @@ const EditProfile = () => {
         />
         <div>
           <label>Social media</label>
-          <ul className="flex gap-1">
+          <ul className="flex flex-wrap gap-1">
             {userData.socialMedias.map((item: SocialMedia) => (
               <li
                 className="flex items-center gap-1 py-1 px-2 border rounded-md border-slate-200"
@@ -138,7 +138,7 @@ const EditProfile = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="absolute bottom-0 left-[110%] z-10"
+            className="absolute w-full lg:w-[400px] top-0 left-0 lg:bottom-0 lg:left-2/3 4xl:left-[105%] z-10"
           >
             {outlet}
           </motion.div>

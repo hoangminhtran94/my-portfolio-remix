@@ -36,7 +36,7 @@ const MySkillsLayout = () => {
     },
   };
   return (
-    <div className="flex flex-col md:flex-row w-[1000px] h-full md:items-center  mx-auto  gap-14  2xl:gap-[100px]">
+    <div className="flex flex-col h-[480px] md:flex-row w-[1000px] md:h-full md:items-center  mx-auto  gap-14  2xl:gap-[100px]">
       <div
         className="relative flex-1 h-[480px] 2xl:h-[600px] border border-slate-100 rounded-lg overflow-hidden shadow-lg  flex justify-center items-center cursor-pointer gap-[16px] transition-all hover:scale-[1.1] hover:z-10"
         onClick={() => {
@@ -74,7 +74,7 @@ const MySkillsLayout = () => {
         <h2 className="gradient-dark z-10">Front-end</h2>
       </div>
       <div
-        className="relative flex-1 h-[480px] 2xl:h-[600px] border border-slate-100 rounded-lg overflow-hidden shadow-lg  flex justify-center items-center cursor-pointer gap-[16px] transition-all hover:scale-[1.1] hover:z-10"
+        className="relative flex-1 h-[480px]  2xl:h-[600px] border border-slate-100 rounded-lg overflow-hidden shadow-lg  flex justify-center items-center cursor-pointer gap-[16px] transition-all hover:scale-[1.1] hover:z-10"
         onClick={() => {
           navigate("back-end");
         }}

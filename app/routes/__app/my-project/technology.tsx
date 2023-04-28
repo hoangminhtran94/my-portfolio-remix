@@ -23,7 +23,7 @@ const NewTechnology = () => {
     <div className="flex flex-col w-full h-[90%] gap-6">
       <div className=" bg-white drop-shadow-md p-4 rounded flex flex-col gap-4">
         <h2>Technology management</h2>
-        <Button className="w-1/4" to={"new-technology"}>
+        <Button className="lg:w-1/4" to={"new-technology"}>
           New technology
         </Button>
       </div>
