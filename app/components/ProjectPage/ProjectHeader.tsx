@@ -1,16 +1,20 @@
-import { useMatches } from "@remix-run/react";
+import { useMatches, useParams } from "@remix-run/react";
+import type { Project } from "~/utils/models/models";
 const ProjectHeader = () => {
   const matches = useMatches();
+  const { projectId } = useParams();
+  const projects = matches[0].data.projects;
+  const project = projects.find((project: Project) => project.id === projectId);
 
   const setHeader = () => {
     if (matches[2].id.includes("new-project")) {
       return "New Project";
     }
-    if (matches[2].id.includes("$projectId")) {
+    if (matches[2].id.includes("edit")) {
       return "Edit Project";
     }
-    if (matches[2].id.includes("technology")) {
-      return "Technology";
+    if (matches[2].id.includes("$projectId")) {
+      return project.name;
     }
     return "My Project";
   };

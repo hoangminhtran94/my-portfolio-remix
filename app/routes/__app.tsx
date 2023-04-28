@@ -156,7 +156,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className="relative flex-1 mb-[60px] px-8 md:px-4  ">
+    <main className="relative flex-1 mb-[60px]  px-4 md:px-12  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div

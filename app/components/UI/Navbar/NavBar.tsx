@@ -14,7 +14,7 @@ const NavBar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="relative flex justify-between text-slate-500  items-center  py-[36px] px-8 md:px-4 z-30  ">
+    <header className="relative flex justify-between text-slate-500  items-center  py-[36px] px-4 md:px-12 z-30  ">
       <Link to="/">Home</Link>
       <Button
         className="lg:hidden hover:scale-110 transition-all"

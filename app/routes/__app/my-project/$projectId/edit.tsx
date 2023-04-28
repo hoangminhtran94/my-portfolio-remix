@@ -1,17 +1,10 @@
 import {
   ActionFunction,
   LoaderFunction,
-  NodeOnDiskFile,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
-import {
-  redirect,
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
-import fs from "fs";
-import path from "path";
+import { redirect, unstable_parseMultipartFormData } from "@remix-run/node";
 
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { getUserFromSession } from "~/utils/database/auth.server";

@@ -1,16 +1,16 @@
-import type { Project } from "~/utils/models/models";
-import type { FC } from "react";
-import ProjectTechnology from "../UI/ProjectTechnology/ProjectTechnology";
-import Button from "../UI/Button/Button";
+import type { Project, Technology } from "~/utils/models/models";
+import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
+import { useMatches, useParams } from "@remix-run/react";
 
-const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
-  project,
-  enableEdit,
-}) => {
+const ProjectView = () => {
+  const matches = useMatches();
+  const { projectId } = useParams();
+  const projects = matches[0].data.projects;
+  const project = projects.find((project: Project) => project.id === projectId);
+
   return (
     <div className="p-[24px] md:p-[48px] flex flex-col items-center flex-1 justify-center">
       <div className="flex gap-8 w-full flex-col flex-1">
-        <h2 className="h-fit text-center font-bold">{project.name}</h2>
         {project.description && (
           <div>
             <h3 className="font-bold">Description</h3>
@@ -21,7 +21,7 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
           <div>
             <h3 className="font-bold">Technologies</h3>
             <div className="flex gap-4 max-w-full flex-wrap text-lg">
-              {project.technologies.map((tech) => (
+              {project.technologies.map((tech: Technology) => (
                 <ProjectTechnology
                   key={tech.id}
                   icon={tech.icon}
@@ -58,18 +58,8 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
           </div>
         )}
       </div>
-      <div className="flex w-full gap-4">
-        <Button className="flex-1" to={project.id}>
-          View Detail
-        </Button>
-        {enableEdit && (
-          <Button className="flex-1" to={project.id + "/edit"}>
-            Edit
-          </Button>
-        )}
-      </div>
     </div>
   );
 };
 
-export default ProjectDetail;
+export default ProjectView;
