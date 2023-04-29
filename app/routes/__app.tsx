@@ -156,7 +156,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className=" overflow-x-hidden relative flex-1 mb-[60px]  px-4 md:px-12  ">
+    <main className=" flex flex-col  overflow-x-hidden relative flex-1 mb-[60px]  px-4 md:px-12  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -172,7 +172,7 @@ const AppLayout = () => {
           </div>
         </motion.div>
       </AnimatePresence>
-      <div className="flex 2xl:flex-row  flex-col  container  h-full gap-14 mx-auto  items-center ">
+      <div className="flex 2xl:flex-row flex-1  flex-col  container  h-full gap-14 mx-auto  items-center ">
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -181,7 +181,7 @@ const AppLayout = () => {
                 firstContainerPathPattern.id === "routes/__app/profile" ||
                 firstContainerPathPattern.id.includes("auth")) &&
               "hidden"
-            } relative w-full 2xl:w-1/3    2xl:h-full px-[36px]  flex items-center   z-20 text-slate-500 `}
+            } relative w-full 2xl:w-1/3 2xl:h-full px-[36px]  flex items-center   z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"

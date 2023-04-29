@@ -31,7 +31,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen">
         <div id="modal-hook"></div>
         <NavBar />
         <Outlet />
