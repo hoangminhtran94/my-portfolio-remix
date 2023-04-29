@@ -4,7 +4,13 @@ import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import NavigationImage from "../NavigationImage/NavigationImage";
 import ViewImageModal from "../ViewImageModal/ViewImageModal";
 import { debounce } from "lodash";
-const ImageCarousel = ({ images = [] }: { images: string[] }) => {
+const ImageCarousel = ({
+  images = [],
+  containerClassName,
+}: {
+  images: string[];
+  containerClassName?: string;
+}) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [disableButtons, setDisabledButtons] = useState(false);
   const [usingNavigation, setUsingNavigation] = useState(false);
@@ -56,7 +62,9 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
         }px)`;
   };
   return (
-    <div className="w-full h-full relative overflow-hidden bg-slate-50">
+    <div
+      className={`w-full h-full relative overflow-hidden bg-slate-50 ${containerClassName}`}
+    >
       <AnimatePresence>
         {toogleViewImage && (
           <ViewImageModal
@@ -75,7 +83,6 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
         custom={{ usingNavigation, next: nextImage }}
       >
         <motion.img
-          onClick={() => setToggleViewImage(true)}
           variants={animation.imageNext}
           onAnimationStart={() => {
             setDisabledButtons(true);
@@ -90,15 +97,31 @@ const ImageCarousel = ({ images = [] }: { images: string[] }) => {
               setUsingNavigation(false);
             }
           }}
-          className="w-full h-full object-cover object-left   absolute left-0 top-0"
+          className="w-full h-full object-cover object-left  pointer-events-none  absolute left-0 top-0"
           key={images[currentImage]}
           src={images[currentImage]}
           alt="carouselImage"
         />
       </AnimatePresence>
+      <div className="absolute top-[5%] w-full flex justify-center">
+        <span
+          className="flex gap-3 items-center hover:scale-110 transition-all cursor-pointer drop-shadow-white-lg "
+          onClick={() => setToggleViewImage(true)}
+        >
+          View image
+          <svg
+            className="h-[25px]"
+            fill="rgb(100 116 139)"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" />
+          </svg>
+        </span>
+      </div>
       <div
         ref={containerRef}
-        className=" drop-shadow-md h-[120px] md:h-[180px]  absolute bottom-0 py-6 w-full bg-[rgba(0,0,0,0.05)] justify-center flex gap-5"
+        className=" drop-shadow-md h-[120px] md:h-[180px]  absolute bottom-0 py-6 w-full  bg-[rgba(0,0,0,0.05)] justify-center flex gap-5"
       >
         {images.map((image, index) => (
           <NavigationImage

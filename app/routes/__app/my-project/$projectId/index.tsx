@@ -1,6 +1,7 @@
 import type { Project, Technology } from "~/utils/models/models";
 import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 import { useMatches, useParams } from "@remix-run/react";
+import ImageCarousel from "~/components/UI/ImageCarousel/ImageCarousel";
 
 const ProjectView = () => {
   const matches = useMatches();
@@ -9,17 +10,30 @@ const ProjectView = () => {
   const project = projects.find((project: Project) => project.id === projectId);
 
   return (
-    <div className="p-[24px] md:p-[48px] flex flex-col items-center flex-1 justify-center">
-      <div className="flex gap-8 w-full flex-col flex-1">
-        {project.description && (
+    <div className="p-[24px] md:p-[48px] flex flex-col items-center gap-10 flex-1 justify-center">
+      <div className="w-full">
+        <h3 className="font-bold mb-3">Project Images</h3>
+        <ImageCarousel
+          containerClassName="h-[500px] rounded shadow drop-shadow-md"
+          images={project.projectImages}
+        />
+      </div>
+      <div className="flex gap-8 w-full flex-col flex-1 ">
+        {project.detailedDescription && (
           <div>
-            <h3 className="font-bold">Description</h3>
-            <p className="text-sm md:text-lg">{project.description}</p>
+            <h3 className="font-bold mb-3">About the project</h3>
+            <p
+              style={{ lineHeight: 2 }}
+              dangerouslySetInnerHTML={{
+                __html: project.detailedDescription.replace(/\n/g, "<br>"),
+              }}
+              className="  text-sm md:text-lg"
+            ></p>
           </div>
         )}
         {project.technologies.length > 0 && (
           <div>
-            <h3 className="font-bold">Technologies</h3>
+            <h3 className="font-bold mb-3">Technologies</h3>
             <div className="flex gap-4 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech: Technology) => (
                 <ProjectTechnology
