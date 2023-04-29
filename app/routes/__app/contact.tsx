@@ -96,6 +96,7 @@ const Contact = () => {
               <div className="flex gap-5">
                 {rootUser.socialMedias.map((sm: SocialMedia) => (
                   <span
+                    title={sm.name}
                     key={sm.id}
                     className="hover:scale-110 transition-all cursor-pointer"
                     onClick={() => {
