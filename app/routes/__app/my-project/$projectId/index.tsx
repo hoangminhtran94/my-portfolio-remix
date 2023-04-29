@@ -14,7 +14,7 @@ const ProjectView = () => {
       <div className="w-full">
         <h3 className="font-bold mb-3">Project Images</h3>
         <ImageCarousel
-          containerClassName="h-[500px] rounded shadow drop-shadow-md"
+          containerClassName="!h-[500px] rounded shadow drop-shadow-md"
           images={project.projectImages}
         />
       </div>
