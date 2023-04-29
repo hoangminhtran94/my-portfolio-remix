@@ -10,7 +10,7 @@ const ProjectView = () => {
   const project = projects.find((project: Project) => project.id === projectId);
 
   return (
-    <div className="p-[24px] md:p-[48px] flex flex-col items-center gap-10 flex-1 justify-center">
+    <div className=" flex flex-col items-center gap-10 flex-1 justify-center">
       <div className="w-full">
         <h3 className="font-bold mb-3">Project Images</h3>
         <ImageCarousel
