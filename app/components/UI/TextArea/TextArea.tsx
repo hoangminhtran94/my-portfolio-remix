@@ -7,7 +7,7 @@ interface TextAreaProps extends ComponentPropsWithoutRef<"textarea"> {
 
 const TextArea: React.FC<TextAreaProps> = ({ label, ...otherProps }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <label htmlFor={label}>{label}</label>
       <textarea
         {...otherProps}

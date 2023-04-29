@@ -1,7 +1,7 @@
 export const profile = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
     className=" h-full opacity-10"
     viewBox="0 0 538.0218 520.24984"
@@ -159,7 +159,7 @@ export const home = (
     data-name="Layer 1"
     className=" h-full opacity-10"
     viewBox="0 0 979.32677 424.8366"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
   >
     <path
       d="M993.71816,412.83936H419.142a9.19888,9.19888,0,0,0,0,18.39776H435.417V651.3026a9.19888,9.19888,0,0,0,18.39776,0l.1398-220.06548h461.1557l42.52,220.06548a9.19887,9.19887,0,1,0,18.39775,0l2.67633-220.06548h15.01383a9.19888,9.19888,0,0,0,0-18.39776Z"
@@ -608,7 +608,7 @@ export const skill = (
 export const about = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
     className="h-full opacity-10"
     viewBox="0 0 786.81995 572.25773"
@@ -1393,7 +1393,7 @@ export const about = (
 export const project = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
     className="h-full opacity-30"
     viewBox="0 0 876.27165 661.47277"
@@ -1662,7 +1662,7 @@ export const project = (
 export const contact = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
     className="h-full opacity-30"
     viewBox="0 0 933.35096 538.01113"
@@ -1822,7 +1822,7 @@ export const contact = (
       d="M337.38347,433.22883a27.4562,27.4562,0,1,0-27.26785,31.62275l-2.90812-18.96331-6.89257,1.057-1.20341-7.84725,6.89256-1.057-.9171-5.98026c-1.04289-6.80051,2.43325-11.18146,8.63157-12.132a42.19262,42.19262,0,0,1,6.15735-.40112l1.02431,6.67933-3.42387.52507c-3.36935.5167-4.10271,2.7695-3.77311,4.91878l.78073,5.091,7.52621-1.15418.00154,8.03157-6.32435.96987,2.90831,18.96454a27.46354,27.46354,0,0,0,18.78776-30.32482Z"
       transform="translate(-133.32452 -180.99443)"
       fill="#3f3d56"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     />
     <polygon
       points="710.484 427.449 720.526 430.086 735.477 392.605 720.655 388.713 710.484 427.449"
@@ -1894,7 +1894,7 @@ export const contact = (
 export const auth = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
     className="h-full opacity-30"
     viewBox="0 0 869.99994 520.13854"

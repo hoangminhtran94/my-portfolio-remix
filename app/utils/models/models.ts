@@ -11,6 +11,7 @@ export interface Project {
   id: string;
   name: string;
   description: string;
+  detailedDescription: string;
   projectImages: string[];
   githubLink: string;
   demoLink: string;

@@ -80,7 +80,7 @@ const InputDropdown: FC<InputDropdownProps> = ({
         </ul>
       )}
       {displayList.length > 0 && (
-        <ul className="absolute top-[105%] w-full bg-white border-2 border-slate-200">
+        <ul className="absolute top-[105%] w-full bg-white border-2 border-slate-200 max-h-[200px] overflow-scroll">
           {displayList.map((item) => (
             <li
               onClick={() => {

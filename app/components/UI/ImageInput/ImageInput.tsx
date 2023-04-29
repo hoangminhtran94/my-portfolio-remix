@@ -26,7 +26,7 @@ const ImageInput: FC<ImageInputProps> = ({
   }, [images]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <label htmlFor="image-input">{label}</label>
       <input
         multiple={multiple ?? true}
@@ -103,7 +103,7 @@ const ImageInput: FC<ImageInputProps> = ({
           </div>
         )}
 
-        {multiple && images.length <= 3 && (
+        {multiple && (
           <div
             onClick={() => {
               inputRef.current?.click();

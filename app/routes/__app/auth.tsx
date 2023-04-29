@@ -15,21 +15,24 @@ const Auth = () => {
     <div className="w-full flex justify-center ">
       <div className="w-[80%] lg:w-[40%] bg-white p-10 rounded-lg drop-shadow-lg">
         <p className="text-center text-3xl">
-          {mode === "login" ? "Login" : "Register"}
+          Login
+          {/* {mode === "login" ? "Login" : "Register"} */}
         </p>
         <Form method="post" className="flex flex-col gap-4">
-          {mode === "register" && <Input name="name" label="Name" />}
+          {/* {mode === "register" && <Input name="name" label="Name" />} */}
+          <Input name="name" label="Name" />
           <Input name="username" label="Username" />
           <Input type="password" name="password" label="Password" />
           <Button className="mt-8">
-            {mode === "login" ? "Login" : "Submit"}
+            {/* {mode === "login" ? "Login" : "Submit"} */}
+            Login
           </Button>
-          <Link
+          {/* <Link
             className="text-center  text-[12px]"
             to={mode === "register" ? "" : "?mode=register"}
           >
             {mode === "login" ? "Register for me only" : "Login for me only"}
-          </Link>
+          </Link> */}
         </Form>
       </div>
     </div>
@@ -41,20 +44,21 @@ export default Auth;
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const searchParams = new URL(request.url).searchParams.get("mode");
-  if (searchParams) {
-    try {
-      return await register(data);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  } else {
-    try {
-      return await login(data);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+  // const searchParams = new URL(request.url).searchParams.get("mode");
+  // if (searchParams) {
+
+  // try {
+  //   return await register(data);
+  // } catch (error) {
+  //   console.log(error);
+  //   throw error;
+  // }
+  // } else {
+  try {
+    return await login(data);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
+  // }
 };

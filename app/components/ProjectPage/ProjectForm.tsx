@@ -67,6 +67,11 @@ const ProjectForm: FC<
         name="description"
         label="Project description"
       />
+      <TextArea
+        defaultValue={props.project?.detailedDescription}
+        name="detailedDescription"
+        label="Project detailed description"
+      />
       <Input
         defaultValue={props.project?.githubLink}
         name="githubLink"
