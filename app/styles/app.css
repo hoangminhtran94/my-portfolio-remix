@@ -253,8 +253,8 @@ a.active {
   }
 }
 
-@media (min-height: 1080px) {
+/* @media (min-height: 1080px) {
   body {
     height: 100vh;
   }
-}
+} */
