@@ -20,7 +20,7 @@ const Auth = () => {
         </p>
         <Form method="post" className="flex flex-col gap-4">
           {/* {mode === "register" && <Input name="name" label="Name" />} */}
-          <Input name="name" label="Name" />
+          {/* <Input name="name" label="Name" /> */}
           <Input name="username" label="Username" />
           <Input type="password" name="password" label="Password" />
           <Button className="mt-8">

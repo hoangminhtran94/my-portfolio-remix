@@ -156,7 +156,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className=" flex flex-col  overflow-x-hidden relative flex-1 mb-[60px]  px-4 md:px-12  ">
+    <main className=" flex flex-col relative overflow-x-hidden overflow-y-visible  flex-1 py-[48px] md:py-[60px]  px-4 md:px-12  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -172,7 +172,7 @@ const AppLayout = () => {
           </div>
         </motion.div>
       </AnimatePresence>
-      <div className="flex 2xl:flex-row flex-1  flex-col  container  h-full gap-14 mx-auto  items-center ">
+      <div className="flex 2xl:flex-row flex-1 flex-col container h-full gap-14 mx-auto items-center ">
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -189,7 +189,7 @@ const AppLayout = () => {
             exit="exit"
           >
             <div
-              className={`w-full h-[150%] 2xl:h-1/2 absolute 2xl:top-1/4 left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+              className={`w-full h-[200px] md:h-[400px]   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
             />
             {changeFirstContainerHandler()}
           </motion.div>

@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 900;
 }
 
@@ -210,7 +210,7 @@ p {
 
 a.active {
   color: #8a92db;
-  font-size: large;
+  font-size: x-large;
   font-weight: 800;
 }
 *::-webkit-scrollbar {
@@ -250,6 +250,11 @@ a.active {
   }
   h4 {
     font-size: 20px;
+  }
+}
+@media (min-width: 1024px) {
+  a.active {
+    font-size: large;
   }
 }
 

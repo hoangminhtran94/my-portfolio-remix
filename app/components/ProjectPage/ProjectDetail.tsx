@@ -8,7 +8,7 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
   enableEdit,
 }) => {
   return (
-    <div className="p-[24px] md:p-[48px] flex flex-col items-center flex-1 justify-center">
+    <div className="p-[24px] md:p-[48px] flex flex-col items-center gap-6 flex-1 justify-center">
       <div className="flex gap-8 w-full flex-col flex-1">
         <h2 className="h-fit text-center font-bold">{project.name}</h2>
         {project.description && (

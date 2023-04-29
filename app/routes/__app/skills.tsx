@@ -43,7 +43,7 @@ const MySkillsLayout = () => {
           navigate("front-end");
         }}
       >
-        <div className=" absolute top-0 right-0 w-full h-full frontend-bg  " />
+        <div className="  absolute top-0 right-0 w-full h-full frontend-bg  " />
         <span className="z-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
