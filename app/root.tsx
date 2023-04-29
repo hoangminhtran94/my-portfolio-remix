@@ -26,7 +26,7 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   return (
-    <html className="overflow-x-hidden " lang="en">
+    <html lang="en">
       <head>
         <Meta />
         <Links />
