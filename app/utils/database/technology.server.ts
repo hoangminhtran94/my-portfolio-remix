@@ -30,3 +30,11 @@ export const getATechnology = async (id: string) => {
     throw error;
   }
 };
+
+export const updateTechnology = async (id: string, data: any) => {
+  try {
+    return await prisma.technology.update({ where: { id }, data: { ...data } });
+  } catch (error) {
+    throw error;
+  }
+};

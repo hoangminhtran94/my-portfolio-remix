@@ -72,6 +72,14 @@ const ProjectForm: FC<
         name="detailedDescription"
         label="Project detailed description"
       />
+      <InputDropdown
+        defaultList={props.project?.technologies}
+        getSelectedList={(list) => {
+          setSelectedTechnologies(list);
+        }}
+        label="Technologies"
+        dropdownList={technologies}
+      />
       <Input
         defaultValue={props.project?.githubLink}
         name="githubLink"
@@ -89,14 +97,7 @@ const ProjectForm: FC<
         }}
         label="Project images"
       />
-      <InputDropdown
-        defaultList={props.project?.technologies}
-        getSelectedList={(list) => {
-          setSelectedTechnologies(list);
-        }}
-        label="Technologies"
-        dropdownList={technologies}
-      />
+
       <div className="flex gap-5">
         <Button to={"/my-project"} className="flex-1">
           Cancel

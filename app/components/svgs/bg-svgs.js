@@ -1664,7 +1664,7 @@ export const contact = (
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     data-name="Layer 1"
-    className="h-full opacity-30"
+    className="h-full opacity-10"
     viewBox="0 0 933.35096 538.01113"
   >
     <path

@@ -7,6 +7,9 @@ const ProjectHeader = () => {
   const project = projects.find((project: Project) => project.id === projectId);
 
   const setHeader = () => {
+    if (matches[2].id.includes("technology")) {
+      return "Technology";
+    }
     if (matches[2].id.includes("new-project")) {
       return "New Project";
     }

@@ -128,6 +128,9 @@ const AppLayout = () => {
   };
 
   const firstContainerKey = () => {
+    if (firstContainerPathPattern.id.includes("technology")) {
+      return "technology-first-container";
+    }
     if (firstContainerPathPattern.id.includes("my-project")) {
       return "project-first-container";
     }
@@ -156,7 +159,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className=" flex flex-col relative overflow-x-hidden overflow-y-visible  flex-1 py-[48px] md:py-[60px]  px-4 md:px-12  ">
+    <main className="flex  flex-col relative overflow-x-hidden overflow-y-visible 2xl:h-auto  flex-auto py-[48px] md:py-[60px]  px-4 md:px-12  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -172,7 +175,7 @@ const AppLayout = () => {
           </div>
         </motion.div>
       </AnimatePresence>
-      <div className="flex 2xl:flex-row flex-1 flex-col container h-full gap-14 mx-auto items-center ">
+      <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
         {/* First Container */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -181,7 +184,7 @@ const AppLayout = () => {
                 firstContainerPathPattern.id === "routes/__app/profile" ||
                 firstContainerPathPattern.id.includes("auth")) &&
               "hidden"
-            } relative w-full 2xl:w-1/3 2xl:h-full px-[36px]  flex items-center   z-20 text-slate-500 `}
+            } relative flex flex-1  2xl:h-auto 2xl:max-w-[33%]  min-h-[200px] lg:min-h-[250px]  px-[36px]   items-center   z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -189,7 +192,7 @@ const AppLayout = () => {
             exit="exit"
           >
             <div
-              className={`w-full h-[200px] md:h-[400px]   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+              className={`w-full h-full 2xl:h-full   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
             />
             {changeFirstContainerHandler()}
           </motion.div>
@@ -197,7 +200,7 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            className=" flex items-center w-full h-full  flex-1 z-20"
+            className=" flex items-center flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

@@ -20,16 +20,19 @@ const NewTechnology = () => {
     },
   };
   return (
-    <div className="flex flex-col w-full h-[90%] gap-6">
+    <div className="flex flex-col w-full  gap-6">
       <div className=" bg-white drop-shadow-md p-4 rounded flex flex-col gap-4">
-        <h2>Technology management</h2>
-        <Button className="lg:w-1/4" to={"new-technology"}>
-          New technology
-        </Button>
+        <h2 className="text-center">Technology management</h2>
+        <div className=" flex flex-col gap-2">
+          <Button className="flex-1" to={"new-technology"}>
+            New technology
+          </Button>
+          <Button className="flex-1">Search</Button>
+        </div>
       </div>
       <AnimatePresence mode="wait">
         <motion.div
-          className="w-full h-full p-4  bg-white rounded-md drop-shadow-md "
+          className="w-full h-[700px] p-4  bg-white rounded-md drop-shadow-md "
           key={location.pathname}
           variants={container}
           initial="hidden"

@@ -1,5 +1,3 @@
-import { Form } from "@remix-run/react";
-import Button from "~/components/UI/Button/Button";
 import TechnologyForm from "~/components/ProjectPage/Technology/TechnologyForm";
 import {
   ActionFunction,
@@ -7,10 +5,7 @@ import {
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
-import {
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
+import { unstable_parseMultipartFormData } from "@remix-run/node";
 import { createATechnology } from "~/utils/database/technology.server";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import serverError from "~/utils/models/ServerError";
