@@ -24,6 +24,7 @@ export const createProject = async (projectData: any, creatorId: string) => {
       data: {
         name: projectData.name,
         description: projectData.description,
+        detailedDescription: projectData.detailedDescription,
         projectImages: projectData.projectImages,
         githubLink: projectData.githubLink,
         demoLink: projectData.demoLink,

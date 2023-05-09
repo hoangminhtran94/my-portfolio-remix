@@ -1,24 +1,29 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FC } from "react";
 import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import ImageCarousel from "../UI/ImageCarousel/ImageCarousel";
 import NavigtionDot from "../UI/NavigationDot/NavigationDot";
 import type { Project } from "~/utils/models/models";
 
-import { useMatches } from "@remix-run/react";
+import { useMatches, useSearchParams } from "@remix-run/react";
+
 import ProjectDetail from "./ProjectDetail";
 
 interface ProjectCarouselProps {
   projects: Project[];
 }
 const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const [searhParams, setSearchParams] = useSearchParams();
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(
+    searhParams.get("project") ? +searhParams.get("project")! : 0
+  );
   const [disableButtons, setDisabledButtons] = useState(false);
   const [nextProject, setNextProject] = useState(true);
   const [usingNavigationDot, setUsingNavigationDot] = useState(false);
   const matches = useMatches();
   const rootData = matches[0].data;
+
   if (!projects || projects.length === 0) {
     return <div></div>;
   }
@@ -26,16 +31,32 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
   const currentProject = projects[currentProjectIndex];
 
   const nextHandler = () => {
-    setCurrentProjectIndex((prev) => prev + 1);
+    setCurrentProjectIndex((prev) => {
+      return prev + 1;
+    });
+    setSearchParams((prev) => {
+      prev.set("project", (+prev.get("project")! + 1).toString());
+      return prev;
+    });
+
     if (currentProjectIndex === projects.length - 1) {
       setCurrentProjectIndex(0);
+      setSearchParams({ project: "0" });
     }
     setNextProject(true);
   };
   const previousHandler = () => {
     setCurrentProjectIndex((prev) => prev - 1);
+    setSearchParams((prev) => {
+      prev.set("project", (+prev.get("project")! - 1).toString());
+      return prev;
+    });
     if (currentProjectIndex === 0) {
       setCurrentProjectIndex(projects.length - 1);
+      setSearchParams((prev) => {
+        prev.set("project", (projects.length - 1).toString());
+        return prev;
+      });
     }
     setNextProject(false);
   };
@@ -99,6 +120,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
               onClick={() => {
                 setUsingNavigationDot(true);
                 setCurrentProjectIndex(index);
+                setSearchParams({ project: index.toString() });
               }}
               key={index}
               selected={currentProjectIndex === index}

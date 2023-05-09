@@ -103,20 +103,12 @@ const ImageCarousel = ({
           alt="carouselImage"
         />
       </AnimatePresence>
-      <div className="absolute top-[5%] w-full flex justify-center">
+      <div className="absolute top-[2.5%] w-full flex justify-center">
         <span
-          className="flex gap-3 items-center hover:scale-110 transition-all cursor-pointer drop-shadow-white-lg "
+          className="flex gap-3 text-slate-50 text-shadow items-center hover:scale-110 transition-all cursor-pointer shadow-sm bg-[rgba(255,255,255,0.1)] backdrop-blur-sm  p-3 rounded-full "
           onClick={() => setToggleViewImage(true)}
         >
           View image
-          <svg
-            className="h-[25px]"
-            fill="rgb(100 116 139)"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" />
-          </svg>
         </span>
       </div>
       <div
@@ -140,7 +132,7 @@ const ImageCarousel = ({
       <span
         className={`${
           disableButtons && " pointer-events-none"
-        } drop-shadow-xl  absolute opacity-60  top-1/2 right-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
+        } drop-shadow-xl  absolute opacity-60  top-1/2 right-[5%] cursor-pointer hover:opacity-100 transition-all hover:scale-[1.1]`}
         onClick={nextHandler}
       >
         <svg
@@ -155,7 +147,7 @@ const ImageCarousel = ({
       <span
         className={`${
           disableButtons && " pointer-events-none"
-        } drop-shadow-xl absolute opacity-60  top-1/2 left-[5%] cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
+        } drop-shadow-xl absolute opacity-60  top-1/2 left-[5%] transition-all cursor-pointer hover:opacity-100 hover:scale-[1.1]`}
         onClick={previousHandler}
       >
         <svg

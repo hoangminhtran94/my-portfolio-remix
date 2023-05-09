@@ -264,6 +264,12 @@ a.active {
     height: 100vh;
   }
 } */
+.text-shadow {
+  text-shadow: 0.05em 0 rgba(0, 0, 0, 0.5), 0 0.05em rgba(0, 0, 0, 0.5),
+    -0.05em 0 rgba(0, 0, 0, 0.5), 0 -0.05em rgba(0, 0, 0, 0.5),
+    -0.05em -0.05em rgba(0, 0, 0, 0.5), -0.05em 0.05em rgba(0, 0, 0, 0.5),
+    0.05em -0.05em rgba(0, 0, 0, 0.5), 0.05em 0.05em rgba(0, 0, 0, 0.5);
+}
 .lds-spinner {
   color: official;
   display: inline-block;

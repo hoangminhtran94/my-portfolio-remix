@@ -23,9 +23,9 @@ const NavigationImage: FC<{
       <img
         src={image}
         onClick={onClick}
-        className={`border-[3px] border-white rounded-md w-full h-full object-cover ${
+        className={`border-[3px] border-white rounded-md transition-all w-full h-full object-cover ${
           selected
-            ? "backdrop-filter-none scale-[1.3] shadow-white drop-shadow-xl drop"
+            ? "backdrop-filter-none scale-[1.3]  shadow-white drop-shadow-xl drop"
             : "opacity-70 hover:opacity-70 hover:scale-[1.1]"
         } ${className}`}
         alt="navigationImage"

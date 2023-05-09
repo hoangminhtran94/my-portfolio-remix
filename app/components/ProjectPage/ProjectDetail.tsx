@@ -14,7 +14,9 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
         {project.description && (
           <div>
             <h3 className="font-bold">Description</h3>
-            <p className="text-sm md:text-lg">{project.description}</p>
+            <p className="text-sm md:text-lg line-clamp-[10]">
+              {project.description}
+            </p>
           </div>
         )}
         {project.technologies.length > 0 && (
@@ -34,27 +36,21 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
         {project.demoLink && (
           <div>
             <h3 className="font-bold">Link</h3>
-            <a
-              className="text-lg"
-              href={project.demoLink}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Visit the demo website
-            </a>
+            <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
+              <a href={project.demoLink} rel="noreferrer" target="_blank">
+                Visit the demo website
+              </a>
+            </div>
           </div>
         )}
         {project.githubLink && (
           <div>
             <h3 className="font-bold">Project respository</h3>
-            <a
-              className="text-lg"
-              href={project.githubLink}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Visit the project source code
-            </a>
+            <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
+              <a href={project.githubLink} rel="noreferrer" target="_blank">
+                Visit the project source code
+              </a>
+            </div>
           </div>
         )}
       </div>
