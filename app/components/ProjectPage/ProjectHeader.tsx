@@ -14,7 +14,7 @@ const ProjectHeader = () => {
       return "Edit Project";
     }
 
-    return "My Project";
+    return "My Projects";
   };
 
   return (

@@ -3,23 +3,25 @@ import type { FC } from "react";
 import ProjectTechnology from "../UI/ProjectTechnology/ProjectTechnology";
 import Button from "../UI/Button/Button";
 import { Link } from "@remix-run/react";
-const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
-  project,
-  enableEdit,
-}) => {
+const ProjectDetail: FC<{
+  project: Project;
+  enableEdit: boolean;
+  className?: string;
+}> = ({ project, enableEdit, className = "" }) => {
   return (
-    <div className="p-[24px] md:p-[48px] border-r-[1px] border-indigo-200  flex flex-col items-center gap-6 flex-1 justify-center">
+    <div
+      className={`p-[24px] md:p-[48px] border-r-[1px] border-indigo-200  flex flex-col items-center gap-6 flex-1 justify-center ${className}`}
+    >
       <div className="flex gap-8 w-full flex-col flex-1">
         <h2 className="h-fit text-center font-bold">{project.name}</h2>
         {project.description && (
           <div className="flex flex-col gap-3">
             <h3 className="font-bold">About this project</h3>
             <p className="text-sm md:text-lg line-clamp-[5]">
-              {project.description}|| firstContainerPathPattern.id ===
-              "routes/__app/my-project/$projectId/index"
+              {project.description}
             </p>
             <Link
-              className=" flex gap-2 items-center text-lg hover:scale-110 transition-all w-fit ml-auto  font-extrabold "
+              className=" flex gap-2 items-center text-base md:text-lg hover:scale-110 transition-all w-fit ml-auto  font-extrabold "
               to={project.id}
             >
               View details
@@ -34,7 +36,7 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
           </div>
         )}
         {project.technologies.length > 0 && (
-          <div>
+          <div className="flex flex-col gap-3">
             <h3 className="font-bold">Technologies</h3>
             <div className="flex gap-4 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech) => (
@@ -48,20 +50,30 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
           </div>
         )}
         {project.demoLink && (
-          <div>
+          <div className="flex flex-col gap-3">
             <h3 className="font-bold">Link</h3>
             <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
-              <a href={project.demoLink} rel="noreferrer" target="_blank">
+              <a
+                className=" text-sm md:text-base"
+                href={project.demoLink}
+                rel="noreferrer"
+                target="_blank"
+              >
                 Visit the demo website
               </a>
             </div>
           </div>
         )}
         {project.githubLink && (
-          <div>
+          <div className="flex flex-col gap-3">
             <h3 className="font-bold">Project respository</h3>
             <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
-              <a href={project.githubLink} rel="noreferrer" target="_blank">
+              <a
+                className=" text-sm md:text-base"
+                href={project.githubLink}
+                rel="noreferrer"
+                target="_blank"
+              >
                 Visit the project source code
               </a>
             </div>

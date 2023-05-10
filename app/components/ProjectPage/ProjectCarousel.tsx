@@ -15,6 +15,7 @@ interface ProjectCarouselProps {
 }
 const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
   const [searhParams, setSearchParams] = useSearchParams();
+  const [toggleMode, setToggleMode] = useState(false);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(
     searhParams.get("project") ? +searhParams.get("project")! : 0
   );
@@ -72,7 +73,29 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full rounded-lg border border-indigo-200 h-full relative overflow-hidden shadow-md">
+      <label className="md:hidden relative inline-flex mx-auto justify-center items-center cursor-pointer mb-6">
+        <input
+          onChange={() => {
+            setToggleMode((prev) => !prev);
+          }}
+          type="checkbox"
+          value=""
+          className="sr-only peer"
+        />
+        <div
+          className="w-11 h-6 bg-gray-200 peer-focus:outline-none 
+        peer-focus:ring-4 peer-focus:ring-blue-300 
+         rounded-full peer 
+        peer-checked:after:translate-x-full peer-checked:after:border-white
+         after:content-[''] after:absolute after:top-[2px] 
+         after:left-[2px] after:bg-white after:border-gray-300 after:border 
+         after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+        ></div>
+        <span className="ml-3 text-md  text-slate-700 ">
+          Show project images
+        </span>
+      </label>
+      <div className="w-full  rounded-lg border border-indigo-200 h-full relative overflow-hidden shadow-md">
         <AnimatePresence
           custom={{ next: nextProject, usingDot: usingNavigationDot }}
           initial={false}
@@ -93,13 +116,19 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
             }}
             exit="exit"
             key={currentProject.id}
-            className=" absolute left-0 top-0 flex flex-col-reverse flex-1 lg:flex-row h-full min-w-full"
+            className=" overflow-auto md:overflow-visible absolute left-0 top-0  flex flex-col-reverse flex-1 lg:flex-row h-full min-w-full"
           >
             <ProjectDetail
+              className={`${toggleMode ? "!hidden" : ""} md:!flex`}
               project={currentProject}
               enableEdit={!!rootData.userData}
             />
-            <div className="flex-1 border-l  border-slate-50">
+
+            <div
+              className={`${
+                toggleMode ? "block" : "hidden"
+              } md:block flex-1 border-l  border-slate-50`}
+            >
               <ImageCarousel images={currentProject.projectImages} />
             </div>
           </motion.div>
