@@ -97,7 +97,7 @@ const ImageCarousel = ({
               setUsingNavigation(false);
             }
           }}
-          className="w-full h-full object-cover object-left  pointer-events-none  absolute left-0 top-0"
+          className="w-full h-full object-cover object-center  pointer-events-none  absolute left-0 top-0"
           key={images[currentImage]}
           src={images[currentImage]}
           alt="carouselImage"

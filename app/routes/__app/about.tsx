@@ -1,3 +1,4 @@
+import { MetaFunction } from "@remix-run/node";
 import { Link, useLocation, useMatches } from "@remix-run/react";
 import { motion } from "framer-motion";
 const About = () => {
@@ -104,3 +105,7 @@ const About = () => {
   );
 };
 export default About;
+
+export const meta: MetaFunction = () => {
+  return { title: "About me" };
+};

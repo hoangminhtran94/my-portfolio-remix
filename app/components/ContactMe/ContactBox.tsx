@@ -23,7 +23,7 @@ const ContactBox: FC<ContactBoxProps & ComponentPropsWithoutRef<"div">> = ({
         rotateY: showContent ? 180 : 0,
       }}
       transition={{ type: "spring", damping: 10, stiffness: 100 }}
-      className={` relative   flex-1 flex flex-col px-3 items-center justify-center gap-2 border h-full  border-slate-200`}
+      className={` relative   flex-1 flex flex-col px-3 items-center justify-center gap-2 border h-full  border-indigo-200`}
     >
       <div
         className={` cursor-pointer absolute w-full h-full    ${

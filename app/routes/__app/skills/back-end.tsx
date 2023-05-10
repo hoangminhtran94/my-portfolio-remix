@@ -15,7 +15,7 @@ const BackEndShowCase: React.FC = () => {
         }}
       />
       <div
-        className=" bg-modal w-[80%] h-[60%] overflow-scroll  md:h-max 3xl:w-[40%]     rounded-xl 
+        className=" bg-modal border border-indigo-200 w-[80%] h-[60%] overflow-scroll  md:h-max 3xl:w-[40%]     rounded-xl 
         p-[24px] lg:p-[48px]  
         z-[888] shadow-lg  flex flex-col items-center gap-[16px]"
       >

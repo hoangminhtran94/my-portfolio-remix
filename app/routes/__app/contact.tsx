@@ -5,6 +5,7 @@ import { useMatches } from "@remix-run/react";
 import type { SocialMedia } from "~/utils/models/models";
 import ContactBox from "~/components/ContactMe/ContactBox";
 import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
+import type { MetaFunction } from "@remix-run/node";
 
 const Contact = () => {
   const { pathname } = useLocation();
@@ -73,3 +74,7 @@ const Contact = () => {
   );
 };
 export default Contact;
+
+export const meta: MetaFunction = () => {
+  return { title: "My Contacts" };
+};

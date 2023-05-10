@@ -34,36 +34,45 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
     setCurrentProjectIndex((prev) => {
       return prev + 1;
     });
-    setSearchParams((prev) => {
-      prev.set("project", (+prev.get("project")! + 1).toString());
-      return prev;
-    });
+    setSearchParams(
+      (prev) => {
+        prev.set("project", (+prev.get("project")! + 1).toString());
+        return prev;
+      },
+      { preventScrollReset: true }
+    );
 
     if (currentProjectIndex === projects.length - 1) {
       setCurrentProjectIndex(0);
-      setSearchParams({ project: "0" });
+      setSearchParams({ project: "0" }, { preventScrollReset: true });
     }
     setNextProject(true);
   };
   const previousHandler = () => {
     setCurrentProjectIndex((prev) => prev - 1);
-    setSearchParams((prev) => {
-      prev.set("project", (+prev.get("project")! - 1).toString());
-      return prev;
-    });
+    setSearchParams(
+      (prev) => {
+        prev.set("project", (+prev.get("project")! - 1).toString());
+        return prev;
+      },
+      { preventScrollReset: true }
+    );
     if (currentProjectIndex === 0) {
       setCurrentProjectIndex(projects.length - 1);
-      setSearchParams((prev) => {
-        prev.set("project", (projects.length - 1).toString());
-        return prev;
-      });
+      setSearchParams(
+        (prev) => {
+          prev.set("project", (projects.length - 1).toString());
+          return prev;
+        },
+        { preventScrollReset: true }
+      );
     }
     setNextProject(false);
   };
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full rounded-lg border border-slate-50 h-full relative overflow-hidden shadow-md">
+      <div className="w-full rounded-lg border border-indigo-200 h-full relative overflow-hidden shadow-md">
         <AnimatePresence
           custom={{ next: nextProject, usingDot: usingNavigationDot }}
           initial={false}
@@ -120,7 +129,10 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
               onClick={() => {
                 setUsingNavigationDot(true);
                 setCurrentProjectIndex(index);
-                setSearchParams({ project: index.toString() });
+                setSearchParams(
+                  { project: index.toString() },
+                  { preventScrollReset: true }
+                );
               }}
               key={index}
               selected={currentProjectIndex === index}

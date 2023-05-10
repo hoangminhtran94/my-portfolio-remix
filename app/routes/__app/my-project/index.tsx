@@ -1,5 +1,6 @@
 import ProjectCarousel from "~/components/ProjectPage/ProjectCarousel";
 import { Link, useLocation, useMatches } from "@remix-run/react";
+import { MetaFunction } from "@remix-run/node";
 
 const MyProject = () => {
   const { pathname } = useLocation();
@@ -25,10 +26,14 @@ const MyProject = () => {
           </Link>
         </div>
       )}
-      <div className=" h-[900px]  md:h-[900px] text-slate-600 w-full rounded-md">
+      <div className="  h-[1200px] lg:h-[900px]    text-slate-600 w-full rounded-md">
         <ProjectCarousel projects={projects} />
       </div>
     </div>
   );
 };
 export default MyProject;
+
+export const meta: MetaFunction = () => {
+  return { title: "My Projects" };
+};

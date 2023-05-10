@@ -182,9 +182,11 @@ const AppLayout = () => {
             className={`${
               (firstContainerPathPattern.id === "routes/__app/index" ||
                 firstContainerPathPattern.id === "routes/__app/profile" ||
-                firstContainerPathPattern.id.includes("auth")) &&
+                firstContainerPathPattern.id.includes("auth") ||
+                firstContainerPathPattern.id ===
+                  "routes/__app/my-project/$projectId/index") &&
               "hidden"
-            } relative flex flex-1  2xl:h-auto 2xl:max-w-[33%]  min-h-[200px] lg:min-h-[250px]  px-[36px]   items-center   z-20 text-slate-500 `}
+            } relative flex flex-1  2xl:h-auto 2xl:max-w-[33%]   lg:min-h-[250px]  px-[36px] items-center    z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -192,7 +194,7 @@ const AppLayout = () => {
             exit="exit"
           >
             <div
-              className={`w-full h-full 2xl:h-full   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+              className={`w-full h-full 2xl:h-full min-h-[200px]   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
             />
             {changeFirstContainerHandler()}
           </motion.div>

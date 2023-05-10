@@ -2,6 +2,7 @@ import type { Project, Technology } from "~/utils/models/models";
 import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 import { useMatches, useParams } from "@remix-run/react";
 import ImageCarousel from "~/components/UI/ImageCarousel/ImageCarousel";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
 const ProjectView = () => {
   const matches = useMatches();
@@ -11,13 +12,7 @@ const ProjectView = () => {
 
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-center">
-      <div className="w-full">
-        <h3 className="font-bold mb-3">Project Images</h3>
-        <ImageCarousel
-          containerClassName="!h-[500px] rounded shadow drop-shadow-md"
-          images={project.projectImages}
-        />
-      </div>
+      <h1>{project.name}</h1>
       <div className="flex gap-8 w-full flex-col flex-1 ">
         {project.detailedDescription && (
           <div>
@@ -72,8 +67,27 @@ const ProjectView = () => {
           </div>
         )}
       </div>
+      <div className="w-[100%]">
+        <ImageCarousel
+          containerClassName="!pt-[50%]  rounded shadow drop-shadow-md"
+          images={project.projectImages}
+        />
+      </div>
     </div>
   );
 };
 
 export default ProjectView;
+
+export const meta: MetaFunction = ({ parentsData, params }) => {
+  const { root } = parentsData;
+  const { rootUser } = root;
+  const { projects } = rootUser;
+  const project = projects.find(
+    (project: Project) => project.id === params.projectId
+  );
+
+  return {
+    title: project ? `${project.name} - Project details` : "Project details",
+  };
+};

@@ -2,21 +2,35 @@ import type { Project } from "~/utils/models/models";
 import type { FC } from "react";
 import ProjectTechnology from "../UI/ProjectTechnology/ProjectTechnology";
 import Button from "../UI/Button/Button";
-
+import { Link } from "@remix-run/react";
 const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
   project,
   enableEdit,
 }) => {
   return (
-    <div className="p-[24px] md:p-[48px] flex flex-col items-center gap-6 flex-1 justify-center">
+    <div className="p-[24px] md:p-[48px] border-r-[1px] border-indigo-200  flex flex-col items-center gap-6 flex-1 justify-center">
       <div className="flex gap-8 w-full flex-col flex-1">
         <h2 className="h-fit text-center font-bold">{project.name}</h2>
         {project.description && (
-          <div>
-            <h3 className="font-bold">Description</h3>
-            <p className="text-sm md:text-lg line-clamp-[10]">
-              {project.description}
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold">About this project</h3>
+            <p className="text-sm md:text-lg line-clamp-[5]">
+              {project.description}|| firstContainerPathPattern.id ===
+              "routes/__app/my-project/$projectId/index"
             </p>
+            <Link
+              className=" flex gap-2 items-center text-lg hover:scale-110 transition-all w-fit ml-auto  font-extrabold "
+              to={project.id}
+            >
+              View details
+              <svg
+                className="h-[18px] fill-slate-500 "
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" />
+              </svg>
+            </Link>
           </div>
         )}
         {project.technologies.length > 0 && (
@@ -55,9 +69,6 @@ const ProjectDetail: FC<{ project: Project; enableEdit: boolean }> = ({
         )}
       </div>
       <div className="flex w-full gap-4">
-        <Button className="flex-1" to={project.id}>
-          View Detail
-        </Button>
         {enableEdit && (
           <Button className="flex-1" to={project.id + "/edit"}>
             Edit
