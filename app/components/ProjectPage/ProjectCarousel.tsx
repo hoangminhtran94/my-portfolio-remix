@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { FC } from "react";
 import * as animation from "~/utils/FramerMotionVariants/animationVariants";
 import ImageCarousel from "../UI/ImageCarousel/ImageCarousel";
@@ -30,7 +30,6 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
   }
 
   const currentProject = projects[currentProjectIndex];
-
   const nextHandler = () => {
     setCurrentProjectIndex((prev) => {
       return prev + 1;
@@ -159,7 +158,10 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects }) => {
                 setUsingNavigationDot(true);
                 setCurrentProjectIndex(index);
                 setSearchParams(
-                  { project: index.toString() },
+                  (prev) => {
+                    prev.set("project", index.toString());
+                    return prev;
+                  },
                   { preventScrollReset: true }
                 );
               }}

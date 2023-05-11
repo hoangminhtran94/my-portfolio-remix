@@ -8,7 +8,8 @@ import {
 import type { MetaFunction } from "@remix-run/node";
 import Switch from "~/components/UI/Switch/Switch";
 import { useState, useEffect } from "react";
-import type { Project } from "~/utils/models/models";
+import ProjectListByFrontEnd from "~/components/ProjectPage/ProjectListByFrontEnd";
+import ProjectListByBackend from "~/components/ProjectPage/ProjectByBackend";
 
 const MyProject = () => {
   const { pathname } = useLocation();
@@ -28,32 +29,45 @@ const MyProject = () => {
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;
-  console.log(projects);
+
   useEffect(() => {
     if (toggleMode) {
-      setSearchParams((prev) => {
-        prev.set("mode", "carousel");
+      setSearchParams(
+        (prev) => {
+          prev.set("mode", "carousel");
 
-        return prev;
-      });
+          return prev;
+        },
+        { preventScrollReset: true }
+      );
     } else {
-      setSearchParams((prev) => {
-        prev.set("mode", "list");
-        return prev;
-      });
+      setSearchParams(
+        (prev) => {
+          prev.set("mode", "list");
+          return prev;
+        },
+        { preventScrollReset: true }
+      );
     }
     if (toggleFilterMode) {
-      setSearchParams((prev) => {
-        prev.set("filterBy", "backend");
-        return prev;
-      });
+      setSearchParams(
+        (prev) => {
+          prev.set("filterBy", "backend");
+          return prev;
+        },
+        { preventScrollReset: true }
+      );
     } else {
-      setSearchParams((prev) => {
-        prev.set("filterBy", "frontend");
-        return prev;
-      });
+      setSearchParams(
+        (prev) => {
+          prev.set("filterBy", "frontend");
+          return prev;
+        },
+        { preventScrollReset: true }
+      );
     }
   }, [setSearchParams, toggleFilterMode, toggleMode]);
+  console.log(projects);
   return (
     <div className="h-full w-full flex-1 flex flex-col gap-6 justify-center">
       {pathname === "/my-project" && rootData.userData && (
@@ -106,53 +120,12 @@ const MyProject = () => {
         <ProjectCarousel projects={projects} />
       </div>
 
-      <div
-        className={`${
-          toggleMode && "hidden"
-        } h-[500px]   md:h-[1200px] lg:h-[900px]    text-slate-600 w-full rounded-md`}
-      >
-        <div>
-          <label>React based: React, Nextjs, Remix</label>
-          <div className="grid grid-cols-3 gap-x-6  gap-y-3 ">
-            {projects
-              .filter(
-                (project: Project) =>
-                  project.technologyIds.includes("6444cd513b0778f1880bf32a") ||
-                  project.technologyIds.includes("644783a9d93ddcdeaaa42632")
-              )
-              .map((project: Project) => (
-                <div
-                  className=" text-center p-4 border rounded border-indigo-300 hover:scale-105 transition-all hover:bg-indigo-400 hover:text-white cursor-pointer"
-                  key={project.id}
-                >
-                  {project.name}
-                </div>
-              ))}
-          </div>
-        </div>
-        <div>
-          <label>Angular</label>
-          <div className="grid grid-cols-3 gap-x-6  gap-y-3 ">
-            {projects
-              .filter((project: Project) =>
-                project.technologyIds.includes("6444d6833b0778f1880bf36d")
-              )
-              .map((project: Project) => (
-                <div
-                  className=" text-center p-4 border rounded border-indigo-300 hover:scale-105 transition-all hover:bg-indigo-400 hover:text-white cursor-pointer"
-                  key={project.id}
-                >
-                  {project.name}
-                </div>
-              ))}
-          </div>
-        </div>
-        <div>
-          <label>Laravel with Vue</label>
-        </div>
-        <div>
-          <label>Svelte kit</label>
-        </div>
+      <div className={`${toggleMode && "hidden"} min-h-[700px] `}>
+        {!toggleFilterMode ? (
+          <ProjectListByFrontEnd projects={projects} />
+        ) : (
+          <ProjectListByBackend projects={projects} />
+        )}
       </div>
     </div>
   );
