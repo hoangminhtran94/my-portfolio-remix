@@ -64,7 +64,7 @@ export function CatchBoundary() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen bg-slate-50 flex flex-col">
         <NavBar />
         <main className="h-[80vh] flex flex-col items-center justify-center">
           <h2 className="text-center">Error happened</h2>
@@ -98,7 +98,7 @@ export function ErrorBoundary() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen bg-slate-50 flex flex-col">
         <NavBar />
         <main className="h-[80vh] flex flex-col items-center justify-center">
           <h2 className="text-center">Error happened</h2>

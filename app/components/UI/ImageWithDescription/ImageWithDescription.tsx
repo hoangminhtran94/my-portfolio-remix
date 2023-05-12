@@ -8,7 +8,9 @@ const ImageWithDescription = ({
   containerClassName?: string;
 }) => {
   return (
-    <div className={`flex flex-col w-full gap-20 ${containerClassName}`}>
+    <div
+      className={`flex flex-col w-full gap-5 lg:gap-20 ${containerClassName}`}
+    >
       <h2 className="text-center">Project details</h2>
       {images.map((image, index) => (
         <div

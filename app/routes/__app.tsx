@@ -170,7 +170,7 @@ const AppLayout = () => {
           exit="exit"
           className={`absolute flex top-0 right-0  w-full h-full overflow-hidden`}
         >
-          <div className="flex-1 flex items-center justify-end ">
+          <div className="w-full flex items-center justify-end">
             {setBackGroundImageHanlder()}
           </div>
         </motion.div>
