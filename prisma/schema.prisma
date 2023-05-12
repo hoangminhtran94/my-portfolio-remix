@@ -54,6 +54,9 @@ model User {
   secondaryEmail String
   profileImage   String
   contactNumber  String
+  firstLineAbout String
+  secondLineAbout String
+  thirdLineAbout  String
   socialMedias   SocialMedia[]
   password       String
   projects       Project[]

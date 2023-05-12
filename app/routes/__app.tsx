@@ -137,6 +137,9 @@ const AppLayout = () => {
     if (firstContainerPathPattern.id.includes("skills")) {
       return "skills-first-container";
     }
+    if (firstContainerPathPattern.id.includes("about")) {
+      return "about-first-container";
+    }
     if (firstContainerPathPattern.id.includes("contact")) {
       return "contact-first-container";
     } else {

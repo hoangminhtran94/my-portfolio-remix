@@ -26,6 +26,9 @@ export interface User {
   username: string;
   secondaryEmail: string;
   profileImage: string;
+  firstLineAbout: string;
+  secondLineAbout: string;
+  thirdLineAbout: string;
   socialMedias: SocialMedia[];
   password?: string;
   projects?: Project[];
