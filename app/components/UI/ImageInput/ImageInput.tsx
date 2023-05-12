@@ -10,6 +10,7 @@ const ImageInput: FC<ImageInputProps> = ({
   label,
   defaultImages = [],
   multiple = true,
+  className,
   getImages,
   ...otherProps
 }) => {
@@ -26,7 +27,7 @@ const ImageInput: FC<ImageInputProps> = ({
   }, [images]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 ${className}`}>
       <label htmlFor="image-input">{label}</label>
       <input
         multiple={multiple ?? true}

@@ -29,29 +29,27 @@ const About = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-[36px] md:text-[60px]"
           >
-            Hi,
+            {rootUser.firstLineAbout}
           </motion.h2>
           <motion.h3
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
             className="text-[20px] leading-loose md:text-[30px]"
-          >
-            I'm
-            <strong> Minh Hoang Tran</strong> , a Full Stack web developer with
-            experience many frameworks and languages.
-          </motion.h3>
+            dangerouslySetInnerHTML={{
+              __html: rootUser.secondLineAbout.replace(/\n/g, "<br>"),
+            }}
+          ></motion.h3>
 
           <motion.h3
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.5 }}
             className="text-[20px] leading-loose md:text-[30px]"
-          >
-            I am working for Algonquin College - Data Analytics center. I am
-            experienced with React, Angular, VueJs, Svelte, NextJs... and other
-            latest and popular technologies.
-          </motion.h3>
+            dangerouslySetInnerHTML={{
+              __html: rootUser.thirdLineAbout.replace(/\n/g, "<br>"),
+            }}
+          ></motion.h3>
         </div>
       </div>
 
