@@ -10,6 +10,7 @@ import InputDropdown from "../UI/InputDropdown/InputDropdown";
 import type { ComponentPropsWithoutRef, FC } from "react";
 import { useState } from "react";
 import type { Project, Technology } from "~/utils/models/models";
+import FeatureImageInput from "../UI/FeatureImageInput/FeatureImageInput";
 
 const ProjectForm: FC<
   FormProps & ComponentPropsWithoutRef<"form"> & { project?: Project }
@@ -20,11 +21,21 @@ const ProjectForm: FC<
   const [selectedTechonologies, setSelectedTechnologies] = useState<
     Technology[]
   >([]);
-  const [projectImages, setProjectImages] = useState<
-    { image: string; file: File | null }[]
+
+  const [featureImages, setFeatureImages] = useState<
+    {
+      image: string;
+      file: File | null;
+      priority: string;
+      description: string;
+      showIn: "carousel" | "detail" | "both";
+    }[]
   >(
     props.project
-      ? props.project.projectImages.map((image) => ({ image, file: null }))
+      ? props.project.projectFeatureImages.map((image) => ({
+          ...image,
+          file: null,
+        }))
       : []
   );
 
@@ -36,7 +47,7 @@ const ProjectForm: FC<
         formData.append("technologyIds", tech.id)
       );
     }
-    projectImages.forEach((image) => {
+    featureImages.forEach((image) => {
       if (image.file) {
         formData.append("projectImages", image.file);
       } else {
@@ -90,12 +101,13 @@ const ProjectForm: FC<
         name="demoLink"
         label="Project demo link"
       />
-      <ImageInput
-        defaultImages={props.project?.projectImages}
+
+      <FeatureImageInput
+        defaultImages={featureImages}
+        label="Feature images"
         getImages={(images) => {
-          setProjectImages(images);
+          setFeatureImages(images);
         }}
-        label="Project images"
       />
 
       <div className="flex gap-5">

@@ -48,7 +48,7 @@ const NavBar = () => {
           className={`${
             !showNavBar ? "hidden" : "flex"
           }  drop-shadow-lg lg:drop-shadow-none items-center justify-center 
-          w-full md:w-1/2 flex-col    lg:px-0 bg-white fixed right-0 top-0  lg:w-auto h-full lg:h-auto lg:static  lg:block`}
+          w-full md:w-1/2 flex-col    lg:px-0  fixed right-0 top-0  lg:w-auto h-full lg:h-auto lg:static  lg:block`}
         >
           <span
             onClick={() => {

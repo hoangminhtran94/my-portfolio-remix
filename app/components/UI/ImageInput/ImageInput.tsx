@@ -65,7 +65,7 @@ const ImageInput: FC<ImageInputProps> = ({
                     return images;
                   });
                 }}
-                className=" absolute left-0 top-0  hover:z-10  w-full h-full justify-center items-center bg-[rgba(0,0,0,0.3)] opacity-0 cursor-pointer  hover:opacity-100  flex"
+                className=" absolute left-0 top-0  z-10  w-full h-full justify-center items-center bg-[rgba(0,0,0,0.3)] opacity-0 cursor-pointer  hover:opacity-100  flex"
               >
                 <svg
                   className=" w-6"

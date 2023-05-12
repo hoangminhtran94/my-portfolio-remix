@@ -159,7 +159,7 @@ const AppLayout = () => {
   };
   // ${setBackGroundImageHanlder()}
   return (
-    <main className="flex  flex-col relative overflow-x-hidden overflow-y-visible 2xl:h-auto  flex-auto py-[48px] md:py-[60px]  px-4 md:px-12  ">
+    <main className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible py-[12px] 2xl:h-auto     px-4 md:px-12  ">
       {/* BackGround */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -186,7 +186,7 @@ const AppLayout = () => {
                 firstContainerPathPattern.id ===
                   "routes/__app/my-project/$projectId/index") &&
               "hidden"
-            } relative flex flex-1  2xl:h-auto 2xl:max-w-[33%]   lg:min-h-[250px]  px-[36px] items-center    z-20 text-slate-500 `}
+            } relative flex 2xl:flex-1  2xl:h-auto 2xl:max-w-[33%]   lg:min-h-[250px]  px-[36px] items-center    z-20 text-slate-500 `}
             key={firstContainerKey()}
             variants={container1}
             initial="hidden"
@@ -202,7 +202,7 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            className=" flex items-center flex-1 z-20"
+            className=" flex  flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"

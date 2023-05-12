@@ -1,7 +1,7 @@
 import { useMatches } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
-import { SocialMedia } from "~/utils/models/models";
+import type { SocialMedia } from "~/utils/models/models";
 const MyProfile = () => {
   const matches = useMatches();
   const userData = matches[0].data.userData;
@@ -9,7 +9,7 @@ const MyProfile = () => {
     return <div>Not available</div>;
   }
   return (
-    <div className=" shadow-md border border-slate-100 rounded-lg gap-9 flex p-8 flex-col items-center">
+    <div className=" shadow-md border  border-slate-100 rounded-lg gap-9 flex p-8 flex-col items-center">
       <h2 className=" font-bold">{userData.name}</h2>
       <img
         className="w-[200px] h-[200px] object-cover  rounded-full shadow-lg "

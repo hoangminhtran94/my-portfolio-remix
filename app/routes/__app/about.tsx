@@ -7,7 +7,7 @@ const About = () => {
   const rootUser = matches[0].data.rootUser;
   return (
     <div
-      className=" text-stone-600 drop-shadow-sm  text-justify  font-extrabold flex flex-col gap-4  "
+      className=" text-stone-600 drop-shadow-sm  text-justif self-center  font-extrabold flex flex-col gap-4  "
       key={pathname}
     >
       <div className="flex flex-col 3xl:flex-row gap-14 items-center md:py-9">

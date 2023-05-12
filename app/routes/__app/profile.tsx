@@ -28,7 +28,7 @@ const Profile = () => {
   };
   const outlet = useOutlet();
   return (
-    <div className=" flex flex-col gap-10 text-slate-600 w-full h-full">
+    <div className=" flex flex-col self-center gap-10 text-slate-600 w-full h-full">
       <div>
         <h2 className="text-center">My Profile</h2>
       </div>
@@ -40,7 +40,7 @@ const Profile = () => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className=" flex w-full h-full  items-start  justify-center"
+          className=" flex w-full   items-start  justify-center"
         >
           {outlet}
         </motion.div>

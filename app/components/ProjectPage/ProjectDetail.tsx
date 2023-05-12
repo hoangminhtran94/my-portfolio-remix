@@ -10,7 +10,7 @@ const ProjectDetail: FC<{
 }> = ({ project, enableEdit, className = "" }) => {
   return (
     <div
-      className={`p-[24px] md:p-[48px] border-r-[1px] border-indigo-200  flex flex-col items-center gap-6 flex-1 justify-center ${className}`}
+      className={`p-[24px] md:p-[48px] overflow-visible border-r-[1px] border-indigo-200  flex flex-col items-center gap-6 flex-1 justify-center ${className}`}
     >
       <div className="flex gap-8 w-full flex-col flex-1">
         <h2 className="h-fit text-center font-bold">{project.name}</h2>

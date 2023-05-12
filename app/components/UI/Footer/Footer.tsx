@@ -1,7 +1,7 @@
 import * as backEndIcons from "~/utils/icons/Backend";
 const Footer = () => {
   return (
-    <footer className=" bg-slate-50 mt-auto py-[30px] flex flex-col items-center gap-5 ">
+    <footer className=" bg-slate-100 mt-[50px] py-[30px] flex flex-col items-center gap-5 ">
       <p className=" text-[16px]">Developed by Minh Hoang Tran.</p>
       <p className="text-center font-bold text-[16px]">Technologies</p>
       <div>

@@ -13,6 +13,7 @@ export interface Project {
   description: string;
   detailedDescription: string;
   projectImages: string[];
+  projectFeatureImages: FeatureImage[];
   githubLink: string;
   demoLink: string;
   technologies: Technology[];
@@ -38,4 +39,12 @@ export interface SocialMedia {
   icon: string;
   ownerId?: string;
   owner?: User;
+}
+
+export interface FeatureImage {
+  id?: string;
+  image: string;
+  priority: string;
+  description: string;
+  showIn: "carousel" | "detail" | "both";
 }

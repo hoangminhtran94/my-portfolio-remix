@@ -87,6 +87,16 @@ const ImageCarousel = ({
           onAnimationStart={() => {
             setDisabledButtons(true);
           }}
+          drag="x"
+          onDragEnd={(e, info) => {
+            if (Math.abs(info.velocity.x) >= 1000) {
+              if (info.delta.x < 0) {
+                nextHandler();
+              } else {
+                previousHandler();
+              }
+            }
+          }}
           custom={{ usingNavigation, next: nextImage }}
           initial="initial"
           animate="animate"
@@ -97,7 +107,7 @@ const ImageCarousel = ({
               setUsingNavigation(false);
             }
           }}
-          className="w-full h-full object-cover object-center  pointer-events-none  absolute left-0 top-0"
+          className="w-full h-full object-cover object-center  absolute left-0 top-0"
           key={images[currentImage]}
           src={images[currentImage]}
           alt="carouselImage"

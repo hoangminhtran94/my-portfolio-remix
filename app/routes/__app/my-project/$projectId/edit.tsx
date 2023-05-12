@@ -8,7 +8,11 @@ import { redirect, unstable_parseMultipartFormData } from "@remix-run/node";
 
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { getUserFromSession } from "~/utils/database/auth.server";
-import { editProject, getAProject } from "~/utils/database/project.server";
+import {
+  deleteFeatureImage,
+  editProject,
+  getAProject,
+} from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
 import type { Project } from "~/utils/models/models";
 import { useParams, useMatches } from "@remix-run/react";
@@ -61,9 +65,12 @@ export const action: ActionFunction = async ({ request, params }) => {
     throw error;
   }
   const { projectId } = params;
+  if (!projectId) {
+    throw redirect("/");
+  }
   let project;
   try {
-    project = await getAProject(projectId!);
+    project = await getAProject(projectId);
   } catch (error) {
     throw error;
   }
@@ -95,17 +102,15 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+  //Get main formdata
   const { projectImageArray, ...mainFormData } = data;
-
+  //
   const remainedImageData = formData.getAll("projectImageArray");
 
-  const oldImages = project.projectImages.filter((image) =>
-    remainedImageData.includes(image)
-  );
-  const deletedImages = project.projectImages.filter(
-    (image) => !remainedImageData.includes(image)
-  );
-
+  const deletedImages = project.projectFeatureImages
+    .map((image) => image.image)
+    .filter((image) => !remainedImageData.includes(image));
+  //Delete Images from cloudinary
   let deletePromises: Promise<any>[] = [];
 
   deletedImages.forEach((deletedImage) =>
@@ -114,20 +119,49 @@ export const action: ActionFunction = async ({ request, params }) => {
   try {
     await Promise.all(deletePromises);
   } catch (error) {
+    //This error will now stop the process
     console.log(error);
   }
 
+  //Delete Images from database
+  let deletImageFromDatabasePromises: Promise<any>[] = [];
+  deletedImages.forEach((deletedImage) => {
+    deletImageFromDatabasePromises.push(deleteFeatureImage(deletedImage));
+  });
+  try {
+    await Promise.all(deletImageFromDatabasePromises);
+  } catch (error) {
+    //Fail to delete image from database will stop this request
+    throw error;
+  }
+
+  //Get images data
   const images = imageData.getAll("projectImages");
   const technologyIds = formData.getAll("technologyIds");
 
+  const featureImages: {
+    image: FormDataEntryValue;
+    priority: FormDataEntryValue;
+    description: FormDataEntryValue;
+    showIn: FormDataEntryValue;
+  }[] = [];
+  //Format the image data
+  images.forEach((image, index) => {
+    featureImages.push({
+      image,
+      priority: data[`priority${index}`],
+      description: data[`description${index}`],
+      showIn: data[`showIn${index}`],
+    });
+  });
+
   const databaseData = {
     ...mainFormData,
-    projectImages: [...oldImages, ...images],
     technologyIds,
   };
 
   try {
-    await editProject(projectId!, databaseData);
+    await editProject(projectId, databaseData, featureImages);
     return redirect("/my-project");
   } catch (error) {
     throw error;

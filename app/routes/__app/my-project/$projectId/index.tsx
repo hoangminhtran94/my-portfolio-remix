@@ -1,18 +1,27 @@
-import type { Project, Technology } from "~/utils/models/models";
+import type { FeatureImage, Project, Technology } from "~/utils/models/models";
 import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 import { useMatches, useParams } from "@remix-run/react";
-import ImageCarousel from "~/components/UI/ImageCarousel/ImageCarousel";
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
+import type { MetaFunction } from "@remix-run/node";
+import Button from "~/components/UI/Button/Button";
 
 const ProjectView = () => {
   const matches = useMatches();
   const { projectId } = useParams();
   const projects = matches[0].data.projects;
+  const user = matches[0].data.userData;
   const project = projects.find((project: Project) => project.id === projectId);
 
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-center">
-      <h1>{project.name}</h1>
+      <div className="flex flex-col w-full ">
+        <h1 className="text-center">{project.name}</h1>
+        {user && (
+          <Button className=" w-2/3 md:w-1/3 mx-auto" to="edit">
+            Edit
+          </Button>
+        )}
+      </div>
       <div className="flex gap-8 w-full flex-col flex-1 ">
         {project.detailedDescription && (
           <div>
@@ -67,12 +76,15 @@ const ProjectView = () => {
           </div>
         )}
       </div>
-      <div className="w-[100%]">
-        <ImageCarousel
-          containerClassName="!pt-[50%]  rounded shadow drop-shadow-md"
-          images={project.projectImages}
-        />
-      </div>
+
+      <ImageWithDescription
+        images={[...project.projectFeatureImages]
+          .sort((a, b) => +a.priority - +b.priority)
+          .filter(
+            (image: FeatureImage) =>
+              image.showIn === "detail" || image.showIn === "both"
+          )}
+      />
     </div>
   );
 };

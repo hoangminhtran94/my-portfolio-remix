@@ -11,7 +11,7 @@ const WelcomePage = () => {
     };
   }, [navigate]);
   return (
-    <div className="w-full flex items-center h-[500px]">
+    <div className="w-full self-center flex items-center h-[500px]">
       <h1 className="text-center w-full"> Welcome to my website</h1>
     </div>
   );

@@ -1,17 +1,13 @@
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { createProject } from "~/utils/database/project.server";
 import {
-  LoaderFunction,
-  NodeOnDiskFile,
   redirect,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 
-import {
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
+import { unstable_parseMultipartFormData } from "@remix-run/node";
 
 import type { ActionFunction } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
@@ -74,8 +70,33 @@ export const action: ActionFunction = async ({ request }) => {
     uploadHandler
   );
   const images = imageData.getAll("projectImages");
+
+  const featureImages: {
+    image: FormDataEntryValue;
+    priority: FormDataEntryValue;
+    description: FormDataEntryValue;
+    showIn: FormDataEntryValue;
+  }[] = [];
+
+  images.forEach((image, index) => {
+    featureImages.push({
+      image,
+      priority: data[`priority${index}`],
+      description: data[`description${index}`],
+      showIn: data[`showIn${index}`],
+    });
+  });
+  const carouselImages = featureImages
+    .filter((img) => img.showIn === "carousel" || img.showIn === "both")
+    .map((img) => img.image);
+
   const technologyIds = formData.getAll("technologyIds");
-  const databaseData = { ...data, projectImages: images, technologyIds };
+  const databaseData = {
+    ...data,
+    projectImages: carouselImages,
+    projectFeatureImages: featureImages,
+    technologyIds,
+  };
 
   try {
     await createProject(databaseData, user.id!);

@@ -25,7 +25,7 @@ const MyProject = () => {
       : true;
   const [toggleMode, setToggleMode] = useState(defaultMode);
   const [toggleFilterMode, setToggleFilterMode] = useState(defaultFilterMode);
-
+  const [toogleViewImage, setToggleViewImage] = useState(false);
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;
@@ -67,32 +67,40 @@ const MyProject = () => {
       );
     }
   }, [setSearchParams, toggleFilterMode, toggleMode]);
-  console.log(projects);
+
   return (
-    <div className="h-full w-full flex-1 flex flex-col gap-6 justify-center">
+    <div className="w-full flex-1 flex flex-col gap-6 ">
       {pathname === "/my-project" && rootData.userData && (
         <div className="flex gap-3 top-full">
           <Link
-            className="  flex justify-center bg-white flex-1 gap-2 items-center border border-slate-400 p-2 rounded-md hover:bg-slate-50"
+            className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
             to="new-project"
           >
             New Project <span className=" text-3xl">+</span>
           </Link>
           <Link
-            className=" flex-1 justify-center bg-white  flex gap-2 items-center border border-slate-400 p-2 rounded-md hover:bg-slate-50"
+            className=" flex-1 justify-center  flex gap-2 items-center border border-indigo-400 p-2 rounded-md  hover:bg-indigo-500 hover:text-white"
             to="technology"
           >
             Technology <span className=" text-3xl">+</span>
           </Link>
         </div>
       )}
-      <div className="w-full flex gap-5 justify-end">
+      <div className="w-full flex gap-5 justify-end flex-wrap">
+        <Switch
+          label="View Image"
+          className={`${!toggleMode && "hidden"} lg:hidden`}
+          onChange={() => {
+            setToggleViewImage((prev) => !prev);
+          }}
+          defaultChecked={false}
+        />
         <Switch
           className={toggleMode ? "!hidden" : ""}
           label={
             toggleFilterMode
-              ? "Filtered by back-end technologies"
-              : "Filtered by front-end technologies"
+              ? "View by back-end technologies"
+              : "View by front-end technologies"
           }
           onChange={() => {
             setToggleFilterMode((prev) => {
@@ -115,12 +123,15 @@ const MyProject = () => {
       <div
         className={`${
           !toggleMode && "hidden"
-        } h-[500px]   md:h-[1200px] lg:h-[900px]    text-slate-600 w-full rounded-md`}
+        } flex-1  flex  text-slate-600 w-full rounded-md`}
       >
-        <ProjectCarousel projects={projects} />
+        <ProjectCarousel
+          toggleViewImage={toogleViewImage}
+          projects={projects}
+        />
       </div>
 
-      <div className={`${toggleMode && "hidden"} min-h-[700px] `}>
+      <div className={`${toggleMode && "hidden"}  `}>
         {!toggleFilterMode ? (
           <ProjectListByFrontEnd projects={projects} />
         ) : (

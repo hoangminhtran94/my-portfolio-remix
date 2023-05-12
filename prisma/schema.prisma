@@ -23,17 +23,28 @@ model Technology {
 }
 
 model Project {
-  id                  String       @id @default(auto()) @map("_id") @db.ObjectId
-  name                String
-  description         String
-  detailedDescription String
-  projectImages       String[]
-  githubLink          String
-  demoLink            String
-  technologies        Technology[] @relation(fields: [technologyIds], references: [id])
-  technologyIds       String[]     @db.ObjectId
-  creator             User?        @relation(fields: [creatorId], references: [id])
-  creatorId           String?      @db.ObjectId
+  id                   String         @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String
+  description          String
+  detailedDescription  String
+  projectImages        String[]
+  projectFeatureImages FeatureImage[]
+  githubLink           String
+  demoLink             String
+  technologies         Technology[]   @relation(fields: [technologyIds], references: [id])
+  technologyIds        String[]       @db.ObjectId
+  creator              User?          @relation(fields: [creatorId], references: [id])
+  creatorId            String?        @db.ObjectId
+}
+
+model FeatureImage {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  priority    String
+  description String
+  image       String
+  showIn      ShowIn
+  Project     Project? @relation(fields: [projectId], references: [id])
+  projectId   String?  @db.ObjectId
 }
 
 model User {
@@ -56,4 +67,10 @@ model SocialMedia {
   icon    String
   owner   User?   @relation(fields: [ownerId], references: [id])
   ownerId String? @db.ObjectId
+}
+
+enum ShowIn {
+  carousel
+  detail
+  both
 }
