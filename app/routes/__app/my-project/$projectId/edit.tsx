@@ -105,11 +105,16 @@ export const action: ActionFunction = async ({ request, params }) => {
   //Get main formdata
   const { projectImageArray, ...mainFormData } = data;
   //
-  const remainedImageData = formData.getAll("projectImageArray");
+  const remainedImageDataJSON = formData.getAll("projectImageArray");
+  const remainedImageData = remainedImageDataJSON.map((json) =>
+    JSON.parse(json as string)
+  );
 
   const deletedImages = project.projectFeatureImages
     .map((image) => image.image)
-    .filter((image) => !remainedImageData.includes(image));
+    .filter(
+      (image) => !remainedImageData.map((data) => data.image).includes(image)
+    );
   //Delete Images from cloudinary
   let deletePromises: Promise<any>[] = [];
 
@@ -155,14 +160,21 @@ export const action: ActionFunction = async ({ request, params }) => {
     });
   });
 
+  //Format remainded images
+
   const databaseData = {
     ...mainFormData,
     technologyIds,
   };
 
   try {
-    await editProject(projectId, databaseData, featureImages);
-    return redirect("/my-project");
+    await editProject(
+      projectId,
+      databaseData,
+      featureImages,
+      remainedImageData
+    );
+    return redirect("..");
   } catch (error) {
     throw error;
   }

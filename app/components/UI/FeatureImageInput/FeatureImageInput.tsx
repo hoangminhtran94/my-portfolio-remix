@@ -80,7 +80,7 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
       />
       <div className="flex flex-col lg:justify-start justify-center gap-3">
         {images.length > 0 &&
-          images.map((image, firstindex) => (
+          [...images].map((image, firstindex) => (
             <div
               className="flex row gap-4 p-2 border border-indigo-300"
               key={image.image}

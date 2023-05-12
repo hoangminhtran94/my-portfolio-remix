@@ -12,15 +12,20 @@ const ImageWithDescription = ({
       <h2 className="text-center">Project details</h2>
       {images.map((image, index) => (
         <div
-          className="flex gap-2 flex-col justify-center items-center md:items-start md:flex-row md:odd:flex-row-reverse "
+          className="flex gap-2 flex-col justify-center items-center md:items-start lg:flex-row lg:odd:flex-row-reverse "
           key={index}
         >
           <img
-            className="md:w-fit h-fit w-screen  md:h-[800px] object-contain  object-center  outline outline-1 outline-indigo-300 rounded"
+            className=" lg:w-[50%]  w-screen h-fit object-cover max-h-[800px] object-left-top   outline outline-1 outline-indigo-300 rounded"
             src={image.image}
             alt="carouselImage"
           />
-          <p className="p-4 flex-1 rounded  text-base">{image.description}</p>
+          <p
+            className="p-4 flex-1 rounded  text-base  leading-loose"
+            dangerouslySetInnerHTML={{
+              __html: image.description.replace(/\n/g, "<br>"),
+            }}
+          ></p>
         </div>
       ))}
     </div>

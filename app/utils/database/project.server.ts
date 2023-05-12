@@ -85,10 +85,23 @@ export const deleteFeatureImage = async (image: string) => {
   }
 };
 
+export const updateFeatureImage = async (changedData: any) => {
+  const { id, ...rest } = changedData;
+  try {
+    return await prisma.featureImage.update({
+      where: { id },
+      data: { ...rest },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const editProject = async (
   id: string,
   changedData: any,
-  featureImages: any
+  featureImages: any,
+  remainedImageData: any
 ) => {
   let promises: Promise<any>[] = [];
   featureImages.forEach((data: any) =>
@@ -104,6 +117,9 @@ export const editProject = async (
       })
     )
   );
+  remainedImageData.forEach((data: any) => {
+    promises.push(updateFeatureImage(data));
+  });
 
   try {
     await Promise.all(promises);

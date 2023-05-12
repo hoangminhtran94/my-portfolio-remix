@@ -1,6 +1,6 @@
 import Input from "../UI/Input/Input";
 import TextArea from "../UI/TextArea/TextArea";
-import ImageInput from "../UI/ImageInput/ImageInput";
+
 import Button from "../UI/Button/Button";
 import { Form } from "@remix-run/react";
 import type { FormEvent } from "react";
@@ -51,7 +51,8 @@ const ProjectForm: FC<
       if (image.file) {
         formData.append("projectImages", image.file);
       } else {
-        formData.append("projectImageArray", image.image);
+        const { file, ...rest } = image;
+        formData.append("projectImageArray", JSON.stringify(rest));
       }
     });
 
@@ -60,7 +61,7 @@ const ProjectForm: FC<
       encType: "multipart/form-data",
     });
   };
-
+  console.log(featureImages);
   return (
     <Form
       onSubmit={submitHandler}
