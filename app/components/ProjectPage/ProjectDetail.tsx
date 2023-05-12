@@ -64,7 +64,7 @@ const ProjectDetail: FC<{
             </div>
           </div>
         )}
-        {project.githubLink && (
+        {project.githubLink ? (
           <div className="flex flex-col gap-3">
             <h3 className="font-bold">Project respository</h3>
             <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
@@ -76,6 +76,13 @@ const ProjectDetail: FC<{
               >
                 Visit the project source code
               </a>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            <h3 className="font-bold">Project respository</h3>
+            <div className="text-lg cursor-not-allowed transition-all w-fit ">
+              <p className=" text-sm md:text-base">This code is private</p>
             </div>
           </div>
         )}
