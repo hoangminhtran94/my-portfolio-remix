@@ -4,13 +4,10 @@ const AboutHeader = () => {
   const user = matches[0].data.userData;
   return (
     <div className="w-full">
-      <h1 className="text-center relative">
+      <h1 className="flex gap-3 justify-center ">
         About{" "}
         {user && (
-          <Link
-            to="/about/edit"
-            className="absolute hover:scale-110 transition-all right-0"
-          >
+          <Link to="/about/edit" className=" hover:scale-110 transition-all ">
             <svg
               className="w-7  fill-slate-700"
               xmlns="http://www.w3.org/2000/svg"

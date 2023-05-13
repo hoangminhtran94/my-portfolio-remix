@@ -8,11 +8,7 @@ import {
 } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { useSearchParams } from "@remix-run/react";
-import {
-  redirect,
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
+import { redirect, unstable_parseMultipartFormData } from "@remix-run/node";
 import {
   addASocialMedia,
   getASocialMedia,

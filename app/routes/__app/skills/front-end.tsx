@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "@remix-run/react";
-import * as Icons from "~/utils/icons/Frontend";
+import { useMatches, useNavigate } from "@remix-run/react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
 const FrontEndShowCase: React.FC = () => {
   const navigate = useNavigate();
+  const matches = useMatches();
+  const frontendData = matches[2].data;
 
   return (
     <div className="fixed w-[100vw] h-[100vh] top-0 right-0 flex justify-center items-center ">
@@ -21,41 +22,33 @@ const FrontEndShowCase: React.FC = () => {
         z-[888] shadow-lg  flex flex-col items-center gap-[16px]"
         >
           <h2>Front-end</h2>
-          <motion.div
-            key="frontend-programming-languages"
-            initial={{ opacity: 0, translateX: -100 }}
-            animate={{ opacity: 1, translateX: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="w-[100%] md:w-[80%] flex flex-col gap-6"
-          >
-            <h3>Programming language</h3>
-            <ul className="flex max-w-full flex-wrap  gap-10">
-              <li>{Icons.JavaScript}</li>
-              <li>{Icons.TypeScript}</li>
-              <li>{Icons.Java}</li>
-              <li>{Icons.HTML}</li>
-              <li>{Icons.CSS}</li>
-            </ul>
-          </motion.div>
-          <motion.div
-            key="frontend-programming-frameworks"
-            initial={{ opacity: 0, translateX: -100 }}
-            animate={{ opacity: 1, translateX: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-            className="w-[100%] md:w-[80%] flex flex-col gap-6"
-          >
-            <h3>Frameworks</h3>
-            <ul className="flex  flex-wrap  gap-10">
-              <li>{Icons.React}</li>
-              <li>{Icons.Angular}</li>
-              <li>{Icons.Remix}</li>
-              <li>{Icons.NextJs}</li>
-              <li>{Icons.Svelte}</li>
-              <li>{Icons.ReactNative}</li>
-              <li>{Icons.VueJs}</li>
-              <li>{Icons.Laravel}</li>
-            </ul>
-          </motion.div>
+          {frontendData && frontendData.frontends?.length > 0 ? (
+            [...frontendData.frontends]
+              .sort((a, b) => a.priority - b.priority)
+              .map((data: any, index: number) => (
+                <motion.div
+                  key={data.id}
+                  initial={{ opacity: 0, translateX: -100 }}
+                  animate={{ opacity: 1, translateX: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 * data.priority }}
+                  className="w-[100%] md:w-[80%] flex flex-col gap-6"
+                >
+                  <h3>{data.category.name}</h3>
+                  <ul className="flex max-w-full flex-wrap  gap-10">
+                    {data.technologies.map((tech: any) => (
+                      <li key={tech.id}>
+                        <TechnologyIcon
+                          className="!w-[60px] !h-[60px]"
+                          icon={tech.icon}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))
+          ) : (
+            <div>Not available</div>
+          )}
         </div>
       </AnimatePresence>
     </div>

@@ -15,13 +15,10 @@ const ProjectView = () => {
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-center">
       <div className="flex flex-col  ">
-        <h1 className="text-center relative">
-          {project.name}{" "}
+        <h1 className="text-center flex gap-3">
+          {project.name}
           {user && (
-            <Link
-              to="edit"
-              className="absolute hover:scale-110 transition-all right-[-10%]"
-            >
+            <Link to="edit" className=" hover:scale-110 transition-all ">
               <svg
                 className="w-7  fill-slate-700"
                 xmlns="http://www.w3.org/2000/svg"

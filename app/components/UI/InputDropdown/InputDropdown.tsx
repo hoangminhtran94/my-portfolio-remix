@@ -4,7 +4,7 @@ import type { Technology } from "~/utils/models/models";
 import { includes } from "lodash";
 
 interface InputDropdownProps extends ComponentPropsWithoutRef<"input"> {
-  label: string;
+  label?: string;
   dropdownList: Technology[];
   defaultList?: Technology[];
   getSelectedList?: (list: Technology[]) => void;
@@ -40,7 +40,11 @@ const InputDropdown: FC<InputDropdownProps> = ({
   }, [selectedItems]);
   return (
     <div className="relative flex flex-col gap-2">
-      <label htmlFor={label}>{label}</label>
+      {label && (
+        <label className="pl-2" htmlFor={label}>
+          {label}
+        </label>
+      )}
       <input
         className="rounded border-solid border p-2 h-[35px] border-slate-200 focus:outline-slate-400"
         id={label}

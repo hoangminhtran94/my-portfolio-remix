@@ -229,6 +229,11 @@ a.active {
   height: 8px;
   background-color: transparent; /* or add it to the track */
 }
+.strong {
+  font-size: xx-large;
+  font-weight: 800;
+  color: #570ccf;
+}
 
 .show-scroll-bar::-webkit-scrollbar {
   display: inline !important;

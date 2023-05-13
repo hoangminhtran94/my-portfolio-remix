@@ -8,6 +8,7 @@ import {
   unstable_composeUploadHandlers,
 } from "@remix-run/node";
 import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
+
 const AboutEdit = () => {
   const data = useLoaderData();
   const rootUser = data;

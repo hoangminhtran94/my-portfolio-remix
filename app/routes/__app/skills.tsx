@@ -2,7 +2,9 @@ import { useOutlet } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/react/dist/routeModules";
+import type { MetaFunction } from "@remix-run/react/dist/routeModules";
+import { LoaderFunction, json } from "@remix-run/node";
+import { getTechnologyGroups } from "~/utils/database/skills.server";
 
 const MySkillsLayout = () => {
   const navigate = useNavigate();
@@ -158,4 +160,18 @@ export default MySkillsLayout;
 
 export const meta: MetaFunction = () => {
   return { title: "My Skills" };
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  try {
+    return json({
+      frontends: await getTechnologyGroups("645f20b4cc9091850c9182d7"),
+      backends: await getTechnologyGroups("645f20c2cc9091850c9182d8"),
+    });
+  } catch (error) {
+    return json({
+      frontends: [],
+      backends: [],
+    });
+  }
 };

@@ -5,6 +5,7 @@ const About = () => {
   const { pathname } = useLocation();
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
+
   return (
     <div
       className=" text-stone-600 drop-shadow-sm  text-justif self-center  font-extrabold flex flex-col gap-4  "
@@ -37,7 +38,7 @@ const About = () => {
             transition={{ delay: 1, duration: 0.5 }}
             className="text-[20px] leading-loose md:text-[30px]"
             dangerouslySetInnerHTML={{
-              __html: rootUser.secondLineAbout.replace(/\n/g, "<br>"),
+              __html: rootUser.secondLineAbout?.replace(/\n/g, "<br>"),
             }}
           ></motion.h3>
 
@@ -47,7 +48,7 @@ const About = () => {
             transition={{ delay: 1.5, duration: 0.5 }}
             className="text-[20px] leading-loose md:text-[30px]"
             dangerouslySetInnerHTML={{
-              __html: rootUser.thirdLineAbout.replace(/\n/g, "<br>"),
+              __html: rootUser.thirdLineAbout?.replace(/\n/g, "<br>"),
             }}
           ></motion.h3>
         </div>

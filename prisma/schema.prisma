@@ -11,15 +11,17 @@ datasource db {
 }
 
 model Technology {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  backgroundColor String
-  textColor       String
-  icon            String
-  projects        Project[] @relation(fields: [projectIds], references: [id])
-  projectIds      String[]  @db.ObjectId
-  creator         User?     @relation(fields: [creatorId], references: [id])
-  creatorId       String?   @db.ObjectId
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  backgroundColor    String
+  textColor          String
+  icon               String
+  projects           Project[]         @relation(fields: [projectIds], references: [id])
+  projectIds         String[]          @db.ObjectId
+  creator            User?             @relation(fields: [creatorId], references: [id])
+  creatorId          String?           @db.ObjectId
+  technologyGroups   TechnologyGroup[] @relation(fields: [technologyGroupIds], references: [id])
+  technologyGroupIds String[]          @db.ObjectId
 }
 
 model Project {
@@ -48,19 +50,19 @@ model FeatureImage {
 }
 
 model User {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  username       String        @unique
-  secondaryEmail String
-  profileImage   String
-  contactNumber  String
-  firstLineAbout String
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  username        String        @unique
+  secondaryEmail  String
+  profileImage    String
+  contactNumber   String
+  firstLineAbout  String
   secondLineAbout String
   thirdLineAbout  String
-  socialMedias   SocialMedia[]
-  password       String
-  projects       Project[]
-  technologies   Technology[]
+  socialMedias    SocialMedia[]
+  password        String
+  projects        Project[]
+  technologies    Technology[]
 }
 
 model SocialMedia {
@@ -76,4 +78,27 @@ enum ShowIn {
   carousel
   detail
   both
+}
+
+model TechnologyType {
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  TechnologyCategory TechnologyCategory[]
+}
+
+model TechnologyCategory {
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  name             String            @unique
+  type             TechnologyType    @relation(fields: [technologyTypeId], references: [id])
+  TechnologyGroup  TechnologyGroup[]
+  technologyTypeId String            @db.ObjectId
+}
+
+model TechnologyGroup {
+  id                   String             @id @default(auto()) @map("_id") @db.ObjectId
+  category             TechnologyCategory @relation(fields: [technologyCategoryId], references: [id])
+  priority             Int
+  technologies         Technology[]       @relation(fields: [technologiesIds], references: [id])
+  technologiesIds      String[]           @db.ObjectId
+  technologyCategoryId String             @db.ObjectId
 }

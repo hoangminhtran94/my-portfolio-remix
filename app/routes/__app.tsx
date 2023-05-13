@@ -5,6 +5,7 @@ import ProjectHeader from "~/components/ProjectPage/ProjectHeader";
 import SkillsHeader from "~/components/SkillsPage/SkillsHeader";
 import ContactMeHeader from "~/components/ContactMe/ContactMeHeader";
 import AboutHeader from "./../components/About/AboutHeader";
+
 import * as bgSVGs from "~/components/svgs/bg-svgs";
 
 const AppLayout = () => {
@@ -148,7 +149,10 @@ const AppLayout = () => {
   };
 
   const secondContainerKey = () => {
-    if (firstContainerPathPattern.id.includes("skills")) {
+    if (
+      firstContainerPathPattern.id.includes("skills") ||
+      firstContainerPathPattern.id.includes("skills.edit")
+    ) {
       return "skills-second-container";
     }
     if (firstContainerPathPattern.id.includes("technology")) {
