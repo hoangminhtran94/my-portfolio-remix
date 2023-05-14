@@ -86,7 +86,7 @@ const MyProject = () => {
           </Link>
         </div>
       )}
-      <div className="w-full flex gap-5 justify-end flex-wrap">
+      <div className="w-full flex gap-5  justify-end flex-wrap">
         <Switch
           label="View Image"
           className={`${!toggleMode && "hidden"} lg:hidden`}

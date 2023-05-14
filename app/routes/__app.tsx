@@ -6,8 +6,6 @@ import SkillsHeader from "~/components/SkillsPage/SkillsHeader";
 import ContactMeHeader from "~/components/ContactMe/ContactMeHeader";
 import AboutHeader from "./../components/About/AboutHeader";
 
-import * as bgSVGs from "~/components/svgs/bg-svgs";
-
 const AppLayout = () => {
   const outlet = useOutlet();
   const matches = useMatches();
@@ -15,17 +13,6 @@ const AppLayout = () => {
 
   const location = useLocation();
 
-  const background = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { duration: 0.7 },
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.7 },
-    },
-  };
   const container1 = {
     hidden: { opacity: 0, x: -50 },
     show: {
@@ -54,50 +41,50 @@ const AppLayout = () => {
     },
   };
 
-  const setBackGroundImageHanlder = () => {
+  const setContainer2BackGroundHanlder = () => {
     if (firstContainerPathPattern.id.includes("skills")) {
-      return bgSVGs.skill;
+      return "skill-2-bg";
     }
     if (firstContainerPathPattern.id.includes("about")) {
-      return bgSVGs.about;
+      return "about-2-bg";
     }
     if (firstContainerPathPattern.id.includes("my-project")) {
-      return bgSVGs.project;
+      return "project-2-bg";
     }
     if (firstContainerPathPattern.id.includes("contact")) {
-      return bgSVGs.contact;
+      return "contact-2-bg";
     }
     if (firstContainerPathPattern.id.includes("auth")) {
-      return bgSVGs.auth;
+      return "auth-2-bg";
     }
     if (firstContainerPathPattern.id === "routes/__app/index") {
-      return bgSVGs.home;
+      return "home-2-bg";
     }
     if (firstContainerPathPattern.id.includes("profile")) {
-      return bgSVGs.profile;
+      return "profile-2-bg";
     }
   };
 
-  const setBackGroundKey = () => {
-    if (firstContainerPathPattern.id.includes("home")) {
-      return "main-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("my-project")) {
-      return "secondary-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("skills")) {
-      return "fifth-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("about")) {
-      return "third-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("contact")) {
-      return "fourth-screen-background";
-    }
-    if (firstContainerPathPattern.id.includes("auth")) {
-      return "login-screen-background";
-    }
-  };
+  // const setBackGroundKey = () => {
+  //   if (firstContainerPathPattern.id.includes("home")) {
+  //     return "main-screen-background";
+  //   }
+  //   if (firstContainerPathPattern.id.includes("my-project")) {
+  //     return "secondary-screen-background";
+  //   }
+  //   if (firstContainerPathPattern.id.includes("skills")) {
+  //     return "fifth-screen-background";
+  //   }
+  //   if (firstContainerPathPattern.id.includes("about")) {
+  //     return "third-screen-background";
+  //   }
+  //   if (firstContainerPathPattern.id.includes("contact")) {
+  //     return "fourth-screen-background";
+  //   }
+  //   if (firstContainerPathPattern.id.includes("auth")) {
+  //     return "login-screen-background";
+  //   }
+  // };
 
   const changeFirstContainerHandler = () => {
     if (firstContainerPathPattern.id.includes("my-project")) {
@@ -201,9 +188,9 @@ const AppLayout = () => {
             animate="show"
             exit="exit"
           >
-            <div className="w-full  absolute top-0 left-0 flex -z-10 items-center justify-end">
-              {setBackGroundImageHanlder()}
-            </div>
+            <div
+              className={`h-full w-full absolute top-0 left-0 flex -z-10 items-center justify-end ${setContainer2BackGroundHanlder()}`}
+            ></div>
             {outlet}
           </motion.div>
         </AnimatePresence>

@@ -156,6 +156,49 @@ p {
   filter: blur(3px);
 }
 
+.about-2-bg {
+  background-image: url("public/images/about-2.svg");
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.1;
+}
+.auth-2-bg {
+  background-image: url("public/images/auth-2.svg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.3;
+}
+.contact-2-bg {
+  background-image: url("public/images/contact-2.svg");
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.1;
+}
+.home-2-bg {
+  background-image: url("public/images/home-2.svg");
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.1;
+}
+.profile-2-bg {
+  background-image: url("public/images/profile-2.svg");
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.1;
+}
+.project-2-bg {
+  background-image: url("public/images/project-2.svg");
+  background-position: top left;
+  background-size: cover;
+  opacity: 0.1;
+}
+.skill-2-bg {
+  background-image: url("public/images/skill-2.svg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
+}
+
 .about-link-1 {
   background: rgb(208, 205, 205);
   background: linear-gradient(
