@@ -1,6 +1,5 @@
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import {
-  ActionFunction,
-  LoaderFunction,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
@@ -168,7 +167,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       featureImages,
       remainedImageData
     );
-    return redirect("..");
+    return redirect("/my-project/" + projectId);
   } catch (error) {
     throw error;
   }
