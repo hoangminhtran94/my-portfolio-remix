@@ -6,7 +6,6 @@ const BackEndShowCase: React.FC = () => {
   const navigate = useNavigate();
   const matches = useMatches();
   const skilldata = matches[2].data;
-  console.log(skilldata);
 
   return (
     <div className="fixed w-[100vw] h-[100vh] top-0 right-0 flex justify-center items-center ">
@@ -22,7 +21,7 @@ const BackEndShowCase: React.FC = () => {
         p-[24px] lg:p-[48px]  
         z-[888] shadow-lg  flex flex-col items-center gap-[16px]"
         >
-          <h2>Front-end</h2>
+          <h2>Back-end</h2>
           {skilldata && skilldata.backends?.length > 0 ? (
             [...skilldata.backends]
               .sort((a, b) => a.priority - b.priority)

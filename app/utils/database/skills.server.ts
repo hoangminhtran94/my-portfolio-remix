@@ -95,6 +95,16 @@ export const getTechnologyCategories = async () => {
     return [];
   }
 };
+export const updateTechnologyCategory = async (id: any, updatedName: any) => {
+  try {
+    await prisma.technologyCategory.update({
+      where: { id },
+      data: { name: updatedName },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const createTechnologyCategory = async (formdata: any) => {
   try {
