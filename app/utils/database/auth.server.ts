@@ -38,17 +38,21 @@ export const getUserFromSession = async (request: Request) => {
   );
   const userId = session.get("userId");
   if (!userId) {
-    return null;
+    throw redirect("/auth");
   }
+  let user;
   try {
-    const user = await prisma.user.findFirst({
+    user = await prisma.user.findFirst({
       where: { id: userId },
       include: { socialMedias: true },
     });
-    return user;
   } catch (error) {
     throw error;
   }
+  if (!user) {
+    throw redirect("/auth");
+  }
+  return user;
 };
 export const logout = async (request: Request) => {
   const session = await sessionStorage.getSession(

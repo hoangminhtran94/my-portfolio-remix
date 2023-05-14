@@ -44,7 +44,7 @@ export const action: ActionFunction = async ({ request }) => {
     throw error;
   }
   if (!user) {
-    throw redirect("/login");
+    throw redirect("/auth");
   }
   const requestClone = request.clone();
   const uploadHandler = unstable_composeUploadHandlers(

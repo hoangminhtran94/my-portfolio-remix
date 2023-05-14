@@ -52,14 +52,11 @@ const Profile = () => {
 export default Profile;
 
 export const loader: LoaderFunction = async ({ request }) => {
-  let user;
   try {
-    user = await getUserFromSession(request);
+    await getUserFromSession(request);
   } catch (error) {
-    return redirect("/auth");
+    throw redirect("/auth");
   }
-  if (!user) {
-    return redirect("/auth");
-  }
+
   return null;
 };

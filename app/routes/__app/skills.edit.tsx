@@ -42,11 +42,3 @@ export const loader: LoaderFunction = async ({ request }) => {
     technologyCategories: await getTechnologyCategories(),
   });
 };
-
-export const action: ActionFunction = async ({ request }) => {
-  try {
-    await getUserFromSession(request);
-  } catch (error) {
-    throw redirect("/auth");
-  }
-};

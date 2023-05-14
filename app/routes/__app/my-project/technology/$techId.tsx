@@ -21,6 +21,7 @@ import {
   updateTechnology,
 } from "~/utils/database/technology.server";
 import serverError from "~/utils/models/ServerError";
+import { getUserFromSession } from "~/utils/database/auth.server";
 
 const TechnologyEdit = () => {
   const matches = useMatches();
@@ -63,6 +64,12 @@ export function ErrorBoundary() {
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
+  try {
+    await getUserFromSession(request);
+  } catch (error) {
+    throw redirect("/auth");
+  }
+
   const requestClone = request.clone();
   const { techId } = params;
   const uploadHandler = unstable_composeUploadHandlers(

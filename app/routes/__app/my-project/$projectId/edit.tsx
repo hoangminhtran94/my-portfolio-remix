@@ -45,10 +45,7 @@ export default EditProject;
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   try {
-    const user = await getUserFromSession(request);
-    if (!user) {
-      throw redirect("/auth");
-    }
+    await getUserFromSession(request);
   } catch (error) {
     throw error;
   }
@@ -57,10 +54,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export const action: ActionFunction = async ({ request, params }) => {
   try {
-    const user = await getUserFromSession(request);
-    if (!user) {
-      throw redirect("/auth");
-    }
+    await getUserFromSession(request);
   } catch (error) {
     throw error;
   }

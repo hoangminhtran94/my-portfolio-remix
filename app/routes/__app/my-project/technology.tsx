@@ -1,7 +1,11 @@
-import { Outlet, useOutlet } from "@remix-run/react";
+import { useOutlet } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "~/components/UI/Button/Button";
 import { useLocation } from "@remix-run/react";
+
+import type { LoaderFunction } from "@remix-run/node";
+import { getUserFromSession } from "~/utils/database/auth.server";
+import { redirect } from "@remix-run/node";
 
 const NewTechnology = () => {
   const location = useLocation();
@@ -47,3 +51,12 @@ const NewTechnology = () => {
 };
 
 export default NewTechnology;
+
+export const loader: LoaderFunction = async ({ request }) => {
+  try {
+    await getUserFromSession(request);
+  } catch (error) {
+    throw redirect("/auth");
+  }
+  return null;
+};
