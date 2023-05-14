@@ -414,3 +414,34 @@ a.active {
     opacity: 0;
   }
 }
+
+.animate-in {
+  display: block !important;
+  animation: slide-in 1s ease-in-out;
+}
+
+.animate-out {
+  animation: fade-out 0.5s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

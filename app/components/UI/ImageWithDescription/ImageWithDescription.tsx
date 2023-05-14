@@ -1,5 +1,7 @@
 import type { FeatureImage } from "~/utils/models/models";
-
+import ImageDescription from "./ImageDescription/ImageDescription";
+import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 const ImageWithDescription = ({
   images = [],
   containerClassName,
@@ -8,29 +10,17 @@ const ImageWithDescription = ({
   containerClassName?: string;
 }) => {
   return (
-    <div
-      className={`flex flex-col w-full gap-5 lg:gap-20 ${containerClassName}`}
+    <motion.div
+      initial={{ x: -200, opacity: 0 }}
+      animate={{ x: 0, opacity: 1, transition: { delay: 1.2, duration: 0.5 } }}
+      className={`flex flex-col container lg:gap-5  relative ${containerClassName}`}
     >
-      <h2 className="text-center">Project details</h2>
+      <div className="w-full h-full absolute top-0 left-0 project-2-bg "></div>
+      <h1 className="text-center">Project details</h1>
       {images.map((image, index) => (
-        <div
-          className="flex gap-2 flex-col justify-center items-center md:items-start lg:flex-row lg:odd:flex-row-reverse "
-          key={index}
-        >
-          <img
-            className=" lg:w-[50%]  w-screen h-fit object-cover max-h-[800px] object-left-top   outline outline-1 outline-indigo-300 rounded"
-            src={image.image}
-            alt="carouselImage"
-          />
-          <p
-            className="p-4 flex-1 rounded  text-base  leading-loose"
-            dangerouslySetInnerHTML={{
-              __html: image.description.replace(/\n/g, "<br>"),
-            }}
-          ></p>
-        </div>
+        <ImageDescription key={image.id} image={image} />
       ))}
-    </div>
+    </motion.div>
   );
 };
 

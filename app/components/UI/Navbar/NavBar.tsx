@@ -3,8 +3,11 @@ import { useLoaderData } from "@remix-run/react";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
+import { useMatches } from "@remix-run/react";
 const NavBar = () => {
   const data = useLoaderData();
+  const matches = useMatches();
+  const currentRoute = matches[2].id;
   const [showNavBar, setShowNavBar] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -14,7 +17,13 @@ const NavBar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="relative flex justify-between text-slate-500  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30  ">
+    <header
+      className={`relative flex justify-between text-slate-500  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30 ${
+        currentRoute === "routes/__app/my-project/$projectId/index"
+          ? "bg-indigo-700 !text-white"
+          : ""
+      } `}
+    >
       <Link to="/">Home</Link>
       <Button
         className="lg:hidden hover:scale-110 transition-all"
@@ -58,7 +67,13 @@ const NavBar = () => {
           >
             X
           </span>
-          <ul className="flex text-white lg:text-slate-700  flex-col lg:flex-row gap-[60px] md:gap-[80px] text-xl lg:text-[16px] items-center">
+          <ul
+            className={`flex lg:text-slate-700  flex-col lg:flex-row gap-[60px] md:gap-[80px] text-xl lg:text-[16px] items-center ${
+              currentRoute === "routes/__app/my-project/$projectId/index"
+                ? "!text-white"
+                : ""
+            }`}
+          >
             <li className="hover:scale-110 transition-all">
               <NavLink to="/my-project">My Projects</NavLink>
             </li>

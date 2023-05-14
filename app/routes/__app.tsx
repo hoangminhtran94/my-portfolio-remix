@@ -13,6 +13,19 @@ const AppLayout = () => {
 
   const location = useLocation();
 
+  const detailPageContainer = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      opacity: 0,
+      x: -300,
+      transition: { duration: 0.5 },
+    },
+  };
+
   const container1 = {
     hidden: { opacity: 0, x: -50 },
     show: {
@@ -152,50 +165,80 @@ const AppLayout = () => {
     return location.pathname;
   };
   // ${setBackGroundImageHanlder()}
+
   return (
-    <main className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible py-[12px] 2xl:h-auto     px-4 md:px-12  ">
-      <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
-        {/* First Container */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            className={`${
-              (firstContainerPathPattern.id === "routes/__app/index" ||
-                firstContainerPathPattern.id === "routes/__app/profile" ||
-                firstContainerPathPattern.id.includes("auth") ||
-                firstContainerPathPattern.id ===
-                  "routes/__app/my-project/$projectId/index") &&
-              "hidden"
-            } relative flex 2xl:flex-1  2xl:h-auto 2xl:max-w-[33%]   lg:min-h-[250px]  px-[36px] items-center    z-20 text-slate-500 `}
-            key={firstContainerKey()}
+    <>
+      <AnimatePresence mode="wait">
+        {firstContainerPathPattern.id ===
+          "routes/__app/my-project/$projectId/index" && (
+          <motion.main
+            variants={detailPageContainer}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            key={"profile-detail"}
+            className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible pb-[50px]  "
+          >
+            {outlet}
+          </motion.main>
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {firstContainerPathPattern.id !==
+          "routes/__app/my-project/$projectId/index" && (
+          <motion.main
             variants={container1}
             initial="hidden"
             animate="show"
             exit="exit"
+            key={"main-container"}
+            className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible 2xl:h-auto     px-4 md:px-12  "
           >
-            <div
-              className={`w-full h-full 2xl:h-full min-h-[200px]   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
-            />
-            {changeFirstContainerHandler()}
-          </motion.div>
-        </AnimatePresence>
-        {/* Second Container */}
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            className=" flex relative  flex-1 z-20"
-            key={secondContainerKey()}
-            variants={container2}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-          >
-            <div
-              className={`h-full w-full absolute top-0 left-0 flex -z-10 items-center justify-end ${setContainer2BackGroundHanlder()}`}
-            ></div>
-            {outlet}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </main>
+            <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
+              {/* First Container */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  className={`${
+                    (firstContainerPathPattern.id === "routes/__app/index" ||
+                      firstContainerPathPattern.id === "routes/__app/profile" ||
+                      firstContainerPathPattern.id.includes("auth") ||
+                      firstContainerPathPattern.id ===
+                        "routes/__app/my-project/$projectId/index") &&
+                    "hidden"
+                  } relative flex 2xl:flex-1  2xl:h-auto 2xl:max-w-[33%] py-[24px]   lg:min-h-[250px]  px-[36px] items-center    z-20 text-slate-500 `}
+                  key={firstContainerKey()}
+                  variants={container1}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                >
+                  <div
+                    className={`w-full h-full 2xl:h-full min-h-[200px]   absolute  left-0 -z-10  my-project-bg ${changeFirstContainerBgHandler()}`}
+                  />
+                  {changeFirstContainerHandler()}
+                </motion.div>
+              </AnimatePresence>
+              {/* Second Container */}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  className=" flex relative  py-[24px]   flex-1 z-20"
+                  key={secondContainerKey()}
+                  variants={container2}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                >
+                  <div
+                    className={`h-full w-full absolute top-0 left-0 flex -z-10 items-center justify-end ${setContainer2BackGroundHanlder()}`}
+                  ></div>
+                  {outlet}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.main>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

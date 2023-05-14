@@ -4,6 +4,7 @@ import { Link, useMatches, useParams } from "@remix-run/react";
 import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
 import type { MetaFunction } from "@remix-run/node";
 import Button from "~/components/UI/Button/Button";
+import { motion } from "framer-motion";
 
 const ProjectView = () => {
   const matches = useMatches();
@@ -11,11 +12,20 @@ const ProjectView = () => {
   const projects = matches[0].data.projects;
   const user = matches[0].data.userData;
   const project = projects.find((project: Project) => project.id === projectId);
-
+  const images = [...project.projectFeatureImages]
+    .sort((a, b) => +a.priority - +b.priority)
+    .filter(
+      (image: FeatureImage) =>
+        image.showIn === "detail" || image.showIn === "both"
+    );
   return (
-    <div className=" flex flex-col items-center gap-10 flex-1 justify-center">
-      <div className="flex flex-col  ">
-        <h1 className="text-center flex gap-3">
+    <div className=" flex flex-col items-center gap-10 flex-1 justify-center ">
+      <div className="flex gap-8 w-full flex-col   p-10 bg-indigo-700 text-white">
+        <motion.h1
+          initial={{ y: 200, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}
+          className="text-center flex gap-3 self-center"
+        >
           {project.name}
           {user && (
             <Link to="edit" className=" hover:scale-110 transition-all ">
@@ -29,11 +39,12 @@ const ProjectView = () => {
               </svg>
             </Link>
           )}
-        </h1>
-      </div>
-      <div className="flex gap-8 w-full flex-col flex-1 ">
+        </motion.h1>
         {project.detailedDescription && (
-          <div>
+          <motion.div
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 0.7 } }}
+          >
             <h3 className="font-bold mb-3">About the project</h3>
             <p
               style={{ lineHeight: 2 }}
@@ -42,10 +53,13 @@ const ProjectView = () => {
               }}
               className="  text-sm md:text-lg"
             ></p>
-          </div>
+          </motion.div>
         )}
         {project.technologies.length > 0 && (
-          <div>
+          <motion.div
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 1 } }}
+          >
             <h3 className="font-bold mb-3">Technologies</h3>
             <div className="flex gap-4 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech: Technology) => (
@@ -56,7 +70,7 @@ const ProjectView = () => {
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
         {project.demoLink && (
           <div>
@@ -86,14 +100,7 @@ const ProjectView = () => {
         )}
       </div>
 
-      <ImageWithDescription
-        images={[...project.projectFeatureImages]
-          .sort((a, b) => +a.priority - +b.priority)
-          .filter(
-            (image: FeatureImage) =>
-              image.showIn === "detail" || image.showIn === "both"
-          )}
-      />
+      <ImageWithDescription images={images} />
     </div>
   );
 };
