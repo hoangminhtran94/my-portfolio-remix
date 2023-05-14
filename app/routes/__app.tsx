@@ -167,21 +167,6 @@ const AppLayout = () => {
   // ${setBackGroundImageHanlder()}
   return (
     <main className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible py-[12px] 2xl:h-auto     px-4 md:px-12  ">
-      {/* BackGround */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={setBackGroundKey()}
-          variants={background}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          className={`absolute flex top-0 right-0  w-full h-full overflow-hidden`}
-        >
-          <div className="w-full flex items-center justify-end">
-            {setBackGroundImageHanlder()}
-          </div>
-        </motion.div>
-      </AnimatePresence>
       <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
         {/* First Container */}
         <AnimatePresence mode="wait">
@@ -209,13 +194,16 @@ const AppLayout = () => {
         {/* Second Container */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            className=" flex  flex-1 z-20"
+            className=" flex relative  flex-1 z-20"
             key={secondContainerKey()}
             variants={container2}
             initial="hidden"
             animate="show"
             exit="exit"
           >
+            <div className="w-full  absolute top-0 left-0 flex -z-10 items-center justify-end">
+              {setBackGroundImageHanlder()}
+            </div>
             {outlet}
           </motion.div>
         </AnimatePresence>
