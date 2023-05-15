@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { MetaFunction, json } from "@remix-run/node";
 import stylesheet from "~/tailwind.css";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
@@ -140,5 +140,5 @@ export const loader: LoaderFunction = async ({ request }) => {
     projects = [];
   }
 
-  return { rootUser, userData: user, technologies, projects };
+  return json({ rootUser, userData: user, technologies, projects });
 };

@@ -1,11 +1,10 @@
 import type { FeatureImage } from "./../../../../utils/models/models";
-import { useRef, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+
 const ImageDescription = ({ image }: { image: FeatureImage }) => {
   return (
     <div
       id={image.id}
-      className="flex gap-2  p-5  flex-col justify-center items-center md:items-start lg:flex-row lg:odd:flex-row-reverse "
+      className="flex gap-2 p-5  flex-col justify-center items-center md:items-start lg:flex-row lg:odd:flex-row-reverse "
     >
       <img
         key={image.image}
@@ -14,12 +13,12 @@ const ImageDescription = ({ image }: { image: FeatureImage }) => {
         src={image.image}
         alt="carouselImage"
       />
-      <p
-        className="p-4 flex-1 rounded  text-base  leading-loose"
+      <div
+        className="lg:p-4 flex-1 gap-3 flex flex-col items-center text-justify lg:items-start rounded text-sm  lg:text-base   !leading-[40px]"
         dangerouslySetInnerHTML={{
           __html: image.description.replace(/\n/g, "<br>"),
         }}
-      ></p>
+      ></div>
     </div>
   );
 };

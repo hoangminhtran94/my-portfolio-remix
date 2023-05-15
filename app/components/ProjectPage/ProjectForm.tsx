@@ -61,7 +61,7 @@ const ProjectForm: FC<
       encType: "multipart/form-data",
     });
   };
-  console.log(featureImages);
+
   return (
     <Form
       onSubmit={submitHandler}

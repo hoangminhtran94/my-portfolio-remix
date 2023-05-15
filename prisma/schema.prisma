@@ -40,13 +40,28 @@ model Project {
 }
 
 model FeatureImage {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  priority    String
-  description String
-  image       String
-  showIn      ShowIn
-  Project     Project? @relation(fields: [projectId], references: [id])
-  projectId   String?  @db.ObjectId
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
+  priority          String
+  description       String
+  image             String
+  showIn            ShowIn
+  multiscreenImages MultiScreenImage[]
+  Project           Project?           @relation(fields: [projectId], references: [id])
+  projectId         String?            @db.ObjectId
+}
+
+model MultiScreenImage {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  screen         Screen
+  image          String
+  FeatureImage   FeatureImage? @relation(fields: [featureImageId], references: [id])
+  featureImageId String?       @db.ObjectId
+}
+
+enum Screen {
+  desktop
+  table
+  mobile
 }
 
 model User {

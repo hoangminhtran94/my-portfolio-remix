@@ -4,6 +4,7 @@ import { Link, useMatches, useParams } from "@remix-run/react";
 import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
 import type { MetaFunction } from "@remix-run/node";
 import Button from "~/components/UI/Button/Button";
+
 import { motion } from "framer-motion";
 
 const ProjectView = () => {
@@ -20,7 +21,7 @@ const ProjectView = () => {
     );
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-center ">
-      <div className="flex gap-8 w-full flex-col   p-10 bg-indigo-700 text-white">
+      <div className="flex gap-8 w-full flex-col py-10 px-4  lg:p-10 bg-indigo-700 text-white">
         <motion.h1
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}
@@ -45,13 +46,12 @@ const ProjectView = () => {
             animate={{ y: 0, opacity: 1, transition: { delay: 0.7 } }}
           >
             <h3 className="font-bold mb-3">About the project</h3>
-            <p
-              style={{ lineHeight: 2 }}
+            <div
               dangerouslySetInnerHTML={{
-                __html: project.detailedDescription.replace(/\n/g, "<br>"),
+                __html: project.detailedDescription?.replace(/\n/g, "<br>"),
               }}
-              className="  text-sm md:text-lg"
-            ></p>
+              className=" !leading-[40px] md:!leading-[50px]  text-sm md:text-lg"
+            ></div>
           </motion.div>
         )}
         {project.technologies.length > 0 && (

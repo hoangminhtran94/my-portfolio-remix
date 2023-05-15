@@ -140,6 +140,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const images = imageData.getAll("projectImages");
   const technologyIds = formData.getAll("technologyIds");
 
+  console.log(data);
   const featureImages: {
     image: FormDataEntryValue;
     priority: FormDataEntryValue;
@@ -150,9 +151,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   images.forEach((image, index) => {
     featureImages.push({
       image,
-      priority: data[`priority${index}`],
-      description: data[`description${index}`],
-      showIn: data[`showIn${index}`],
+      priority: data[`priority${index + remainedImageData.length}`],
+      description: data[`description${index + remainedImageData.length}`],
+      showIn: data[`showIn${index + remainedImageData.length}`],
     });
   });
 
