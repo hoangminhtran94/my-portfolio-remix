@@ -8,8 +8,7 @@ const useClickOutside = (
 ) => {
   useEffect(() => {
     const clickHandler = (e: MouseEvent) => {
-      console.log((e.target as HTMLElement).contains(ref.current));
-      if ((e.target as HTMLElement).contains(ref.current)) {
+      if (!ref.current.contains(e.target)) {
         excutingFunction();
       }
     };
