@@ -72,7 +72,10 @@ const ProjectView = () => {
           </motion.div>
         )}
         {project.demoLink && (
-          <div>
+          <motion.div
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 1.1 } }}
+          >
             <h3 className="font-bold">Link</h3>
             <a
               className="text-lg"
@@ -82,10 +85,13 @@ const ProjectView = () => {
             >
               Visit the demo website
             </a>
-          </div>
+          </motion.div>
         )}
         {project.githubLink && (
-          <div>
+          <motion.div
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
+          >
             <h3 className="font-bold">Project respository</h3>
             <a
               className="text-lg"
@@ -95,7 +101,7 @@ const ProjectView = () => {
             >
               Visit the project source code
             </a>
-          </div>
+          </motion.div>
         )}
       </div>
 
