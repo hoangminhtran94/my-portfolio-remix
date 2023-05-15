@@ -1,4 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import LoadingSpinner from "~/components/UI/LoadingSpinner/LoadingSpinner";
 import {
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
@@ -14,7 +15,7 @@ import {
 } from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
 import type { Project } from "~/utils/models/models";
-import { useParams, useMatches } from "@remix-run/react";
+import { useParams, useMatches, useTransition } from "@remix-run/react";
 import {
   deleteImageFromCloudinary,
   uploadImageToCloudinary,
@@ -22,6 +23,7 @@ import {
 
 const EditProject = () => {
   const matches = useMatches();
+  const transition = useTransition();
   const { projectId } = useParams();
   const projects = matches[0].data.projects;
   if (!projects || projects.length === 0) {
@@ -33,7 +35,8 @@ const EditProject = () => {
   }
 
   return (
-    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8">
+    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8 relative">
+      {transition.state !== "idle" && <LoadingSpinner />}
       <h2>Edit Project</h2>
       <ProjectForm project={project} className="flex-1" />
     </div>
@@ -59,7 +62,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
   const { projectId } = params;
   if (!projectId) {
-    throw redirect("/");
+    throw redirect("/auth");
   }
   let project;
   try {
