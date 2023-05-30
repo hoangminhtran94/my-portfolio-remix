@@ -24,7 +24,7 @@ const ProjectForm: FC<
 
   const [featureImages, setFeatureImages] = useState<
     {
-      image: string;
+      image?: string;
       file: File | null;
       priority: string;
       description: string;

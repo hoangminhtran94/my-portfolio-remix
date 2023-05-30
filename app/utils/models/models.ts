@@ -46,8 +46,19 @@ export interface SocialMedia {
 
 export interface FeatureImage {
   id?: string;
-  image: string;
+  image?: string;
+  label?: string;
+  group?: string;
+  multiScreenImages?: MultiScreenImage[];
   priority: string;
   description: string;
   showIn: "carousel" | "detail" | "both";
+}
+
+export interface MultiScreenImage {
+  id?: string;
+  priority: string;
+  label: string;
+  image: string;
+  featureImageId?: string;
 }
