@@ -12,6 +12,7 @@ import { unstable_parseMultipartFormData } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
+import type { FeatureImage } from "~/utils/models/models";
 const NewProject = () => {
   return (
     <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8">
@@ -49,64 +50,62 @@ export const action: ActionFunction = async ({ request }) => {
   const requestClone = request.clone();
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
-  console.log(JSON.parse((data as any).technologyIds));
-  console.log(JSON.parse((data as any).featureImages));
+  const technologyIds = JSON.parse((data as any).technologyIds);
+  const featureImages: (FeatureImage & { name: string })[] = JSON.parse(
+    (data as any).featureImages
+  );
 
-  return null;
-  // const uploadHandler = unstable_composeUploadHandlers(
-  //   // our custom upload handler
-  //   async ({ name, contentType, data, filename }) => {
-  //     if (name !== "projectImages") {
-  //       return undefined;
-  //     }
-  //     const uploadedImage = await uploadImageToCloudinary(
-  //       data,
-  //       "projectImages"
-  //     );
-  //     return uploadedImage?.secure_url;
-  //   },
-  //   // fallback to memory for everything else
-  //   unstable_createMemoryUploadHandler()
-  // );
+  featureImages.map(async (featureImage) => {
+    const cloned = requestClone.clone();
+    const uploadHandler = unstable_composeUploadHandlers(
+      // our custom upload handler
+      async ({ name, contentType, data, filename }) => {
+        if (name !== featureImage.name) {
+          return undefined;
+        }
+        const uploadedImage = await uploadImageToCloudinary(
+          data,
+          "projectImages"
+        );
+        return uploadedImage?.secure_url;
+      },
+      // fallback to memory for everything else
+      unstable_createMemoryUploadHandler()
+    );
+    const imageData = await unstable_parseMultipartFormData(
+      cloned,
+      uploadHandler
+    );
+    const images = imageData.getAll(featureImage.name);
+    const uploadedMultiscreenImages = featureImage.multiScreenImages?.map(
+      (image, index) => ({ ...image, image: images[index] })
+    );
+    const displayImage =
+      featureImage.multiScreenImages!.length > 1
+        ? [...featureImage.multiScreenImages!].sort((a, b) => +a - +b)[0].image
+        : featureImage.multiScreenImages![0].image;
+    return {
+      ...featureImage,
+      image: displayImage,
+      multiScreenImages: uploadedMultiscreenImages,
+    };
+  });
 
-  // const imageData = await unstable_parseMultipartFormData(
-  //   requestClone,
-  //   uploadHandler
-  // );
-  // const images = imageData.getAll("projectImages");
+  const carouselImages = featureImages
+    .filter((img) => img.showIn === "carousel" || img.showIn === "both")
+    .map((img) => img.image);
 
-  // const featureImages: {
-  //   image: FormDataEntryValue;
-  //   priority: FormDataEntryValue;
-  //   description: FormDataEntryValue;
-  //   showIn: FormDataEntryValue;
-  // }[] = [];
+  const databaseData = {
+    ...data,
+    projectImages: carouselImages,
+    projectFeatureImages: featureImages,
+    technologyIds,
+  };
 
-  // images.forEach((image, index) => {
-  //   featureImages.push({
-  //     image,
-  //     priority: data[`priority${index}`],
-  //     description: data[`description${index}`],
-  //     showIn: data[`showIn${index}`],
-  //   });
-  // });
-  // const carouselImages = featureImages
-  //   .filter((img) => img.showIn === "carousel" || img.showIn === "both")
-  //   .map((img) => img.image);
-
-  // const technologyIds = formData.getAll("technologyIds");
-  // const databaseData = {
-  //   ...data,
-  //   projectImages: carouselImages,
-  //   projectFeatureImages: featureImages,
-  //   technologyIds,
-  // };
-
-  // try {
-  //   await createProject(databaseData, user.id!);
-  //   return redirect("/my-project");
-  // } catch (error) {
-  //   return error;
-  // }
+  try {
+    await createProject(databaseData, user.id!);
+    return redirect("/my-project");
+  } catch (error) {
+    return error;
+  }
 };

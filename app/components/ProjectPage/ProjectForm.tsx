@@ -42,6 +42,11 @@ const ProjectForm: FC<
       ...fti,
       name: fti.label!.replace(/ /g, "").toLocaleLowerCase(),
     }));
+    featureImagesWithNames.forEach((group) => {
+      group.multiScreenImages?.forEach((image) => {
+        formData.append(group.name, image.file ?? "N/A");
+      });
+    });
     formData.append("featureImages", JSON.stringify(featureImagesWithNames));
 
     fetcher.submit(formData, {
