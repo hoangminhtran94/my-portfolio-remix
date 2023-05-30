@@ -47,61 +47,66 @@ export const action: ActionFunction = async ({ request }) => {
     throw redirect("/auth");
   }
   const requestClone = request.clone();
-  const uploadHandler = unstable_composeUploadHandlers(
-    // our custom upload handler
-    async ({ name, contentType, data, filename }) => {
-      if (name !== "projectImages") {
-        return undefined;
-      }
-      const uploadedImage = await uploadImageToCloudinary(
-        data,
-        "projectImages"
-      );
-      return uploadedImage?.secure_url;
-    },
-    // fallback to memory for everything else
-    unstable_createMemoryUploadHandler()
-  );
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+  console.log(data);
+  console.log(JSON.parse((data as any).technologyIds));
+  console.log(JSON.parse((data as any).featureImages));
 
-  const imageData = await unstable_parseMultipartFormData(
-    requestClone,
-    uploadHandler
-  );
-  const images = imageData.getAll("projectImages");
+  return null;
+  // const uploadHandler = unstable_composeUploadHandlers(
+  //   // our custom upload handler
+  //   async ({ name, contentType, data, filename }) => {
+  //     if (name !== "projectImages") {
+  //       return undefined;
+  //     }
+  //     const uploadedImage = await uploadImageToCloudinary(
+  //       data,
+  //       "projectImages"
+  //     );
+  //     return uploadedImage?.secure_url;
+  //   },
+  //   // fallback to memory for everything else
+  //   unstable_createMemoryUploadHandler()
+  // );
 
-  const featureImages: {
-    image: FormDataEntryValue;
-    priority: FormDataEntryValue;
-    description: FormDataEntryValue;
-    showIn: FormDataEntryValue;
-  }[] = [];
+  // const imageData = await unstable_parseMultipartFormData(
+  //   requestClone,
+  //   uploadHandler
+  // );
+  // const images = imageData.getAll("projectImages");
 
-  images.forEach((image, index) => {
-    featureImages.push({
-      image,
-      priority: data[`priority${index}`],
-      description: data[`description${index}`],
-      showIn: data[`showIn${index}`],
-    });
-  });
-  const carouselImages = featureImages
-    .filter((img) => img.showIn === "carousel" || img.showIn === "both")
-    .map((img) => img.image);
+  // const featureImages: {
+  //   image: FormDataEntryValue;
+  //   priority: FormDataEntryValue;
+  //   description: FormDataEntryValue;
+  //   showIn: FormDataEntryValue;
+  // }[] = [];
 
-  const technologyIds = formData.getAll("technologyIds");
-  const databaseData = {
-    ...data,
-    projectImages: carouselImages,
-    projectFeatureImages: featureImages,
-    technologyIds,
-  };
+  // images.forEach((image, index) => {
+  //   featureImages.push({
+  //     image,
+  //     priority: data[`priority${index}`],
+  //     description: data[`description${index}`],
+  //     showIn: data[`showIn${index}`],
+  //   });
+  // });
+  // const carouselImages = featureImages
+  //   .filter((img) => img.showIn === "carousel" || img.showIn === "both")
+  //   .map((img) => img.image);
 
-  try {
-    await createProject(databaseData, user.id!);
-    return redirect("/my-project");
-  } catch (error) {
-    return error;
-  }
+  // const technologyIds = formData.getAll("technologyIds");
+  // const databaseData = {
+  //   ...data,
+  //   projectImages: carouselImages,
+  //   projectFeatureImages: featureImages,
+  //   technologyIds,
+  // };
+
+  // try {
+  //   await createProject(databaseData, user.id!);
+  //   return redirect("/my-project");
+  // } catch (error) {
+  //   return error;
+  // }
 };

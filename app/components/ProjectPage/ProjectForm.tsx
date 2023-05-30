@@ -9,7 +9,7 @@ import type { FormProps } from "@remix-run/react";
 import InputDropdown from "../UI/InputDropdown/InputDropdown";
 import type { ComponentPropsWithoutRef, FC } from "react";
 import { useState } from "react";
-import type { Project, Technology } from "~/utils/models/models";
+import type { FeatureImage, Project, Technology } from "~/utils/models/models";
 import FeatureImageInput from "../UI/FeatureImageInput/FeatureImageInput";
 
 const ProjectForm: FC<
@@ -22,15 +22,7 @@ const ProjectForm: FC<
     Technology[]
   >([]);
 
-  const [featureImages, setFeatureImages] = useState<
-    {
-      image?: string;
-      file: File | null;
-      priority: string;
-      description: string;
-      showIn: "carousel" | "detail" | "both";
-    }[]
-  >(
+  const [featureImages, setFeatureImages] = useState<FeatureImage[]>(
     props.project
       ? props.project.projectFeatureImages.map((image) => ({
           ...image,
@@ -43,18 +35,14 @@ const ProjectForm: FC<
   const submitHandler = (event: FormEvent) => {
     const formData = new FormData(event.target as HTMLFormElement);
     if (selectedTechonologies.length > 0) {
-      selectedTechonologies.forEach((tech) =>
-        formData.append("technologyIds", tech.id)
-      );
+      const technologiesIds = selectedTechonologies.map((tech) => tech.id);
+      formData.append("technologyIds", JSON.stringify(technologiesIds));
     }
-    featureImages.forEach((image) => {
-      if (image.file) {
-        formData.append("projectImages", image.file);
-      } else {
-        const { file, ...rest } = image;
-        formData.append("projectImageArray", JSON.stringify(rest));
-      }
-    });
+    const featureImagesWithNames = featureImages.map((fti) => ({
+      ...fti,
+      name: fti.label!.replace(/ /g, "").toLocaleLowerCase(),
+    }));
+    formData.append("featureImages", JSON.stringify(featureImagesWithNames));
 
     fetcher.submit(formData, {
       method: "post",

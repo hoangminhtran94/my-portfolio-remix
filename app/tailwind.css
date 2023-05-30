@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input {
+    @apply rounded border-solid border p-2 h-[35px] border-slate-200 focus:outline-slate-400;
+  }
+  .btn-alert {
+    @apply !bg-red-300 !border-red-400 hover:!bg-red-200;
+  }
+}

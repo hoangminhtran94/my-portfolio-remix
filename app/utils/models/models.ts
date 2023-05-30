@@ -57,6 +57,7 @@ export interface FeatureImage {
 
 export interface MultiScreenImage {
   id?: string;
+  file?: File | null;
   priority: string;
   label: string;
   image: string;

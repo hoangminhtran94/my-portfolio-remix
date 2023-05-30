@@ -1,32 +1,20 @@
 import type { FC, ChangeEvent } from "react";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ComponentPropsWithoutRef } from "react";
-import TextArea from "../TextArea/TextArea";
 import Button from "../Button/Button";
-import type { FeatureImage } from "~/utils/models/models";
+import type { FeatureImage, MultiScreenImage } from "~/utils/models/models";
 import ImageItemInput from "../ImageItemInput/ImageItemInput";
 interface FeatureImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   defaultImages?: FeatureImage[];
-  getImages?: (
-    image: {
-      image?: string;
-      file: File | null;
-      priority: string;
-      description: string;
-      showIn: "carousel" | "detail" | "both";
-    }[]
-  ) => void;
+  getImages?: (image: FeatureImage[]) => void;
 }
 const FeatureImageInput: FC<FeatureImageInputProps> = ({
   label,
   defaultImages = [],
   getImages,
-  ...otherProps
 }) => {
-  const [images, setImages] = useState<FeatureImage[]>(
-    defaultImages.map((image) => ({ ...image, file: null }))
-  );
+  const [images, setImages] = useState<FeatureImage[]>(defaultImages);
 
   const priorityChangeHandler = (
     e: ChangeEvent<HTMLSelectElement>,
@@ -78,7 +66,7 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
       return copied;
     });
   };
-  const deleteImageHandler = (index: number) => {
+  const deleteImageGroupHandler = (index: number) => {
     setImages((prev) => {
       const images = [...prev];
       images.splice(index, 1);
@@ -86,33 +74,70 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
     });
   };
 
-  // useEffect(() => {
-  //   if (getImages) {
-  //     getImages(images);
-  //   }
-  // }, [images]);
-
-  const addNewImageHandler = () => {
+  useEffect(() => {
+    if (getImages) {
+      getImages(images);
+    }
+  }, [images]);
+  const addNewImageHandler = (newImages: MultiScreenImage[], index: number) => {
     setImages((prev) => {
       const copied = [...prev];
-      copied.push({
+      const oldImagesState = copied[index].multiScreenImages;
+      copied[index].multiScreenImages = [...oldImagesState!, ...newImages];
+      return copied;
+    });
+  };
+
+  const addNewImageGroupHandler = () => {
+    setImages((prev) => [
+      ...prev,
+      {
         image: "",
         multiScreenImages: [],
         label: "",
         priority: "1",
         description: "",
         showIn: "both",
-      });
+      },
+    ]);
+  };
+  const eachImageDataChangeHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number,
+    imageIndex: number
+  ) => {
+    setImages((prev) => {
+      const copied = [...prev];
+      const currentImageGroup = copied[index];
+      const currentImage = currentImageGroup.multiScreenImages![imageIndex];
+      (currentImage as any)[e.target.name] = e.target.value;
       return copied;
     });
   };
+  const deleteIndivisualImage = (index: number, imageIndex: number) => {
+    setImages((prev) => {
+      const copied = [...prev];
+      const currentImageGroup = copied[index];
+      const currentImages = currentImageGroup.multiScreenImages;
+      currentImages?.splice(imageIndex, 1);
+      return copied;
+    });
+  };
+  const groupLabelChangeHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setImages((prev) => {
+      const copied = [...prev];
+      const currentImageGroup = copied[index];
+      currentImageGroup.label = e.target.value;
+      return copied;
+    });
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor="image-input">{label}</label>
-      <Button type="button" onClick={addNewImageHandler}>
-        Add new image
-      </Button>
-
       <div className="flex flex-col lg:justify-start justify-center gap-3">
         {images.length > 0 &&
           [...images].map((image, index) => (
@@ -135,12 +160,27 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
               onDescriptionBlur={(e) => {
                 descriptionBlurHandler(e, index);
               }}
-              onDeleteImage={() => {
-                deleteImageHandler(index);
+              onGroupLabelChange={(e) => {
+                groupLabelChangeHandler(e, index);
+              }}
+              onDeleteImageGroup={() => {
+                deleteImageGroupHandler(index);
+              }}
+              onAddNewImages={(newImages) => {
+                addNewImageHandler(newImages, index);
+              }}
+              onEachImageDataChange={(e, imageIndex) => {
+                eachImageDataChangeHandler(e, index, imageIndex);
+              }}
+              onDeleteImage={(imageIndex) => {
+                deleteIndivisualImage(index, imageIndex);
               }}
             />
           ))}
       </div>
+      <Button className="mt-5" type="button" onClick={addNewImageGroupHandler}>
+        Add new image group
+      </Button>
     </div>
   );
 };

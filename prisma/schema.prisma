@@ -44,7 +44,6 @@ model FeatureImage {
   priority          String
   description       String
   image             String?
-  group             String?
   label             String?
   showIn            ShowIn
   multiScreenImages MultiScreenImage[]
