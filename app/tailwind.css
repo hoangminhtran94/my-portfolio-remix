@@ -9,4 +9,7 @@
   .btn-alert {
     @apply !bg-red-300 !border-red-400 hover:!bg-red-200;
   }
+  .btn-success {
+    @apply !bg-green-300 !border-green-400 hover:!bg-green-200;
+  }
 }

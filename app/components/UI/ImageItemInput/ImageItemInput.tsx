@@ -11,6 +11,7 @@ import type { FeatureImage, MultiScreenImage } from "~/utils/models/models";
 import TextArea from "../TextArea/TextArea";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import { useFetcher } from "@remix-run/react";
 
 interface ImageItemInputProps {
   image: FeatureImage;
@@ -28,6 +29,7 @@ interface ImageItemInputProps {
   ) => void;
   onDeleteImage: (currentImageIndex: number) => void;
   onGroupLabelChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  editMode: boolean;
 }
 
 const ImageItemInput: FC<ImageItemInputProps> = ({
@@ -43,8 +45,40 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
   onEachImageDataChange,
   onDeleteImage,
   onGroupLabelChange,
+  editMode,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const fetcher = useFetcher();
+  const featureGroupChangeHandler = () => {
+    try {
+      const formdata = new FormData();
+      formdata.append("featureImage", JSON.stringify(image));
+      if (image.multiScreenImages!.length > 0) {
+        image.multiScreenImages?.forEach((img) => {
+          if (img.file) {
+            formdata.append("multiscreenImages", img.file);
+          }
+        });
+      }
+
+      fetcher.submit(formdata, {
+        method: "post",
+        action: `/api/${image.id}/update-feature-image`,
+        encType: "multipart/form-data",
+        preventScrollReset: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteImageGroupHandler = () => {
+    fetcher.submit(null, {
+      method: "post",
+      action: `/api/${image.id}/delete-feature-group`,
+      preventScrollReset: true,
+      replace: true,
+    });
+  };
 
   return (
     <div className="flex flex-col  gap-4 p-2 border-[3px] border-indigo-300">
@@ -57,7 +91,6 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
         <div className="flex flex-col gap-1">
           <label>Group Priority</label>
           <select
-            name={"priority" + itemIndex}
             className="rounded border-solid border p-2 border-slate-200 focus:outline-slate-400"
             defaultValue={defaultPriority}
             onChange={onPriorityChange}
@@ -73,7 +106,6 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
         <div className="flex flex-col gap-1">
           <label>Show in</label>
           <select
-            name={"showIn" + itemIndex}
             className="rounded border-solid border p-2 border-slate-200 focus:outline-slate-400"
             defaultValue={image.showIn ?? "both"}
             onChange={onShowInChange}
@@ -93,10 +125,10 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
                 <div className="flex flex-col">
                   <label>Image Priority</label>
                   <input
+                    name="priority"
                     defaultValue={image.priority}
                     className="input"
                     type="number"
-                    name="priority"
                     onChange={(e) => {
                       onEachImageDataChange(e, index);
                     }}
@@ -105,10 +137,10 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
                 <div className="flex flex-col">
                   <label>Label</label>
                   <input
+                    name="label"
                     defaultValue={image.label}
                     className="input"
                     type="text"
-                    name="label"
                     onChange={(e) => {
                       onEachImageDataChange(e, index);
                     }}
@@ -160,15 +192,38 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
       </div>
 
       <TextArea
-        name={"description" + itemIndex}
         className="w-full h-full flex-1"
         placeholder="Image description"
         defaultValue={image.description}
         onBlur={onDescriptionBlur}
       />
-      <Button className="btn-alert" type="button" onClick={onDeleteImageGroup}>
-        Delete this group
-      </Button>
+      {editMode && image.id && (
+        <>
+          <Button
+            className="btn-success"
+            type="button"
+            onClick={featureGroupChangeHandler}
+          >
+            Edit this group
+          </Button>
+          <Button
+            className="btn-alert"
+            type="button"
+            onClick={deleteImageGroupHandler}
+          >
+            Delete this group
+          </Button>
+        </>
+      )}
+      {(!editMode || !image.id) && (
+        <Button
+          className="btn-alert"
+          type="button"
+          onClick={onDeleteImageGroup}
+        >
+          Delete this group
+        </Button>
+      )}
       <input
         multiple={true}
         ref={inputRef}

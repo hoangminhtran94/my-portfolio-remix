@@ -8,11 +8,13 @@ interface FeatureImageInputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   defaultImages?: FeatureImage[];
   getImages?: (image: FeatureImage[]) => void;
+  editMode: boolean;
 }
 const FeatureImageInput: FC<FeatureImageInputProps> = ({
   label,
   defaultImages = [],
   getImages,
+  editMode,
 }) => {
   const [images, setImages] = useState<FeatureImage[]>(defaultImages);
 
@@ -142,6 +144,7 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
         {images.length > 0 &&
           [...images].map((image, index) => (
             <ImageItemInput
+              editMode={editMode}
               image={image}
               key={image.image}
               itemIndex={index}

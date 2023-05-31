@@ -1,6 +1,5 @@
 import Input from "../UI/Input/Input";
 import TextArea from "../UI/TextArea/TextArea";
-
 import Button from "../UI/Button/Button";
 import { Form } from "@remix-run/react";
 import type { FormEvent } from "react";
@@ -11,12 +10,13 @@ import type { ComponentPropsWithoutRef, FC } from "react";
 import { useState } from "react";
 import type { FeatureImage, Project, Technology } from "~/utils/models/models";
 import FeatureImageInput from "../UI/FeatureImageInput/FeatureImageInput";
+import { v4 } from "uuid";
 
 const ProjectForm: FC<
   FormProps & ComponentPropsWithoutRef<"form"> & { project?: Project }
 > = (props) => {
   const matches = useMatches();
-
+  const editMode = !!props.project;
   const technologies: Technology[] = matches[0].data.technologies;
   const [selectedTechonologies, setSelectedTechnologies] = useState<
     Technology[]
@@ -38,17 +38,19 @@ const ProjectForm: FC<
       const technologiesIds = selectedTechonologies.map((tech) => tech.id);
       formData.append("technologyIds", JSON.stringify(technologiesIds));
     }
-    const featureImagesWithNames = featureImages.map((fti) => ({
-      ...fti,
-      name: fti.label!.replace(/ /g, "").toLocaleLowerCase(),
-    }));
+    const featureImagesWithNames = featureImages
+      .filter((fti) => fti.id === undefined)
+      .map((fti) => ({
+        ...fti,
+        name: v4(),
+      }));
     featureImagesWithNames.forEach((group) => {
       group.multiScreenImages?.forEach((image) => {
         formData.append(group.name, image.file ?? "N/A");
       });
     });
-    formData.append("featureImages", JSON.stringify(featureImagesWithNames));
 
+    formData.append("featureImages", JSON.stringify(featureImagesWithNames));
     fetcher.submit(formData, {
       method: "post",
       encType: "multipart/form-data",
@@ -97,6 +99,7 @@ const ProjectForm: FC<
       />
 
       <FeatureImageInput
+        editMode={editMode}
         defaultImages={featureImages}
         label="Feature images"
         getImages={(images) => {

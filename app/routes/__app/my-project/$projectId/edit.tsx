@@ -9,12 +9,19 @@ import { redirect, unstable_parseMultipartFormData } from "@remix-run/node";
 import ProjectForm from "~/components/ProjectPage/ProjectForm";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import {
+  createFeatureImage,
+  createMultiscreenImage,
   deleteFeatureImage,
+  deleteMultiScreenImage,
   editProject,
   getAProject,
 } from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
-import type { Project } from "~/utils/models/models";
+import type {
+  FeatureImage,
+  MultiScreenImage,
+  Project,
+} from "~/utils/models/models";
 import { useParams, useMatches, useTransition } from "@remix-run/react";
 import {
   deleteImageFromCloudinary,
@@ -55,10 +62,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
+  let user;
   try {
-    await getUserFromSession(request);
+    user = await getUserFromSession(request);
   } catch (error) {
     throw error;
+  }
+  if (!user) {
+    throw redirect("/auth");
   }
   const { projectId } = params;
   if (!projectId) {
@@ -76,103 +87,77 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
 
   const requestClone = request.clone();
-  const uploadHandler = unstable_composeUploadHandlers(
-    // our custom upload handler
-    async ({ name, contentType, data, filename }) => {
-      if (name !== "projectImages") {
-        return undefined;
-      }
-      const uploadedImage = await uploadImageToCloudinary(
-        data,
-        "projectImages"
-      );
-      return uploadedImage?.secure_url;
-    },
-    // fallback to memory for everything else
-    unstable_createMemoryUploadHandler()
-  );
-  const imageData = await unstable_parseMultipartFormData(
-    requestClone,
-    uploadHandler
-  );
-
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  //Get main formdata
-  const { projectImageArray, ...mainFormData } = data;
-  //
-  const remainedImageDataJSON = formData.getAll("projectImageArray");
-  const remainedImageData = remainedImageDataJSON.map((json) =>
-    JSON.parse(json as string)
+  const technologyIds = JSON.parse((data as any).technologyIds);
+  const featureImages: (FeatureImage & { name: string })[] = JSON.parse(
+    (data as any).featureImages
   );
 
-  const deletedImages = project.projectFeatureImages
-    .map((image) => image.image)
-    .filter(
-      (image) => !remainedImageData.map((data) => data.image).includes(image)
+  featureImages.map(async (featureImage) => {
+    const cloned = requestClone.clone();
+    const uploadHandler = unstable_composeUploadHandlers(
+      // our custom upload handler
+      async ({ name, contentType, data, filename }) => {
+        if (name !== featureImage.name) {
+          return undefined;
+        }
+        const uploadedImage = await uploadImageToCloudinary(
+          data,
+          "projectImages"
+        );
+        return uploadedImage?.secure_url;
+      },
+      // fallback to memory for everything else
+      unstable_createMemoryUploadHandler()
     );
-  //Delete Images from cloudinary
-  let deletePromises: Promise<any>[] = [];
+    const imageData = await unstable_parseMultipartFormData(
+      cloned,
+      uploadHandler
+    );
 
-  deletedImages.forEach((deletedImage) =>
-    deletePromises.push(deleteImageFromCloudinary(deletedImage))
-  );
-  try {
-    await Promise.all(deletePromises);
-  } catch (error) {
-    //This error will now stop the process
-    console.log(error);
-  }
+    const images = imageData.getAll(featureImage.name);
+    let newFeatureGroup: any;
+    try {
+      newFeatureGroup = await createFeatureImage({
+        priority: featureImage.priority,
+        description: featureImage.description,
+        showIn: featureImage.showIn,
+        projectId: projectId,
+      });
+    } catch (error) {
+      throw error;
+    }
 
-  //Delete Images from database
-  let deletImageFromDatabasePromises: Promise<any>[] = [];
-  deletedImages.forEach((deletedImage) => {
-    deletImageFromDatabasePromises.push(deleteFeatureImage(deletedImage));
+    if (featureImage.multiScreenImages!.length > 0) {
+      let newImagesPromises: Promise<any>[] = [];
+      featureImage.multiScreenImages!.forEach((img, index) =>
+        newImagesPromises.push(
+          createMultiscreenImage({
+            image: images[index],
+            label: img.label,
+            priority: img.priority,
+            featureImageId: newFeatureGroup.id,
+          })
+        )
+      );
+      try {
+        await Promise.all(newImagesPromises);
+      } catch (error) {}
+    }
   });
-  try {
-    await Promise.all(deletImageFromDatabasePromises);
-  } catch (error) {
-    //Fail to delete image from database will stop this request
-    throw error;
-  }
-
-  //Get images data
-  const images = imageData.getAll("projectImages");
-  const technologyIds = formData.getAll("technologyIds");
-
-  console.log(data);
-  const featureImages: {
-    image: FormDataEntryValue;
-    priority: FormDataEntryValue;
-    description: FormDataEntryValue;
-    showIn: FormDataEntryValue;
-  }[] = [];
-  //Format the image data
-  images.forEach((image, index) => {
-    featureImages.push({
-      image,
-      priority: data[`priority${index + remainedImageData.length}`],
-      description: data[`description${index + remainedImageData.length}`],
-      showIn: data[`showIn${index + remainedImageData.length}`],
-    });
-  });
-
-  //Format remainded images
 
   const databaseData = {
-    ...mainFormData,
+    ...data,
+    id: projectId,
     technologyIds,
   };
+  console.log(databaseData);
 
   try {
-    await editProject(
-      projectId,
-      databaseData,
-      featureImages,
-      remainedImageData
-    );
-    return redirect("/my-project/" + projectId);
+    await editProject(databaseData);
   } catch (error) {
     throw error;
   }
+  return redirect("/my-project");
 };
