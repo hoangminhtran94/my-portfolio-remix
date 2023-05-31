@@ -11,7 +11,10 @@ export const getProjects = async () => {
     projects = await prisma.project.findMany({
       include: {
         technologies: true,
-        projectFeatureImages: { include: { multiScreenImages: true } },
+        projectFeatureImages: {
+          orderBy: { priority: "asc" },
+          include: { multiScreenImages: { orderBy: { priority: "asc" } } },
+        },
       },
     });
   } catch (error) {
@@ -34,7 +37,10 @@ export const getAProject = async (id: string) => {
       where: { id },
       include: {
         technologies: true,
-        projectFeatureImages: { include: { multiScreenImages: true } },
+        projectFeatureImages: {
+          orderBy: { priority: "asc" },
+          include: { multiScreenImages: { orderBy: { priority: "asc" } } },
+        },
       },
     });
   } catch (error) {

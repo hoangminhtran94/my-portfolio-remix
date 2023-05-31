@@ -120,7 +120,10 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
         <h3 className="text-center">Group images</h3>
         <div className=" grid grid-cols-3 gap-2">
           {image.multiScreenImages?.map((image, index) => (
-            <div key={index} className="flex flex-col gap-2 overflow-hidden">
+            <div
+              key={image.image}
+              className="flex flex-col gap-2 overflow-hidden"
+            >
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
                   <label>Image Priority</label>

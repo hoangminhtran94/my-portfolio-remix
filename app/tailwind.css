@@ -12,4 +12,18 @@
   .btn-success {
     @apply !bg-green-300 !border-green-400 hover:!bg-green-200;
   }
+  .carousel-active {
+    @apply relative font-extrabold scale-[115%];
+  }
+}
+.carousel-active::after {
+  content: "";
+  position: absolute;
+  top: 110%;
+  left: 50%; /* Adjust the position of the pseudo-element */
+  transform: translateX(-50%); /* Center the pseudo-element horizontally */
+  width: 80%; /* Set the width of the border */
+  height: 3px; /* Set the height of the border */
+  background-color: #33218d; /* Set the color of the border */
+  border-radius: 5px; /* Set the border radius for the pseudo-element */
 }

@@ -1,24 +1,24 @@
 import type { FeatureImage, Project, Technology } from "~/utils/models/models";
-import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 import { Link, useMatches, useParams } from "@remix-run/react";
 import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
 import type { MetaFunction } from "@remix-run/node";
-import Button from "~/components/UI/Button/Button";
 
 import { motion } from "framer-motion";
+import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
 
 const ProjectView = () => {
   const matches = useMatches();
   const { projectId } = useParams();
-  const projects = matches[0].data.projects;
+  const projects: Project[] = matches[0].data.projects;
   const user = matches[0].data.userData;
   const project = projects.find((project: Project) => project.id === projectId);
-  const images = [...project.projectFeatureImages]
-    .sort((a, b) => +a.priority - +b.priority)
-    .filter(
-      (image: FeatureImage) =>
-        image.showIn === "detail" || image.showIn === "both"
-    );
+  if (!project) {
+    return <div>Not found</div>;
+  }
+  const images = project.projectFeatureImages.filter(
+    (image: FeatureImage) =>
+      image.showIn === "detail" || image.showIn === "both"
+  );
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-start ">
       <div className="flex gap-8 w-full flex-col py-10 px-4  lg:p-10 bg-indigo-700 text-white">
@@ -60,12 +60,12 @@ const ProjectView = () => {
             animate={{ y: 0, opacity: 1, transition: { delay: 1 } }}
           >
             <h3 className="font-bold mb-3">Technologies</h3>
-            <div className="flex gap-4 max-w-full flex-wrap text-lg">
+            <div className="flex gap-10 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech: Technology) => (
-                <ProjectTechnology
+                <TechnologyIcon
+                  className="!w-20 !h-20"
                   key={tech.id}
                   icon={tech.icon}
-                  label={tech.name}
                 />
               ))}
             </div>
