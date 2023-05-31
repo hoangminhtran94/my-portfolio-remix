@@ -4,28 +4,29 @@ import {
   useLocation,
   useNavigate,
   useSearchParams,
+  useFetcher,
 } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import ImageInput from "~/components/UI/ImageInput/ImageInput";
 import Input from "~/components/UI/Input/Input";
+import type { ActionFunction } from "@remix-run/node";
 import {
-  ActionFunction,
   redirect,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
 } from "@remix-run/node";
 import { useOutlet } from "@remix-run/react";
-import {
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData,
-} from "@remix-run/node";
+import { unstable_parseMultipartFormData } from "@remix-run/node";
 import { getUserFromSession, updateUser } from "~/utils/database/auth.server";
 import { AnimatePresence, motion } from "framer-motion";
-import { SocialMedia } from "~/utils/models/models";
+import type { SocialMedia } from "~/utils/models/models";
 import {
   deleteImageFromCloudinary,
   uploadImageToCloudinary,
 } from "~/utils/fileUpload/fileUpload";
+import serverError from "~/utils/models/ServerError";
+import type { FormEvent } from "react";
+import { useState } from "react";
 
 const EditProfile = () => {
   const container1 = {
@@ -42,22 +43,32 @@ const EditProfile = () => {
     },
   };
   const matches = useMatches();
-  const location = useLocation();
+  const fetcher = useFetcher();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const outlet = useOutlet();
   const userData = matches[0].data.userData;
+  const [file, setFile] = useState<File | null>(null);
   const [searchParams] = useSearchParams();
+  const submitHandler = (e: FormEvent) => {
+    const formdata = new FormData(e.target as HTMLFormElement);
+    if (!file) {
+      formdata.delete("profileImage");
+    }
+    fetcher.submit(formdata, {
+      method: "post",
+      encType: "multipart/form-data",
+    });
+  };
 
   return (
     <div className="w-full lg:w-1/2 shadow-md border relative  border-slate-100 p-10 ">
       <h2 className="text-center">Edit Profile</h2>
-      <Form
-        method="post"
-        encType="multipart/form-data"
-        className="flex  flex-col gap-3"
-      >
+      <Form onSubmit={submitHandler} className="flex  flex-col gap-3">
         <ImageInput
+          getImages={(data) => {
+            setFile(data[0].file);
+          }}
           defaultImages={[userData.profileImage]}
           name="profileImage"
           multiple={false}
@@ -168,6 +179,7 @@ export const action: ActionFunction = async ({ request }) => {
       if (name !== "profileImage") {
         return undefined;
       }
+
       const uploadedImage = await uploadImageToCloudinary(data, "profileImage");
       return uploadedImage?.secure_url;
     },

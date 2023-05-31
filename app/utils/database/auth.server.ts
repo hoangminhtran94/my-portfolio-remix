@@ -114,7 +114,7 @@ export const updateUser = async (userId: string, userData: any) => {
   try {
     await prisma.user.update({ where: { id: userId }, data: { ...userData } });
   } catch (error) {
-    throw serverError(500, "Something went wrong");
+    throw error;
   }
 };
 

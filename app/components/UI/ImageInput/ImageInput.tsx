@@ -15,7 +15,6 @@ const ImageInput: FC<ImageInputProps> = ({
   ...otherProps
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [images, setImages] = useState<{ image: string; file: File | null }[]>(
     defaultImages.map((image) => ({ image, file: null }))
   );
