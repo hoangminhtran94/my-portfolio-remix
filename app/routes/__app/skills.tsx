@@ -165,8 +165,8 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async ({ request }) => {
   try {
     return json({
-      frontends: await getTechnologyGroups("645f20b4cc9091850c9182d7"),
-      backends: await getTechnologyGroups("645f20c2cc9091850c9182d8"),
+      frontends: await getTechnologyGroups("frontend"),
+      backends: await getTechnologyGroups("backend"),
     });
   } catch (error) {
     return json({

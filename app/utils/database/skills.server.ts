@@ -116,10 +116,10 @@ export const createTechnologyCategory = async (formdata: any) => {
   }
 };
 
-export const getTechnologyGroups = async (typeId: string) => {
+export const getTechnologyGroups = async (name: string) => {
   try {
     return await prisma.technologyGroup.findMany({
-      where: { category: { technologyTypeId: typeId } },
+      where: { category: { type: { name: name } } },
       include: { technologies: true, category: true },
     });
   } catch (error) {
