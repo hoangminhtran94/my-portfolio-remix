@@ -1,4 +1,4 @@
-import { useOutlet } from "@remix-run/react";
+import { useLoaderData, useOutlet } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "@remix-run/react";
@@ -8,8 +8,10 @@ import { getTechnologyGroups } from "~/utils/database/skills.server";
 
 const MySkillsLayout = () => {
   const navigate = useNavigate();
+  const data = useLoaderData();
   const outlet = useOutlet();
   const { pathname } = useLocation();
+  console.log(data);
   const frontEnd = {
     hidden: { x: -100, opacity: 0 },
     show: {

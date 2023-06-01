@@ -120,6 +120,7 @@ export const getTechnologyGroups = async (name: string) => {
   try {
     return await prisma.technologyGroup.findMany({
       where: { category: { type: { name: name } } },
+      orderBy: { priority: "asc" },
       include: { technologies: true, category: true },
     });
   } catch (error) {
