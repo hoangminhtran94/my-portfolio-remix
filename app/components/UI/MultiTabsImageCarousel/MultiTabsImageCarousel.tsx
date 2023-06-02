@@ -2,7 +2,8 @@ import type { MultiScreenImage } from "~/utils/models/models";
 import type { FC } from "react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-interface NavigationImageCarouselProps {
+import ViewImageModal from "../ViewImageModal/ViewImageModal";
+interface MultiTabsImageCarouselProps {
   images: MultiScreenImage[];
 }
 const carouselFade = {
@@ -10,10 +11,11 @@ const carouselFade = {
   animate: { opacity: 1, transition: { duration: 0.3 } },
   exit: { opacity: 0.3, transition: { duration: 0.3 } },
 };
-const NavigationImageCarousel: FC<NavigationImageCarouselProps> = ({
+const MultiTabsImageCarousel: FC<MultiTabsImageCarouselProps> = ({
   images,
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [toogleViewImage, setToggleViewImage] = useState(false);
   return (
     <div className="flex flex-col gap-7 w-full lg:w-[800px] ">
       <div className="flex gap-10 justify-center flex-wrap">
@@ -31,7 +33,15 @@ const NavigationImageCarousel: FC<NavigationImageCarouselProps> = ({
           </span>
         ))}
       </div>
-      <div className="h-[400px] lg:h-[600px] flex justify-center">
+      <div className="h-[400px] lg:h-[600px] flex justify-center relative">
+        <div className="absolute top-[2.5%] w-full flex justify-center z-10">
+          <span
+            className="flex gap-3 text-slate-50 text-shadow items-center hover:scale-110 transition-all cursor-pointer shadow-sm bg-[rgba(255,255,255,0.1)] backdrop-blur-sm  p-3 rounded-full "
+            onClick={() => setToggleViewImage(true)}
+          >
+            View image
+          </span>
+        </div>
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             variants={carouselFade}
@@ -45,8 +55,19 @@ const NavigationImageCarousel: FC<NavigationImageCarouselProps> = ({
           />
         </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {toogleViewImage && (
+          <ViewImageModal
+            toggle={toogleViewImage}
+            onCancel={() => {
+              setToggleViewImage(false);
+            }}
+            image={images[currentImage]?.image}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-export default NavigationImageCarousel;
+export default MultiTabsImageCarousel;

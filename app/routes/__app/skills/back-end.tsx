@@ -6,6 +6,7 @@ const BackEndShowCase: React.FC = () => {
   const navigate = useNavigate();
   const matches = useMatches();
   const data = matches[2].data;
+  console.log(data);
 
   return (
     <div className="fixed w-[100vw] h-[100vh] top-0 right-0 flex justify-center items-center ">
