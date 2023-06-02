@@ -13,6 +13,7 @@ module.exports = {
       },
       backgroundColor: {
         modal: "rgba(255, 255, 255, 0.7)",
+        skills: "rgba(255, 255, 255, 0.9)",
       },
       dropShadow: {
         "white-lg": "0 10px 8px rgba(255, 255, 255, 0.8)",

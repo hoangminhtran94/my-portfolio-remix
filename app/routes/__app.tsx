@@ -77,7 +77,6 @@ const AppLayout = () => {
       return "profile-2-bg";
     }
   };
-
   // const setBackGroundKey = () => {
   //   if (firstContainerPathPattern.id.includes("home")) {
   //     return "main-screen-background";
@@ -183,7 +182,7 @@ const AppLayout = () => {
           </motion.main>
         )}
       </AnimatePresence>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {firstContainerPathPattern.id !==
           "routes/__app/my-project/$projectId/index" && (
           <motion.main
@@ -196,7 +195,10 @@ const AppLayout = () => {
           >
             <div className="flex 2xl:flex-row flex-1 flex-col container  mx-auto ">
               {/* First Container */}
-              <AnimatePresence mode="wait">
+              <AnimatePresence
+                mode="wait"
+                initial={matches[3]?.pathname.includes("-end") ? false : true}
+              >
                 <motion.div
                   className={`${
                     (firstContainerPathPattern.id === "routes/__app/index" ||
@@ -219,7 +221,10 @@ const AppLayout = () => {
                 </motion.div>
               </AnimatePresence>
               {/* Second Container */}
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence
+                mode="wait"
+                initial={matches[3]?.pathname.includes("-end") ? false : true}
+              >
                 <motion.div
                   className=" flex relative py-[24px]  2xl:py-[80px]   flex-1 z-20"
                   key={secondContainerKey()}

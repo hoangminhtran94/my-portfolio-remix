@@ -137,7 +137,7 @@ const MySkillsLayout = () => {
         </span>
         <h2 className="frost-text z-10 text-[40px] ">Back-end</h2>
       </div>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           className={` fixed w-screen h-screen top-0 left-0 ${
             pathname === "/skills/front-end" || pathname === "/skills/back-end"
