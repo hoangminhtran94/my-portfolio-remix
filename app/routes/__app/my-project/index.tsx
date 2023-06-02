@@ -69,7 +69,7 @@ const MyProject = () => {
   }, [setSearchParams, toggleFilterMode, toggleMode]);
 
   return (
-    <div className="w-full flex-1 flex flex-col gap-6 ">
+    <div className="w-full flex-1 min-h-[800px] justify-center flex flex-col gap-6 ">
       {pathname === "/my-project" && rootData.userData && (
         <div className="flex gap-3 top-full">
           <Link

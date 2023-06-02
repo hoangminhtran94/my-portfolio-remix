@@ -256,12 +256,13 @@ a.active {
   color: white;
   font-size: 36px;
   font-weight: 900;
+  opacity: 1 !important;
 }
 @media (min-width: 1024px) {
   a.active {
-    color: #8a92db;
     font-size: x-large;
     font-weight: 800;
+    opacity: 1 !important;
   }
 }
 *::-webkit-scrollbar {
@@ -317,11 +318,6 @@ a.active {
   }
   h4 {
     font-size: 20px;
-  }
-}
-@media (min-width: 1024px) {
-  a.active {
-    font-size: large;
   }
 }
 

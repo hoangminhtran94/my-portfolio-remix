@@ -21,7 +21,7 @@ const ProjectView = () => {
   );
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 justify-start ">
-      <div className="flex gap-8 w-full flex-col py-10 px-4  lg:p-10 bg-indigo-700 text-white">
+      <div className="flex gap-8 w-full flex-col py-10 px-4  lg:p-10 endless-river text-white">
         <motion.h1
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}

@@ -192,7 +192,7 @@ const AppLayout = () => {
             animate="show"
             exit="exit"
             key={"main-container"}
-            className="flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible 2xl:h-auto     px-4 md:px-12  "
+            className=" flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible 2xl:h-auto     px-4 md:px-12  "
           >
             <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
               {/* First Container */}
