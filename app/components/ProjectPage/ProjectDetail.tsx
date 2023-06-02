@@ -64,18 +64,30 @@ const ProjectDetail: FC<{
             </div>
           </div>
         )}
-        {project.githubLink ? (
+        {project.githubLink || project.secondGitHubLink ? (
           <div className="flex flex-col gap-3">
             <h3 className="font-bold">Project respository</h3>
-            <div className="text-lg hover:scale-110 transition-all w-fit hover:translate-x-2">
-              <a
-                className=" text-sm md:text-base"
-                href={project.githubLink}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Visit the project source code
-              </a>
+            <div className="text-lg grid grid-cols-1  md:grid-cols-2  w-fit ">
+              {project.githubLink && (
+                <a
+                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  href={project.githubLink}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Visit the project source code
+                </a>
+              )}
+              {project.secondGitHubLink && (
+                <a
+                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  href={project.secondGitHubLink}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Visit the project source code (backend)
+                </a>
+              )}
             </div>
           </div>
         ) : (

@@ -87,20 +87,34 @@ const ProjectView = () => {
             </a>
           </motion.div>
         )}
-        {project.githubLink && (
+        {(project.githubLink || project.secondGitHubLink) && (
           <motion.div
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
           >
             <h3 className="font-bold">Project respository</h3>
-            <a
-              className="text-lg"
-              href={project.githubLink}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Visit the project source code
-            </a>
+            <div className="text-lg grid grid-cols-2  w-fit mt-3 ">
+              {project.githubLink && (
+                <a
+                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  href={project.githubLink}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  View project source code
+                </a>
+              )}
+              {project.secondGitHubLink && (
+                <a
+                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  href={project.secondGitHubLink}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  View project source code (backend)
+                </a>
+              )}
+            </div>
           </motion.div>
         )}
       </div>

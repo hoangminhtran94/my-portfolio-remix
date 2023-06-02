@@ -93,6 +93,11 @@ const ProjectForm: FC<
         label="Project Github link"
       />
       <Input
+        defaultValue={props.project?.secondGitHubLink}
+        name="secondGitHubLink"
+        label="Project backend Github link"
+      />
+      <Input
         defaultValue={props.project?.demoLink}
         name="demoLink"
         label="Project demo link"

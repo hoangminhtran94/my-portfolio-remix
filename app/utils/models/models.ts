@@ -15,6 +15,7 @@ export interface Project {
   projectImages: string[];
   projectFeatureImages: FeatureImage[];
   githubLink: string;
+  secondGitHubLink?: string;
   demoLink: string;
   technologies: Technology[];
   technologyIds: string[];
