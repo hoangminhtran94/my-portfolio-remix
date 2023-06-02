@@ -15,7 +15,7 @@ const Switch: FC<SwitchProps> = ({
 }) => {
   return (
     <label
-      className={`relative inline-flex items-center cursor-pointer hover:scale-10 transition-all ${className}`}
+      className={`relative inline-flex items-center cursor-pointer hover:scale-105 transition-all ${className}`}
     >
       <input
         onChange={onChange}

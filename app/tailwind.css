@@ -15,6 +15,39 @@
   .carousel-active {
     @apply relative font-extrabold scale-[115%];
   }
+  .frost {
+    @apply bg-gradient-to-r from-blue-900 to-cyan-500;
+  }
+  .gradient-purple {
+    @apply bg-gradient-to-r from-blue-600 to-violet-600 text-white first:fill-white;
+  }
+  .frost-text {
+    @apply bg-gradient-to-r from-blue-800 to-indigo-900 bg-clip-text text-transparent;
+  }
+  .indigo-violet {
+    @apply bg-gradient-to-r from-blue-500 to-violet-500 text-white;
+  }
+  .gradient-violet {
+    @apply bg-gradient-to-r from-purple-200 to-purple-400;
+  }
+  .gradient-orange {
+    @apply bg-gradient-to-r from-yellow-200 to-amber-500;
+  }
+  .purple-text {
+    @apply bg-gradient-to-r from-purple-500 to-purple-900 bg-clip-text text-transparent;
+  }
+  .blue-text {
+    @apply bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent;
+  }
+  .red-text {
+    @apply bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent;
+  }
+  .green-text {
+    @apply bg-gradient-to-r from-emerald-500 to-emerald-900 bg-clip-text text-transparent;
+  }
+}
+.bg-clip-text {
+  -webkit-background-clip: text;
 }
 .carousel-active::after {
   content: "";

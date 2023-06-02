@@ -12,7 +12,7 @@ const ProjectList: FC<ProjectListProps> = ({ projects, children }) => {
       <label className="text-base md:text-lg font-bold flex gap-5 flex-wrap items-center">
         {children}
       </label>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6  gap-y-3 ">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-x-6  gap-y-6 ">
         {projects.map((project: Project) => (
           <ProjectListItem
             label={project.name}

@@ -5,7 +5,7 @@ const EducationHeader = () => {
   const user = matches[0].data.userData;
   return (
     <div className="w-full">
-      <h1 className="flex gap-3 justify-center ">
+      <h1 className="flex gap-3 justify-center green-text ">
         My skills
         {user && (
           <Link to="/skills/edit" className=" hover:scale-110 transition-all ">

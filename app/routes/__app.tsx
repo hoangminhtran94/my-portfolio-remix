@@ -194,7 +194,7 @@ const AppLayout = () => {
             key={"main-container"}
             className=" flex flex-col flex-1 relative overflow-x-hidden overflow-y-visible 2xl:h-auto     px-4 md:px-12  "
           >
-            <div className="flex 2xl:flex-row flex-1 flex-col container  gap-6 md:gap-14 mx-auto ">
+            <div className="flex 2xl:flex-row flex-1 flex-col container  mx-auto ">
               {/* First Container */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -221,7 +221,7 @@ const AppLayout = () => {
               {/* Second Container */}
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  className=" flex relative  py-[24px]   flex-1 z-20"
+                  className=" flex relative py-[24px]  2xl:py-[80px]   flex-1 z-20"
                   key={secondContainerKey()}
                   variants={container2}
                   initial="hidden"

@@ -62,7 +62,7 @@ const About = () => {
       >
         <Link
           to="/my-project"
-          className=" hover:bg-indigo-200 flex items-center justify-center gap-3  flex-1 hover:z-10   hover:scale-110 bol  transition-all p-3    text-slate-800  relative "
+          className=" hover:gradient-purple flex items-center justify-center gap-3  flex-1 hover:z-10   hover:scale-110 bol  transition-all p-3    text-slate-800  relative "
         >
           See more about my projects
           <svg
@@ -75,7 +75,7 @@ const About = () => {
         </Link>
         <Link
           to="/skills"
-          className="hover:bg-amber-200  flex items-center gap-3 hover:z-10 justify-center  flex-1   hover:scale-110  transition-all p-3    text-slate-800  relative "
+          className="hover:gradient-violet  flex items-center gap-3 hover:z-10 justify-center  flex-1   hover:scale-110  transition-all p-3    text-slate-800  relative "
         >
           See more about my skills
           <svg
@@ -88,7 +88,7 @@ const About = () => {
         </Link>
         <Link
           to="/contact"
-          className="hover:bg-orange-200  flex items-center justify-center gap-3 hover:z-10  flex-1  hover:scale-110  transition-all p-3    text-slate-800  relative "
+          className="hover:gradient-orange  flex items-center justify-center gap-3 hover:z-10  flex-1  hover:scale-110  transition-all p-3    text-slate-800  relative "
         >
           Contact me
           <svg
