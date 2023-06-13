@@ -2,9 +2,9 @@ import type { FeatureImage, Project, Technology } from "~/utils/models/models";
 import { Link, useMatches, useParams } from "@remix-run/react";
 import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
 import type { MetaFunction } from "@remix-run/node";
-
 import { motion } from "framer-motion";
 import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
+import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 
 const ProjectView = () => {
   const matches = useMatches();
@@ -62,9 +62,10 @@ const ProjectView = () => {
             <h3 className="font-bold mb-3">Technologies</h3>
             <div className="flex gap-10 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech: Technology) => (
-                <TechnologyIcon
+                <ProjectTechnology
                   className="!w-20 !h-20"
                   key={tech.id}
+                  label={tech.name}
                   icon={tech.icon}
                 />
               ))}

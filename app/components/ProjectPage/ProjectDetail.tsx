@@ -41,6 +41,7 @@ const ProjectDetail: FC<{
             <div className="flex gap-4 max-w-full flex-wrap text-lg">
               {project.technologies.map((tech) => (
                 <ProjectTechnology
+                  className="!w-5 !h-5 md:!w-8 md:!h-8"
                   key={tech.id}
                   icon={tech.icon}
                   label={tech.name}
