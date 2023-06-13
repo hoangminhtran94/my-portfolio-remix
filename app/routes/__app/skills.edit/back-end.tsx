@@ -174,7 +174,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   try {
-    return json(await getTechnologyGroups("645f20c2cc9091850c9182d8"));
+    return json(await getTechnologyGroups("backend"));
   } catch (error) {
     return [];
   }

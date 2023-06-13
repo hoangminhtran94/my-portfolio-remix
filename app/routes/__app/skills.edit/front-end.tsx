@@ -46,7 +46,7 @@ const FrontEndEditForm = () => {
       priority: data.priority ?? 1,
     }))
   );
-
+  console.log(loaderdata);
   const submitHandler = (e: FormEvent) => {
     const formData = new FormData();
     formData.append("frontendList", JSON.stringify(selectedList));
@@ -173,7 +173,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   try {
-    return json(await getTechnologyGroups("645f20b4cc9091850c9182d7"));
+    return json(await getTechnologyGroups("frontend"));
   } catch (error) {
     return [];
   }
