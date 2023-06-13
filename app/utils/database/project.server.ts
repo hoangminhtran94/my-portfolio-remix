@@ -231,6 +231,13 @@ export const editProject = async (changedData: any) => {
     (id: string) => ({ id: id })
   );
 
+  const disconnections: { id: string }[] = changedData.deleteTechnologyIds.map(
+    (id: string) => ({
+      id: id,
+    })
+  );
+  console.log(disconnections);
+
   try {
     return await prisma.project.update({
       where: { id: changedData.id },
@@ -241,7 +248,7 @@ export const editProject = async (changedData: any) => {
         secondGitHubLink: changedData.secondGitHubLink,
         githubLink: changedData.githubLink,
         demoLink: changedData.demoLink,
-        technologies: { connect: connections },
+        technologies: { connect: connections, disconnect: disconnections },
       },
     });
   } catch (error) {

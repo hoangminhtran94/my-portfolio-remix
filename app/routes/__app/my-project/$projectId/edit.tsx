@@ -146,13 +146,17 @@ export const action: ActionFunction = async ({ request, params }) => {
       } catch (error) {}
     }
   });
+  const oldTechnologyIds = project.technologyIds;
+  const deleteTechnologyIds = oldTechnologyIds.filter(
+    (id) => !technologyIds.includes(id)
+  );
 
   const databaseData = {
     ...data,
     id: projectId,
+    deleteTechnologyIds,
     technologyIds,
   };
-  console.log(databaseData);
 
   try {
     await editProject(databaseData);
