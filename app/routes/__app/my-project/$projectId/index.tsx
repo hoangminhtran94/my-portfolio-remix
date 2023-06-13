@@ -79,7 +79,7 @@ const ProjectView = () => {
           >
             <h3 className="font-bold">Link</h3>
             <a
-              className="text-lg"
+              className="text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
               href={project.demoLink}
               rel="noreferrer"
               target="_blank"
