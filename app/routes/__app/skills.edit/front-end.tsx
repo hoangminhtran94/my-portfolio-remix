@@ -46,7 +46,6 @@ const FrontEndEditForm = () => {
       priority: data.priority ?? 1,
     }))
   );
-  console.log(loaderdata);
   const submitHandler = (e: FormEvent) => {
     const formData = new FormData();
     formData.append("frontendList", JSON.stringify(selectedList));
