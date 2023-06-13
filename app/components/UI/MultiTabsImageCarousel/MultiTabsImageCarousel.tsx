@@ -18,10 +18,10 @@ const MultiTabsImageCarousel: FC<MultiTabsImageCarouselProps> = ({
   const [toogleViewImage, setToggleViewImage] = useState(false);
   return (
     <div className="flex flex-col gap-7 w-full lg:w-[800px] ">
-      <div className="flex gap-10 justify-center flex-wrap">
+      <div className="flex gap-5 justify-center flex-wrap">
         {images.map((img, index) => (
           <span
-            className={`cursor-pointer hover:scale-110 text-lg font-bold transition-all  ${
+            className={`cursor-pointer mx-2 hover:scale-110 text-lg font-bold transition-all  ${
               index === currentImage ? "carousel-active" : " opacity-60"
             }`}
             key={img?.image}
