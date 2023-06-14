@@ -76,16 +76,19 @@ const ProjectView = () => {
           <motion.div
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1.1 } }}
+            className="flex flex-col gap-3"
           >
             <h3 className="font-bold">Link</h3>
-            <a
-              className="text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
-              href={project.demoLink}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Visit the demo website
-            </a>
+            <div className="hover:scale-125  transition-all hover:translate-x-4 w-fit">
+              <a
+                className="text-sm md:text-base "
+                href={project.demoLink}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Visit the demo website
+              </a>
+            </div>
           </motion.div>
         )}
         {(project.githubLink || project.secondGitHubLink) && (
@@ -94,10 +97,10 @@ const ProjectView = () => {
             animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
           >
             <h3 className="font-bold">Project respository</h3>
-            <div className="text-lg grid grid-cols-2  w-fit mt-3 ">
+            <div className="text-lg flex gap-20  w-fit mt-3 ">
               {project.githubLink && (
                 <a
-                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  className=" text-sm md:text-base hover:scale-125  transition-all hover:translate-x-4"
                   href={project.githubLink}
                   rel="noreferrer"
                   target="_blank"
@@ -107,7 +110,7 @@ const ProjectView = () => {
               )}
               {project.secondGitHubLink && (
                 <a
-                  className=" text-sm md:text-base hover:scale-110 transition-all hover:translate-x-2"
+                  className=" text-sm md:text-base hover:scale-125  transition-all hover:translate-x-4"
                   href={project.secondGitHubLink}
                   rel="noreferrer"
                   target="_blank"
