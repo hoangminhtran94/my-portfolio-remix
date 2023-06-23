@@ -45,6 +45,12 @@
   .green-text {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-900 bg-clip-text text-transparent;
   }
+  .white-gradient-text {
+    @apply bg-gradient-to-r from-slate-50 to-slate-300 bg-clip-text text-transparent tracking-wider;
+  }
+  .light-blue-gradient-text {
+    @apply bg-gradient-to-r from-zinc-50 to-indigo-100 bg-clip-text text-transparent tracking-wider;
+  }
 }
 .bg-clip-text {
   -webkit-background-clip: text;

@@ -25,9 +25,9 @@ const ProjectView = () => {
         <motion.h1
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}
-          className="text-center flex gap-3 self-center"
+          className="text-center flex gap-3 self-center white-gradient-text"
         >
-          {project.name}
+          Project: {project.name}
           {user && (
             <Link to="edit" className=" hover:scale-110 transition-all ">
               <svg
@@ -45,24 +45,30 @@ const ProjectView = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 0.7 } }}
           >
-            <h3 className="font-bold mb-3">About the project</h3>
+            <h3 className="font-bold mb-3 text-center white-gradient-text">
+              About the project
+            </h3>
             <div
               dangerouslySetInnerHTML={{
                 __html: project.detailedDescription?.replace(/\n/g, "<br>"),
               }}
-              className=" !leading-[40px] md:!leading-[50px]  text-sm md:text-lg"
+              className=" !leading-[40px] md:!leading-[50px]  text-sm md:text-lg light-blue-gradient-text"
             ></div>
           </motion.div>
         )}
         {project.technologies.length > 0 && (
           <motion.div
+            className="flex flex-col"
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1 } }}
           >
-            <h3 className="font-bold mb-3">Technologies</h3>
-            <div className="flex gap-10 max-w-full flex-wrap text-lg">
+            <h3 className="font-bold mb-3 text-center white-gradient-text">
+              Technologies
+            </h3>
+            <div className="flex gap-10 max-w-full flex-wrap text-lg self-center">
               {project.technologies.map((tech: Technology) => (
                 <ProjectTechnology
+                  containerClassName="flex-col"
                   className="!w-20 !h-20"
                   key={tech.id}
                   label={tech.name}
@@ -76,12 +82,12 @@ const ProjectView = () => {
           <motion.div
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1.1 } }}
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-3 items-center "
           >
-            <h3 className="font-bold">Link</h3>
-            <div className="hover:scale-125  transition-all hover:translate-x-4 w-fit">
+            <h3 className="font-bold white-gradient-text">Demo Website</h3>
+            <div className=" flex transition-all w-fit">
               <a
-                className="text-sm md:text-base "
+                className=" text-sm md:text-base hover:scale-125  transition-all light-blue-gradient-text hover:outline hover:outline-[0.5px] rounded-md p-2 hover:outline-slate-200"
                 href={project.demoLink}
                 rel="noreferrer"
                 target="_blank"
@@ -93,14 +99,17 @@ const ProjectView = () => {
         )}
         {(project.githubLink || project.secondGitHubLink) && (
           <motion.div
+            className="flex flex-col items-center"
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
           >
-            <h3 className="font-bold">Project respository</h3>
+            <h3 className="font-bold white-gradient-text">
+              Project respository
+            </h3>
             <div className="text-lg flex gap-20  w-fit mt-3 ">
               {project.githubLink && (
                 <a
-                  className=" text-sm md:text-base hover:scale-125  transition-all hover:translate-x-4"
+                  className=" text-sm md:text-base hover:scale-125  transition-all light-blue-gradient-text hover:outline hover:outline-[0.5px] rounded-md p-2 hover:outline-slate-200"
                   href={project.githubLink}
                   rel="noreferrer"
                   target="_blank"
@@ -110,7 +119,7 @@ const ProjectView = () => {
               )}
               {project.secondGitHubLink && (
                 <a
-                  className=" text-sm md:text-base hover:scale-125  transition-all hover:translate-x-4"
+                  className=" text-sm md:text-base hover:scale-125  transition-all light-blue-gradient-text hover:outline hover:outline-[0.5px] rounded-md p-2 hover:outline-slate-200"
                   href={project.secondGitHubLink}
                   rel="noreferrer"
                   target="_blank"
