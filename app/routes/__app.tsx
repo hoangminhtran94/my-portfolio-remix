@@ -194,7 +194,7 @@ const AppLayout = () => {
           >
             <div className="flex 2xl:flex-row flex-1 flex-col container  mx-auto ">
               {/* First Container */}
-              <AnimatePresence
+              {/* <AnimatePresence
                 mode="wait"
                 initial={matches[3]?.pathname.includes("-end") ? false : true}
               >
@@ -218,7 +218,7 @@ const AppLayout = () => {
                   />
                   {changeFirstContainerHandler()}
                 </motion.div>
-              </AnimatePresence>
+              </AnimatePresence> */}
               {/* Second Container */}
               <AnimatePresence
                 mode="wait"

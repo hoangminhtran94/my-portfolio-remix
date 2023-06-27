@@ -1,46 +1,7 @@
-import { useOutlet } from "@remix-run/react";
-import { useNavigate } from "@remix-run/react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useLocation } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/react/dist/routeModules";
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { getTechnologyGroups } from "~/utils/database/skills.server";
-
-const MySkillsLayout = () => {
-  const navigate = useNavigate();
-  const outlet = useOutlet();
-  const { pathname } = useLocation();
-  const frontEnd = {
-    hidden: { x: -100, opacity: 0 },
-    show: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
-    exit: {
-      y: 100,
-      opacity: 0,
-
-      transition: { duration: 0.5 },
-    },
-  };
-  const backend = {
-    hidden: { x: 100, opacity: 0 },
-    show: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
-    exit: {
-      y: -100,
-      opacity: 0,
-
-      transition: { duration: 0.5 },
-    },
-  };
+import type { FC } from "react";
+const SkillShowCase: FC = () => {
   return (
-    <div className="flex flex-col  md:flex-row  md:items-center flex-1    gap-14  2xl:gap-[100px]">
+    <div className="flex min-h-[1000px] flex-col  md:flex-row  md:items-center flex-1    gap-14  2xl:gap-[100px]">
       <div className="card flex-1 h-[500px]">
         <div className="imgbox">
           <div className="img"></div>
@@ -52,9 +13,9 @@ const MySkillsLayout = () => {
       </div>
       <div
         className="relative flex-1 md:min-h-[500px]   border border-indigo-100 rounded-lg overflow-hidden shadow-lg  flex justify-center items-center cursor-pointer gap-[16px] transition-all hover:scale-105 lg:hover:scale-[1.1] hover:z-10"
-        onClick={() => {
-          navigate("back-end");
-        }}
+        //   onClick={() => {
+        //     navigate("back-end");
+        //   }}
       >
         <div className=" absolute top-0 right-0 w-full h-full backend-bg  shadow-lg rounded-lg " />
         <span className="z-10">
@@ -110,42 +71,8 @@ const MySkillsLayout = () => {
         </span>
         <h2 className="frost-text z-10 text-[40px] ">Back-end</h2>
       </div>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          className={` fixed w-screen h-screen top-0 left-0 ${
-            pathname === "/skills/front-end" || pathname === "/skills/back-end"
-              ? "z-[889] block"
-              : " hidden "
-          }`}
-          key={pathname + "modal"}
-          variants={pathname === "/skills/front-end" ? frontEnd : backend}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-        >
-          {outlet}
-        </motion.div>
-      </AnimatePresence>
     </div>
   );
 };
 
-export default MySkillsLayout;
-
-export const meta: MetaFunction = () => {
-  return { title: "My Skills" };
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  try {
-    return json({
-      frontends: await getTechnologyGroups("frontend"),
-      backends: await getTechnologyGroups("backend"),
-    });
-  } catch (error) {
-    return json({
-      frontends: [],
-      backends: [],
-    });
-  }
-};
+export default SkillShowCase;
