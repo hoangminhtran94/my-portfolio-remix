@@ -14,6 +14,7 @@ import ProjectListByFrontEnd from "~/components/ProjectPage/ProjectListByFrontEn
 import ProjectListByBackend from "~/components/ProjectPage/ProjectByBackend";
 import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";
+import Contact from "../contact";
 
 const MyProject = () => {
   const loaderData = useLoaderData();
@@ -146,6 +147,8 @@ const MyProject = () => {
       </div>
       {/*Skills*/}
       <SkillShowCase skillsData={loaderData} />
+
+      <Contact />
     </div>
   );
 };
