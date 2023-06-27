@@ -20,7 +20,7 @@ const ProjectView = () => {
       image.showIn === "detail" || image.showIn === "both"
   );
   return (
-    <div className=" flex flex-col items-center gap-10 flex-1 justify-start endless-river ">
+    <div className=" flex flex-col items-center gap-10 flex-1 justify-start  ">
       <div className="flex gap-8 w-full flex-col py-10 px-4  lg:p-10  text-white">
         <motion.h1
           initial={{ y: 200, opacity: 0 }}

@@ -225,7 +225,7 @@ const AppLayout = () => {
                 initial={matches[3]?.pathname.includes("-end") ? false : true}
               >
                 <motion.div
-                  className=" flex relative py-[24px]  2xl:py-[80px]   flex-1 z-20 "
+                  className=" flex relative flex-1 z-20  "
                   key={secondContainerKey()}
                   variants={container2}
                   initial="hidden"

@@ -56,6 +56,11 @@ export interface FeatureImage {
   showIn: "carousel" | "detail" | "both";
 }
 
+export interface TechnologyType {
+  id: string;
+  name: string;
+  TechnologyCategory: TechnologyCategory[];
+}
 export interface MultiScreenImage {
   id?: string;
   file?: File | null;
@@ -63,4 +68,20 @@ export interface MultiScreenImage {
   label: string;
   image: string;
   featureImageId?: string;
+}
+
+export interface TechnologyCategory {
+  id: string;
+  name: string;
+  type: TechnologyType;
+  TechnologyGroup: TechnologyGroup[];
+  technologyTypeId: string;
+}
+export interface TechnologyGroup {
+  id: string;
+  category: TechnologyCategory;
+  priority: number;
+  technologies: Technology[];
+  technologiesIds: string[];
+  technologyCategoryId: string;
 }

@@ -5,7 +5,7 @@ import TechnologyIcon from "../UI/TechnologyIcon/TechnologyIcon";
 
 const ProjectListByFrontEnd: FC<{ projects: Project[] }> = ({ projects }) => {
   return (
-    <div className="flex flex-col gap-10 text-white tracking-widest w-full rounded-md">
+    <div className="flex flex-col items-center gap-10 text-white tracking-widest w-full rounded-md">
       <ProjectList
         projects={projects.filter(
           (project: Project) =>
@@ -14,7 +14,7 @@ const ProjectListByFrontEnd: FC<{ projects: Project[] }> = ({ projects }) => {
             project.technologyIds.includes("645c0cda5ad7b31a88969c08")
         )}
       >
-        React ecosystem:
+        React.js ecosystem:
         <TechnologyIcon
           className="md:!w-[50px] md:!h-[50px]"
           icon="/icons/upload_706028798.svg"

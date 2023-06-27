@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <header
-      className={`relative flex justify-between text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30 ${
+      className={`sticky top-0 flex justify-between text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30 ${
         currentRoute === "routes/__app/my-project/$projectId/index"
           ? "endless-river !text-white"
           : "shore"
