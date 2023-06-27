@@ -69,7 +69,7 @@ const MyProject = () => {
   }, [setSearchParams, toggleFilterMode, toggleMode]);
 
   return (
-    <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6 ">
+    <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6  ">
       {pathname === "/my-project" && rootData.userData && (
         <div className="flex gap-3 top-full">
           <Link
@@ -89,7 +89,7 @@ const MyProject = () => {
       <div className="w-full flex gap-5  justify-end flex-wrap">
         <Switch
           label="View Image"
-          className={`${!toggleMode && "hidden"} lg:hidden`}
+          className={`${!toggleMode && "hidden"} lg:hidden `}
           onChange={() => {
             setToggleViewImage((prev) => !prev);
           }}

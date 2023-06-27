@@ -8,7 +8,7 @@ interface ProjectListItemProps {
 const ProjectListItem: FC<ProjectListItemProps> = ({ label, to }) => {
   return (
     <Link
-      className=" text-center p-4 border rounded border-indigo-300 hover:scale-105 transition-all hover:frost hover:text-white cursor-pointer"
+      className=" text-center p-4 border rounded  border-indigo-300 hover:scale-105 transition-all hover:frost cursor-pointer"
       to={to}
     >
       {label}

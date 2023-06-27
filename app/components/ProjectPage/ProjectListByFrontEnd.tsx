@@ -5,7 +5,7 @@ import TechnologyIcon from "../UI/TechnologyIcon/TechnologyIcon";
 
 const ProjectListByFrontEnd: FC<{ projects: Project[] }> = ({ projects }) => {
   return (
-    <div className="flex flex-col gap-10 text-slate-600 w-full rounded-md">
+    <div className="flex flex-col gap-10 text-white tracking-widest w-full rounded-md">
       <ProjectList
         projects={projects.filter(
           (project: Project) =>

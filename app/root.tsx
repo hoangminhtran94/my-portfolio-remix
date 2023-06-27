@@ -1,6 +1,10 @@
 import { MetaFunction, json } from "@remix-run/node";
 import stylesheet from "~/tailwind.css";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import {
+  isRouteErrorResponse,
+  useMatches,
+  useRouteError,
+} from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import {
   Links,
@@ -25,13 +29,21 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const matches = useMatches();
+  const firstContainerPathPattern = matches[2];
+  const inProjectDetail =
+    firstContainerPathPattern.id === "routes/__app/my-project/$projectId/index";
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-slate-50 flex flex-col ">
+      <body
+        className={`min-h-screen bg-slate-50 flex flex-col ${
+          inProjectDetail ? "endless-river" : "shore"
+        } `}
+      >
         <div id="modal-hook"></div>
         <NavBar />
         <Outlet />
