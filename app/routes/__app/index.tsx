@@ -1,25 +1,46 @@
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
-import { useCallback } from "react";
-import type { Container, Engine } from "tsparticles-engine";
-import Particles from "react-particles";
-//import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
-import { loadSlim } from "tsparticles-slim";
+import { useLoaderData, useMatches } from "@remix-run/react";
+import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
+import ProjectList from "~/components/ProjectPage/ProjectListByFrontEnd";
 
-const WelcomePage = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    let timeout = setTimeout(() => {
-      navigate("/about");
-    }, 2000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [navigate]);
+import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
+import { getTechnologyGroups } from "~/utils/database/skills.server";
+import Contact from "./contact";
+import About from "~/components/About/About";
+
+const MyProject = () => {
+  const loaderData = useLoaderData();
+  const matches = useMatches();
+  const rootData = matches[0].data;
+  const projects = rootData.projects;
+
   return (
-    <div className="w-full self-center flex items-center h-[500px]">
-      <h1 className="text-center w-full"> Welcome to my website</h1>
+    <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">
+      <About />
+
+      <ProjectList projects={projects} />
+
+      <SkillShowCase skillsData={loaderData} />
+
+      <Contact />
     </div>
   );
 };
-export default WelcomePage;
+export default MyProject;
+
+export const meta: MetaFunction = () => {
+  return { title: "My Projects" };
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  try {
+    return json({
+      frontends: await getTechnologyGroups("frontend"),
+      backends: await getTechnologyGroups("backend"),
+    });
+  } catch (error) {
+    return json({
+      frontends: [],
+      backends: [],
+    });
+  }
+};

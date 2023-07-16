@@ -15,6 +15,7 @@ import ProjectListByBackend from "~/components/ProjectPage/ProjectByBackend";
 import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";
 import Contact from "../contact";
+import About from "~/components/About/About";
 
 const MyProject = () => {
   const loaderData = useLoaderData();
@@ -77,7 +78,7 @@ const MyProject = () => {
 
   return (
     <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">
-      {pathname === "/my-project" && rootData.userData && (
+      {/* {pathname === "/my-project" && rootData.userData && (
         <div className="flex gap-3 top-full">
           <Link
             className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
@@ -92,60 +93,11 @@ const MyProject = () => {
             Technology <span className=" text-3xl">+</span>
           </Link>
         </div>
-      )}
-      {/* <div className="w-full flex gap-5 py-4 justify-end flex-wrap">
-        <Switch
-          label="View Image"
-          className={`${!toggleMode && "hidden"} lg:hidden `}
-          onChange={() => {
-            setToggleViewImage((prev) => !prev);
-          }}
-          defaultChecked={false}
-        />
-        <Switch
-          className={toggleMode ? "!hidden" : ""}
-          label={
-            toggleFilterMode
-              ? "View by back-end technologies"
-              : "View by front-end technologies"
-          }
-          onChange={() => {
-            setToggleFilterMode((prev) => {
-              return !prev;
-            });
-          }}
-          defaultChecked={toggleFilterMode}
-        />
-        <Switch
-          label={toggleMode ? "View by carousel" : "View by list"}
-          onChange={() => {
-            setToggleMode((prev) => {
-              return !prev;
-            });
-          }}
-          defaultChecked={toggleMode}
-        />
-      </div> */}
+      )} */}
+      <About />
 
-      {/* <div
-        className={`${
-          !toggleMode && "hidden"
-        } flex-1  flex  text-slate-600 w-full rounded-md`}
-      >
-        <ProjectCarousel
-          toggleViewImage={toogleViewImage}
-          projects={projects}
-        />
-      </div> */}
       <ProjectList projects={projects} />
-      {/* <div  >
-        {!toggleFilterMode ? (
-       
-        ) : (
-          <ProjectListByBackend projects={projects} />
-        )}
-      </div> */}
-      {/*Skills*/}
+
       <SkillShowCase skillsData={loaderData} />
 
       <Contact />

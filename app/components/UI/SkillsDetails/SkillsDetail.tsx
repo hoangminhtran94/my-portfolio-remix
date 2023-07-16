@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useRef, useEffect, useState } from "react";
 import TechnologyIcon from "../TechnologyIcon/TechnologyIcon";
 import type { TechnologyGroup } from "~/utils/models/models";
-
+import { useInView } from "framer-motion";
 interface SkillsDetailProps {
   skillGroups: TechnologyGroup[];
   header: string;
@@ -11,6 +11,7 @@ interface SkillsDetailProps {
 
 const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
   const [height, setHeight] = useState<number | undefined>();
   useEffect(() => {
     const resizeListener = () => {
@@ -23,7 +24,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
     };
   }, []);
   return (
-    <div style={{ height }} className="box-hover noselect">
+    <div ref={ref} style={{ height }} className="box-hover noselect">
       <div className="box-hover-canvas">
         <div className="tracker tr-1"></div>
         <div className="tracker tr-2"></div>
@@ -59,11 +60,14 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
             <h2>{header}</h2>
             {skillGroups && skillGroups.length > 0 ? (
               skillGroups.map((data: any, index: number) => (
-                <motion.div
+                <div
                   key={data.id}
-                  initial={{ opacity: 0, translateX: -100 }}
-                  animate={{ opacity: 1, translateX: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 * data.priority }}
+                  style={{
+                    transform: isInView ? "none" : "translateX(-200px)",
+                    opacity: isInView ? 1 : 0,
+                    transition:
+                      "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+                  }}
                   className="w-[100%] md:w-[80%] flex flex-col gap-6"
                 >
                   <h3>{data.category.name}</h3>
@@ -77,7 +81,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               ))
             ) : (
               <div>Not available</div>
