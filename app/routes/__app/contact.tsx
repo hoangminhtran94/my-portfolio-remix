@@ -1,4 +1,4 @@
-import { useLocation } from "@remix-run/react";
+import { Form, useLocation } from "@remix-run/react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMatches } from "@remix-run/react";
@@ -6,6 +6,9 @@ import type { SocialMedia } from "~/utils/models/models";
 import ContactBox from "~/components/ContactMe/ContactBox";
 import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
 import type { MetaFunction } from "@remix-run/node";
+import Input from "~/components/UI/Input/Input";
+import TextArea from "~/components/UI/TextArea/TextArea";
+import Button from "~/components/UI/Button/Button";
 
 const Contact = () => {
   const { pathname } = useLocation();
@@ -15,13 +18,10 @@ const Contact = () => {
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
   return (
-    <div>
-      <AnimatePresence>
-        <h1 className="text-white">My Contacts</h1>
-        <div
-          className="h-[600px] self-center  2xl:h-[900px] w-full  flex md:flex-row flex-col gap-10 justify-center "
-          key={pathname}
-        >
+    <div className="text-white">
+      <h1 className="">My Contacts</h1>
+      <div className="flex gap-2 " key={pathname}>
+        <div className="flex-1 grid grid-cols-2 gap-4">
           <ContactBox
             showContent={showPhone}
             onClick={() => {
@@ -72,7 +72,16 @@ const Contact = () => {
             </div>
           </ContactBox>
         </div>
-      </AnimatePresence>
+        <div className="flex-1">
+          <Form className="w-full h-full bg-indigo-50 rounded-md">
+            <h2>Contact me now</h2>
+            <Input label="Title" />
+            <Input label="email" />
+            <TextArea label="Description" />
+            <Button>Submit</Button>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 };

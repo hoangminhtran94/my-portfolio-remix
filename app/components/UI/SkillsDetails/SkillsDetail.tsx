@@ -23,7 +23,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
     };
   }, []);
   return (
-    <div style={{ height: height }} className="box-hover noselect">
+    <div style={{ height }} className="box-hover noselect">
       <div className="box-hover-canvas">
         <div className="tracker tr-1"></div>
         <div className="tracker tr-2"></div>
@@ -50,7 +50,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
         <div className="tracker tr-23"></div>
         <div className="tracker tr-24"></div>
         <div className="tracker tr-25"></div>
-        <div ref={ref} id="card">
+        <div ref={ref} id="box-hover-card">
           <div
             className="border border-blue-800 w-full min-h-full overflow-scroll      rounded-xl 
     p-[24px] lg:p-[48px]  
