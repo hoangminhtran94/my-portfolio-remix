@@ -10,7 +10,7 @@ import {
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import Switch from "~/components/UI/Switch/Switch";
 import { useState, useEffect } from "react";
-import ProjectListByFrontEnd from "~/components/ProjectPage/ProjectListByFrontEnd";
+import ProjectList from "~/components/ProjectPage/ProjectListByFrontEnd";
 import ProjectListByBackend from "~/components/ProjectPage/ProjectByBackend";
 import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";
@@ -19,61 +19,61 @@ import Contact from "../contact";
 const MyProject = () => {
   const loaderData = useLoaderData();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const navigate = useNavigate();
+  // const [searchParams, setSearchParams] = useSearchParams();
 
-  const defaultMode =
-    !searchParams.get("mode") || searchParams.get("mode") === "list"
-      ? false
-      : true;
-  const defaultFilterMode =
-    !searchParams.get("filterBy") || searchParams.get("filterBy") === "frontend"
-      ? false
-      : true;
-  const [toggleMode, setToggleMode] = useState(defaultMode);
-  const [toggleFilterMode, setToggleFilterMode] = useState(defaultFilterMode);
-  const [toogleViewImage, setToggleViewImage] = useState(false);
+  // const defaultMode =
+  //   !searchParams.get("mode") || searchParams.get("mode") === "list"
+  //     ? false
+  //     : true;
+  // const defaultFilterMode =
+  //   !searchParams.get("filterBy") || searchParams.get("filterBy") === "frontend"
+  //     ? false
+  //     : true;
+  // const [toggleMode, setToggleMode] = useState(defaultMode);
+  // const [toggleFilterMode, setToggleFilterMode] = useState(defaultFilterMode);
+  // const [toogleViewImage, setToggleViewImage] = useState(false);
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;
 
-  useEffect(() => {
-    if (toggleMode) {
-      setSearchParams(
-        (prev) => {
-          prev.set("mode", "carousel");
+  // useEffect(() => {
+  //   if (toggleMode) {
+  //     setSearchParams(
+  //       (prev) => {
+  //         prev.set("mode", "carousel");
 
-          return prev;
-        },
-        { preventScrollReset: true }
-      );
-    } else {
-      setSearchParams(
-        (prev) => {
-          prev.set("mode", "list");
-          return prev;
-        },
-        { preventScrollReset: true }
-      );
-    }
-    if (toggleFilterMode) {
-      setSearchParams(
-        (prev) => {
-          prev.set("filterBy", "backend");
-          return prev;
-        },
-        { preventScrollReset: true }
-      );
-    } else {
-      setSearchParams(
-        (prev) => {
-          prev.set("filterBy", "frontend");
-          return prev;
-        },
-        { preventScrollReset: true }
-      );
-    }
-  }, [setSearchParams, toggleFilterMode, toggleMode]);
+  //         return prev;
+  //       },
+  //       { preventScrollReset: true }
+  //     );
+  //   } else {
+  //     setSearchParams(
+  //       (prev) => {
+  //         prev.set("mode", "list");
+  //         return prev;
+  //       },
+  //       { preventScrollReset: true }
+  //     );
+  //   }
+  //   if (toggleFilterMode) {
+  //     setSearchParams(
+  //       (prev) => {
+  //         prev.set("filterBy", "backend");
+  //         return prev;
+  //       },
+  //       { preventScrollReset: true }
+  //     );
+  //   } else {
+  //     setSearchParams(
+  //       (prev) => {
+  //         prev.set("filterBy", "frontend");
+  //         return prev;
+  //       },
+  //       { preventScrollReset: true }
+  //     );
+  //   }
+  // }, [setSearchParams, toggleFilterMode, toggleMode]);
 
   return (
     <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">
@@ -93,7 +93,7 @@ const MyProject = () => {
           </Link>
         </div>
       )}
-      <div className="w-full flex gap-5 py-4 justify-end flex-wrap">
+      {/* <div className="w-full flex gap-5 py-4 justify-end flex-wrap">
         <Switch
           label="View Image"
           className={`${!toggleMode && "hidden"} lg:hidden `}
@@ -125,9 +125,9 @@ const MyProject = () => {
           }}
           defaultChecked={toggleMode}
         />
-      </div>
+      </div> */}
 
-      <div
+      {/* <div
         className={`${
           !toggleMode && "hidden"
         } flex-1  flex  text-slate-600 w-full rounded-md`}
@@ -136,15 +136,15 @@ const MyProject = () => {
           toggleViewImage={toogleViewImage}
           projects={projects}
         />
-      </div>
-
-      <div className={`${toggleMode && "hidden"}  `}>
+      </div> */}
+      <ProjectList projects={projects} />
+      {/* <div  >
         {!toggleFilterMode ? (
-          <ProjectListByFrontEnd projects={projects} />
+       
         ) : (
           <ProjectListByBackend projects={projects} />
         )}
-      </div>
+      </div> */}
       {/*Skills*/}
       <SkillShowCase skillsData={loaderData} />
 
