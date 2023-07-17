@@ -15,7 +15,7 @@ const Header: FC<HeaderProps & ComponentPropsWithoutRef<"h1">> = ({
   ...otherProps
 }) => {
   const ref = useRef<HTMLHeadingElement>(null);
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { once: true });
   return (
     <h1
       style={{
