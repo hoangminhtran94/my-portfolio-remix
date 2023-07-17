@@ -18,7 +18,7 @@ const ContactBox: FC<ContactBoxProps & ComponentPropsWithoutRef<"div">> = ({
   children,
 }) => {
   return (
-    <div className="w-full h-full rounded border border-indigo-700 hover:scale-105 transition-all  p-10 flex flex-col">
+    <div className="w-full h-full rounded-lg bg-indigo-500 hover:scale-105 transition-all  p-10 flex flex-col">
       {children}
     </div>
   );

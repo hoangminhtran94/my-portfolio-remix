@@ -1,6 +1,6 @@
 import { useLoaderData, useMatches } from "@remix-run/react";
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
-import ProjectList from "~/components/ProjectPage/ProjectListByFrontEnd";
+import Projects from "~/components/ProjectPage/Projects";
 
 import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";
@@ -17,7 +17,7 @@ const MyProject = () => {
     <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">
       <About />
 
-      <ProjectList projects={projects} />
+      <Projects projects={projects} />
 
       <SkillShowCase skillsData={loaderData} />
 

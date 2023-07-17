@@ -3,11 +3,13 @@ import type { ComponentPropsWithoutRef } from "react";
 
 interface TextAreaProps extends ComponentPropsWithoutRef<"textarea"> {
   label?: string;
+  textAreaClassName?: string;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
   label,
   className,
+  textAreaClassName,
   ...otherProps
 }) => {
   return (
@@ -15,7 +17,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       {label && <label htmlFor={label}>{label}</label>}
       <textarea
         {...otherProps}
-        className="rounded border-solid border p-2 border-slate-200 focus:outline-slate-400      "
+        className={`rounded border-solid border p-2 border-slate-200 focus:outline-slate-400 ${textAreaClassName}`}
         rows={10}
       />
     </div>

@@ -1,9 +1,9 @@
-import type { FC, ReactNode } from "react";
+import { useRef, type FC, type ReactNode } from "react";
 import type { Project } from "~/utils/models/models";
 import ProjectListItem from "../ProjectListItem/ProjectListItem";
 interface ProjectListProps {
   projects: Project[];
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const ProjectList: FC<ProjectListProps> = ({ projects, children }) => {
@@ -17,7 +17,7 @@ const ProjectList: FC<ProjectListProps> = ({ projects, children }) => {
           <ProjectListItem
             img={project.projectImages[0]}
             label={project.name}
-            to={project.id}
+            to={`/my-project/${project.id}`}
             key={project.id}
           />
         ))}

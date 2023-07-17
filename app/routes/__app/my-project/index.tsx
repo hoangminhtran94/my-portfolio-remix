@@ -10,7 +10,7 @@ import {
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import Switch from "~/components/UI/Switch/Switch";
 import { useState, useEffect } from "react";
-import ProjectList from "~/components/ProjectPage/ProjectListByFrontEnd";
+import ProjectList from "~/components/ProjectPage/Projects";
 import ProjectListByBackend from "~/components/ProjectPage/ProjectByBackend";
 import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";

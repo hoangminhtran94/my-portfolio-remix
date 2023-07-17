@@ -1,5 +1,6 @@
-import type { FC } from "react";
+import { useRef, type FC } from "react";
 import { Link } from "@remix-run/react";
+import { useInView } from "framer-motion";
 interface ProjectListItemProps {
   label: string;
   to: string;
@@ -7,8 +8,19 @@ interface ProjectListItemProps {
 }
 
 const ProjectListItem: FC<ProjectListItemProps> = ({ label, to, img }) => {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const isInView = useInView(ref, { once: true });
   return (
-    <Link className="article-wrapper" to={to}>
+    <Link
+      ref={ref}
+      style={{
+        transform: isInView ? "scale(1)" : "scale(0)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
+      className="article-wrapper"
+      to={to}
+    >
       <img
         className="rounded-lg container-project object-cover"
         alt={label}

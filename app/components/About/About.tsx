@@ -1,13 +1,30 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, useLocation, useMatches } from "@remix-run/react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 const About = () => {
   const { pathname } = useLocation();
+  const [loaded, setLoaded] = useState(false);
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
   return (
     <div
+      ref={ref}
+      style={
+        loaded
+          ? {
+              transform: isInView ? "none" : "translateY(-200px)",
+              opacity: isInView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }
+          : {}
+      }
       className=" text-white drop-shadow-sm h-[calc(100vh-112px)]  text-justify  items-center font-extrabold flex gap-4  "
       key={pathname}
     >

@@ -24,7 +24,14 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
     };
   }, []);
   return (
-    <div ref={ref} style={{ height }} className="box-hover noselect">
+    <div
+      style={{
+        height,
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
+      className="box-hover noselect"
+    >
       <div className="box-hover-canvas">
         <div className="tracker tr-1"></div>
         <div className="tracker tr-2"></div>

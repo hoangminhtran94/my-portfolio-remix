@@ -9,6 +9,7 @@ import type { MetaFunction } from "@remix-run/node";
 import Input from "~/components/UI/Input/Input";
 import TextArea from "~/components/UI/TextArea/TextArea";
 import Button from "~/components/UI/Button/Button";
+import Header from "~/components/UI/Header/Header";
 
 const Contact = () => {
   const { pathname } = useLocation();
@@ -19,7 +20,7 @@ const Contact = () => {
   const rootUser = matches[0].data.rootUser;
   return (
     <div className="text-white">
-      <h1 className="">My Contacts</h1>
+      <Header className="">My Contacts</Header>
       <div className="flex gap-2 " key={pathname}>
         <div className="flex-1 grid grid-cols-2 gap-4">
           <ContactBox
@@ -72,13 +73,13 @@ const Contact = () => {
             </div>
           </ContactBox>
         </div>
-        <div className="flex-1">
-          <Form className="w-full h-full bg-indigo-50 rounded-md">
+        <div className="flex-1 ">
+          <Form className="w-full h-full p-5 flex flex-col gap-3 bg-indigo-700 rounded-md">
             <h2>Contact me now</h2>
-            <Input label="Title" />
-            <Input label="email" />
-            <TextArea label="Description" />
-            <Button>Submit</Button>
+            <Input className="!bg-transparent" label="Title" />
+            <Input className="!bg-transparent" label="Email" />
+            <TextArea textAreaClassName="!bg-transparent" label="Description" />
+            <Button className="hover:!bg-indigo-600">Submit</Button>
           </Form>
         </div>
       </div>
