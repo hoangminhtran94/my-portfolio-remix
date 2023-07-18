@@ -22,6 +22,7 @@ import Footer from "./components/UI/Footer/Footer";
 import { getRootUser, getUserFromSession } from "./utils/database/auth.server";
 import { getTechnologies } from "./utils/database/technology.server";
 import { getProjects } from "./utils/database/project.server";
+import PageContextProvider from "./store/page-context";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Minh Hoang Tran Portfolio",
@@ -45,8 +46,10 @@ export default function App() {
         } `}
       >
         <div id="modal-hook"></div>
-        <NavBar />
-        <Outlet />
+        <PageContextProvider>
+          <NavBar />
+          <Outlet />
+        </PageContextProvider>
         <Footer />
         <ScrollRestoration />
         <Scripts />

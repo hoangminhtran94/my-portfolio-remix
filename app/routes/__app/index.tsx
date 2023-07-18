@@ -9,6 +9,7 @@ import About from "~/components/About/About";
 
 const MyProject = () => {
   const loaderData = useLoaderData();
+
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;

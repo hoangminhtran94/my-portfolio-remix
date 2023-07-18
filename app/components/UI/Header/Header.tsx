@@ -12,6 +12,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps & ComponentPropsWithoutRef<"h1">> = ({
   children,
+  className,
   ...otherProps
 }) => {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -23,6 +24,7 @@ const Header: FC<HeaderProps & ComponentPropsWithoutRef<"h1">> = ({
         opacity: isInView ? 1 : 0,
         transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
       }}
+      className={`tracking-widest ${className}`}
       ref={ref}
       {...otherProps}
     >

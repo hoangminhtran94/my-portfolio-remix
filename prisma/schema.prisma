@@ -114,3 +114,11 @@ model TechnologyGroup {
   technologiesIds      String[]           @db.ObjectId
   technologyCategoryId String             @db.ObjectId
 }
+
+model Message {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  email   String
+  message String
+  read    Boolean @default(false)
+}

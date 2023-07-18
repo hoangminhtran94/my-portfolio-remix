@@ -28,7 +28,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-[36px] md:text-[60px]"
+            className="text-[36px] md:text-[60px] tracking-widest"
           >
             {rootUser.firstLineAbout}
           </motion.h2>
@@ -36,7 +36,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="text-[20px] leading-loose md:text-[30px]"
+            className="text-[20px] leading-loose md:text-[30px] tracking-widest"
             dangerouslySetInnerHTML={{
               __html: rootUser.secondLineAbout?.replace(/\n/g, "<br>"),
             }}

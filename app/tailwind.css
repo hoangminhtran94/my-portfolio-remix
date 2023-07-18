@@ -18,6 +18,12 @@
   .frost {
     @apply bg-gradient-to-r from-blue-900 to-cyan-500;
   }
+  .blue-coral {
+    @apply bg-gradient-to-r from-blue-400 to-emerald-400;
+  }
+  .big-sur {
+    @apply bg-gradient-to-tr bg-gradient-to-tr from-violet-500 to-orange-300;
+  }
   .gradient-purple {
     @apply bg-gradient-to-r from-blue-600 to-violet-600 text-white first:fill-white;
   }
@@ -177,14 +183,13 @@
 /*Project list*/
 
 .article-wrapper {
-  width: 250px;
+  width: 500px;
   -webkit-transition: 0.15s all ease-in-out;
   transition: 0.15s all ease-in-out;
   border-radius: 10px;
   padding: 5px;
   border: 4px solid transparent;
   cursor: pointer;
-  background-color: white;
 }
 
 .article-wrapper:hover {
@@ -571,7 +576,8 @@
 }
 
 #box-hover-card {
-  position: absolute;
+  perspective: 500px;
+  position: relative;
   min-height: 100%;
   height: max-content;
   inset: 0;
@@ -622,7 +628,6 @@
 }
 
 .box-hover-canvas {
-  perspective: 3000px;
   inset: 0;
   z-index: 200;
   position: absolute;
@@ -637,129 +642,128 @@
     "tr-16 tr-17 tr-18 tr-19 tr-20"
     "tr-21 tr-22 tr-23 tr-24 tr-25";
 }
-.tr-1:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-1 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(5deg) rotateY(-7deg) rotateZ(0deg);
+}
+
+.box-hover-card-tr-2 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(-5deg) rotateZ(0deg);
 }
 
-.tr-2:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(5deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-3:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-3 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.tr-4:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-4 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(5deg) rotateZ(0deg);
 }
 
-.tr-5:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(5deg) rotateY(5deg) rotateZ(0deg);
+.box-hover-card-tr-5 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(5deg) rotateY(7deg) rotateZ(0deg);
 }
 
-.tr-6:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-6 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(5deg) rotateY(-7deg) rotateZ(0deg);
+}
+
+.box-hover-card-tr-7 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(-5deg) rotateZ(0deg);
 }
 
-.tr-7:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(5deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-8:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-8 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.tr-9:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-9 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(5deg) rotateY(5deg) rotateZ(0deg);
 }
 
-.tr-10:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(5deg) rotateY(5deg) rotateZ(0deg);
+.box-hover-card-tr-10 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(5deg) rotateY(7deg) rotateZ(0deg);
+}
+.box-hover-card-tr-11 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(0deg) rotateY(-7deg) rotateZ(0deg);
 }
 
-.tr-11:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-12 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(0deg) rotateY(-5deg) rotateZ(0deg);
 }
 
-.tr-12:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(0deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-13:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-13 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.tr-14:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-14 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(0deg) rotateY(5deg) rotateZ(0deg);
 }
 
-.tr-15:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(0deg) rotateY(5deg) rotateZ(0deg);
+.box-hover-card-tr-15 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(0deg) rotateY(7deg) rotateZ(0deg);
 }
 
-.tr-16:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-16 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(-5deg) rotateY(-7deg) rotateZ(0deg);
+}
+
+.box-hover-card-tr-17 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
 }
 
-.tr-17:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-18:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-18 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.tr-19:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-19 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(5deg) rotateZ(0deg);
 }
 
-.tr-20:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(-5deg) rotateY(5deg) rotateZ(0deg);
+.box-hover-card-tr-20 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(-5deg) rotateY(7deg) rotateZ(0deg);
 }
 
-.tr-21:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-21 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(-5deg) rotateY(-7deg) rotateZ(0deg);
+}
+
+.box-hover-card-tr-22 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
 }
 
-.tr-22:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-23:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-23 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(0deg) rotateZ(0deg);
 }
 
-.tr-24:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
+.box-hover-card-tr-24 {
+  transition: 125ms ease-in-out !important;
   transform: rotateX(-5deg) rotateY(5deg) rotateZ(0deg);
 }
 
-.tr-25:hover ~ #box-hover-card {
-  transition: 125ms ease-in-out;
-  transform: rotateX(-5deg) rotateY(5deg) rotateZ(0deg);
+.box-hover-card-tr-25 {
+  transition: 125ms ease-in-out !important;
+  transform: rotateX(-5deg) rotateY(7deg) rotateZ(0deg);
 }
 
 /* ff */
@@ -806,4 +810,52 @@
   transition: 200ms;
   content: "";
   opacity: 80%;
+}
+
+.ag-courses_item {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+
+  margin: 0 15px 30px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+.ag-courses-item_link {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 20px;
+
+  height: 100%;
+  overflow: hidden;
+
+  position: relative;
+}
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #fff;
+}
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+
+.ag-courses-item_bg {
+  height: 128px;
+  width: 128px;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }

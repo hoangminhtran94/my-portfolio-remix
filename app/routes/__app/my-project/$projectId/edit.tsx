@@ -42,7 +42,7 @@ const EditProject = () => {
   }
 
   return (
-    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8 relative">
+    <div className="flex flex-col h-full w-full drop-shadow-md bg-white rounded-lg shadow shadow-white p-8 relative">
       {transition.state !== "idle" && <LoadingSpinner />}
       <h2>Edit Project</h2>
       <ProjectForm project={project} className="flex-1" />

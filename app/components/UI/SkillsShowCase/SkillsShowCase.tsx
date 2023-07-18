@@ -1,16 +1,30 @@
-import type { FC } from "react";
+import { useRef, type FC, useContext, useEffect } from "react";
 import SkillsDetail from "../SkillsDetails/SkillsDetail";
 import type { TechnologyGroup } from "~/utils/models/models";
 import Header from "../Header/Header";
+import { useInView } from "framer-motion";
+import { PageContext } from "~/store/page-context";
 
 interface SkillShowCaseProps {
   skillsData: { frontends: TechnologyGroup[]; backends: TechnologyGroup[] };
 }
 
 const SkillShowCase: FC<SkillShowCaseProps> = ({ skillsData }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
+  const { onChangePage } = useContext(PageContext);
+  useEffect(() => {
+    if (isInView) {
+      onChangePage("my-skills");
+    }
+  }, [isInView]);
   return (
-    <div className="flex text-white flex-col gap-14 snap-center h-[calc(100vh-112px)]">
-      <Header>My skills</Header>
+    <div
+      ref={ref}
+      id="my-skills"
+      className="flex text-white flex-col justify-center gap-10 snap-center min-h-screen"
+    >
+      <Header className="text-center">My skills</Header>
       <SkillsDetail header="Frontend" skillGroups={skillsData?.frontends} />
       <SkillsDetail header="Backend" skillGroups={skillsData?.backends} />
     </div>

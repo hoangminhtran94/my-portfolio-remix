@@ -1,6 +1,6 @@
 import { Form, useLocation } from "@remix-run/react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useContext, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useMatches } from "@remix-run/react";
 import type { SocialMedia } from "~/utils/models/models";
 import ContactBox from "~/components/ContactMe/ContactBox";
@@ -10,6 +10,7 @@ import Input from "~/components/UI/Input/Input";
 import TextArea from "~/components/UI/TextArea/TextArea";
 import Button from "~/components/UI/Button/Button";
 import Header from "~/components/UI/Header/Header";
+import { PageContext } from "~/store/page-context";
 
 const Contact = () => {
   const { pathname } = useLocation();
@@ -18,10 +19,22 @@ const Contact = () => {
   const [showSocial, setShowSocial] = useState(false);
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
+  const { onChangePage } = useContext(PageContext);
+  useEffect(() => {
+    if (isInView) {
+      onChangePage("my-contact");
+    }
+  }, [isInView]);
   return (
-    <div className="text-white">
-      <Header className="">My Contacts</Header>
-      <div className="flex gap-2 " key={pathname}>
+    <div
+      ref={ref}
+      id="my-contact"
+      className="text-white min-h-screen flex justify-center flex-col"
+    >
+      <Header className="text-center">My Contacts</Header>
+      <div className="flex gap-2 mt-[60px] " key={pathname}>
         <div className="flex-1 grid grid-cols-2 gap-4">
           <ContactBox
             showContent={showPhone}
@@ -29,22 +42,24 @@ const Contact = () => {
               setShowPhone((prev) => !prev);
             }}
             label="Phone number"
+            extendedBg="big-sur"
             background="phone-bg"
           >
-            <h3>Contact me now</h3>
-            <span>{rootUser.contactNumber}</span>
+            <span className="relative z-5 ">{rootUser.contactNumber}</span>
           </ContactBox>
           <ContactBox
             showContent={showEmail}
             onClick={() => {
               setShowEmail((prev) => !prev);
             }}
+            extendedBg="indigo-violet"
             label="Email"
             background="email-bg"
           >
-            <h3>Email me now</h3>
-            <span>{rootUser.username}</span>
-            <span>{rootUser.secondaryEmail}</span>
+            <ul className="flex flex-col gap-3 z-5 relative">
+              <li>{rootUser.username}</li>
+              <li>{rootUser.secondaryEmail}</li>
+            </ul>
           </ContactBox>
 
           <ContactBox
@@ -52,11 +67,11 @@ const Contact = () => {
             onClick={() => {
               setShowSocial((prev) => !prev);
             }}
+            extendedBg="gradient-orange"
             label="Social Media"
             labelClassName="text-white"
             background="social-media-bg"
           >
-            <span>Chat with me on</span>
             <div className="flex gap-5">
               {rootUser.socialMedias.map((sm: SocialMedia) => (
                 <span

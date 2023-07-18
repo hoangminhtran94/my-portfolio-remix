@@ -1,7 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, useLocation, useMatches } from "@remix-run/react";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { PageContext } from "~/store/page-context";
+
 const About = () => {
   const { pathname } = useLocation();
   const [loaded, setLoaded] = useState(false);
@@ -10,11 +12,19 @@ const About = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
 
+  const { onChangePage } = useContext(PageContext);
+  useEffect(() => {
+    if (isInView) {
+      onChangePage("about");
+    }
+  }, [isInView]);
   useEffect(() => {
     setLoaded(true);
   }, []);
+
   return (
     <div
+      id="about"
       ref={ref}
       style={
         loaded
@@ -25,7 +35,7 @@ const About = () => {
             }
           : {}
       }
-      className=" text-white drop-shadow-sm h-[calc(100vh-112px)]  text-justify  items-center font-extrabold flex gap-4  "
+      className=" text-white drop-shadow-sm min-h-screen  text-justify  items-center font-extrabold flex gap-4  "
       key={pathname}
     >
       <div className="flex flex-col 3xl:flex-row gap-14 items-center md:py-9">
@@ -45,7 +55,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-[36px] md:text-[60px]"
+            className="text-[36px] md:text-[60px]  tracking-widest"
           >
             {rootUser.firstLineAbout}
           </motion.h2>
@@ -53,7 +63,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="text-[20px] leading-loose md:text-[30px]"
+            className="text-[20px] leading-loose md:text-[30px] tracking-widest"
             dangerouslySetInnerHTML={{
               __html: rootUser.secondLineAbout?.replace(/\n/g, "<br>"),
             }}
@@ -63,7 +73,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.5 }}
-            className="text-[20px] leading-loose md:text-[30px]"
+            className="text-[20px] leading-loose md:text-[30px] tracking-widest"
             dangerouslySetInnerHTML={{
               __html: rootUser.thirdLineAbout?.replace(/\n/g, "<br>"),
             }}

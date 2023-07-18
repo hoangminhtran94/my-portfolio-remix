@@ -6,6 +6,7 @@ const AppLayout = () => {
   const outlet = useOutlet();
   const matches = useMatches();
   const firstContainerPathPattern = matches[2];
+  console.log(firstContainerPathPattern);
 
   const location = useLocation();
 
@@ -51,17 +52,14 @@ const AppLayout = () => {
   };
 
   const secondContainerKey = () => {
-    if (
-      firstContainerPathPattern.id.includes("skills") ||
-      firstContainerPathPattern.id.includes("skills.edit")
-    ) {
+    if (firstContainerPathPattern.id.includes("profile")) {
+      return "profile-second-container";
+    }
+    if (firstContainerPathPattern.id.includes("skills")) {
       return "skills-second-container";
     }
     if (firstContainerPathPattern.id.includes("technology")) {
       return "technology-second-container";
-    }
-    if (firstContainerPathPattern.id.includes("profile")) {
-      return "profile-second-container";
     }
 
     return location.pathname;

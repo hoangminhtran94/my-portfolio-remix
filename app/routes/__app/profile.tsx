@@ -26,6 +26,9 @@ const Profile = () => {
     if (location.pathname.includes("edit-profile")) {
       return "profile-edit-profile-container";
     }
+    if (location.pathname.includes("skills-edit")) {
+      return "skills-edit-profile-container";
+    }
     return location.pathname;
   };
   const outlet = useOutlet();
@@ -42,6 +45,12 @@ const Profile = () => {
             </Link>
             <Link
               className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
+              to="edit-about"
+            >
+              Edit About
+            </Link>
+            <Link
+              className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
               to="new-project"
             >
               New Project
@@ -51,6 +60,12 @@ const Profile = () => {
               to="technology"
             >
               Technology
+            </Link>
+            <Link
+              className=" flex-1 justify-center  flex gap-2 items-center border border-indigo-400 p-2 rounded-md  hover:bg-indigo-500 hover:text-white"
+              to="skills-edit"
+            >
+              Edit skills
             </Link>
           </div>
         )}

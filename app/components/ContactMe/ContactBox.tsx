@@ -6,6 +6,7 @@ interface ContactBoxProps {
   background: string;
   onClick: MouseEventHandler;
   label: string;
+  extendedBg?: string;
   labelClassName?: string;
 }
 
@@ -15,11 +16,16 @@ const ContactBox: FC<ContactBoxProps & ComponentPropsWithoutRef<"div">> = ({
   label,
   onClick,
   labelClassName,
+  extendedBg = "frost",
   children,
 }) => {
   return (
-    <div className="w-full h-full rounded-lg bg-indigo-500 hover:scale-105 transition-all  p-10 flex flex-col">
-      {children}
+    <div className="ag-courses_item tracking-widest  ">
+      <div className="ag-courses-item_link ">
+        <div className={`ag-courses-item_bg ${extendedBg}`}></div>
+        <h2 className=" relative z-5">{label}</h2>
+        {children}
+      </div>
     </div>
   );
 };

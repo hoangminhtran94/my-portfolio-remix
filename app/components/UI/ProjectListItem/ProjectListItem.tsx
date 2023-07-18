@@ -1,26 +1,22 @@
-import { useRef, type FC } from "react";
+import { type FC } from "react";
 import { Link } from "@remix-run/react";
-import { useInView } from "framer-motion";
+import TechnologyIcon from "../TechnologyIcon/TechnologyIcon";
+import type { Technology } from "~/utils/models/models";
 interface ProjectListItemProps {
   label: string;
   to: string;
   img?: string;
+  technologies: Technology[];
 }
 
-const ProjectListItem: FC<ProjectListItemProps> = ({ label, to, img }) => {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, { once: true });
+const ProjectListItem: FC<ProjectListItemProps> = ({
+  label,
+  to,
+  img,
+  technologies,
+}) => {
   return (
-    <Link
-      ref={ref}
-      style={{
-        transform: isInView ? "scale(1)" : "scale(0)",
-        opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-      }}
-      className="article-wrapper"
-      to={to}
-    >
+    <Link className="article-wrapper bg-white" to={to}>
       <img
         className="rounded-lg container-project object-cover"
         alt={label}
@@ -36,10 +32,10 @@ const ProjectListItem: FC<ProjectListItemProps> = ({ label, to, img }) => {
               width="2em"
               height="2em"
               color="black"
-              stroke-linejoin="round"
-              stroke-linecap="round"
+              strokeLinejoin="round"
+              strokeLinecap="round"
               viewBox="0 0 24 24"
-              stroke-width="2"
+              strokeWidth="2"
               fill="none"
               stroke="currentColor"
             >
@@ -49,16 +45,14 @@ const ProjectListItem: FC<ProjectListItemProps> = ({ label, to, img }) => {
           </div>
         </div>
         <div className="types">
-          <span
-            style={{
-              backgroundColor: "rgba(165, 96, 247, 0.43)",
-              color: "rgb(85, 27, 177)",
-            }}
-            className="project-type"
-          >
-            • Analytics
+          {technologies.map((tech, index) => {
+            if (index <= 6) {
+              return <TechnologyIcon key={tech.id} icon={tech.icon} />;
+            }
+          })}
+          <span className=" text-black flex items-center">
+            {technologies.length > 6 && "•••"}
           </span>
-          <span className="project-type">• Dashboards</span>
         </div>
       </div>
     </Link>
