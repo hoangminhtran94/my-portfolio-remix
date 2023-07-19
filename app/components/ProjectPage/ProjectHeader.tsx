@@ -19,7 +19,9 @@ const ProjectHeader = () => {
 
   return (
     <div className="relative w-full flex items-center ">
-      <h1 className="text-center w-full frost-text">{setHeader()}</h1>
+      <h1 className="text-center w-full light-blue-gradient-text">
+        {setHeader()}
+      </h1>
     </div>
   );
 };

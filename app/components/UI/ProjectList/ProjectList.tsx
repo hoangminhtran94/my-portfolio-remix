@@ -1,22 +1,35 @@
-import type { FC, ReactNode } from "react";
+import { useRef, type FC, type ReactNode } from "react";
 import type { Project } from "~/utils/models/models";
 import ProjectListItem from "../ProjectListItem/ProjectListItem";
+import { useInView } from "framer-motion";
 interface ProjectListProps {
   projects: Project[];
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const ProjectList: FC<ProjectListProps> = ({ projects, children }) => {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(ref);
   return (
-    <div className="flex flex-col gap-3">
-      <label className="text-base md:text-lg font-bold flex gap-5 flex-wrap items-center">
+    <div
+      ref={ref}
+      style={{
+        transform: isInView ? "none" : "translateX(-200px)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
+      className="flex flex-col gap-3"
+    >
+      <label className=" justify-center text-base md:text-lg font-bold flex gap-5 flex-wrap items-center">
         {children}
       </label>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-x-6  gap-y-6 ">
+      <div className="flex flex-wrap gap-10  justify-center">
         {projects.map((project: Project) => (
           <ProjectListItem
+            img={project.projectImages[0]}
             label={project.name}
-            to={project.id}
+            technologies={project.technologies}
+            to={`/my-project/${project.id}`}
             key={project.id}
           />
         ))}

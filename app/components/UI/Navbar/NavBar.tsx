@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatches } from "@remix-run/react";
+import ScrollLink from "../ScrollLink/ScrollLink";
+
 const NavBar = () => {
   const data = useLoaderData();
+
   const matches = useMatches();
-  const currentRoute = matches[2].id;
+  const currentRoute = matches[2]?.id;
   const [showNavBar, setShowNavBar] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -18,11 +21,7 @@ const NavBar = () => {
 
   return (
     <header
-      className={`relative flex justify-between text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30 ${
-        currentRoute === "routes/__app/my-project/$projectId/index"
-          ? "endless-river !text-white"
-          : "shore"
-      } `}
+      className={`sticky top-0 flex justify-between text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-30  `}
     >
       <Link className="hover:scale-110 transition-all" to="/">
         <img
@@ -82,24 +81,17 @@ const NavBar = () => {
             }`}
           >
             <li className="hover:scale-110 transition-all">
-              <NavLink className="opacity-50" to="/my-project">
-                My Projects
-              </NavLink>
+              <ScrollLink to="about">About me</ScrollLink>
             </li>
             <li className="hover:scale-110 transition-all">
-              <NavLink className="opacity-50" to="/skills">
-                My Skills
-              </NavLink>
+              <ScrollLink to="my-project">My Projects</ScrollLink>
+            </li>
+
+            <li className="hover:scale-110 transition-all">
+              <ScrollLink to="my-skills">My Skills</ScrollLink>
             </li>
             <li className="hover:scale-110 transition-all">
-              <NavLink className="opacity-50" to="/about">
-                About me
-              </NavLink>
-            </li>
-            <li className="hover:scale-110 transition-all">
-              <NavLink className="opacity-50" to="/contact">
-                Contact
-              </NavLink>
+              <ScrollLink to="my-contact">My Contacts</ScrollLink>
             </li>
             {!data || !data.userData ? (
               <li className="hover:scale-110 transition-all">

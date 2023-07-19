@@ -13,11 +13,9 @@ const AboutEdit = () => {
   const data = useLoaderData();
   const rootUser = data;
   return (
-    <div className="w-full">
+    <div className="bg-white p-5 rounded-lg w-full border border-indigo-300 ">
       <h1>Edit About</h1>
-      <div className="p-5 rounded-lg w-full border border-indigo-300 ">
-        <EditAboutForm userData={rootUser} />
-      </div>
+      <EditAboutForm userData={rootUser} />
     </div>
   );
 };

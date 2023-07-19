@@ -33,7 +33,9 @@ const Switch: FC<SwitchProps> = ({
    after:left-[2px] after:bg-white after:border-gray-300 after:border 
    after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
       ></div>
-      <span className="ml-3 text-md  text-slate-700 ">{label}</span>
+      <span className="ml-3 text-md light-blue-gradient-text font-bold  ">
+        {label}
+      </span>
     </label>
   );
 };

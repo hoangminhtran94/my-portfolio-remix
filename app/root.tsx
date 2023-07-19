@@ -1,7 +1,12 @@
-import { MetaFunction, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import stylesheet from "~/tailwind.css";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
+import toastifyCSS from "react-toastify/dist/ReactToastify.css";
+import {
+  isRouteErrorResponse,
+  useMatches,
+  useRouteError,
+} from "@remix-run/react";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -18,6 +23,8 @@ import Footer from "./components/UI/Footer/Footer";
 import { getRootUser, getUserFromSession } from "./utils/database/auth.server";
 import { getTechnologies } from "./utils/database/technology.server";
 import { getProjects } from "./utils/database/project.server";
+import PageContextProvider from "./store/page-context";
+import { ToastContainer } from "react-toastify";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Minh Hoang Tran Portfolio",
@@ -25,16 +32,27 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const matches = useMatches();
+  const firstContainerPathPattern = matches[2];
+  const inProjectDetail =
+    firstContainerPathPattern.id === "routes/__app/my-project/$projectId/index";
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-slate-50 flex flex-col ">
+      <body
+        className={`min-h-screen bg-slate-50 flex flex-col ${
+          inProjectDetail ? "endless-river" : "shore"
+        } `}
+      >
         <div id="modal-hook"></div>
-        <NavBar />
-        <Outlet />
+        <ToastContainer />
+        <PageContextProvider>
+          <NavBar />
+          <Outlet />
+        </PageContextProvider>
         <Footer />
         <ScrollRestoration />
         <Scripts />
@@ -52,6 +70,7 @@ export const links: LinksFunction = () => {
     },
     { rel: "stylesheet", href: stylesheet },
     { rel: "stylesheet", href: appStyles },
+    { rel: "stylesheet", href: toastifyCSS },
   ];
 };
 

@@ -1,8 +1,12 @@
 const Footer = () => {
   return (
-    <footer className="   py-[30px] flex flex-col items-center gap-3 ">
-      <p className=" text-[16px]">Developed by Minh Hoang Tran.</p>
-      <p className="text-center font-bold text-[16px]">Powered by:</p>
+    <footer className="py-[30px] flex flex-col items-center gap-3  tracking-widest">
+      <p className=" text-[16px] white-gradient-text">
+        Developed by Minh Hoang Tran.
+      </p>
+      <p className="text-center font-bold text-[16px] white-gradient-text">
+        Powered by:
+      </p>
       <div>
         <div className="flex gap-5 md:gap-10 justify-center items-center flex-wrap ">
           <a

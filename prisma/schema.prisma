@@ -82,6 +82,7 @@ model SocialMedia {
   name    String
   link    String
   icon    String
+  bgColor String?
   owner   User?   @relation(fields: [ownerId], references: [id])
   ownerId String? @db.ObjectId
 }
@@ -113,4 +114,13 @@ model TechnologyGroup {
   technologies         Technology[]       @relation(fields: [technologiesIds], references: [id])
   technologiesIds      String[]           @db.ObjectId
   technologyCategoryId String             @db.ObjectId
+}
+
+model Message {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  subject String
+  name    String
+  email   String
+  message String
+  read    Boolean @default(false)
 }
