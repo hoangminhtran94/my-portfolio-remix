@@ -41,6 +41,7 @@ export interface SocialMedia {
   name: string;
   link: string;
   icon: string;
+  bgColor?: string;
   ownerId?: string;
   owner?: User;
 }

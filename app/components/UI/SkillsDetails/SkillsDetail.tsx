@@ -6,11 +6,16 @@ import { useInView } from "framer-motion";
 interface SkillsDetailProps {
   skillGroups: TechnologyGroup[];
   header: string;
+  once?: boolean;
 }
 
-const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
+const SkillsDetail: FC<SkillsDetailProps> = ({
+  skillGroups,
+  header,
+  once = false,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once });
   const [tr1Hover, setTr1Hover] = useState(false);
   const [tr2Hover, setTr2Hover] = useState(false);
   const [tr3Hover, setTr3Hover] = useState(false);
@@ -67,10 +72,9 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
   return (
     <div
       style={{
+        transform: isInView ? "none" : "translateX(-200px)",
         opacity: isInView ? 1 : 0,
-        transition: isInView
-          ? ""
-          : "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
       }}
       className="box-hover noselect !w-[40vw] mx-auto"
     >
@@ -313,11 +317,6 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
             skillGroups.map((data: any, index: number) => (
               <div
                 key={data.id}
-                style={{
-                  transform: isInView ? "none" : "translateX(-200px)",
-                  opacity: isInView ? 1 : 0,
-                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-                }}
                 className="w-[100%] md:w-[80%] flex flex-col gap-6"
               >
                 <h3 className="tracking-widest">{data.category.name}</h3>

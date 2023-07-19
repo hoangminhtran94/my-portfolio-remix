@@ -2,7 +2,6 @@ import { useEffect, type FC, useRef, useContext } from "react";
 import type { Project } from "~/utils/models/models";
 import ProjectList from "../UI/ProjectList/ProjectList";
 import Header from "../UI/Header/Header";
-import { useSearchParams } from "@remix-run/react";
 import { useInView } from "framer-motion";
 import { PageContext } from "~/store/page-context";
 

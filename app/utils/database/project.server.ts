@@ -1,9 +1,7 @@
 import type { Project } from "../models/models";
-import { Technology, FeatureImage } from "@prisma/client";
-import serverError from "../models/ServerError";
+
 import { prisma } from "./db.server";
 import { deleteImageFromCloudinary } from "../fileUpload/fileUpload";
-import type { MultiScreenImage } from "~/utils/models/models";
 
 export const getProjects = async () => {
   let projects: any[] = [];

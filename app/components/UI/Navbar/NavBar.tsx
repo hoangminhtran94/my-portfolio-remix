@@ -10,7 +10,7 @@ const NavBar = () => {
   const data = useLoaderData();
 
   const matches = useMatches();
-  const currentRoute = matches[2].id;
+  const currentRoute = matches[2]?.id;
   const [showNavBar, setShowNavBar] = useState(false);
   const location = useLocation();
   useEffect(() => {

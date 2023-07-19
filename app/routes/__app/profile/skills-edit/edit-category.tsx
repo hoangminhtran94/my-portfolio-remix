@@ -6,12 +6,7 @@ import Button from "~/components/UI/Button/Button";
 import { useState } from "react";
 import Input from "~/components/UI/Input/Input";
 import { getUserFromSession } from "~/utils/database/auth.server";
-import {
-  createTechnologyCategory,
-  getTechnologyCategories,
-  getTechnologyTypes,
-  updateTechnologyCategory,
-} from "~/utils/database/skills.server";
+import { updateTechnologyCategory } from "~/utils/database/skills.server";
 
 const EditCategory = () => {
   const matches = useMatches();

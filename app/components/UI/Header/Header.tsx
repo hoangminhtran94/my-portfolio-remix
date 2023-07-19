@@ -8,15 +8,17 @@ import {
 
 interface HeaderProps {
   children: ReactNode;
+  once?: boolean;
 }
 
 const Header: FC<HeaderProps & ComponentPropsWithoutRef<"h1">> = ({
   children,
   className,
+  once = false,
   ...otherProps
 }) => {
   const ref = useRef<HTMLHeadingElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once });
   return (
     <h1
       style={{

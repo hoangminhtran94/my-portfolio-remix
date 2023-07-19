@@ -1,11 +1,12 @@
-import { MetaFunction, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import stylesheet from "~/tailwind.css";
+import toastifyCSS from "react-toastify/dist/ReactToastify.css";
 import {
   isRouteErrorResponse,
   useMatches,
   useRouteError,
 } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -23,6 +24,7 @@ import { getRootUser, getUserFromSession } from "./utils/database/auth.server";
 import { getTechnologies } from "./utils/database/technology.server";
 import { getProjects } from "./utils/database/project.server";
 import PageContextProvider from "./store/page-context";
+import { ToastContainer } from "react-toastify";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Minh Hoang Tran Portfolio",
@@ -46,6 +48,7 @@ export default function App() {
         } `}
       >
         <div id="modal-hook"></div>
+        <ToastContainer />
         <PageContextProvider>
           <NavBar />
           <Outlet />
@@ -67,6 +70,7 @@ export const links: LinksFunction = () => {
     },
     { rel: "stylesheet", href: stylesheet },
     { rel: "stylesheet", href: appStyles },
+    { rel: "stylesheet", href: toastifyCSS },
   ];
 };
 

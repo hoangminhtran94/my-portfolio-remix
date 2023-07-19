@@ -3,7 +3,7 @@ import { Link, useLocation, useMatches } from "@remix-run/react";
 import { motion, useInView } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { PageContext } from "~/store/page-context";
-
+import { Typewriter } from "react-simple-typewriter";
 const About = () => {
   const { pathname } = useLocation();
   const [loaded, setLoaded] = useState(false);
@@ -51,14 +51,20 @@ const About = () => {
         </div>
 
         <div className="flex flex-1  flex-col gap-4 leading-relaxed">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-[36px] md:text-[60px]  tracking-widest"
           >
-            {rootUser.firstLineAbout}
-          </motion.h2>
+            <Typewriter
+              words={[rootUser.firstLineAbout]}
+              loop={true}
+              // typeSpeed={40}
+              cursor
+            />
+            {}
+          </motion.div>
           <motion.h3
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
@@ -84,7 +90,3 @@ const About = () => {
   );
 };
 export default About;
-
-export const meta: MetaFunction = () => {
-  return { title: "About me" };
-};

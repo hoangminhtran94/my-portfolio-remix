@@ -10,6 +10,7 @@ module.exports = {
       },
       backgroundImage: {
         "main-screen": "url('public/images/background.jpg')",
+        "message-sent": "url('public/icons/message-sent.svg')",
       },
       backgroundColor: {
         modal: "rgba(255, 255, 255, 0.7)",
@@ -19,21 +20,32 @@ module.exports = {
         "white-lg": "0 10px 8px rgba(255, 255, 255, 0.8)",
       },
       animation: {
-        type: "type 2.7s ease-out .8s infinite alternate both",
+        typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",
+        bouncing: "bouncing 0.4s linear",
       },
       keyframes: {
-        type: {
-          "0%": { transform: "translateX(0ch)" },
-          "5%, 10%": { transform: "translateX(1ch)" },
-          "15%, 20%": { transform: "translateX(2ch)" },
-          "25%, 30%": { transform: "translateX(3ch)" },
-          "35%, 40%": { transform: "translateX(4ch)" },
-          "45%, 50%": { transform: "translateX(5ch)" },
-          "55%, 60%": { transform: "translateX(6ch)" },
-          "65%, 70%": { transform: "translateX(7ch)" },
-          "75%, 80%": { transform: "translateX(8ch)" },
-          "85%, 90%": { transform: "translateX(9ch)" },
-          "95%, 100%": { transform: "translateX(11ch)" },
+        typing: {
+          "0%": {
+            width: "0%",
+            visibility: "hidden",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        blink: {
+          "50%": {
+            borderColor: "transparent",
+          },
+          "100%": {
+            borderColor: "white",
+          },
+        },
+        bouncing: {
+          "40%": { transform: "scale(1.4)" },
+          "60%": { transform: "scale(0.8)" },
+          "80%": { transform: "scale(1.2)" },
+          "100%": { transform: "scale(1)" },
         },
       },
     },

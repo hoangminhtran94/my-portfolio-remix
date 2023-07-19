@@ -6,7 +6,6 @@ const AppLayout = () => {
   const outlet = useOutlet();
   const matches = useMatches();
   const firstContainerPathPattern = matches[2];
-  console.log(firstContainerPathPattern);
 
   const location = useLocation();
 
