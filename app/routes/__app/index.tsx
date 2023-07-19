@@ -10,7 +10,7 @@ import { PageContext } from "~/store/page-context";
 import { useContext, useEffect } from "react";
 
 const MyProject = () => {
-  const { currentPage, onForceScrollTo, forceScrollTo } =
+  const { onChangePage, onForceScrollTo, forceScrollTo } =
     useContext(PageContext);
   const loaderData = useLoaderData();
   const matches = useMatches();

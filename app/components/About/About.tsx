@@ -13,11 +13,16 @@ const About = () => {
   const isInView = useInView(ref);
 
   const { onChangePage } = useContext(PageContext);
-  // useEffect(() => {
-  //   if (isInView) {
-  //     onChangePage("about");
-  //   }
-  // }, [isInView]);
+  const timeoutRef = useRef<any>(null);
+  useEffect(() => {
+    if (isInView) {
+      timeoutRef.current = setTimeout(() => {
+        onChangePage("about");
+      }, 400);
+    } else {
+      clearTimeout(timeoutRef.current);
+    }
+  }, [isInView]);
   useEffect(() => {
     setLoaded(true);
   }, []);

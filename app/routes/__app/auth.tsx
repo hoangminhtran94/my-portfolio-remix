@@ -5,14 +5,19 @@ import Input from "~/components/UI/Input/Input";
 import Button from "~/components/UI/Button/Button";
 import { Link } from "react-router-dom";
 import { login, register } from "~/utils/database/auth.server";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import useClickOutside from "~/utils/hooks/useClickOutside";
 import type { ActionFunction } from "@remix-run/node";
+import { PageContext } from "~/store/page-context";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
+  const { onChangePage } = useContext(PageContext);
   const [toggleDescriptionModal, setToggleDescriptionModal] = useState(false);
   const modalRef = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    onChangePage("");
+  }, []);
   useClickOutside(modalRef, () => {
     setToggleDescriptionModal(false);
   });

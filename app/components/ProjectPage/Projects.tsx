@@ -10,11 +10,17 @@ const Projects: FC<{ projects: Project[] }> = ({ projects }) => {
 
   const isInView = useInView(ref);
   const { onChangePage } = useContext(PageContext);
-  // useEffect(() => {
-  //   if (isInView) {
-  //     onChangePage("my-project");
-  //   }
-  // }, [isInView]);
+
+  const timeoutRef = useRef<any>(null);
+  useEffect(() => {
+    if (isInView) {
+      timeoutRef.current = setTimeout(() => {
+        onChangePage("my-project");
+      }, 400);
+    } else {
+      clearTimeout(timeoutRef.current);
+    }
+  }, [isInView]);
 
   return (
     <div

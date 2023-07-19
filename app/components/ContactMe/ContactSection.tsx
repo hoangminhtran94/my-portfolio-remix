@@ -12,11 +12,16 @@ const Contact = () => {
   const isInView = useInView(ref);
   const { onChangePage } = useContext(PageContext);
 
-  // useEffect(() => {
-  //   if (isInView) {
-  //     onChangePage("my-contact");
-  //   }
-  // }, [isInView]);
+  const timeoutRef = useRef<any>(null);
+  useEffect(() => {
+    if (isInView) {
+      timeoutRef.current = setTimeout(() => {
+        onChangePage("my-contact");
+      }, 400);
+    } else {
+      clearTimeout(timeoutRef.current);
+    }
+  }, [isInView]);
   return (
     <div
       ref={ref}

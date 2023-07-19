@@ -13,11 +13,16 @@ const SkillShowCase: FC<SkillShowCaseProps> = ({ skillsData }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
   const { onChangePage } = useContext(PageContext);
-  // useEffect(() => {
-  //   if (isInView) {
-  //     onChangePage("my-skills");
-  //   }
-  // }, [isInView]);
+  const timeoutRef = useRef<any>(null);
+  useEffect(() => {
+    if (isInView) {
+      timeoutRef.current = setTimeout(() => {
+        onChangePage("my-skills");
+      }, 400);
+    } else {
+      clearTimeout(timeoutRef.current);
+    }
+  }, [isInView]);
   return (
     <div
       ref={ref}
