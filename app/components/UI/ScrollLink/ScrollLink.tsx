@@ -12,7 +12,8 @@ const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { currentPage, onChangePage } = useContext(PageContext);
+  const { currentPage, onChangePage, onForceScrollTo } =
+    useContext(PageContext);
   let targetElement: any;
 
   // const isInView = useInView(targetElement);
@@ -26,14 +27,10 @@ const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
       onClick={async () => {
         if (location.pathname !== "/") {
           navigate("/");
-          setTimeout(() => {
-            targetElement?.scrollIntoView({ behavior: "smooth" });
-            onChangePage(to);
-          }, 1000);
-        } else {
-          targetElement?.scrollIntoView({ behavior: "smooth" });
-          onChangePage(to);
+          onForceScrollTo(to);
         }
+        targetElement?.scrollIntoView({ behavior: "smooth" });
+        onChangePage(to);
       }}
       className={` cursor-pointer opacity-50 ${className} ${
         currentPage === to && "!opacity-100 text-xl"

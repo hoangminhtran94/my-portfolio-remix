@@ -10,11 +10,21 @@ import { PageContext } from "~/store/page-context";
 import { useContext, useEffect } from "react";
 
 const MyProject = () => {
-  const { currentPage } = useContext(PageContext);
+  const { currentPage, onForceScrollTo, forceScrollTo } =
+    useContext(PageContext);
   const loaderData = useLoaderData();
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const targetElement = document?.getElementById(forceScrollTo);
+      setTimeout(() => {
+        targetElement?.scrollIntoView({ behavior: "smooth" });
+        onForceScrollTo("");
+      }, 100);
+    }
+  }, [forceScrollTo]);
 
   return (
     <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">

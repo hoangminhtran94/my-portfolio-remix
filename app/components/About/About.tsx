@@ -13,11 +13,11 @@ const About = () => {
   const isInView = useInView(ref);
 
   const { onChangePage } = useContext(PageContext);
-  useEffect(() => {
-    if (isInView) {
-      onChangePage("about");
-    }
-  }, [isInView]);
+  // useEffect(() => {
+  //   if (isInView) {
+  //     onChangePage("about");
+  //   }
+  // }, [isInView]);
   useEffect(() => {
     setLoaded(true);
   }, []);

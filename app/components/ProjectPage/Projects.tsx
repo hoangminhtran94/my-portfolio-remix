@@ -10,11 +10,11 @@ const Projects: FC<{ projects: Project[] }> = ({ projects }) => {
 
   const isInView = useInView(ref);
   const { onChangePage } = useContext(PageContext);
-  useEffect(() => {
-    if (isInView) {
-      onChangePage("my-project");
-    }
-  }, [isInView]);
+  // useEffect(() => {
+  //   if (isInView) {
+  //     onChangePage("my-project");
+  //   }
+  // }, [isInView]);
 
   return (
     <div

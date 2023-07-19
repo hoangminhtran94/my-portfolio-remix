@@ -12,11 +12,11 @@ const Contact = () => {
   const isInView = useInView(ref);
   const { onChangePage } = useContext(PageContext);
 
-  useEffect(() => {
-    if (isInView) {
-      onChangePage("my-contact");
-    }
-  }, [isInView]);
+  // useEffect(() => {
+  //   if (isInView) {
+  //     onChangePage("my-contact");
+  //   }
+  // }, [isInView]);
   return (
     <div
       ref={ref}
