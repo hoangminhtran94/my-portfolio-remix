@@ -76,7 +76,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({
         opacity: isInView ? 1 : 0,
         transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
       }}
-      className="box-hover noselect !w-[40vw] mx-auto"
+      className="box-hover noselect w-screen mx-auto"
     >
       <div className="box-hover-canvas">
         <div
@@ -310,26 +310,25 @@ const SkillsDetail: FC<SkillsDetailProps> = ({
           ref={ref}
           className={`w-full h-fit overflow-scroll      rounded-xl 
                       p-[24px] lg:p-[48px]  
-                      z-[888] shadow-lg flex flex-col items-center gap-[30px]`}
+                      z-[888] shadow-lg flex flex-col items-center gap-[50px]`}
         >
           <h2 className="tracking-widest">{header}</h2>
-          {skillGroups && skillGroups.length > 0 ? (
-            skillGroups.map((data: any, index: number) => (
-              <div
-                key={data.id}
-                className="w-[100%] md:w-[80%] flex flex-col gap-6"
-              >
-                <h3 className="tracking-widest">{data.category.name}</h3>
-                <ul className="flex max-w-full flex-wrap  gap-10">
-                  {data.technologies.map((tech: Technology) => (
-                    <ProjectIcon key={tech.id} tech={tech} />
-                  ))}
-                </ul>
-              </div>
-            ))
-          ) : (
-            <div>Not available</div>
-          )}
+          <div className="grid grid-cols-2 w-full gap-10">
+            {skillGroups && skillGroups.length > 0 ? (
+              skillGroups.map((data: any, index: number) => (
+                <div key={data.id} className="w-[100%] flex flex-col gap-6">
+                  <h3 className="tracking-widest">{data.category.name}</h3>
+                  <ul className="flex max-w-full flex-wrap  gap-10">
+                    {data.technologies.map((tech: Technology) => (
+                      <ProjectIcon key={tech.id} tech={tech} />
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <div>Not available</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

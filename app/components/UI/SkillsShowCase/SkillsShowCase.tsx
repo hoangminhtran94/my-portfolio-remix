@@ -25,8 +25,14 @@ const SkillShowCase: FC<SkillShowCaseProps> = ({ skillsData }) => {
       className="flex text-white flex-col justify-center gap-10 snap-center min-h-screen"
     >
       <Header className="text-center">My skills</Header>
-      <SkillsDetail header="Frontend" skillGroups={skillsData?.frontends} />
-      <SkillsDetail header="Backend" skillGroups={skillsData?.backends} />
+      <SkillsDetail
+        header="Front-end technologies"
+        skillGroups={skillsData?.frontends}
+      />
+      <SkillsDetail
+        header="Back-end technologies"
+        skillGroups={skillsData?.backends}
+      />
     </div>
   );
 };

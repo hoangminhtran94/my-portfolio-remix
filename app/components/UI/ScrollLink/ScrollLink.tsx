@@ -1,5 +1,6 @@
 import { useContext, type FC, type ReactNode } from "react";
 import { PageContext } from "~/store/page-context";
+import { useLocation, useNavigate } from "@remix-run/react";
 // import { useSelector } from "react-redux/es/hooks/useSelector";
 interface ScrollLinkProps {
   to: string;
@@ -8,6 +9,9 @@ interface ScrollLinkProps {
 }
 
 const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const { currentPage, onChangePage } = useContext(PageContext);
   let targetElement: any;
 
@@ -19,9 +23,17 @@ const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
   }
   return (
     <span
-      onClick={() => {
-        targetElement?.scrollIntoView({ behavior: "smooth" });
-        onChangePage(to);
+      onClick={async () => {
+        if (location.pathname !== "/") {
+          navigate("/");
+          setTimeout(() => {
+            targetElement?.scrollIntoView({ behavior: "smooth" });
+            onChangePage(to);
+          }, 1000);
+        } else {
+          targetElement?.scrollIntoView({ behavior: "smooth" });
+          onChangePage(to);
+        }
       }}
       className={` cursor-pointer opacity-50 ${className} ${
         currentPage === to && "!opacity-100 text-xl"

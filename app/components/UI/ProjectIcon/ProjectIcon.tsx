@@ -10,8 +10,8 @@ const ProjectIcon: FC<ProjectIconProps> = ({ tech }) => {
       className="flex flex-col gap-3 items-center justify-center z-[201]"
       key={tech.id}
     >
-      <TechnologyIcon className="!w-[60px] !h-[60px]" icon={tech.icon} />
-      <p className={`tracking-widest`}>{tech.name}</p>
+      <TechnologyIcon className="xl:w-[60px] xl:h-[60px]" icon={tech.icon} />
+      {/* <p className={`tracking-widest`}>{tech.name}</p> */}
     </li>
   );
 };

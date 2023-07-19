@@ -24,7 +24,7 @@ const Contact = () => {
       className="text-white min-h-screen flex justify-center flex-col"
     >
       <Header className="text-center">My Contacts</Header>
-      <div className="flex gap-2 mt-[60px] ">
+      <div className="flex 2xl:flex-row flex-col gap-2 mt-[60px] ">
         <ContactBoxes />
         <ContactForm />
       </div>

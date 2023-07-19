@@ -6,11 +6,12 @@ import SkillShowCase from "~/components/UI/SkillsShowCase/SkillsShowCase";
 import { getTechnologyGroups } from "~/utils/database/skills.server";
 import ContactSection from "../../components/ContactMe/ContactSection";
 import About from "~/components/About/About";
+import { PageContext } from "~/store/page-context";
+import { useContext, useEffect } from "react";
 
 const MyProject = () => {
+  const { currentPage } = useContext(PageContext);
   const loaderData = useLoaderData();
-  const data = useActionData();
-  console.log(data);
   const matches = useMatches();
   const rootData = matches[0].data;
   const projects = rootData.projects;

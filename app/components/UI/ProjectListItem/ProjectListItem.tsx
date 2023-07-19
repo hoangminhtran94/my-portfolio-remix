@@ -16,7 +16,7 @@ const ProjectListItem: FC<ProjectListItemProps> = ({
   technologies,
 }) => {
   return (
-    <Link className="article-wrapper bg-white" to={to}>
+    <Link className="article-wrapper max-w-[90vw] bg-white" to={to}>
       <img
         className="rounded-lg container-project object-cover"
         alt={label}

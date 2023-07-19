@@ -19,7 +19,7 @@ const ContactBoxes = () => {
         transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
       }}
       ref={ref}
-      className="flex-1 grid grid-cols-2 gap-4"
+      className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4"
     >
       <ContactBox label="Phone number" extendedBg="big-sur">
         <ClickableInfo info={rootUser.contactNumber} />
