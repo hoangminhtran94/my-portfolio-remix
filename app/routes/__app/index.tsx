@@ -41,7 +41,7 @@ const MyProject = () => {
 export default MyProject;
 
 export const meta: MetaFunction = () => {
-  return { title: "My Projects" };
+  return { title: "Minh Hoang Tran's Porfolio" };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
