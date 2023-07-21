@@ -44,7 +44,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className={`min-h-screen  flex flex-col ${
+        className={`min-h-screen  flex flex-col overflow-x-hidden ${
           inProjectDetail ? "endless-river" : "shore"
         } `}
       >
@@ -84,7 +84,7 @@ export function CatchBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen endless-river flex flex-col">
+      <body className="min-h-screen endless-river flex flex-col overflow-x-hidden">
         {/* <NavBar /> */}
         <main className="h-[80vh] flex flex-col items-center text-white justify-center">
           <h2 className="text-center">Something wrong happened...</h2>
@@ -123,7 +123,7 @@ export function ErrorBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen endless-river flex flex-col">
+      <body className="min-h-screen endless-river flex flex-col overflow-x-hidden">
         {/* <NavBar /> */}
         <main className="h-[80vh] flex flex-col items-center  text-white justify-center">
           <h2 className="text-center">Something wrong happened...</h2>
