@@ -25,6 +25,7 @@ import { getTechnologies } from "./utils/database/technology.server";
 import { getProjects } from "./utils/database/project.server";
 import PageContextProvider from "./store/page-context";
 import { ToastContainer } from "react-toastify";
+import { getTechnologyGroups } from "./utils/database/skills.server";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Minh Hoang Tran Portfolio",
@@ -43,7 +44,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className={`min-h-screen bg-slate-50 flex flex-col ${
+        className={`min-h-screen  flex flex-col ${
           inProjectDetail ? "endless-river" : "shore"
         } `}
       >
@@ -83,10 +84,10 @@ export function CatchBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-slate-50 flex flex-col">
-        <NavBar />
-        <main className="h-[80vh] flex flex-col items-center justify-center">
-          <h2 className="text-center">Error happened</h2>
+      <body className="min-h-screen endless-river flex flex-col">
+        {/* <NavBar /> */}
+        <main className="h-[80vh] flex flex-col items-center text-white justify-center">
+          <h2 className="text-center">Something wrong happened...</h2>
           <h3 className="text-center">
             {caught.data.error ? caught.data.error : "Unknown error"}
           </h3>
@@ -104,8 +105,13 @@ export function ErrorBoundary() {
   let error = useRouteError();
 
   let errorBody;
+
   if (isRouteErrorResponse(error)) {
-    errorBody = error.data;
+    if (error.status === 404) {
+      errorBody = "Page not found, please try again";
+    } else {
+      errorBody = "Something wrong happened!. Please try again";
+    }
   } else if (error instanceof Error) {
     errorBody = error.message;
   } else {
@@ -117,10 +123,10 @@ export function ErrorBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-slate-50 flex flex-col">
-        <NavBar />
-        <main className="h-[80vh] flex flex-col items-center justify-center">
-          <h2 className="text-center">Error happened</h2>
+      <body className="min-h-screen endless-river flex flex-col">
+        {/* <NavBar /> */}
+        <main className="h-[80vh] flex flex-col items-center  text-white justify-center">
+          <h2 className="text-center">Something wrong happened...</h2>
           <h3 className="text-center">{errorBody}</h3>
         </main>
         <Footer />
@@ -138,26 +144,22 @@ export const loader: LoaderFunction = async ({ request }) => {
   } catch (error) {
     rootUser = null;
   }
-
-  let user;
+  let frontends;
+  let backends;
   try {
-    user = await getUserFromSession(request);
+    frontends = await getTechnologyGroups("frontend");
+    backends = await getTechnologyGroups("backend");
   } catch (error) {
-    user = null;
-  }
-  let technologies: any = [];
-  try {
-    technologies = await getTechnologies();
-  } catch (error) {
-    technologies = [];
+    frontends = null;
+    backends = null;
   }
 
-  let projects: any = [];
-  try {
-    projects = await getProjects();
-  } catch (error) {
-    projects = [];
-  }
-
-  return json({ rootUser, userData: user, technologies, projects });
+  return json({
+    rootUser,
+    user: rootUser,
+    frontends,
+    backends,
+    technologies: rootUser?.technologies,
+    projects: rootUser?.projects,
+  });
 };

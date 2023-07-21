@@ -1,45 +1,24 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link, useLocation, useMatches } from "@remix-run/react";
-import { motion, useInView } from "framer-motion";
-import { useContext, useEffect, useRef, useState } from "react";
-import { PageContext } from "~/store/page-context";
+import { useLocation, useMatches } from "@remix-run/react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+
+import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
 const About = () => {
   const { pathname } = useLocation();
   const [loaded, setLoaded] = useState(false);
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref);
 
-  const { onChangePage } = useContext(PageContext);
-  const timeoutRef = useRef<any>(null);
-  useEffect(() => {
-    if (isInView) {
-      timeoutRef.current = setTimeout(() => {
-        onChangePage("about");
-      }, 400);
-    } else {
-      clearTimeout(timeoutRef.current);
-    }
-  }, [isInView]);
   useEffect(() => {
     setLoaded(true);
   }, []);
 
   return (
-    <div
+    <InviewWrapper
+      loadedState={loaded}
       id="about"
-      ref={ref}
-      style={
-        loaded
-          ? {
-              transform: isInView ? "none" : "translateY(-200px)",
-              opacity: isInView ? 1 : 0,
-              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-            }
-          : {}
-      }
+      mode="top-bottom"
       className=" text-white drop-shadow-sm min-h-screen  text-justify  items-center font-extrabold flex gap-4  "
       key={pathname}
     >
@@ -62,13 +41,7 @@ const About = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-[36px] md:text-[60px]  tracking-widest"
           >
-            <Typewriter
-              words={[rootUser.firstLineAbout]}
-              loop={true}
-              // typeSpeed={40}
-              cursor
-            />
-            {}
+            <Typewriter words={[rootUser.firstLineAbout]} loop={true} cursor />
           </motion.div>
           <motion.h3
             initial={{ opacity: 0, x: 300 }}
@@ -91,7 +64,7 @@ const About = () => {
           ></motion.h3>
         </div>
       </div>
-    </div>
+    </InviewWrapper>
   );
 };
 export default About;

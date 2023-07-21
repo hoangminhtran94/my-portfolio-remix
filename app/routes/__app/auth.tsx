@@ -9,7 +9,7 @@ import { useState, useRef, useContext, useEffect } from "react";
 import useClickOutside from "~/utils/hooks/useClickOutside";
 import type { ActionFunction } from "@remix-run/node";
 import { PageContext } from "~/store/page-context";
-
+import InviewWrapper from "~/components/UI/InviewWrapper/InviewWrapper";
 const Auth = () => {
   const [searchParams] = useSearchParams();
   const { onChangePage } = useContext(PageContext);
@@ -24,8 +24,8 @@ const Auth = () => {
 
   const mode = searchParams.get("mode") ?? "login";
   return (
-    <div className="w-full flex justify-center self-center ">
-      <div className="w-[80%] lg:w-[40%] bg-white p-10 rounded-lg drop-shadow-lg">
+    <div className="w-full flex justify-center self-center flex-1 items-center">
+      <InviewWrapper className="w-[80%] lg:w-[40%] bg-white p-10 rounded-lg drop-shadow-lg">
         <p className="text-center text-3xl flex gap-2 justify-center">
           Login
           {/* {mode === "login" ? "Login" : "Register"} */}
@@ -65,7 +65,7 @@ const Auth = () => {
             {mode === "login" ? "Register for me only" : "Login for me only"}
           </Link> */}
         </Form>
-      </div>
+      </InviewWrapper>
     </div>
   );
 };

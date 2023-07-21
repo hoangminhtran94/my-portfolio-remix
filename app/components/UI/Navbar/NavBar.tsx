@@ -94,14 +94,14 @@ const NavBar = () => {
               <ScrollLink to="my-contact">My Contacts</ScrollLink>
             </li>
             {!data || !data.userData ? (
-              <li className="hover:scale-110 transition-all">
-                <NavLink className="opacity-50" to="/auth">
+              <li className="hover:scale-110 transition-all ">
+                <NavLink className="opacity-50 " to="/auth">
                   Login
                 </NavLink>
               </li>
             ) : (
               <>
-                <li className="hover:scale-110 transition-all">
+                <li className="hover:scale-110 transition-all ">
                   <NavLink className="opacity-50" to="/profile">
                     {data.userData.name}
                   </NavLink>

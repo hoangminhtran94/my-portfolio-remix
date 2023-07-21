@@ -1,38 +1,21 @@
-import { useEffect, type FC, useRef, useContext } from "react";
+import { type FC } from "react";
 import type { Project } from "~/utils/models/models";
 import ProjectList from "../UI/ProjectList/ProjectList";
 import Header from "../UI/Header/Header";
-import { useInView } from "framer-motion";
-import { PageContext } from "~/store/page-context";
+import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
 
 const Projects: FC<{ projects: Project[] }> = ({ projects }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const isInView = useInView(ref);
-  const { onChangePage } = useContext(PageContext);
-
-  const timeoutRef = useRef<any>(null);
-  useEffect(() => {
-    if (isInView) {
-      timeoutRef.current = setTimeout(() => {
-        onChangePage("my-project");
-      }, 400);
-    } else {
-      clearTimeout(timeoutRef.current);
-    }
-  }, [isInView]);
-
   return (
-    <div
-      ref={ref}
+    <InviewWrapper
       id="my-project"
+      mode="fade"
       className="text-white flex flex-col justify-center gap-10 min-h-screen"
     >
       <Header className="text-center">My Projects</Header>
       <div className="flex flex-col items-center gap-10 tracking-widest w-full rounded-md">
         <ProjectList projects={projects}></ProjectList>
       </div>
-    </div>
+    </InviewWrapper>
   );
 };
 export default Projects;

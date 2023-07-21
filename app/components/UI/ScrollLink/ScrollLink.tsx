@@ -24,13 +24,15 @@ const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
   }
   return (
     <span
-      onClick={async () => {
+      onClick={() => {
         if (location.pathname !== "/") {
           navigate("/");
+          onChangePage(to);
           onForceScrollTo(to);
+        } else {
+          targetElement?.scrollIntoView({ behavior: "smooth" });
+          onChangePage(to);
         }
-        targetElement?.scrollIntoView({ behavior: "smooth" });
-        onChangePage(to);
       }}
       className={` cursor-pointer opacity-50 ${className} ${
         currentPage === to && "!opacity-100 text-xl"

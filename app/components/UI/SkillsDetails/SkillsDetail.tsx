@@ -1,31 +1,19 @@
-import ProjectIcon from "../ProjectIcon/ProjectIcon";
 import type { FC } from "react";
-import { useRef, useEffect, useState } from "react";
-import type { Technology, TechnologyGroup } from "~/utils/models/models";
+
+import type { TechnologyGroup } from "~/utils/models/models";
 import SkillGroup from "~/components/SkillsPage/SkillGroup";
-import { useInView } from "framer-motion";
+
+import InviewWrapper from "../InviewWrapper/InviewWrapper";
+
 interface SkillsDetailProps {
   skillGroups: TechnologyGroup[];
   header: string;
-  once?: boolean;
 }
 
-const SkillsDetail: FC<SkillsDetailProps> = ({
-  skillGroups,
-  header,
-  once = false,
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once });
-
+const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
   return (
-    <div
-      ref={ref}
-      style={{
-        transform: isInView ? "none" : "translateX(-200px)",
-        opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-      }}
+    <InviewWrapper
+      mode="left-right"
       className={`w-full h-fit   rounded-xl 
                       z-[888]  flex flex-col items-center gap-[50px]`}
     >
@@ -39,7 +27,7 @@ const SkillsDetail: FC<SkillsDetailProps> = ({
           <div>Not available</div>
         )}
       </div>
-    </div>
+    </InviewWrapper>
   );
 };
 

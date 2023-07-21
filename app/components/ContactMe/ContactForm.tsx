@@ -3,15 +3,14 @@ import Input from "../UI/Input/Input";
 import TextArea from "../UI/TextArea/TextArea";
 import Button from "../UI/Button/Button";
 import type { ChangeEvent, FormEvent } from "react";
-import { useRef, useState } from "react";
-import { useInView } from "framer-motion";
-import { useActionData } from "@remix-run/react";
+import { useState } from "react";
 import FormSent from "./FormSent";
+import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
 
 const ContactForm = () => {
-  const ref = useRef<HTMLDivElement>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [success, setSuccess] = useState(false);
+
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     const response = await fetch("/api/send-message", {
@@ -19,7 +18,6 @@ const ContactForm = () => {
       method: "POST",
     });
     const data = await response.json();
-    console.log(data);
     if (data.error) {
       setErrors(data.error);
     } else {
@@ -40,17 +38,8 @@ const ContactForm = () => {
     });
   };
 
-  const isInView = useInView(ref);
   return (
-    <div
-      ref={ref}
-      style={{
-        transform: isInView ? "none" : "translateX(200px)",
-        opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-      }}
-      className="flex-1 "
-    >
+    <InviewWrapper mode="right-left" className="flex-1 ">
       {success ? (
         <FormSent />
       ) : (
@@ -102,7 +91,7 @@ const ContactForm = () => {
           <Button className="hover:!bg-indigo-600 mt-5">Send message</Button>
         </Form>
       )}
-    </div>
+    </InviewWrapper>
   );
 };
 

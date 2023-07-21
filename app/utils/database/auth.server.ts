@@ -70,7 +70,19 @@ export const getRootUser = async () => {
   try {
     user = await prisma.user.findFirst({
       where: { id: "64432d0ba5e18c1697a2e04c" },
-      include: { socialMedias: true, projects: true },
+      include: {
+        socialMedias: true,
+        projects: {
+          include: {
+            technologies: true,
+            projectFeatureImages: {
+              orderBy: { priority: "asc" },
+              include: { multiScreenImages: { orderBy: { priority: "asc" } } },
+            },
+          },
+        },
+        technologies: true,
+      },
     });
   } catch (error) {
     throw error;

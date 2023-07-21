@@ -3,22 +3,14 @@ import ClickableInfo from "./ClickableInfo";
 import ContactBox from "./ContactBox";
 import TechnologyIcon from "../UI/TechnologyIcon/TechnologyIcon";
 import { useMatches } from "@remix-run/react";
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
 
 const ContactBoxes = () => {
   const matches = useMatches();
   const rootUser = matches[0].data.rootUser;
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref);
   return (
-    <div
-      style={{
-        transform: isInView ? "none" : "translateX(-200px)",
-        opacity: isInView ? 1 : 0,
-        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-      }}
-      ref={ref}
+    <InviewWrapper
+      mode="left-right"
       className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4"
     >
       <ContactBox label="Phone number" extendedBg="big-sur">
@@ -47,7 +39,7 @@ const ContactBoxes = () => {
           ))}
         </div>
       </ContactBox>
-    </div>
+    </InviewWrapper>
   );
 };
 

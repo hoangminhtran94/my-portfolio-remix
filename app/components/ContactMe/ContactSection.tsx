@@ -1,30 +1,13 @@
-import { useContext, useEffect, useRef } from "react";
-import { useInView } from "framer-motion";
-
 import ContactForm from "./ContactForm";
 
 import ContactBoxes from "./ContactBoxes";
 import Header from "~/components/UI/Header/Header";
-import { PageContext } from "~/store/page-context";
 
+import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
 const Contact = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref);
-  const { onChangePage } = useContext(PageContext);
-
-  const timeoutRef = useRef<any>(null);
-  useEffect(() => {
-    if (isInView) {
-      timeoutRef.current = setTimeout(() => {
-        onChangePage("my-contact");
-      }, 400);
-    } else {
-      clearTimeout(timeoutRef.current);
-    }
-  }, [isInView]);
   return (
-    <div
-      ref={ref}
+    <InviewWrapper
+      mode="fade"
       id="my-contact"
       className="text-white min-h-screen flex justify-center flex-col"
     >
@@ -33,7 +16,7 @@ const Contact = () => {
         <ContactBoxes />
         <ContactForm />
       </div>
-    </div>
+    </InviewWrapper>
   );
 };
 export default Contact;
