@@ -11,7 +11,7 @@ const ContactBoxes = () => {
   return (
     <InviewWrapper
       mode="left-right"
-      className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4"
+      className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-10"
     >
       <ContactBox label="Phone number" extendedBg="big-sur">
         <ClickableInfo info={rootUser.contactNumber} />
@@ -24,7 +24,7 @@ const ContactBoxes = () => {
       </ContactBox>
 
       <ContactBox extendedBg="gradient-orange" label="Social Media">
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-5">
           {rootUser.socialMedias.map((sm: SocialMedia) => (
             <span
               title={sm.name}
@@ -34,7 +34,10 @@ const ContactBoxes = () => {
                 window.open(sm.link);
               }}
             >
-              <TechnologyIcon icon={sm.icon} />
+              <TechnologyIcon
+                className="!w-[30px] !h-[30px] xl:!w-[40px] xl:!h-[40px]"
+                icon={sm.icon}
+              />
             </span>
           ))}
         </div>

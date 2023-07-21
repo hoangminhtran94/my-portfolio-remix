@@ -15,10 +15,10 @@ const SkillsDetail: FC<SkillsDetailProps> = ({ skillGroups, header }) => {
     <InviewWrapper
       mode="left-right"
       className={`w-full h-fit   rounded-xl 
-                      z-[888]  flex flex-col items-center gap-[50px]`}
+                      z-[888]  flex flex-col items-center gap-5 xl:gap-[50px]`}
     >
       <h2 className="tracking-widest">{header}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full gap-5 xl:gap-10">
         {skillGroups && skillGroups.length > 0 ? (
           skillGroups.map((data: TechnologyGroup, index: number) => (
             <SkillGroup key={data.id} skillGroup={data} />

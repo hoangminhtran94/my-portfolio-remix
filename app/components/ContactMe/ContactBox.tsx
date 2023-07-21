@@ -11,7 +11,7 @@ const ContactBox: FC<ContactBoxProps & ComponentPropsWithoutRef<"div">> = ({
   children,
 }) => {
   return (
-    <div className="ag-courses_item tracking-widest border border-slate-500   ">
+    <div className="ag-courses_item tracking-widest border h-[200px] xl:h-[300px] border-slate-500   ">
       <div className="ag-courses-item_link ">
         <div className={`ag-courses-item_bg ${extendedBg}`}></div>
         <h2 className=" relative z-5">{label}</h2>

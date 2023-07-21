@@ -9,10 +9,10 @@ const Contact = () => {
     <InviewWrapper
       mode="fade"
       id="my-contact"
-      className="text-white min-h-screen flex justify-center flex-col"
+      className="text-white min-h-screen flex justify-center gap-5 xl:gap-10  flex-col"
     >
       <Header className="text-center">My Contacts</Header>
-      <div className="flex 2xl:flex-row flex-col gap-2 mt-[60px] ">
+      <div className="flex 2xl:flex-row flex-col gap-5  xl:gap-10  ">
         <ContactBoxes />
         <ContactForm />
       </div>

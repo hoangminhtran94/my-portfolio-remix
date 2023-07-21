@@ -9,7 +9,7 @@ const Projects: FC<{ projects: Project[] }> = ({ projects }) => {
     <InviewWrapper
       id="my-project"
       mode="fade"
-      className="text-white flex flex-col justify-center gap-10 min-h-screen"
+      className="text-white flex flex-col justify-center gap-5 xl:gap-10 min-h-screen"
     >
       <Header className="text-center">My Projects</Header>
       <div className="flex flex-col items-center gap-10 tracking-widest w-full rounded-md">

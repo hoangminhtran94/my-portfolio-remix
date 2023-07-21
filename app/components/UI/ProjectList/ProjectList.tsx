@@ -23,7 +23,7 @@ const ProjectList: FC<ProjectListProps> = ({ projects, children }) => {
       <label className=" justify-center text-base md:text-lg font-bold flex gap-5 flex-wrap items-center">
         {children}
       </label>
-      <div className="flex flex-wrap gap-10  justify-center">
+      <div className="flex flex-wrap gap-5 xl:gap-10  justify-center">
         {projects.map((project: Project) => (
           <ProjectListItem
             img={project.projectFeatureImages[0].image}

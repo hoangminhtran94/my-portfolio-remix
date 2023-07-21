@@ -13,7 +13,7 @@ const SkillShowCase: FC<SkillShowCaseProps> = ({ skillsData }) => {
     <InviewWrapper
       mode="fade"
       id="my-skills"
-      className="flex text-white flex-col justify-center gap-10 snap-center min-h-screen"
+      className="flex text-white flex-col justify-center gap-5 xl:gap-10 snap-center min-h-screen"
     >
       <Header className="text-center">My skills</Header>
       <SkillsDetail
