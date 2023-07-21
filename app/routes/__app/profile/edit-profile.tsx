@@ -62,17 +62,18 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="w-full lg:w-1/2 shadow-md border relative  border-slate-100 p-10 ">
+    <div className="w-full bg-white rounded shadow-md border relative  border-slate-100 p-10 ">
       <h2 className="text-center">Edit Profile</h2>
       <Form onSubmit={submitHandler} className="flex  flex-col gap-3">
         <ImageInput
           getImages={(data) => {
             setFile(data[0].file);
           }}
+          circle
+          className="mt-6"
           defaultImages={[user.profileImage]}
           name="profileImage"
           multiple={false}
-          label="Profile Image"
         />
         <Input name="name" defaultValue={user.name} label="Full name" />
         <Input name="username" defaultValue={user.username} label="Username" />

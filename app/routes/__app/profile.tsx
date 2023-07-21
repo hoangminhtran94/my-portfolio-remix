@@ -33,7 +33,7 @@ const Profile = () => {
   };
   const outlet = useOutlet();
   return (
-    <div className="flex items-center gap-10  flex-1 w-full">
+    <div className="flex justify-center  gap-10  flex-1 w-full">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={setKey()}
@@ -41,7 +41,7 @@ const Profile = () => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className=" flex w-full   items-start  justify-center"
+          className=" flex w-full xl:w-1/2  items-start  justify-center"
         >
           {outlet}
         </motion.div>

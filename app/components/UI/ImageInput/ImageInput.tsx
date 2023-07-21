@@ -2,13 +2,15 @@ import type { FC } from "react";
 import { useRef, useState, useEffect } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 interface ImageInputProps extends ComponentPropsWithoutRef<"input"> {
-  label: string;
+  label?: string;
   defaultImages?: string[];
+  circle?: boolean;
   getImages?: (image: { image: string; file: File | null }[]) => void;
 }
 const ImageInput: FC<ImageInputProps> = ({
   label,
   defaultImages = [],
+  circle = false,
   multiple = true,
   className,
   getImages,
@@ -25,9 +27,11 @@ const ImageInput: FC<ImageInputProps> = ({
     }
   }, [images]);
 
+  const roundedStyle = circle ? "rounded-full" : "rounded-lg";
+
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      <label htmlFor="image-input">{label}</label>
+    <div className={`flex flex-col gap-2 items-center ${className}`}>
+      {label && <label htmlFor="image-input">{label}</label>}
       <input
         multiple={multiple ?? true}
         ref={inputRef}
@@ -54,7 +58,7 @@ const ImageInput: FC<ImageInputProps> = ({
         {images.length > 0 &&
           images.map((image, index) => (
             <div
-              className="w-56 h-56 relative rounded-lg overflow-hidden"
+              className={`w-56 h-56 relative overflow-hidden ${roundedStyle}`}
               key={image.image}
             >
               <div
@@ -88,7 +92,7 @@ const ImageInput: FC<ImageInputProps> = ({
             onClick={() => {
               inputRef.current?.click();
             }}
-            className="cursor-pointer  hover:outline-2 hover:outline hover:outline-slate-400  border rounded-lg border-slate-200  w-56 h-56 "
+            className={`cursor-pointer  hover:outline-2 hover:outline hover:outline-slate-400  border ${roundedStyle} border-slate-200  w-56 h-56 `}
           >
             <div className="w-full h-full flex justify-center items-center hover:scale-110">
               <svg
@@ -108,7 +112,7 @@ const ImageInput: FC<ImageInputProps> = ({
             onClick={() => {
               inputRef.current?.click();
             }}
-            className="cursor-pointer  hover:outline-2 hover:outline hover:outline-slate-400  border rounded-lg border-slate-200  w-56 h-56 "
+            className={`cursor-pointer  hover:outline-2 hover:outline hover:outline-slate-400  border ${roundedStyle} border-slate-200  w-56 h-56`}
           >
             <div className="w-full h-full flex justify-center items-center hover:scale-110">
               <svg

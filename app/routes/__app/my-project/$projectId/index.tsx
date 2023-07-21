@@ -1,9 +1,8 @@
 import type { FeatureImage, Project, Technology } from "~/utils/models/models";
-import { Link, useLocation, useMatches, useParams } from "@remix-run/react";
+import { Link, useMatches, useParams } from "@remix-run/react";
 import ImageWithDescription from "~/components/UI/ImageWithDescription/ImageWithDescription";
 import type { MetaFunction } from "@remix-run/node";
 import { motion } from "framer-motion";
-import TechnologyIcon from "~/components/UI/TechnologyIcon/TechnologyIcon";
 import ProjectTechnology from "~/components/UI/ProjectTechnology/ProjectTechnology";
 import { useContext, useEffect } from "react";
 import { PageContext } from "~/store/page-context";
@@ -11,7 +10,6 @@ import { PageContext } from "~/store/page-context";
 const ProjectView = () => {
   const { onChangePage } = useContext(PageContext);
   const matches = useMatches();
-  const location = useLocation();
   const { projectId } = useParams();
   const projects: Project[] = matches[0].data.projects;
   const user = matches[0].data.user;

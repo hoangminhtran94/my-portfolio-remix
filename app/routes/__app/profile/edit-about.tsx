@@ -1,13 +1,8 @@
-import { useMatches, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import EditAboutForm from "~/components/About/AboutForm";
-import { ActionFunction, LoaderFunction, json } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { getUserFromSession, updateUser } from "~/utils/database/auth.server";
-import {
-  redirect,
-  unstable_parseMultipartFormData,
-  unstable_composeUploadHandlers,
-} from "@remix-run/node";
-import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
+import { redirect } from "@remix-run/node";
 
 const AboutEdit = () => {
   const data = useLoaderData();
@@ -48,35 +43,14 @@ export const action: ActionFunction = async ({ request }) => {
   const requestClone = request.clone();
   const formdata = await requestClone.formData();
   const data = Object.fromEntries(formdata);
-  let profileImageFormData = data.profileImage;
-
-  if (profileImageFormData) {
-    const uploadHandler = unstable_composeUploadHandlers(
-      async ({ data, contentType, name, filename }) => {
-        if (name !== "profileImage") {
-          return undefined;
-        }
-        const response = await uploadImageToCloudinary(data, "profileImage");
-        return response?.secure_url;
-      }
-    );
-    const imageFormData = await unstable_parseMultipartFormData(
-      request,
-      uploadHandler
-    );
-    profileImageFormData = imageFormData.get("profileImage")!;
-  }
 
   const databaseData = {
     ...data,
-    profileImage: profileImageFormData
-      ? profileImageFormData
-      : user.profileImage,
   };
 
   try {
     await updateUser(user.id, databaseData);
-    return redirect("/about");
+    return redirect("/profile");
   } catch (error) {
     throw error;
   }

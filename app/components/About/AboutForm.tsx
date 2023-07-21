@@ -22,12 +22,6 @@ const EditAboutForm: FC<EditAboutFormProps & FormProps> = ({
       encType="multipart/form-data"
       className={`${className}  flex flex-col gap-3`}
     >
-      <ImageInput
-        name="profileImage"
-        defaultImages={[user?.profileImage]}
-        multiple={false}
-        label="Profile Image"
-      />
       <Input
         defaultValue={user?.firstLineAbout}
         name="firstLineAbout"
