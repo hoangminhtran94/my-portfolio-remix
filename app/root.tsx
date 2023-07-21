@@ -38,7 +38,7 @@ export default function App() {
   const inProjectDetail =
     firstContainerPathPattern.id === "routes/__app/my-project/$projectId/index";
   return (
-    <html lang="en">
+    <html className="overflow-x-hidden" lang="en">
       <head>
         <Meta />
         <Links />
@@ -79,7 +79,7 @@ export function CatchBoundary() {
   const caught = useCatch();
 
   return (
-    <html lang="en">
+    <html className="overflow-x-hidden" lang="en">
       <head>
         <Meta />
         <Links />
@@ -118,7 +118,7 @@ export function ErrorBoundary() {
     errorBody = "Unknow error";
   }
   return (
-    <html lang="en">
+    <html className="overflow-x-hidden" lang="en">
       <head>
         <Meta />
         <Links />
