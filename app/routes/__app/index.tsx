@@ -26,7 +26,7 @@ const MyProject = () => {
   }, [forceScrollTo]);
 
   return (
-    <div className="w-full flex-1 2xl:min-h-[1000px] flex flex-col gap-6">
+    <div className="w-full mx-auto flex-1 2xl:min-h-[1000px] container flex flex-col gap-6">
       <About />
 
       <Projects projects={projects} />

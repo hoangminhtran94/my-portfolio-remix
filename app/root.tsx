@@ -41,13 +41,13 @@ export default function App() {
     firstContainerPathPattern.id === "routes/__app/my-project/$projectId/index";
 
   return (
-    <html className="overflow-x-hidden" lang="en">
+    <html lang="en">
       <head>
         <Meta />
         <Links />
       </head>
       <body
-        className={`min-h-screen  flex flex-col overflow-x-hidden ${
+        className={`min-h-screen  flex flex-col ${
           inProjectDetail ? "endless-river" : "shore"
         } `}
       >

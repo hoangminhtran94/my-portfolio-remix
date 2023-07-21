@@ -19,7 +19,7 @@ const NavBar = ({ user }: { user?: User }) => {
 
   return (
     <header
-      className={`fixed top-0 flex justify-between w-full text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-[5000]  `}
+      className={` sticky top-0 flex justify-between w-full text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-[5000]  `}
     >
       <Link className="hover:scale-110 transition-all" to="/">
         <img

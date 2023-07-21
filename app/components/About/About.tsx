@@ -19,7 +19,7 @@ const About = () => {
       loadedState={loaded}
       id="about"
       mode="top-bottom"
-      className=" text-white drop-shadow-sm min-h-screen mt-[80px] 3xl:mt-0  text-justify  items-center font-extrabold flex gap-4  "
+      className=" text-white drop-shadow-sm min-h-screen 3xl:mt-0  text-justify  items-center font-extrabold flex gap-4  "
       key={pathname}
     >
       <div className="flex flex-col 3xl:flex-row gap-14 items-center md:py-9">

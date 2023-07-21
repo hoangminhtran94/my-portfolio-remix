@@ -1,4 +1,4 @@
-import { Link, useMatches, useOutlet } from "@remix-run/react";
+import { useOutlet } from "@remix-run/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
@@ -6,8 +6,7 @@ import { getUserFromSession } from "~/utils/database/auth.server";
 import { redirect } from "@remix-run/node";
 const Profile = () => {
   const location = useLocation();
-  const matches = useMatches();
-  const rootData = matches[0].data;
+
   const container1 = {
     hidden: { opacity: 0, x: -50 },
     show: {
@@ -33,7 +32,7 @@ const Profile = () => {
   };
   const outlet = useOutlet();
   return (
-    <div className="flex justify-center  gap-10  flex-1 w-full">
+    <div className="flex justify-center  gap-10  flex-1 w-full container mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={setKey()}
