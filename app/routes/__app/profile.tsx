@@ -23,8 +23,8 @@ const Profile = () => {
   };
 
   const setKey = () => {
-    if (location.pathname.includes("edit-profile")) {
-      return "profile-edit-profile-container";
+    if (location.pathname.includes("technology")) {
+      return "profile-edit-technology-container";
     }
     if (location.pathname.includes("skills-edit")) {
       return "skills-edit-profile-container";

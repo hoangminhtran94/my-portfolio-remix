@@ -153,7 +153,7 @@ export const login = async (credientials: any) => {
     throw serverError(403, "Authentication failed");
   }
   try {
-    return await createUserSession(user.id!, "/my-project");
+    return await createUserSession(user.id!, "/profile");
   } catch (error) {
     throw error;
   }

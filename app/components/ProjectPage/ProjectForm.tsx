@@ -113,7 +113,7 @@ const ProjectForm: FC<
       />
 
       <div className="flex gap-5">
-        <Button to={"/my-project"} className="flex-1">
+        <Button to={"/profile"} className="flex-1">
           Cancel
         </Button>
         <Button type="submit" className="flex-1">

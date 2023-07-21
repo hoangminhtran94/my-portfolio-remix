@@ -92,7 +92,7 @@ export function CatchBoundary() {
         <Links />
       </head>
       <body className="min-h-screen endless-river flex flex-col overflow-x-hidden">
-        {/* <NavBar /> */}
+        <NavBar />
         <main className="h-[80vh] flex flex-col items-center text-white justify-center">
           <h2 className="text-center">Something wrong happened...</h2>
           <h3 className="text-center">
@@ -131,7 +131,7 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body className="min-h-screen endless-river flex flex-col overflow-x-hidden">
-        {/* <NavBar /> */}
+        <NavBar />
         <main className="h-[80vh] flex flex-col items-center  text-white justify-center">
           <h2 className="text-center">Something wrong happened...</h2>
           <h3 className="text-center">{errorBody}</h3>
