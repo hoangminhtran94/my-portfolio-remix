@@ -44,7 +44,7 @@ const ProjectListItem: FC<ProjectListItemProps> = ({
             </svg>
           </div>
         </div>
-        <div className="types">
+        <div className="types flex-wrap ">
           {technologies.map((tech, index) => {
             if (index <= 6) {
               return <TechnologyIcon key={tech.id} icon={tech.icon} />;
