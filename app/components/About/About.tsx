@@ -19,7 +19,7 @@ const About = () => {
       loadedState={loaded}
       id="about"
       mode="top-bottom"
-      className=" text-white drop-shadow-sm min-h-screen  text-justify  items-center font-extrabold flex gap-4  "
+      className=" text-white drop-shadow-sm min-h-screen mt-[80px] 3xl:mt-0  text-justify  items-center font-extrabold flex gap-4  "
       key={pathname}
     >
       <div className="flex flex-col 3xl:flex-row gap-14 items-center md:py-9">
@@ -39,7 +39,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-[36px] md:text-[60px]  tracking-widest"
+            className="text-[36px] md:text-[60px] h-[100px]  tracking-widest"
           >
             <Typewriter words={[rootUser.firstLineAbout]} loop={true} cursor />
           </motion.div>

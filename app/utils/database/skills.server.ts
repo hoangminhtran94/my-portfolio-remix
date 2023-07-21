@@ -59,9 +59,7 @@ export const updateSkillGroup = async (
   });
   try {
     await Promise.all(promises2);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
   try {
     return await prisma.technologyGroup.update({

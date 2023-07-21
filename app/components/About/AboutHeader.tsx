@@ -1,7 +1,7 @@
 import { Link, useMatches } from "@remix-run/react";
 const AboutHeader = () => {
   const matches = useMatches();
-  const user = matches[0].data.userData;
+  const user = matches[0].data.user;
   return (
     <div className="w-full">
       <h1 className="flex gap-3 justify-center purple-text ">

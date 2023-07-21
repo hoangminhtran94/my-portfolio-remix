@@ -33,44 +33,7 @@ const Profile = () => {
   };
   const outlet = useOutlet();
   return (
-    <div className="flex self-center gap-10  w-full h-full">
-      <div className="w-[400px] p-4 rounded-lg text-indigo-800 bg-white">
-        {rootData.userData && (
-          <div className="flex flex-col gap-3">
-            <Link
-              className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
-              to="/profile"
-            >
-              Edit Profile
-            </Link>
-            <Link
-              className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
-              to="edit-about"
-            >
-              Edit About
-            </Link>
-            <Link
-              className="  flex justify-center  flex-1 gap-2 items-center border border-indigo-400 p-2 rounded-md hover:bg-indigo-500 hover:text-white"
-              to="new-project"
-            >
-              New Project
-            </Link>
-            <Link
-              className=" flex-1 justify-center  flex gap-2 items-center border border-indigo-400 p-2 rounded-md  hover:bg-indigo-500 hover:text-white"
-              to="technology"
-            >
-              Technology
-            </Link>
-            <Link
-              className=" flex-1 justify-center  flex gap-2 items-center border border-indigo-400 p-2 rounded-md  hover:bg-indigo-500 hover:text-white"
-              to="skills-edit"
-            >
-              Edit skills
-            </Link>
-          </div>
-        )}
-      </div>
-
+    <div className="flex items-center gap-10  flex-1 w-full">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={setKey()}

@@ -1,9 +1,14 @@
 import { Form } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/node";
+import {
+  redirect,
+  type LoaderFunction,
+  type MetaFunction,
+} from "@remix-run/node";
 import { useSearchParams } from "@remix-run/react";
 import Input from "~/components/UI/Input/Input";
 import Button from "~/components/UI/Button/Button";
 import { Link } from "react-router-dom";
+import { sessionStorage as serverSessionStorage } from "~/utils/database/auth.server";
 import { login, register } from "~/utils/database/auth.server";
 import { useState, useRef, useContext, useEffect } from "react";
 import useClickOutside from "~/utils/hooks/useClickOutside";
@@ -72,23 +77,22 @@ const Auth = () => {
 
 export default Auth;
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await serverSessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  const userId = session.get("userId");
+  if (userId) {
+    throw redirect("/profile");
+  }
+  return null;
+};
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  // const searchParams = new URL(request.url).searchParams.get("mode");
-  // if (searchParams) {
-
-  // try {
-  //   return await register(data);
-  // } catch (error) {
-  //   console.log(error);
-  //   throw error;
-  // }
-  // } else {
   try {
     return await login(data);
   } catch (error) {
-    console.log(error);
     throw error;
   }
   // }

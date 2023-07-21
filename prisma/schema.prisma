@@ -26,6 +26,7 @@ model Technology {
 
 model Project {
   id                   String         @id @default(auto()) @map("_id") @db.ObjectId
+  showProject          Boolean        @default(true)
   name                 String
   description          String
   detailedDescription  String

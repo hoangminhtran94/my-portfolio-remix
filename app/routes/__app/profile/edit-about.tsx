@@ -15,7 +15,7 @@ const AboutEdit = () => {
   return (
     <div className="bg-white p-5 rounded-lg w-full border border-indigo-300 ">
       <h1>Edit About</h1>
-      <EditAboutForm userData={rootUser} />
+      <EditAboutForm user={rootUser} />
     </div>
   );
 };

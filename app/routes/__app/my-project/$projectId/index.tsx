@@ -14,7 +14,7 @@ const ProjectView = () => {
   const location = useLocation();
   const { projectId } = useParams();
   const projects: Project[] = matches[0].data.projects;
-  const user = matches[0].data.userData;
+  const user = matches[0].data.user;
   const project = projects.find((project: Project) => project.id === projectId);
   useEffect(() => {
     onChangePage("my-project");

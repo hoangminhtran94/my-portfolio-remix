@@ -47,7 +47,7 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const outlet = useOutlet();
-  const userData = matches[0].data.userData;
+  const user = matches[0].data.user;
   const [file, setFile] = useState<File | null>(null);
   const [searchParams] = useSearchParams();
   const submitHandler = (e: FormEvent) => {
@@ -69,32 +69,28 @@ const EditProfile = () => {
           getImages={(data) => {
             setFile(data[0].file);
           }}
-          defaultImages={[userData.profileImage]}
+          defaultImages={[user.profileImage]}
           name="profileImage"
           multiple={false}
           label="Profile Image"
         />
-        <Input name="name" defaultValue={userData.name} label="Full name" />
-        <Input
-          name="username"
-          defaultValue={userData.username}
-          label="Username"
-        />
+        <Input name="name" defaultValue={user.name} label="Full name" />
+        <Input name="username" defaultValue={user.username} label="Username" />
 
         <Input
           name="secondaryEmail"
-          defaultValue={userData.secondaryEmail}
+          defaultValue={user.secondaryEmail}
           label="Secondary contact email"
         />
         <Input
           name="contactNumber"
-          defaultValue={userData.contactNumber}
+          defaultValue={user.contactNumber}
           label="Contact Phone number"
         />
         <div>
           <label>Social media</label>
           <ul className="flex flex-wrap gap-1">
-            {userData.socialMedias.map((item: SocialMedia) => (
+            {user.socialMedias.map((item: SocialMedia) => (
               <li
                 className="flex items-center gap-1 py-1 px-2 border rounded-md border-slate-200"
                 key={item.id}

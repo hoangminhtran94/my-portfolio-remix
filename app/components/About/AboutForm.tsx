@@ -7,11 +7,11 @@ import ImageInput from "../UI/ImageInput/ImageInput";
 import type { FC } from "react";
 import type { User } from "~/utils/models/models";
 interface EditAboutFormProps {
-  userData: User;
+  user: User;
 }
 const EditAboutForm: FC<EditAboutFormProps & FormProps> = ({
   className,
-  userData,
+  user,
   ...props
 }) => {
   return (
@@ -24,22 +24,22 @@ const EditAboutForm: FC<EditAboutFormProps & FormProps> = ({
     >
       <ImageInput
         name="profileImage"
-        defaultImages={[userData?.profileImage]}
+        defaultImages={[user?.profileImage]}
         multiple={false}
         label="Profile Image"
       />
       <Input
-        defaultValue={userData?.firstLineAbout}
+        defaultValue={user?.firstLineAbout}
         name="firstLineAbout"
         label="First line"
       />
       <TextArea
-        defaultValue={userData?.secondLineAbout}
+        defaultValue={user?.secondLineAbout}
         name="secondLineAbout"
         label="Second line"
       />
       <TextArea
-        defaultValue={userData?.thirdLineAbout}
+        defaultValue={user?.thirdLineAbout}
         name="thirdLineAbout"
         label="Third line"
       />

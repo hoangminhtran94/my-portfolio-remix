@@ -2,7 +2,7 @@ import { Link, useMatches } from "@remix-run/react";
 
 const EducationHeader = () => {
   const matches = useMatches();
-  const user = matches[0].data.userData;
+  const user = matches[0].data.user;
   return (
     <div className="w-full">
       <h1 className="flex gap-3 justify-center green-text ">

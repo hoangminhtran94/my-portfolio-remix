@@ -106,9 +106,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   } else {
     try {
       await deleteImageFromCloudinary(technology.icon);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     databaseData = { ...data, icon: image };
   }
   try {

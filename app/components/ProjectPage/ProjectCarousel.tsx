@@ -102,7 +102,7 @@ const ProjectCarousel: FC<ProjectCarouselProps> = ({
             <ProjectDetail
               className={`${toggleViewImage ? "!hidden" : ""}   lg:!flex`}
               project={currentProject}
-              enableEdit={!!rootData.userData}
+              enableEdit={!!rootData.user}
             />
 
             <div

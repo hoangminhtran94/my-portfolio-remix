@@ -25,10 +25,10 @@ const SocialMedia = () => {
   const matches = useMatches();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const userData = matches[0].data.userData;
+  const user = matches[0].data.user;
 
   const currentSocialMedia = id
-    ? userData.socialMedias.find((sm: TypeSocialMedia) => sm.id === id)
+    ? user.socialMedias.find((sm: TypeSocialMedia) => sm.id === id)
     : null;
 
   return (
@@ -116,7 +116,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   const data = Object.fromEntries(formData);
   const icon = parsedData.get("icon");
-  console.log(data);
   const iconPath = icon
     ? icon
     : currentSocialMedia
@@ -134,15 +133,12 @@ export const action: ActionFunction = async ({ request }) => {
     if (icon) {
       try {
         await deleteImageFromCloudinary(currentSocialMedia.icon);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
 
     try {
       updateASocialMedia(mediaId, databaseData);
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }

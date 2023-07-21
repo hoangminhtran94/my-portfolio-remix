@@ -3,6 +3,7 @@ import stylesheet from "~/tailwind.css";
 import toastifyCSS from "react-toastify/dist/ReactToastify.css";
 import {
   isRouteErrorResponse,
+  useLoaderData,
   useMatches,
   useRouteError,
 } from "@remix-run/react";
@@ -21,11 +22,10 @@ import NavBar from "./components/UI/Navbar/NavBar";
 import appStyles from "~/styles/app.css";
 import Footer from "./components/UI/Footer/Footer";
 import { getRootUser, getUserFromSession } from "./utils/database/auth.server";
-import { getTechnologies } from "./utils/database/technology.server";
-import { getProjects } from "./utils/database/project.server";
 import PageContextProvider from "./store/page-context";
 import { ToastContainer } from "react-toastify";
 import { getTechnologyGroups } from "./utils/database/skills.server";
+import AdminNavBar from "./components/UI/AdminNavbar/AdminNavbar";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Minh Hoang Tran Portfolio",
@@ -34,9 +34,12 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   const matches = useMatches();
+  const data = useLoaderData();
+  const { user } = data;
   const firstContainerPathPattern = matches[2];
   const inProjectDetail =
     firstContainerPathPattern.id === "routes/__app/my-project/$projectId/index";
+
   return (
     <html className="overflow-x-hidden" lang="en">
       <head>
@@ -51,7 +54,11 @@ export default function App() {
         <div id="modal-hook"></div>
         <ToastContainer />
         <PageContextProvider>
-          <NavBar />
+          {firstContainerPathPattern.pathname.includes("profile") ? (
+            <AdminNavBar user={user} />
+          ) : (
+            <NavBar user={user} />
+          )}
           <Outlet />
         </PageContextProvider>
         <Footer />
@@ -144,6 +151,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   } catch (error) {
     rootUser = null;
   }
+  let user;
+  try {
+    await getUserFromSession(request);
+    user = rootUser;
+  } catch (error) {
+    user = null;
+  }
   let frontends;
   let backends;
   try {
@@ -156,7 +170,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return json({
     rootUser,
-    user: rootUser,
+    user,
     frontends,
     backends,
     technologies: rootUser?.technologies,

@@ -1,14 +1,12 @@
 import { NavLink, Link, useLocation } from "@remix-run/react";
-import { useLoaderData } from "@remix-run/react";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatches } from "@remix-run/react";
 import ScrollLink from "../ScrollLink/ScrollLink";
+import type { User } from "@prisma/client";
 
-const NavBar = () => {
-  const data = useLoaderData();
-
+const NavBar = ({ user }: { user?: User }) => {
   const matches = useMatches();
   const currentRoute = matches[2]?.id;
   const [showNavBar, setShowNavBar] = useState(false);
@@ -113,7 +111,7 @@ const NavBar = () => {
             >
               <ScrollLink to="my-contact">My Contacts</ScrollLink>
             </li>
-            {!data || !data.userData ? (
+            {!user ? (
               <li className="hover:scale-110 transition-all ">
                 <NavLink className="opacity-50 " to="/auth">
                   Login
@@ -123,7 +121,7 @@ const NavBar = () => {
               <>
                 <li className="hover:scale-110 transition-all ">
                   <NavLink className="opacity-50" to="/profile">
-                    {data.userData.name}
+                    {user.name}
                   </NavLink>
                 </li>
                 <li className="hover:scale-110 transition-all">

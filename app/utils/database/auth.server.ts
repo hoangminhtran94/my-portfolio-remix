@@ -73,6 +73,11 @@ export const getRootUser = async () => {
       include: {
         socialMedias: true,
         projects: {
+          where: {
+            NOT: {
+              showProject: false,
+            },
+          },
           include: {
             technologies: true,
             projectFeatureImages: {
