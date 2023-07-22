@@ -18,6 +18,8 @@ module.exports = {
       },
       dropShadow: {
         "white-lg": "0 10px 8px rgba(255, 255, 255, 0.8)",
+        "white-around": "0 0px 8px rgba(255, 255, 255, 0.8)",
+        "orand-around": "0 0px 15px rgba(255, 148, 197, 0.8)",
       },
       animation: {
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",
