@@ -13,7 +13,7 @@ const AllProjectsPage = () => {
       <h2 className="text-center">All Projects</h2>
       {projects.map((project) => (
         <div
-          className=" flex justify-between items-center border border-indigo-200  rounded p-4 shadow-md"
+          className=" flex gap-5 flex-col lg:flex-row justify-between items-center border border-indigo-200  rounded p-4 shadow-md"
           key={project.id}
         >
           <div>{project.name}</div>
@@ -37,7 +37,7 @@ const AllProjectsPage = () => {
               <Form method="patch">
                 <input type="hidden" name="id" value={project.id} />
                 <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                  {project.showProject ? "Hide Project" : "Show Project"}
+                  {project.showProject ? "Hide" : "Show"}
                 </button>
               </Form>
               <Form method="delete">

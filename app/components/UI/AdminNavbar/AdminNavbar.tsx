@@ -1,18 +1,10 @@
 import type { User } from "@prisma/client";
 import { Link, NavLink } from "@remix-run/react";
 
+import NavbarWrapper from "../NavbarWrapper/NavbarWrapper";
 const AdminNavBar = ({ user }: { user?: User }) => {
   return user ? (
-    <header
-      className={`flex justify-between w-full text-slate-100  items-center  py-[18px] md:py-[36px] px-4 md:px-12 z-[5000]  `}
-    >
-      <Link className="hover:scale-110 transition-all" to="/">
-        <img
-          className="h-[40px] w-auto object-contain"
-          src="/images/logo.svg"
-          alt="logo"
-        />
-      </Link>
+    <NavbarWrapper>
       <ul
         className={`flex lg:text-slate-100  flex-col lg:flex-row gap-[60px] md:gap-[80px] text-xl lg:text-[16px] items-center
             }`}
@@ -53,9 +45,9 @@ const AdminNavBar = ({ user }: { user?: User }) => {
           </Link>
         </li>
       </ul>
-    </header>
+    </NavbarWrapper>
   ) : (
-    <header>Not available</header>
+    <div>Not available</div>
   );
 };
 

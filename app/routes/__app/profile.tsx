@@ -35,7 +35,7 @@ const Profile = () => {
   };
   const outlet = useOutlet();
   return (
-    <div className="flex justify-center  gap-10  flex-1 w-full container mx-auto">
+    <div className="flex justify-center mt-[60px]  gap-10 page-in-left  flex-1 w-full container mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={setKey()}
