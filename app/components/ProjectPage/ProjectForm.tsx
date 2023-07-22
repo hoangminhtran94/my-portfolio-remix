@@ -1,7 +1,7 @@
 import Input from "../UI/Input/Input";
 import TextArea from "../UI/TextArea/TextArea";
 import Button from "../UI/Button/Button";
-import { Form } from "@remix-run/react";
+import { Form, useTransition } from "@remix-run/react";
 import type { FormEvent } from "react";
 import { useMatches, useFetcher } from "@remix-run/react";
 import type { FormProps } from "@remix-run/react";
@@ -11,7 +11,7 @@ import { useState } from "react";
 import type { FeatureImage, Project, Technology } from "~/utils/models/models";
 import FeatureImageInput from "../UI/FeatureImageInput/FeatureImageInput";
 import { v4 } from "uuid";
-
+import LoadingSpinner from "~/components/UI/LoadingSpinner/LoadingSpinner";
 const ProjectForm: FC<
   FormProps & ComponentPropsWithoutRef<"form"> & { project?: Project }
 > = (props) => {
@@ -30,8 +30,8 @@ const ProjectForm: FC<
         }))
       : []
   );
-
   const fetcher = useFetcher();
+  const transition = useTransition();
   const submitHandler = (event: FormEvent) => {
     const formData = new FormData(event.target as HTMLFormElement);
     if (selectedTechonologies.length > 0) {
@@ -64,6 +64,7 @@ const ProjectForm: FC<
       {...props}
       className={`${props.className}  flex flex-col gap-3`}
     >
+      {transition.state !== "idle" && <LoadingSpinner />}
       <h2>{props.project ? "Edit" : "New"} Project</h2>
       <Input
         defaultValue={props.project?.name}

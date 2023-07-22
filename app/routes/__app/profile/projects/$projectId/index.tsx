@@ -1,5 +1,5 @@
 import type { ActionFunction } from "@remix-run/node";
-import LoadingSpinner from "~/components/UI/LoadingSpinner/LoadingSpinner";
+
 import {
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
@@ -21,7 +21,7 @@ import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
 
 const EditProject = () => {
   const projects = useOutletContext<Project[]>();
-  const transition = useTransition();
+
   const { projectId } = useParams();
 
   if (!projects || projects.length === 0) {
