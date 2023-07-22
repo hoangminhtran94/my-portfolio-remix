@@ -39,10 +39,10 @@ const EditAboutForm: FC<EditAboutFormProps & FormProps> = ({
       />
 
       <div className="flex gap-5">
-        <Button to={"/my-project"} className="flex-1">
+        <Button to={"/my-project"} className="flex-1 btn-light">
           Cancel
         </Button>
-        <Button type="submit" className="flex-1">
+        <Button type="submit" className="flex-1 btn-primary-outline">
           Save
         </Button>
       </div>

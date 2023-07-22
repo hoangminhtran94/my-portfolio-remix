@@ -1,7 +1,7 @@
 const TableHeader = () => {
   return (
     <li
-      className=" sticky bg-slate-50 top-0  py-4  grid grid-cols-4 md:grid-cols-6 items-center font-bold text-sm  lg:text-md  "
+      className=" sticky z-50 bg-slate-50 top-0  py-4  grid grid-cols-4 md:grid-cols-6 items-center font-bold text-sm  lg:text-md  "
       key="header"
     >
       <span className="text-center">Icon</span>

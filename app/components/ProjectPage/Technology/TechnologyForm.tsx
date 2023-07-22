@@ -39,10 +39,10 @@ const TechnologyForm: FC<{ tech?: Technology }> = ({ tech }) => {
         label="Icon"
       />
       <div className="flex w-full gap-5 mt-auto">
-        <Button to={".."} className="flex-1">
+        <Button to={".."} className="flex-1 btn-light">
           Cancel
         </Button>
-        <Button disabled={submitting} className="flex-1">
+        <Button disabled={submitting} className="flex-1 btn-success">
           {submitting ? "Submitting" : "Submit"}
         </Button>
       </div>

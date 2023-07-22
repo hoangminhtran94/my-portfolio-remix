@@ -59,7 +59,7 @@ export default function App() {
           ) : (
             <NavBar user={user} />
           )}
-          <Outlet />
+          <Outlet context={{ rootData: data }} />
         </PageContextProvider>
         <Footer />
         <ScrollRestoration />

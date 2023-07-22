@@ -1,8 +1,8 @@
-import { useOutlet } from "@remix-run/react";
+import { Form, useOutlet } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "~/components/UI/Button/Button";
 import { useLocation } from "@remix-run/react";
-
+import InputSearch from "~/components/UI/InputSearch/InputSearch";
 import type { LoaderFunction } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { redirect } from "@remix-run/node";
@@ -28,10 +28,12 @@ const NewTechnology = () => {
       <div className=" bg-white drop-shadow-md p-4 rounded flex flex-col gap-4">
         <h2 className="text-center">Technology management</h2>
         <div className=" flex flex-col gap-2">
-          <Button className="flex-1" to={"new-technology"}>
+          <Button className="flex-1 btn-primary-outline" to={"new-technology"}>
             New technology
           </Button>
-          <Button className="flex-1">Search</Button>
+          <Form>
+            <InputSearch required placeholder="Search for a technology" />
+          </Form>
         </div>
       </div>
       <AnimatePresence mode="wait">

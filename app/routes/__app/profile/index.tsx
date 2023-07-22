@@ -9,7 +9,7 @@ const MyProfile = () => {
     return <div>Not available</div>;
   }
   return (
-    <div className=" shadow-md border bg-white w-full  border-slate-100 rounded-lg gap-9 flex p-8 flex-col items-center">
+    <div className=" shadow-md border bg-white w-fit  border-slate-100 rounded-lg gap-9 flex p-8 flex-col items-center">
       <h2 className=" font-bold">{userData.name}</h2>
       <img
         className="w-[200px] h-[200px] object-cover  rounded-full shadow-lg "
@@ -34,10 +34,10 @@ const MyProfile = () => {
             ))}
           </div>
         </h4>
+        <Button className="w-full mt-5 btn-primary-outline" to={"edit-profile"}>
+          Edit
+        </Button>
       </div>
-      <Button className="w-full" to={"edit-profile"}>
-        Edit
-      </Button>
     </div>
   );
 };

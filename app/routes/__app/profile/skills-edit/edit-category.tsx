@@ -1,18 +1,20 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Form, useLoaderData, useMatches } from "@remix-run/react";
+import { Form, useOutletContext, useMatches } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import { useState } from "react";
 import Input from "~/components/UI/Input/Input";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { updateTechnologyCategory } from "~/utils/database/skills.server";
+import type { TechnologyCategory, TechnologyType } from "@prisma/client";
 
 const EditCategory = () => {
-  const matches = useMatches();
+  const data = useOutletContext<{
+    technologyTypes: TechnologyType[];
+    technologyCategories: TechnologyCategory[];
+  }>();
   const [selectedType, setSelectedType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const data = matches[2].data;
 
   return (
     <Form
@@ -66,8 +68,8 @@ const EditCategory = () => {
         <Input
           defaultValue={
             data?.technologyCategories.find(
-              (cat: any) => cat.id === selectedCategory
-            ).name
+              (cat) => cat.id === selectedCategory
+            )?.name
           }
           label="Category name"
           name="name"
@@ -76,10 +78,10 @@ const EditCategory = () => {
         />
       )}
       <div className="flex gap-3">
-        <Button to=".." className="flex-1">
+        <Button to=".." className="flex-1 btn-light">
           Cancel
         </Button>
-        <Button type="submit" className="flex-1">
+        <Button type="submit" className="flex-1 btn-success">
           Save
         </Button>
       </div>

@@ -9,7 +9,7 @@ const AboutEdit = () => {
   const rootUser = data;
   return (
     <div className="bg-white p-5 rounded-lg w-full border border-indigo-300 ">
-      <h1>Edit About</h1>
+      <h2 className="text-center">Edit About</h2>
       <EditAboutForm user={rootUser} />
     </div>
   );

@@ -1,16 +1,16 @@
+import { TechnologyType } from "@prisma/client";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useOutletContext } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import Input from "~/components/UI/Input/Input";
 import { getUserFromSession } from "~/utils/database/auth.server";
-import {
-  createTechnologyCategory,
-  getTechnologyTypes,
-} from "~/utils/database/skills.server";
+import { createTechnologyCategory } from "~/utils/database/skills.server";
 
 const NewCategoryForm = () => {
-  const data = useLoaderData();
+  const data = useOutletContext<{
+    technologyTypes: TechnologyType[];
+  }>();
   return (
     <Form
       method="post"
@@ -38,18 +38,12 @@ const NewCategoryForm = () => {
         className="flex-1"
         containerClassName="h-full"
       />
-      <Button>Save</Button>
+      <Button className="btn-success">Save</Button>
     </Form>
   );
 };
 
 export default NewCategoryForm;
-
-export const loader: LoaderFunction = async ({ request }) => {
-  return {
-    technologyTypes: await getTechnologyTypes(),
-  };
-};
 
 export const action: ActionFunction = async ({ request }) => {
   try {

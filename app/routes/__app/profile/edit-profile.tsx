@@ -123,7 +123,7 @@ const EditProfile = () => {
           </ul>
         </div>
         <Button
-          className={`flex-1 ${
+          className={`flex-1 btn-purple-outline ${
             pathname.includes("social-media") && "invisible"
           }`}
           to={"social-media"}
@@ -132,10 +132,10 @@ const EditProfile = () => {
         </Button>
 
         <div className="flex gap-3 mt-6">
-          <Button className="flex-1" to={".."}>
+          <Button className="flex-1 btn-light" to={".."}>
             Cancel
           </Button>
-          <Button className="flex-1">Submit</Button>
+          <Button className="flex-1 btn-success">Submit</Button>
         </div>
       </Form>
       <AnimatePresence mode="wait" initial={false}>

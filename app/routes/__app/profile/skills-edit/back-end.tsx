@@ -1,7 +1,17 @@
-import { Form, useLoaderData, useMatches, Outlet } from "@remix-run/react";
+import {
+  Form,
+  useLoaderData,
+  useMatches,
+  Outlet,
+  useOutletContext,
+} from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import InputDropdown from "~/components/UI/InputDropdown/InputDropdown";
-import type { Technology } from "~/utils/models/models";
+import type {
+  Technology,
+  TechnologyCategory,
+  TechnologyType,
+} from "~/utils/models/models";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { useFetcher } from "@remix-run/react";
@@ -21,8 +31,11 @@ const BackEndEditForm = () => {
   const loaderdata = useLoaderData();
   const fetcher = useFetcher();
   const technologies: Technology[] = matches[0].data.technologies;
-  const categoriesdata = matches[2].data;
-  const currentCategories = categoriesdata?.technologyCategories.filter(
+  const data = useOutletContext<{
+    technologyTypes: TechnologyType[];
+    technologyCategories: TechnologyCategory[];
+  }>();
+  const currentCategories = data?.technologyCategories.filter(
     (tech: any) =>
       tech.type.name === "backend" &&
       (!loaderdata || loaderdata?.length === 0
@@ -55,14 +68,14 @@ const BackEndEditForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 border border-indigo-300 p-5">
+    <div className="flex flex-col gap-3 p-5">
       <div className="flex flex-col gap-3">
         <Button
           to="new-group"
           className={
             !currentCategories || currentCategories.length === 0
-              ? "cursor-not-allowed opacity-50 pointer-events-none"
-              : ""
+              ? "cursor-not-allowed opacity-50 pointer-events-none btn-light"
+              : " btn-purple-outline "
           }
         >
           {!currentCategories || currentCategories.length === 0
@@ -72,7 +85,7 @@ const BackEndEditForm = () => {
         <Outlet />
       </div>
       <Form className={`rounded  flex flex-col gap-3`} onSubmit={submitHandler}>
-        <div className="flex flex-col gap-3  border-b border-b-indigo-300">
+        <div className="flex flex-col gap-3 ">
           <h2>Backend skills</h2>
 
           {loaderdata?.map((group: any, firstIndex: number) => (
@@ -128,10 +141,10 @@ const BackEndEditForm = () => {
         </div>
 
         <div className="flex gap-5">
-          <Button to={".."} className="flex-1">
+          <Button to={".."} className="flex-1 btn-light">
             Cancel
           </Button>
-          <Button type="submit" className="flex-1">
+          <Button type="submit" className="flex-1 btn-success">
             Save
           </Button>
         </div>
