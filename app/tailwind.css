@@ -30,8 +30,17 @@
   .carousel-active {
     @apply relative font-extrabold scale-[115%];
   }
+  .deep-black {
+    @apply bg-gradient-to-r from-slate-700 via-slate-800 to-slate-800;
+  }
+  .glowing-bg {
+    @apply relative before:absolute before:w-full before:h-full before:-z-10 before:bg-gradient-to-r before:from-[#782fff] before:to-[#d489ff] before:left-0 before:top-0 before:blur-[5px];
+  }
   .frost {
     @apply bg-gradient-to-r from-blue-900 to-cyan-500;
+  }
+  .deep-blue {
+    @apply bg-gradient-to-r from-violet-900 via-fuchsia-900 to-fuchsia-900;
   }
   .blue-coral {
     @apply bg-gradient-to-r from-blue-400 to-emerald-400;

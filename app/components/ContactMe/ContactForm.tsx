@@ -44,7 +44,8 @@ const ContactForm = () => {
         <FormSent />
       ) : (
         <Form
-          className="w-full h-full p-5 flex flex-col bg-indigo-700 rounded-md"
+          className="w-full h-full p-5 flex flex-col deep-blue  relative
+          glowing-bg rounded-lg"
           onSubmit={submitHandler}
         >
           <h2>Contact me now</h2>
@@ -88,7 +89,11 @@ const ContactForm = () => {
             textAreaClassName="!bg-transparent"
             label="Message"
           />
-          <Button className="hover:!bg-indigo-600 mt-5">Send message</Button>
+          <button className="relative inline-flex w-fit  items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span className="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Send message
+            </span>
+          </button>
         </Form>
       )}
     </InviewWrapper>
