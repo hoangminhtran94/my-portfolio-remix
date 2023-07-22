@@ -1,5 +1,3 @@
-import type { Project } from "../models/models";
-
 import { prisma } from "./db.server";
 import { deleteImageFromCloudinary } from "../fileUpload/fileUpload";
 
@@ -18,15 +16,7 @@ export const getProjects = async () => {
   } catch (error) {
     throw error;
   }
-  return projects.map((project: Project) => {
-    const displayImages = project.projectFeatureImages
-      .filter((img) => img.showIn === "both" || img.showIn === "carousel")
-      .map(
-        (img) =>
-          img.multiScreenImages?.find((data) => data.priority === "1")?.image
-      );
-    return { ...project, projectImages: displayImages };
-  });
+  return projects;
 };
 
 export const getAProject = async (id: string) => {
@@ -234,7 +224,6 @@ export const editProject = async (changedData: any) => {
       id: id,
     })
   );
-  console.log(disconnections);
 
   try {
     return await prisma.project.update({
@@ -248,6 +237,24 @@ export const editProject = async (changedData: any) => {
         demoLink: changedData.demoLink,
         technologies: { connect: connections, disconnect: disconnections },
       },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const changeProjectVisibility = async (projectId: string) => {
+  try {
+    return await prisma.$transaction(async (context) => {
+      const { id, ...project } = await context.project.findFirstOrThrow({
+        where: { id: projectId },
+      });
+      const currentVisiblity = project.showProject;
+
+      await context.project.update({
+        where: { id },
+        data: { ...project, showProject: !currentVisiblity },
+      });
     });
   } catch (error) {
     throw error;

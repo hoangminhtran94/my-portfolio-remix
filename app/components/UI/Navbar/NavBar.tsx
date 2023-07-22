@@ -144,7 +144,7 @@ const NavBar = ({ user }: { user?: User }) => {
             ) : (
               <>
                 <li className="hover:scale-110 transition-all ">
-                  <NavLink className="opacity-50" to="/profile">
+                  <NavLink className="opacity-50" to="/profile/">
                     {user.name}
                   </NavLink>
                 </li>

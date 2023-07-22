@@ -64,6 +64,7 @@ const ProjectForm: FC<
       {...props}
       className={`${props.className}  flex flex-col gap-3`}
     >
+      <h2>{props.project ? "Edit" : "New"} Project</h2>
       <Input
         defaultValue={props.project?.name}
         name="name"
@@ -111,12 +112,11 @@ const ProjectForm: FC<
           setFeatureImages(images);
         }}
       />
-
-      <div className="flex gap-5">
-        <Button to={"/profile"} className="flex-1">
+      <div className="flex sticky -bottom-4 gap-5 z-10 pt-5  bg-white">
+        <Button to={"/profile/projects"} className="flex-1 btn-light">
           Cancel
         </Button>
-        <Button type="submit" className="flex-1">
+        <Button type="submit" className="flex-1 btn-success">
           {props.project ? "Save" : "Submit"}
         </Button>
       </div>

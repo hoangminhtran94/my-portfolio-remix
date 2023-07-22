@@ -25,6 +25,9 @@ const Profile = () => {
     if (location.pathname.includes("technology")) {
       return "profile-edit-technology-container";
     }
+    if (location.pathname.includes("projects")) {
+      return "profile-edit-projects-container";
+    }
     if (location.pathname.includes("skills-edit")) {
       return "skills-edit-profile-container";
     }

@@ -33,8 +33,8 @@ const AdminNavBar = ({ user }: { user?: User }) => {
           </NavLink>
         </li>
         <li className="hover:scale-110 transition-all">
-          <NavLink className="opacity-50" to="/profile/new-project">
-            New Project
+          <NavLink className="opacity-50" to="/profile/projects">
+            Manage Projects
           </NavLink>
         </li>
         <li className="hover:scale-110 transition-all">

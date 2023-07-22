@@ -15,10 +15,7 @@ import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
 import type { FeatureImage } from "~/utils/models/models";
 const NewProject = () => {
   return (
-    <div className="flex flex-col h-full w-full drop-shadow-md bg-white p-8 rounded-lg shadow shadow-white">
-      <h2>New Project</h2>
-      <ProjectForm className="flex-1" />
-    </div>
+    <ProjectForm className="flex flex-col w-full p-4  bg-white rounded-lg  h-[800px] overflow-scroll relative flex-1" />
   );
 };
 

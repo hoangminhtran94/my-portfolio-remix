@@ -181,7 +181,11 @@ const FeatureImageInput: FC<FeatureImageInputProps> = ({
             />
           ))}
       </div>
-      <Button className="mt-5" type="button" onClick={addNewImageGroupHandler}>
+      <Button
+        className="mt-5 btn-purple-outline"
+        type="button"
+        onClick={addNewImageGroupHandler}
+      >
         Add new image group
       </Button>
     </div>

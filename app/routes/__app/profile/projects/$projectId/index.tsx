@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
 import LoadingSpinner from "~/components/UI/LoadingSpinner/LoadingSpinner";
 import {
   unstable_composeUploadHandlers,
@@ -11,28 +11,19 @@ import { getUserFromSession } from "~/utils/database/auth.server";
 import {
   createFeatureImage,
   createMultiscreenImage,
-  deleteFeatureImage,
-  deleteMultiScreenImage,
   editProject,
   getAProject,
 } from "~/utils/database/project.server";
 import serverError from "~/utils/models/ServerError";
-import type {
-  FeatureImage,
-  MultiScreenImage,
-  Project,
-} from "~/utils/models/models";
-import { useParams, useMatches, useTransition } from "@remix-run/react";
-import {
-  deleteImageFromCloudinary,
-  uploadImageToCloudinary,
-} from "~/utils/fileUpload/fileUpload";
+import type { FeatureImage, Project } from "~/utils/models/models";
+import { useParams, useTransition, useOutletContext } from "@remix-run/react";
+import { uploadImageToCloudinary } from "~/utils/fileUpload/fileUpload";
 
 const EditProject = () => {
-  const matches = useMatches();
+  const projects = useOutletContext<Project[]>();
   const transition = useTransition();
   const { projectId } = useParams();
-  const projects = matches[0].data.projects;
+
   if (!projects || projects.length === 0) {
     throw new Error("There's no project to edit");
   }
@@ -42,24 +33,14 @@ const EditProject = () => {
   }
 
   return (
-    <div className="flex flex-col h-full w-full drop-shadow-md bg-white rounded-lg shadow shadow-white p-8 relative">
-      {transition.state !== "idle" && <LoadingSpinner />}
-      <h2>Edit Project</h2>
-      <ProjectForm project={project} className="flex-1" />
-    </div>
+    <ProjectForm
+      project={project}
+      className=" flex flex-col w-full p-4  bg-white rounded-lg  h-[800px] overflow-scroll relative flex-1"
+    />
   );
 };
 
 export default EditProject;
-
-export const loader: LoaderFunction = async ({ request, params }) => {
-  try {
-    await getUserFromSession(request);
-  } catch (error) {
-    throw error;
-  }
-  return null;
-};
 
 export const action: ActionFunction = async ({ request, params }) => {
   let user;
@@ -163,5 +144,5 @@ export const action: ActionFunction = async ({ request, params }) => {
   } catch (error) {
     throw error;
   }
-  return redirect("/my-project");
+  return redirect("/profile/projects");
 };
