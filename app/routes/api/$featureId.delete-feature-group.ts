@@ -30,7 +30,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   try {
     await deleteFeatureImageGroup(featureImage);
-    return redirect("/my-project/" + featureImage.projectId + "/edit");
+    return redirect("/profile/projects/" + featureImage.projectId);
   } catch (error) {
     throw error;
   }

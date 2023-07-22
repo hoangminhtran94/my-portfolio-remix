@@ -6,13 +6,13 @@ import type {
   ChangeEvent,
 } from "react";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FeatureImage, MultiScreenImage } from "~/utils/models/models";
 import TextArea from "../TextArea/TextArea";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useFetcher } from "@remix-run/react";
-
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 interface ImageItemInputProps {
   image: FeatureImage;
   itemIndex: number;
@@ -49,6 +49,7 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const fetcher = useFetcher();
+  const [success, setSuccess] = useState(false);
   const featureGroupChangeHandler = () => {
     try {
       const formdata = new FormData();
@@ -80,8 +81,30 @@ const ImageItemInput: FC<ImageItemInputProps> = ({
     });
   };
 
+  const returnData = fetcher.data;
+
+  useEffect(() => {
+    let timeout: any;
+    if (returnData) {
+      if (returnData.message === "Success") {
+        setSuccess(true);
+        timeout = setTimeout(() => {
+          setSuccess(false);
+        }, 2000);
+      }
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [returnData]);
+
   return (
-    <div className="flex flex-col  gap-4 p-2 border-[3px] border-indigo-300">
+    <div
+      className={` relative flex flex-col  gap-4 p-2 border-[3px]  ${
+        success ? "border-green-600" : "border-indigo-300"
+      } `}
+    >
+      {fetcher.state !== "idle" && <LoadingSpinner />}
       <Input
         label="Group label"
         onChange={onGroupLabelChange}

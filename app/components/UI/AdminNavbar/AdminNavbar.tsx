@@ -10,11 +10,6 @@ const AdminNavBar = ({ user }: { user?: User }) => {
             }`}
       >
         <li className="hover:scale-110 transition-all">
-          <Link className="opacity-50" to="/">
-            Back main page
-          </Link>
-        </li>
-        <li className="hover:scale-110 transition-all">
           <NavLink className="opacity-50" to="/profile/">
             Edit Profile
           </NavLink>

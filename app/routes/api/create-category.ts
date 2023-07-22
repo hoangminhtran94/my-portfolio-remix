@@ -16,7 +16,7 @@ export const action: ActionFunction = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await createTechnologyCategory(data);
-    return redirect("/skills/edit");
+    return redirect("/profile/skills/edit");
   } catch (error) {
     throw error;
   }

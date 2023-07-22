@@ -1,5 +1,6 @@
 import type { ActionFunction } from "@remix-run/node";
 import {
+  json,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,
   unstable_parseMultipartFormData,
@@ -129,7 +130,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       showIn: featureImageData.showIn,
       description: featureImageData.description,
     });
-    return redirect("/my-project/" + featureImage.projectId + "/edit");
+    return json({ message: "Success" });
   } catch (error) {
     throw error;
   }
