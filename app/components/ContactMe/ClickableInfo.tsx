@@ -26,7 +26,7 @@ const ClickableInfo: FC<ClickableInfoProps> = ({ info }) => {
       onClick={() => {
         copyHandler(info);
       }}
-      className="expand-info py-3 relative z-5 cursor-pointer text-base e"
+      className="expand-info py-3 relative z-5 cursor-pointer text-base drop-shadow-white-around-sm"
     >
       {info}
     </p>

@@ -39,7 +39,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-[36px] md:text-[60px] h-[100px]  tracking-widest"
+            className="text-[36px] md:text-[60px] text-slate drop-shadow-white-around-sm h-[100px]  tracking-widest"
           >
             <Typewriter words={[rootUser.firstLineAbout]} loop={true} cursor />
           </motion.div>
@@ -47,7 +47,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="text-[20px] leading-loose md:text-[30px] tracking-widest"
+            className="text-[20px] leading-loose md:text-[30px] drop-shadow-white-around-sm  text-slate tracking-widest"
             dangerouslySetInnerHTML={{
               __html: rootUser.secondLineAbout?.replace(/\n/g, "<br>"),
             }}
@@ -57,7 +57,7 @@ const About = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.5 }}
-            className="text-[20px] leading-loose md:text-[30px] tracking-widest"
+            className="text-[20px] leading-loose drop-shadow-white-around-sm  text-slate md:text-[30px] tracking-widest"
             dangerouslySetInnerHTML={{
               __html: rootUser.thirdLineAbout?.replace(/\n/g, "<br>"),
             }}

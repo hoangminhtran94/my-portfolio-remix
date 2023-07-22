@@ -307,7 +307,9 @@ const SkillGroup: FC<SkillGroupProps> = ({
           <div className=" w-full gap-10">
             {skillGroup ? (
               <div className="w-[100%] flex flex-col gap-6">
-                <h3 className="tracking-widest">{skillGroup.category.name}</h3>
+                <h3 className="tracking-widest drop-shadow-white-around-sm">
+                  {skillGroup.category.name}
+                </h3>
                 <ul className="flex max-w-full flex-wrap  gap-10">
                   {skillGroup.technologies.map((tech: Technology) => (
                     <ProjectIcon key={tech.id} tech={tech} />
