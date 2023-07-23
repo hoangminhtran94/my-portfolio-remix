@@ -17,7 +17,7 @@ const ImageWithDescription = ({
     >
       <h1 className="text-center tracking-widest">Project details</h1>
       {images.map((image, index) => (
-        <ImageDescription key={image.id} image={image} />
+        <ImageDescription index={index} key={image.id} image={image} />
       ))}
     </motion.div>
   );

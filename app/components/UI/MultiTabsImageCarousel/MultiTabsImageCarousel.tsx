@@ -7,6 +7,7 @@ import InviewWrapper from "../InviewWrapper/InviewWrapper";
 
 interface MultiTabsImageCarouselProps {
   images: MultiScreenImage[];
+  index: number;
 }
 const carouselFade = {
   initial: { opacity: 0.5 },
@@ -15,20 +16,21 @@ const carouselFade = {
 };
 const MultiTabsImageCarousel: FC<MultiTabsImageCarouselProps> = ({
   images,
+  index,
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [toogleViewImage, setToggleViewImage] = useState(false);
   return (
     <InviewWrapper
-      mode="bottom-top"
+      mode={index % 2 === 1 ? "left-right" : "right-left"}
       loadedState={true}
       once={true}
-      className="flex flex-col gap-7 w-full lg:w-[800px] "
+      className="flex flex-col mt-5 xl:mt-0 gap-7 w-full lg:w-[800px] "
     >
       <div className="flex gap-5 justify-center flex-wrap !text-white">
         {images.map((img, index) => (
           <span
-            className={`cursor-pointer mx-2 hover:scale-110 text-lg font-bold transition-all  ${
+            className={`cursor-pointer mx-2 hover:scale-110 text-sm xl:text-md font-bold transition-all  ${
               index === currentImage ? "carousel-active" : " opacity-60"
             }`}
             key={img?.image}

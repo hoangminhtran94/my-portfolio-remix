@@ -26,7 +26,7 @@ const ProjectView = () => {
   );
   return (
     <div className=" flex flex-col items-center gap-10 flex-1 container mx-auto justify-start text-white  ">
-      <div className="flex gap-8 w-full flex-col py-10 px-4   lg:p-10  ">
+      <div className="flex gap-8 w-full flex-col py-10  ">
         <motion.h1
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}
@@ -70,11 +70,11 @@ const ProjectView = () => {
             <h3 className="font-bold mb-3 text-center drop-shadow-white-around-xs">
               Technologies
             </h3>
-            <div className="flex gap-10 max-w-full flex-wrap text-lg self-center">
+            <div className="flex gap-10 max-w-full flex-wrap text-lg justify-center self-center">
               {project.technologies.map((tech: Technology) => (
                 <ProjectTechnology
                   containerClassName="flex-col"
-                  className="!w-20 !h-20"
+                  className="!w-10 !h-10 xl:!w-20 xl:!h-20"
                   key={tech.id}
                   label={tech.name}
                   icon={tech.icon}
