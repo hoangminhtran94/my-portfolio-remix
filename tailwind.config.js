@@ -25,7 +25,8 @@ module.exports = {
         "orand-around": "0 0px 15px rgba(255, 148, 197, 0.8)",
         "blue-around": "0 0px 5px rgba(114, 120, 255, 0.8)",
         "blue-around-bold": "0 0px 5px rgba(114, 120, 255, 0.9)",
-        "yellow-around": "0 0px 8px rgba(198, 39, 245, 0.8)",
+        "yellow-around": "0 0px 5px rgba(255, 255, 51, 0.8)",
+        "purple-around": "0 0px 5px rgba(178, 50, 255, 0.8)",
       },
       animation: {
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",

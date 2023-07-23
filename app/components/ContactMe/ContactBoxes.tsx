@@ -13,18 +13,30 @@ const ContactBoxes = () => {
       mode="left-right"
       className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-10"
     >
-      <ContactBox label="Phone number" extendedBg="big-sur">
+      <ContactBox
+        shadow="drop-shadow-purple-around"
+        label="Phone number"
+        extendedBg="big-sur"
+      >
         <ClickableInfo info={rootUser.contactNumber} />
       </ContactBox>
-      <ContactBox extendedBg="indigo-violet" label="Email">
+      <ContactBox
+        shadow="drop-shadow-blue-around"
+        extendedBg="indigo-violet"
+        label="Email"
+      >
         <div className="flex flex-col z-5 relative">
           <ClickableInfo info={rootUser.username} />
           <ClickableInfo info={rootUser.secondaryEmail} />
         </div>
       </ContactBox>
 
-      <ContactBox extendedBg="gradient-orange" label="Social Media">
-        <div className="flex flex-wrap gap-5">
+      <ContactBox
+        shadow="drop-shadow-yellow-around"
+        extendedBg="gradient-orange"
+        label="Social Media"
+      >
+        <div className="flex flex-wrap gap-5 z-10">
           {rootUser.socialMedias.map((sm: SocialMedia) => (
             <span
               title={sm.name}
