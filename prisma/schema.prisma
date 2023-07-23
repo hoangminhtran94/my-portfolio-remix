@@ -15,6 +15,7 @@ model Technology {
   name               String
   backgroundColor    String
   textColor          String
+  homePage           String
   icon               String
   projects           Project[]         @relation(fields: [projectIds], references: [id])
   projectIds         String[]          @db.ObjectId
