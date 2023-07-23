@@ -126,6 +126,7 @@ const EditProfile = () => {
           className={`flex-1 btn-purple-outline ${
             pathname.includes("social-media") && "invisible"
           }`}
+          preventScrollReset={true}
           to={"social-media"}
         >
           Add new social media

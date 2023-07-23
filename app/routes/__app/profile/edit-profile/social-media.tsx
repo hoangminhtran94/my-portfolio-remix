@@ -60,10 +60,16 @@ const SocialMedia = () => {
           label="Icon"
         />
         <div className="flex gap-3 mt-3">
-          <Button className="flex-1" to={".."}>
+          <Button
+            className="flex-1 btn-light"
+            to={".."}
+            preventScrollReset={true}
+          >
             Cancel
           </Button>{" "}
-          <Button className="flex-1">Save</Button>
+          <Button className="flex-1 btn-success" preventScrollReset={true}>
+            Save
+          </Button>
         </div>
       </Form>
     </div>
