@@ -3,6 +3,8 @@ import type { FC } from "react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ViewImageModal from "../ViewImageModal/ViewImageModal";
+import InviewWrapper from "../InviewWrapper/InviewWrapper";
+
 interface MultiTabsImageCarouselProps {
   images: MultiScreenImage[];
 }
@@ -17,7 +19,12 @@ const MultiTabsImageCarousel: FC<MultiTabsImageCarouselProps> = ({
   const [currentImage, setCurrentImage] = useState(0);
   const [toogleViewImage, setToggleViewImage] = useState(false);
   return (
-    <div className="flex flex-col gap-7 w-full lg:w-[800px] ">
+    <InviewWrapper
+      mode="bottom-top"
+      loadedState={true}
+      once={true}
+      className="flex flex-col gap-7 w-full lg:w-[800px] "
+    >
       <div className="flex gap-5 justify-center flex-wrap !text-white">
         {images.map((img, index) => (
           <span
@@ -66,7 +73,7 @@ const MultiTabsImageCarousel: FC<MultiTabsImageCarouselProps> = ({
           />
         )}
       </AnimatePresence>
-    </div>
+    </InviewWrapper>
   );
 };
 

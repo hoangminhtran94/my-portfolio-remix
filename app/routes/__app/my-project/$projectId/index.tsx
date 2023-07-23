@@ -25,12 +25,12 @@ const ProjectView = () => {
       image.showIn === "detail" || image.showIn === "both"
   );
   return (
-    <div className=" flex flex-col items-center gap-10 flex-1 container mx-auto justify-start  ">
-      <div className="flex gap-8 w-full flex-col py-10 px-4   lg:p-10  text-white">
+    <div className=" flex flex-col items-center gap-10 flex-1 container mx-auto justify-start text-white  ">
+      <div className="flex gap-8 w-full flex-col py-10 px-4   lg:p-10  ">
         <motion.h1
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.5 } }}
-          className="text-center flex gap-3 self-center white-gradient-text"
+          className="text-center flex gap-3 self-center drop-shadow-white-around-xs "
         >
           Project: {project.name}
           {user && (
@@ -50,14 +50,14 @@ const ProjectView = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 0.7 } }}
           >
-            <h3 className="font-bold mb-3 text-center white-gradient-text">
+            <h3 className="font-bold mb-3 text-center drop-shadow-white-around-xs">
               About the project
             </h3>
             <div
               dangerouslySetInnerHTML={{
                 __html: project.detailedDescription?.replace(/\n/g, "<br>"),
               }}
-              className=" !leading-[40px] md:!leading-[50px]  text-sm md:text-lg light-blue-gradient-text"
+              className=" !leading-[40px] md:!leading-[50px]  text-sm md:text-lg drop-shadow-white-around-xs"
             ></div>
           </motion.div>
         )}
@@ -67,7 +67,7 @@ const ProjectView = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1 } }}
           >
-            <h3 className="font-bold mb-3 text-center white-gradient-text">
+            <h3 className="font-bold mb-3 text-center drop-shadow-white-around-xs">
               Technologies
             </h3>
             <div className="flex gap-10 max-w-full flex-wrap text-lg self-center">
@@ -89,7 +89,9 @@ const ProjectView = () => {
             animate={{ y: 0, opacity: 1, transition: { delay: 1.1 } }}
             className="flex flex-col gap-3 items-center "
           >
-            <h3 className="font-bold white-gradient-text">Demo Website</h3>
+            <h3 className="font-bold drop-shadow-white-around-xs">
+              Demo Website
+            </h3>
             <div className=" flex transition-all w-fit">
               <a
                 className=" text-sm md:text-base hover:scale-125  transition-all light-blue-gradient-text hover:outline hover:outline-[0.5px] rounded-md p-2 hover:outline-slate-200"
@@ -108,7 +110,7 @@ const ProjectView = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
           >
-            <h3 className="font-bold white-gradient-text">
+            <h3 className="font-bold drop-shadow-white-around-xs">
               Project respository
             </h3>
             <div className="text-lg flex gap-20  w-fit mt-3 ">

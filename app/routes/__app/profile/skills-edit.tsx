@@ -9,13 +9,9 @@ import {
   getTechnologyTypes,
 } from "~/utils/database/skills.server";
 import { AnimatePresence, motion } from "framer-motion";
-import type { TechnologyCategory, TechnologyType } from "@prisma/client";
 
 const SkillEdit = () => {
-  const loaderData = useLoaderData<{
-    technologyTypes: TechnologyType[];
-    technologyCategories: TechnologyCategory[];
-  }>();
+  const loaderData = useLoaderData();
   const outlet = useOutlet(loaderData);
   const location = useLocation();
   const container = {

@@ -1,10 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="py-[30px] flex flex-col items-center gap-3  tracking-widest">
-      <p className=" text-[16px] white-gradient-text">
+    <footer className="py-[30px] flex flex-col items-center gap-3  tracking-widest text-white">
+      <p className=" text-[16px] drop-shadow-blue-around">
         Developed by Minh Hoang Tran.
       </p>
-      <p className="text-center font-bold text-[16px] white-gradient-text">
+      <p className="text-center font-bold text-[16px] drop-shadow-blue-around">
         Powered by:
       </p>
       <div>
