@@ -1,6 +1,6 @@
 import TechnologyForm from "~/components/ProjectPage/Technology/TechnologyForm";
+import type { ActionFunction } from "@remix-run/node";
 import {
-  ActionFunction,
   redirect,
   unstable_composeUploadHandlers,
   unstable_createMemoryUploadHandler,

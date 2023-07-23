@@ -31,6 +31,13 @@ const TechnologyForm: FC<{ tech?: Technology }> = ({ tech }) => {
         defaultValue={tech?.textColor ?? "#000000"}
         className="!p-0"
       />
+      <Input
+        name="homePage"
+        type="text"
+        label="Homepage Link"
+        defaultValue={tech?.homePage}
+        className="!p-0"
+      />
       <ImageInput
         name="icon"
         defaultImages={tech ? [tech.icon] : []}

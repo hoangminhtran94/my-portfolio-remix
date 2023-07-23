@@ -4,6 +4,7 @@ export interface Technology {
   backgroundColor: string;
   textColor: string;
   icon: string;
+  homePage?: string;
   creatorId?: string;
 }
 
