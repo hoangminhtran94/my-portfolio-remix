@@ -36,7 +36,7 @@ const TechnologyForm: FC<{ tech?: Technology }> = ({ tech }) => {
         type="text"
         label="Homepage Link"
         defaultValue={tech?.homePage}
-        className="!p-0"
+        placeholder="Technology homepage"
       />
       <ImageInput
         name="icon"

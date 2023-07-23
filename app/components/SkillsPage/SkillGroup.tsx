@@ -56,11 +56,11 @@ const SkillGroup: FC<SkillGroupProps> = ({
                 <h3 className="tracking-widest drop-shadow-white-around-sm">
                   {skillGroup.category.name}
                 </h3>
-                <ul className="flex max-w-full flex-wrap  gap-10">
+                <div className="flex max-w-full flex-wrap  gap-5">
                   {skillGroup.technologies.map((tech: Technology) => (
                     <ProjectIcon key={tech.id} tech={tech} />
                   ))}
-                </ul>
+                </div>
               </div>
             ) : (
               <div>Not available</div>
