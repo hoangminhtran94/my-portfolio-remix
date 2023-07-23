@@ -177,6 +177,9 @@ export const action: ActionFunction = async ({ request }) => {
       if (name !== "profileImage") {
         return undefined;
       }
+      if (!filename) {
+        return undefined;
+      }
 
       const uploadedImage = await uploadImageToCloudinary(data, "profileImage");
       return uploadedImage?.secure_url;

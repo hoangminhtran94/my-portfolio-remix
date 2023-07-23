@@ -77,8 +77,15 @@ export const action: ActionFunction = async ({ request, params }) => {
       if (name !== "icon") {
         return undefined;
       }
-      const res = await uploadImageToCloudinary(data, "icons");
-      return res?.secure_url;
+      if (!filename) {
+        return undefined;
+      }
+      try {
+        const res = await uploadImageToCloudinary(data, "icons");
+        return res?.secure_url;
+      } catch (error) {
+        return undefined;
+      }
     }
   );
   let technology;

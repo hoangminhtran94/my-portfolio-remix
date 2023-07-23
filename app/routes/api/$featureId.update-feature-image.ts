@@ -88,6 +88,10 @@ export const action: ActionFunction = async ({ request, params }) => {
         if (name !== "multiscreenImages") {
           return undefined;
         }
+        if (!filename) {
+          return undefined;
+        }
+
         const uploadedImage = await uploadImageToCloudinary(
           data,
           "projectImages"

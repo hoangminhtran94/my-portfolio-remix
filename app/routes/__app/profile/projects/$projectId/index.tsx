@@ -83,6 +83,10 @@ export const action: ActionFunction = async ({ request, params }) => {
         if (name !== featureImage.name) {
           return undefined;
         }
+        if (!filename) {
+          return undefined;
+        }
+
         const uploadedImage = await uploadImageToCloudinary(
           data,
           "projectImages"

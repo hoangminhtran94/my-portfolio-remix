@@ -97,6 +97,9 @@ export const action: ActionFunction = async ({ request }) => {
       if (name !== "icon") {
         return undefined;
       }
+      if (!filename) {
+        return undefined;
+      }
 
       const response = await uploadImageToCloudinary(data, "icons");
       return response?.secure_url;

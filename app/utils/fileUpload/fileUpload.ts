@@ -21,8 +21,7 @@ export async function uploadImageToCloudinary(
         },
         (error, result) => {
           if (error) {
-            resolve(undefined);
-            return;
+            return resolve(undefined);
           }
           resolve(result!);
         }
