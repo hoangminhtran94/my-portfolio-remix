@@ -4,9 +4,11 @@ import ContactBox from "./ContactBox";
 import TechnologyIcon from "../UI/TechnologyIcon/TechnologyIcon";
 import { useMatches } from "@remix-run/react";
 import InviewWrapper from "../UI/InviewWrapper/InviewWrapper";
+import SocialMediaIcon from "../UI/SocialMediaIcon/SocialMediaIcon";
 
 const ContactBoxes = () => {
   const matches = useMatches();
+
   const rootUser = matches[0].data.rootUser;
   return (
     <InviewWrapper
@@ -38,19 +40,7 @@ const ContactBoxes = () => {
       >
         <div className="flex flex-wrap gap-5 z-10">
           {rootUser.socialMedias.map((sm: SocialMedia) => (
-            <span
-              title={sm.name}
-              key={sm.id}
-              className="hover:scale-110 transition-all hover:animate-bouncing shadow-md p-3 bg-white rounded-full hover:bg-white cursor-pointer"
-              onClick={() => {
-                window.open(sm.link);
-              }}
-            >
-              <TechnologyIcon
-                className="!w-[30px] !h-[30px] xl:!w-[40px] xl:!h-[40px]"
-                icon={sm.icon}
-              />
-            </span>
+            <SocialMediaIcon key={sm.id} socialMedia={sm} />
           ))}
         </div>
       </ContactBox>

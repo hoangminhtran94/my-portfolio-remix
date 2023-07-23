@@ -2,10 +2,8 @@ import { Form } from "@remix-run/react";
 import Button from "~/components/UI/Button/Button";
 import ImageInput from "~/components/UI/ImageInput/ImageInput";
 import Input from "~/components/UI/Input/Input";
-import {
-  ActionFunction,
-  unstable_composeUploadHandlers,
-} from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
+import { unstable_composeUploadHandlers } from "@remix-run/node";
 import { getUserFromSession } from "~/utils/database/auth.server";
 import { useSearchParams } from "@remix-run/react";
 import { redirect, unstable_parseMultipartFormData } from "@remix-run/node";
@@ -48,6 +46,13 @@ const SocialMedia = () => {
           defaultValue={currentSocialMedia?.link}
           name="link"
           label="Connect link"
+        />
+        <Input
+          name="bgColor"
+          defaultValue={currentSocialMedia?.bgColor ?? "#ffffff"}
+          type="color"
+          label="Background color"
+          className="!p-0"
         />
         <ImageInput
           className=" !object-contain "
