@@ -16,9 +16,6 @@ const ScrollLink: FC<ScrollLinkProps> = ({ to, className, children }) => {
     useContext(PageContext);
   let targetElement: any;
 
-  // const isInView = useInView(targetElement);
-  // console.log(isInView);
-
   if (typeof document !== "undefined") {
     targetElement = document?.getElementById(to);
   }

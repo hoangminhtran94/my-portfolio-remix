@@ -36,7 +36,6 @@ const SkillGroup: FC<SkillGroupProps> = ({
       ref={ref}
       className="box-hover"
       onMouseMove={({ clientX: x, clientY: y }) => {
-        console.log(x);
         set({ xys: calc(x, y) });
       }}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
